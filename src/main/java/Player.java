@@ -3,11 +3,15 @@ public class Player {
     private int credits;
     private String name;
     private boolean isBroke = false;
+    private boolean isWaiting = false;
 
-    public Player(String name, int money, int credits){
+    public Player(String name, int money, int credits) {
         this.name = name;
         this.credits = credits;
         this.money = money;
+    }
+
+    public Player() {
     }
 
     public int getMoney() {
@@ -22,6 +26,18 @@ public class Player {
         return name;
     }
 
+    public boolean getIsWaiting() {
+        return isWaiting;
+    }
+
+    public void isWaiting() {
+        isWaiting = true;
+    }
+
+    public void isNotWaiting() {
+        isWaiting = false;
+    }
+
     public void setMoney(int money) {
         this.money = money;
     }
@@ -34,11 +50,11 @@ public class Player {
         return isBroke;
     }
 
-    public void winMoney(int amount){
-        if (amount <= 0){
+    public void winMoney(int amount) {
+        if (amount <= 0) {
             throw new IllegalArgumentException("Cannot earn negative amount or 0");
         }
-        if((money - amount) <= 0){
+        if ((money - amount) <= 0) {
             isBroke = true;
         } else {
             money = money - amount;
