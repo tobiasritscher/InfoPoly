@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
@@ -9,24 +10,25 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="rootPane" minHeight="780.0" minWidth="1200.0" prefHeight="780.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UIController">
+<VBox fx:id="rootPane" minHeight="780.0" minWidth="1200.0" prefHeight="780.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane fx:id="mainPane">
+      <BorderPane fx:id="mainPane" VBox.vgrow="ALWAYS">
          <top>
             <MenuBar fx:id="mainMenu" minHeight="30.0" BorderPane.alignment="CENTER">
                <menus>
                   <Menu fx:id="gameMenu" mnemonicParsing="false" text="Game">
                      <items>
-                        <MenuItem fx:id="newGame" mnemonicParsing="false" text="New Game" />
+                        <MenuItem fx:id="newGame" mnemonicParsing="false" onAction="#newGameAction" text="New Game" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="quit" mnemonicParsing="false" text="Quit" />
+                        <MenuItem fx:id="quit" mnemonicParsing="false" onAction="#quitAction" text="Quit" />
                      </items>
                   </Menu>
                   <Menu fx:id="windowSettingsMenu" mnemonicParsing="false" text="Window Settings">
                      <items>
-                        <MenuItem fx:id="resize" mnemonicParsing="false" text="Resize" />
+                        <MenuItem fx:id="resize" mnemonicParsing="false" onAction="#resizeAction" text="Resize" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="saveWindowConfiguration" mnemonicParsing="false" text="Save Window Configuration" />
+                        <MenuItem fx:id="saveWindowConfiguration" mnemonicParsing="false" onAction="#saveWindowConfigurationAction" text="Save Window Configuration" />
+                        <MenuItem fx:id="loadWindowConfiguration" mnemonicParsing="false" onAction="#loadWindowConfigurationAction" text="Load Window Configuration" />
                      </items>
                   </Menu>
                </menus>
@@ -749,7 +751,7 @@
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
-                              <Label fx:id="field40Players" text="WW" BorderPane.alignment="CENTER">
+                              <Label fx:id="field40Players" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
@@ -1276,9 +1278,9 @@
                         </BorderPane>
                      </bottom>
                      <center>
-                        <BorderPane minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                        <BorderPane fx:id="field09Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
                            <center>
-                              <Label fx:id="field09Color" text="Electronics &amp; digital technology" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                              <Label text="Electronics &amp; digital technology" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
@@ -1311,9 +1313,9 @@
                         </BorderPane>
                      </bottom>
                      <center>
-                        <BorderPane minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                        <BorderPane fx:id="field04Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
                            <center>
-                              <Label fx:id="field04Color" text="Information Theory &amp; Coding" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                              <Label text="Information Theory &amp; Coding" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
@@ -1423,6 +1425,7 @@
                         </Label>
                      </center>
                   </BorderPane>
+                  <BorderPane fx:id="dummyPane" opacity="0.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="10" />
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -1434,7 +1437,7 @@
                <right>
                   <HBox prefHeight="67.0" prefWidth="272.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label fx:id="diceRollLabel" maxHeight="65.0" minHeight="65.0" minWidth="50.0" prefHeight="65.0" prefWidth="102.0" text="Dice roll:" textFill="WHITE">
+                        <Label maxHeight="65.0" minHeight="65.0" minWidth="50.0" prefHeight="65.0" prefWidth="102.0" text="Dice roll:" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -1445,7 +1448,7 @@
                               <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="rollDiceOutput" maxHeight="65.0" minHeight="65.0" minWidth="32.0" prefHeight="65.0" prefWidth="32.0" text="1" textFill="WHITE">
+                        <Label fx:id="rollDiceOutput" maxHeight="65.0" minHeight="65.0" minWidth="32.0" prefHeight="65.0" prefWidth="32.0" textFill="WHITE">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -1453,7 +1456,7 @@
                               <Insets bottom="15.0" right="10.0" top="15.0" />
                            </padding>
                         </Label>
-                        <Button fx:id="diceRollButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="47.0" prefWidth="150.0" style="-fx-background-color: white;" text="Roll Dice" textAlignment="CENTER">
+                        <Button fx:id="rollDiceButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#rollDiceAction" prefHeight="47.0" prefWidth="150.0" style="-fx-background-color: white;" text="Roll Dice" textAlignment="CENTER">
                            <font>
                               <Font name="System Font Regular" size="13.0" />
                            </font>
@@ -1463,6 +1466,9 @@
                            <HBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </HBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                      </children>
                   </HBox>
@@ -1470,28 +1476,28 @@
                <left>
                   <HBox fx:id="interactionBox" alignment="BOTTOM_CENTER" maxHeight="65.0" minHeight="65.0" style="-fx-background-color: #094F95;" BorderPane.alignment="CENTER">
                      <children>
-                        <HBox fx:id="fundsBox" alignment="BOTTOM_CENTER" maxHeight="65.0" minHeight="65.0" style="-fx-background-color: #DDDDDD;">
+                        <HBox alignment="BOTTOM_CENTER" maxHeight="65.0" minHeight="65.0" style="-fx-background-color: #DDDDDD;">
                            <children>
                               <VBox alignment="CENTER_LEFT" minWidth="100.0">
                                  <children>
-                                    <Label fx:id="fundsBoxPlayerName" text="Player">
+                                    <Label text="Player">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="fundsBoxPlayerCredits" layoutX="10.0" layoutY="27.0" text="Credits">
+                                    <Label layoutX="10.0" layoutY="27.0" text="Credits">
                                        <font>
                                           <Font name="System Font Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="fundsBoxPlayerMoney" layoutX="10.0" layoutY="10.0" text="Money">
+                                    <Label layoutX="10.0" layoutY="10.0" text="Money">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </VBox>
-                              <Line fx:id="seperator0" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
+                              <Line startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
@@ -1503,7 +1509,7 @@
                               </Circle>
                               <VBox fx:id="fundsBoxPlayer1" alignment="CENTER_LEFT" minWidth="100.0">
                                  <children>
-                                    <Label fx:id="fundsBoxPlayer1Name" text="OC">
+                                    <Label fx:id="fundsBoxPlayer1Name" text="-">
                                        <font>
                                           <Font name="System Font Bold" size="13.0" />
                                        </font>
@@ -1512,7 +1518,7 @@
                                     <Label fx:id="fundsBoxPlayer1Money" text="-" />
                                  </children>
                               </VBox>
-                              <Line fx:id="seperator1" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
+                              <Line startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
@@ -1524,7 +1530,7 @@
                               </Circle>
                               <VBox fx:id="fundsBoxPlayer2" alignment="CENTER_LEFT" layoutX="410.0" layoutY="15.0" minWidth="100.0">
                                  <children>
-                                    <Label fx:id="fundsBoxPlayer2Name" text="TR">
+                                    <Label fx:id="fundsBoxPlayer2Name" text="-">
                                        <font>
                                           <Font name="System Font Bold" size="13.0" />
                                        </font>
@@ -1533,7 +1539,7 @@
                                     <Label fx:id="fundsBoxPlayer2Money" text="-" />
                                  </children>
                               </VBox>
-                              <Line fx:id="seperator2" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
+                              <Line startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
@@ -1545,7 +1551,7 @@
                               </Circle>
                               <VBox fx:id="fundsBoxPlayer3" alignment="CENTER_LEFT" layoutX="460.0" layoutY="15.0" minWidth="100.0">
                                  <children>
-                                    <Label fx:id="fundsBoxPlayer3Name" text="NS">
+                                    <Label fx:id="fundsBoxPlayer3Name" text="-">
                                        <font>
                                           <Font name="System Font Bold" size="13.0" />
                                        </font>
@@ -1554,7 +1560,7 @@
                                     <Label fx:id="fundsBoxPlayer3Money" text="-" />
                                  </children>
                               </VBox>
-                              <Line fx:id="seperator3" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
+                              <Line startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
@@ -1566,7 +1572,7 @@
                               </Circle>
                               <VBox fx:id="fundsBoxPlayer4" alignment="CENTER_LEFT" layoutX="510.0" layoutY="15.0" minWidth="100.0">
                                  <children>
-                                    <Label fx:id="fundsBoxPlayer4Name" text="ZE">
+                                    <Label fx:id="fundsBoxPlayer4Name" text="-">
                                        <font>
                                           <Font name="System Font Bold" size="13.0" />
                                        </font>
@@ -1583,7 +1589,7 @@
                               <Insets right="15.0" />
                            </HBox.margin>
                         </HBox>
-                        <Label fx:id="currentPlayerLabel" maxHeight="65.0" minHeight="65.0" text="Current Player:" textFill="WHITE">
+                        <Label maxHeight="65.0" minHeight="65.0" text="Current Player:" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -1594,7 +1600,7 @@
                               <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="currentPlayer" layoutX="229.0" layoutY="11.0" maxHeight="65.0" minHeight="65.0" minWidth="62.0" prefHeight="65.0" prefWidth="62.0" text="TR" textFill="WHITE">
+                        <Label fx:id="currentPlayer" layoutX="229.0" layoutY="11.0" maxHeight="65.0" minHeight="65.0" minWidth="62.0" prefHeight="65.0" prefWidth="62.0" textFill="WHITE">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
