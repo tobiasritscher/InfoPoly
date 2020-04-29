@@ -1,0 +1,1612 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="rootPane" minHeight="780.0" minWidth="1200.0" prefHeight="780.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UIController">
+   <children>
+      <BorderPane fx:id="mainPane">
+         <top>
+            <MenuBar fx:id="mainMenu" minHeight="30.0" BorderPane.alignment="CENTER">
+               <menus>
+                  <Menu fx:id="gameMenu" mnemonicParsing="false" text="Game">
+                     <items>
+                        <MenuItem fx:id="newGame" mnemonicParsing="false" text="New Game" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="quit" mnemonicParsing="false" text="Quit" />
+                     </items>
+                  </Menu>
+                  <Menu fx:id="windowSettingsMenu" mnemonicParsing="false" text="Window Settings">
+                     <items>
+                        <MenuItem fx:id="resize" mnemonicParsing="false" text="Resize" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="saveWindowConfiguration" mnemonicParsing="false" text="Save Window Configuration" />
+                     </items>
+                  </Menu>
+               </menus>
+            </MenuBar>
+         </top>
+         <center>
+            <GridPane fx:id="mainGrid" alignment="CENTER" hgap="5.0" minHeight="685.0" vgap="5.0" BorderPane.alignment="CENTER">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <BorderPane style="-fx-border-color: BBBBBB;" GridPane.columnIndex="2" GridPane.rowSpan="2">
+                     <center>
+                        <BorderPane fx:id="field22Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Algorithms &amp; Data Structures" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </center>
+                     <top>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Class" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </top>
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field22Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                  </BorderPane>
+                  <BorderPane style="-fx-border-color: BBBBBB; -fx-background-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field01Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <Label text="START" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="1026.0" layoutY="593.0" style="-fx-border-color: BF6D5F; -fx-background-color: BF6D5F;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field31Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <Label text="Exam failed" textFill="WHITE" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="1026.0" layoutY="593.0" style="-fx-border-color: BF6D5F; -fx-background-color: BF6D5F;" GridPane.columnSpan="2" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field11Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Repeating semester" textFill="WHITE" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                           <bottom>
+                              <HBox BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label text="Repeating:" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="repeatingPlayers" textAlignment="CENTER" textFill="WHITE">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets left="7.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="7.0" right="7.0" />
+                                 </padding>
+                              </HBox>
+                           </bottom>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field32Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <left>
+                              <BorderPane minWidth="35.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Class" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </left>
+                           <center>
+                              <BorderPane fx:id="field32Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Project Thesis" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="1026.0" layoutY="134.0" style="-fx-border-color: BF6D5F;" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field20Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <center>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BF6D5F;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="ZVV fees" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="15.0" layoutY="134.0" style="-fx-border-color: BF6D5F;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="9">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field39Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <center>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BF6D5F;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Party" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="382.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="5" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field07Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane fx:id="field07Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Software Project" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </center>
+                     <top>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Class" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </top>
+                  </BorderPane>
+                  <BorderPane layoutX="382.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="6" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field06Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane fx:id="field06Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="BarStucks" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </center>
+                     <top>
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: FFFAAA;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Job" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </top>
+                  </BorderPane>
+                  <BorderPane layoutX="566.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="6" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field26Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane fx:id="field26Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="AnalogTec" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </center>
+                     <top>
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: FFFAAA;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Job" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </top>
+                  </BorderPane>
+                  <BorderPane layoutX="1026.0" layoutY="122.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="6">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field16Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <center>
+                              <BorderPane fx:id="field16Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="McBurger" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                           <left>
+                              <BorderPane minWidth="35.0" style="-fx-background-color: FFFAAA;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Job" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </left>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="15.0" layoutY="330.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="6">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field36Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <center>
+                              <BorderPane fx:id="field36Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="CashBank" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                           <left>
+                              <BorderPane minWidth="35.0" style="-fx-background-color: FFFAAA;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Job" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </left>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="15.0" layoutY="122.0" style="-fx-border-color: #094F95;" GridPane.columnSpan="2" GridPane.rowIndex="5">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field17Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <center>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #094F95;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Chance" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="15.0" layoutY="278.0" style="-fx-border-color: #094F95;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="7">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field37Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <center>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #094F95;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Chance" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="1026.0" layoutY="15.0" style="-fx-border-color: #094F95; -fx-background-color: #094F95;" GridPane.columnIndex="4" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field24Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <Label text="Chance" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </Label>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="382.0" layoutY="15.0" style="-fx-border-color: #094F95; -fx-background-color: #094F95;" GridPane.columnIndex="4" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field08Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <Label text="Chance" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </Label>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="382.0" layoutY="590.0" style="-fx-border-color: BF6D5F; -fx-background-color: BF6D5F;" GridPane.columnIndex="7" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field05Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <Label text="Semester tuition" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </Label>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="1026.0" layoutY="122.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field33Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <center>
+                              <BorderPane fx:id="field33Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Machine Learning" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                           <left>
+                              <BorderPane minWidth="35.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Class" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </left>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="1026.0" layoutY="174.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field34Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <center>
+                              <BorderPane fx:id="field34Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Cloud Computing" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                           <left>
+                              <BorderPane minWidth="35.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Class" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </left>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="1026.0" layoutY="226.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="5">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field35Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <center>
+                              <BorderPane fx:id="field35Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Game Development" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                           <left>
+                              <BorderPane minWidth="35.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Class" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </left>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="1026.0" layoutY="278.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="8">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field38Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <center>
+                              <BorderPane fx:id="field38Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Mobile Applications" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                           <left>
+                              <BorderPane minWidth="35.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Class" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </left>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="1026.0" layoutY="122.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="10">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field40Players" text="WW" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <center>
+                              <BorderPane fx:id="field40Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Bachelor Thesis" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                           <left>
+                              <BorderPane minWidth="35.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Class" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </left>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="1026.0" layoutY="538.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field19Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <center>
+                              <BorderPane fx:id="field19Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Web Development" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                           <left>
+                              <BorderPane minWidth="35.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Class" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </left>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="15.0" layoutY="174.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field18Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <center>
+                              <BorderPane fx:id="field18Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="System Orientated Programming" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                           <left>
+                              <BorderPane minWidth="35.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Class" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </left>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="15.0" layoutY="226.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="7">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field15Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <center>
+                              <BorderPane fx:id="field15Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Communication Technology" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                           <left>
+                              <BorderPane minWidth="35.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Class" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </left>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="15.0" layoutY="382.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="8">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field14Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <center>
+                              <BorderPane fx:id="field14Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Linear Algebra" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                           <left>
+                              <BorderPane minWidth="35.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Class" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </left>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="15.0" layoutY="434.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="9">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field13Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <center>
+                              <BorderPane fx:id="field13Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Communication Competence" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                           <left>
+                              <BorderPane minWidth="35.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Class" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </left>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="15.0" layoutY="486.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="10">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field12Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <center>
+                              <BorderPane fx:id="field12Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Databases" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                           <left>
+                              <BorderPane minWidth="35.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Class" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </left>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="198.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="3" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field23Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane fx:id="field23Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Stochastics &amp; Statistics" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </center>
+                     <top>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Class" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </top>
+                  </BorderPane>
+                  <BorderPane layoutX="290.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="5" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field25Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane fx:id="field25Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Computer Engineering" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </center>
+                     <top>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Class" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </top>
+                  </BorderPane>
+                  <BorderPane layoutX="474.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="7" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field27Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane fx:id="field27Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="IT Security" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </center>
+                     <top>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Class" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </top>
+                  </BorderPane>
+                  <BorderPane layoutX="658.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="8" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field28Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane fx:id="field28Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Higher Mathematics" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </center>
+                     <top>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Class" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </top>
+                  </BorderPane>
+                  <BorderPane layoutX="750.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="9" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field29Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane fx:id="field29Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Physics Engines" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </center>
+                     <top>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Class" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </top>
+                  </BorderPane>
+                  <BorderPane layoutX="842.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="10" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field30Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane fx:id="field30Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Business Administration" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </center>
+                     <top>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Class" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </top>
+                  </BorderPane>
+                  <BorderPane layoutX="934.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="2" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field10Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane fx:id="field10Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Analysis" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </center>
+                     <top>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Class" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </top>
+                  </BorderPane>
+                  <BorderPane layoutX="198.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="3" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field09Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field09Color" text="Electronics &amp; digital technology" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </center>
+                     <top>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Class" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </top>
+                  </BorderPane>
+                  <BorderPane layoutX="290.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="8" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field04Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field04Color" text="Information Theory &amp; Coding" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </center>
+                     <top>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Class" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </top>
+                  </BorderPane>
+                  <BorderPane layoutX="750.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="9" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field03Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane fx:id="field03Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Discrete Mathematics" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </center>
+                     <top>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Class" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </top>
+                  </BorderPane>
+                  <BorderPane layoutX="842.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="10" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field02Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <BorderPane fx:id="field02Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Programming" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </center>
+                     <top>
+                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label text="Class" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </top>
+                  </BorderPane>
+                  <BorderPane fx:id="field21Color" layoutX="1026.0" layoutY="15.0" style="-fx-border-color: BBBBBB; -fx-background-color: black;" GridPane.columnSpan="2" GridPane.rowSpan="2">
+                     <bottom>
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                           <center>
+                              <Label fx:id="field21Players" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                     <center>
+                        <Label text="Startup" textFill="WHITE" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                     </center>
+                  </BorderPane>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </GridPane>
+         </center>
+         <bottom>
+            <BorderPane minHeight="65.0" prefHeight="65.0" prefWidth="0.0" style="-fx-background-color: #094F95;" BorderPane.alignment="CENTER">
+               <right>
+                  <HBox prefHeight="67.0" prefWidth="272.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label fx:id="diceRollLabel" maxHeight="65.0" minHeight="65.0" minWidth="50.0" prefHeight="65.0" prefWidth="102.0" text="Dice roll:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="rollDiceOutput" maxHeight="65.0" minHeight="65.0" minWidth="32.0" prefHeight="65.0" prefWidth="32.0" text="1" textFill="WHITE">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="15.0" right="10.0" top="15.0" />
+                           </padding>
+                        </Label>
+                        <Button fx:id="diceRollButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="47.0" prefWidth="150.0" style="-fx-background-color: white;" text="Roll Dice" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Font Regular" size="13.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </right>
+               <left>
+                  <HBox fx:id="interactionBox" alignment="BOTTOM_CENTER" maxHeight="65.0" minHeight="65.0" style="-fx-background-color: #094F95;" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox fx:id="fundsBox" alignment="BOTTOM_CENTER" maxHeight="65.0" minHeight="65.0" style="-fx-background-color: #DDDDDD;">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" minWidth="100.0">
+                                 <children>
+                                    <Label fx:id="fundsBoxPlayerName" text="Player">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="fundsBoxPlayerCredits" layoutX="10.0" layoutY="27.0" text="Credits">
+                                       <font>
+                                          <Font name="System Font Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="fundsBoxPlayerMoney" layoutX="10.0" layoutY="10.0" text="Money">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <Line fx:id="seperator0" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Line>
+                              <Circle fill="#003f84" radius="9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+                                 <HBox.margin>
+                                    <Insets bottom="17.0" right="8.0" top="17.0" />
+                                 </HBox.margin>
+                              </Circle>
+                              <VBox fx:id="fundsBoxPlayer1" alignment="CENTER_LEFT" minWidth="100.0">
+                                 <children>
+                                    <Label fx:id="fundsBoxPlayer1Name" text="OC">
+                                       <font>
+                                          <Font name="System Font Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="fundsBoxPlayer1Credits" text="-" />
+                                    <Label fx:id="fundsBoxPlayer1Money" text="-" />
+                                 </children>
+                              </VBox>
+                              <Line fx:id="seperator1" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Line>
+                              <Circle fill="#861515" layoutX="137.0" layoutY="44.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+                                 <HBox.margin>
+                                    <Insets bottom="17.0" right="8.0" top="17.0" />
+                                 </HBox.margin>
+                              </Circle>
+                              <VBox fx:id="fundsBoxPlayer2" alignment="CENTER_LEFT" layoutX="410.0" layoutY="15.0" minWidth="100.0">
+                                 <children>
+                                    <Label fx:id="fundsBoxPlayer2Name" text="TR">
+                                       <font>
+                                          <Font name="System Font Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="fundsBoxPlayer2Credits" text="-" />
+                                    <Label fx:id="fundsBoxPlayer2Money" text="-" />
+                                 </children>
+                              </VBox>
+                              <Line fx:id="seperator2" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Line>
+                              <Circle fill="#008631" layoutX="276.0" layoutY="44.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+                                 <HBox.margin>
+                                    <Insets bottom="17.0" right="8.0" top="17.0" />
+                                 </HBox.margin>
+                              </Circle>
+                              <VBox fx:id="fundsBoxPlayer3" alignment="CENTER_LEFT" layoutX="460.0" layoutY="15.0" minWidth="100.0">
+                                 <children>
+                                    <Label fx:id="fundsBoxPlayer3Name" text="NS">
+                                       <font>
+                                          <Font name="System Font Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="fundsBoxPlayer3Credits" text="-" />
+                                    <Label fx:id="fundsBoxPlayer3Money" text="-" />
+                                 </children>
+                              </VBox>
+                              <Line fx:id="seperator3" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Line>
+                              <Circle fill="#930a7f" layoutX="415.0" layoutY="61.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+                                 <HBox.margin>
+                                    <Insets bottom="17.0" right="8.0" top="17.0" />
+                                 </HBox.margin>
+                              </Circle>
+                              <VBox fx:id="fundsBoxPlayer4" alignment="CENTER_LEFT" layoutX="510.0" layoutY="15.0" minWidth="100.0">
+                                 <children>
+                                    <Label fx:id="fundsBoxPlayer4Name" text="ZE">
+                                       <font>
+                                          <Font name="System Font Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="fundsBoxPlayer4Credits" text="-" />
+                                    <Label fx:id="fundsBoxPlayer4Money" text="-" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets right="15.0" />
+                           </HBox.margin>
+                        </HBox>
+                        <Label fx:id="currentPlayerLabel" maxHeight="65.0" minHeight="65.0" text="Current Player:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="currentPlayer" layoutX="229.0" layoutY="11.0" maxHeight="65.0" minHeight="65.0" minWidth="62.0" prefHeight="65.0" prefWidth="62.0" text="TR" textFill="WHITE">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="15.0" right="10.0" top="15.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </HBox>
+               </left>
+            </BorderPane>
+         </bottom>
+      </BorderPane>
+   </children>
+</VBox>
