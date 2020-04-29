@@ -39,3 +39,6 @@ This project is licensed under the ZHAW License - see [ZHAW](http://www.zhaw.ch)
 # Test Documentation
 
 
+# Conventions
+* [Branch modelling](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/wiki/Git-Branch-Model)
+* [Git message convention](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/wiki/Git-Commit-Message-Convention)
