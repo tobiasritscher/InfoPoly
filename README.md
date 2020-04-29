@@ -1,4 +1,4 @@
-# gruppe2-CaffeineAddicts-projekt2 Infopoly
+# gruppe2-CaffeineAddicts-projekt2
 ## Infopoly
 
 
