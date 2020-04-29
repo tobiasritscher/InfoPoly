@@ -15,7 +15,7 @@ import java.util.Arrays;
  *
  * @author corrooli
  */
-public class mainWindowController {
+public class MainWindowController {
 
     /**
      * Game menu commands.
@@ -243,7 +243,7 @@ public class mainWindowController {
     /**
      * Empty Constructor of UIController Class. Needs to be empty!
      */
-    public mainWindowController() {
+    public MainWindowController() {
     }
 
     @FXML
@@ -475,14 +475,24 @@ public class mainWindowController {
      * Tells the model to start a new game.
      */
     public void newGameAction() {
-        // TODO: tell logic to start a new game
+        QuestionWindow newGameQuestion = new QuestionWindow(
+                "Are you sure?", "You really want to start a new game?"
+        );
+        if (newGameQuestion.getAnswer()) {
+            // TODO: tell logic to start a new game
+        }
     }
 
     /**
      * Quits the entire application.
      */
     public void quitAction() {
-        Platform.exit();
+        QuestionWindow quitQuestion = new QuestionWindow(
+                "Are you sure?", "You really want to quit?"
+        );
+        if (quitQuestion.getAnswer()) {
+            Platform.exit();
+        }
     }
 
     /**
@@ -498,7 +508,7 @@ public class mainWindowController {
      */
     public void rollDiceAction() {
         // TODO: Tell logic to roll dice
-        new informationalWindow("The dice has been rolled ._.");
+        new InformationalWindow("The dice has been rolled ._.");
 
         // quick and dirty test: updateDiceRollLabel(4);
     }

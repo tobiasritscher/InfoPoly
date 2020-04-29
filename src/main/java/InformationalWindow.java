@@ -7,9 +7,9 @@ import java.util.Optional;
  * Informational window to inform players of events happening in the game.
  * (e.g. chance field, party field, zvv fee field)
  * To create an informational window, you don't need to instance it permanently. You can simply create one by using:
- * new informationalWindow("The text you want to tell the user);
+ * new InformationalWindow("The text you want to tell the user);
  */
-public class informationalWindow {
+public class InformationalWindow {
 
     /**
      * Spawns a new alert window.
@@ -25,7 +25,7 @@ public class informationalWindow {
      *
      * @param message The message for the player.
      */
-    public informationalWindow(String message) {
+    public InformationalWindow(String message) {
         alert.setTitle(header);
         alert.setHeaderText(header);
         alert.setContentText(message);

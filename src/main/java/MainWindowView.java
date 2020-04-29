@@ -12,11 +12,11 @@ import java.io.FileInputStream;
  *
  * @author corrooli
  */
-public class mainWindowView extends Application {
+public class MainWindowView extends Application {
     /**
      * Explicitly declared controller class.
      */
-    mainWindowController controller = new mainWindowController();
+    MainWindowController controller = new MainWindowController();
     Parent root;
 
     public static void main(String[] args){
