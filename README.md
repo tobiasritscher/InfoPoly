@@ -1,14 +1,13 @@
 # gruppe2-CaffeineAddicts-projekt2 Infopoly
-
-# Infopoly
-
-
-
-# Getting Started
+## Infopoly
 
 
 
-# Team
+## Getting Started
+
+
+
+## Team
 
 * **Nikita Smailov** - Head of Development aka Assistant Caffeine Addict
 
@@ -18,27 +17,27 @@
 
 * **Tobias Ritscher** - Senior Software Engineer in the Controller Departement aka Diseased Penguin
 
-# License
+## License
 
 This project is licensed under the ZHAW License - see [ZHAW](http://www.zhaw.ch) for details
 
-# Manual
-## First Steps ##
+## Manual
+### First Steps ##
 
 
-## Main Game ##
+### Main Game ##
 
 
-# Screenshot
+## Screenshot
 
 
-# Class Diagram
+## Class Diagram
 
 ![Screenshot](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/blob/master/pm2-proj3-class-diagramm.pdf)
 
-# Test Documentation
+## Test Documentation
 
 
-# Conventions
+## Conventions
 * [Branch modelling](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/wiki/Git-Branch-Model)
 * [Git message convention](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/wiki/Git-Commit-Message-Convention)
