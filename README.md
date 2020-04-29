@@ -1,2 +1,41 @@
-# gruppe2-CaffeineAddicts-projekt2
-PM2 Gruppe2 CaffeineAddicts Projekt2 Infopoly
+# gruppe2-CaffeineAddicts-projekt2 Infopoly
+
+# Infopoly
+
+
+
+# Getting Started
+
+
+
+# Team
+
+* **Nikita Smailov** - Head of Development aka Assistant Caffeine Addict
+
+* **Oliver Corrodi** - Director of UI aka Chief Caffeine and Nicotine Addict
+
+* **Erman Zankov** - First Executive Programmer specialized in Monopoly mechanics aka Longboi
+
+* **Tobias Ritscher** - Senior Software Engineer in the Controller Departement aka Diseased Penguin
+
+# License
+
+This project is licensed under the ZHAW License - see [ZHAW](http://www.zhaw.ch) for details
+
+# Manual
+## First Steps ##
+
+
+## Main Game ##
+
+
+# Screenshot
+
+
+# Class Diagram
+
+![Screenshot](classdiagram.jpg)
+
+# Test Documentation
+
+
