@@ -1,6 +1,8 @@
 /**
  * Enum class to simplify color values for each player.
  * Each color value is fixed. It is used to indicate which field is occupied by whom.
+ *
+ * @author corrooli
  */
 
 public enum PlayerColor {

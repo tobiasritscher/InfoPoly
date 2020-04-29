@@ -4,9 +4,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Main Window UI Controller. Contains all fields to address the main window, and all methods used to update fields.
@@ -231,6 +234,18 @@ public class MainWindowController {
     public Label repeatingPlayers;
 
     /**
+     * Circle shapes corresponding to players.
+     */
+    @FXML
+    public Circle player1Ball;
+    @FXML
+    public Circle player2Ball;
+    @FXML
+    public Circle player3Ball;
+    @FXML
+    public Circle player4Ball;
+
+    /**
      * ArrayList for all player position Labels (fieldXXPlayers) on the board.
      */
     ArrayList<Label> fieldLabels;
@@ -246,12 +261,14 @@ public class MainWindowController {
     public MainWindowController() {
     }
 
+    /**
+     * Create Arraylist for field labels to make it easier to iterate through fields.
+     * Create Arraylist for field colors to make it easier to iterate through fields. Non-addressable fields are
+     * replaced with an invisible dummyPane object so the order of this ArrayList harmonizes with the fields on
+     * the board.
+     */
     @FXML
     private void initialize() {
-        /**
-         * Create Arraylist for field labels to make it easier to iterate through fields.
-         */
-        // TODO: Should be replaced with something more compact. Maybe some methods from Reflection?
         fieldLabels = new ArrayList<>(Arrays.asList(
                 field01Players, field02Players, field03Players, field04Players, field05Players, field06Players,
                 field07Players, field08Players, field09Players, field10Players, field11Players, field12Players,
@@ -262,11 +279,6 @@ public class MainWindowController {
                 field37Players, field38Players, field39Players, field40Players
         ));
 
-        /**
-         * Create Arraylist for field colors to make it easier to iterate through fields. Non-addressable fields are
-         * replaced with an invisible dummyPane object so the order of this ArrayList harmonizes with the fields on
-         * the board.
-         */
         fieldPanes = new ArrayList<>(Arrays.asList(
                 dummyPane, field02Color, field03Color, field04Color, dummyPane, field06Color, field07Color, field09Color, field10Color,
                 dummyPane, field12Color, field13Color, field14Color, field15Color, field16Color, dummyPane, field18Color, field19Color,
@@ -275,43 +287,7 @@ public class MainWindowController {
                 dummyPane, field38Color, dummyPane, field40Color
         ));
 
-        /**
-         * Initialize all fieldLabels with an empty String
-         */
-        fieldLabels.forEach((fieldLabel) -> fieldLabel.setText(""));
-
-
-        // Test some stuff with dirty dirty no-good tests TODO clean up dirty tests
-
-        Player player1 = new Player("BU", 0, 0);
-        Player player2 = new Player("TT", 0, 0);
-        Player player3 = new Player("FA", 0, 0);
-        Player player4 = new Player("CE", 0, 0);
-
-        setPlayerName(1, player1.getName());
-        setPlayerName(2, player2.getName());
-        setPlayerName(3, player3.getName());
-        setPlayerName(4, player4.getName());
-
-        movePlayer(player1.getName(), 6);
-        movePlayer(player2.getName(), 5);
-        movePlayer(player3.getName(), 4);
-        movePlayer(player4.getName(), 3);
-
-        takeOverField(PlayerColor.PLAYER1, 2);
-        takeOverField(PlayerColor.PLAYER2, 3);
-        takeOverField(PlayerColor.PLAYER3, 4);
-        takeOverField(PlayerColor.PLAYER4, 6);
-
-        setPlayerCredits(1, 666);
-        setPlayerCredits(2, 420);
-        setPlayerCredits(3, 69);
-        setPlayerCredits(4, 1);
-
-        setPlayerMoney(1, 666);
-        setPlayerMoney(2, 420);
-        setPlayerMoney(3, 69);
-        setPlayerMoney(4, 1);
+        initializeField();
     }
 
     /**
@@ -322,8 +298,6 @@ public class MainWindowController {
      * @param fieldNumber The number of the field that the player moves to. (See documentation)
      */
     public void movePlayer(String playerName, int fieldNumber) {
-
-        // TODO: Should work, but we first need to decide how much 'intelligence' this class needs to have
 
         // Iterate through all fields and delete current player location
         String tempText;
@@ -352,11 +326,10 @@ public class MainWindowController {
         if (fieldLabels.get(fieldNumber - 1).getText().contains(playerName)) {
 
             // Error msg if Player is already on this field (not really necessary but helps debugging
-            System.out.println("Player already on this field!");
+            new InformationalWindow("Player already on this field!");
         } else {
 
             // Extract text from field and concatenate it with whitespace and Player name
-
             tempText = fieldLabels.get(fieldNumber - 1).getText() + " " + playerName;
 
             // Trim leading and trailing whitespaces
@@ -387,15 +360,19 @@ public class MainWindowController {
         switch (playerNumber) {
             case 1:
                 fundsBoxPlayer1Name.setText(playerName);
+                player1Ball.setFill(Color.valueOf(PlayerColor.PLAYER1.getColorValue()));
                 break;
             case 2:
                 fundsBoxPlayer2Name.setText(playerName);
+                player2Ball.setFill(Color.valueOf(PlayerColor.PLAYER2.getColorValue()));
                 break;
             case 3:
                 fundsBoxPlayer3Name.setText(playerName);
+                player3Ball.setFill(Color.valueOf(PlayerColor.PLAYER3.getColorValue()));
                 break;
             case 4:
                 fundsBoxPlayer4Name.setText(playerName);
+                player4Ball.setFill(Color.valueOf(PlayerColor.PLAYER4.getColorValue()));
                 break;
             default:
                 System.out.println("playerNumber out of range!");
@@ -448,7 +425,7 @@ public class MainWindowController {
                 fundsBoxPlayer4Money.setText(String.valueOf(money));
                 break;
             default:
-                System.out.println("money out of range!");
+                new InformationalWindow("Invalid amount of money!");
         }
     }
 
@@ -475,11 +452,20 @@ public class MainWindowController {
      * Tells the model to start a new game.
      */
     public void newGameAction() {
+        // TODO: Could/should be refactored into model.
+        PlayerEntryWindow entry = null;
         QuestionWindow newGameQuestion = new QuestionWindow(
                 "Are you sure?", "You really want to start a new game?"
         );
         if (newGameQuestion.getAnswer()) {
-            // TODO: tell logic to start a new game
+            initializeField();
+            entry = new PlayerEntryWindow();
+        }
+        for (int i = 0; i < Objects.requireNonNull(entry).getPlayersList().size(); i++) {
+            setPlayerName(i + 1, entry.getPlayersList().get(i));
+            setPlayerMoney(i + 1, 0);
+            setPlayerCredits(i + 1, 0);
+            movePlayer(entry.getPlayersList().get(i), 1);
         }
     }
 
@@ -525,5 +511,29 @@ public class MainWindowController {
      */
     public void loadWindowConfigurationAction() {
         // TODO: implement
+    }
+
+    /**
+     * Initialize all fieldLabels with an empty String
+     */
+    public void initializeField() {
+        fieldLabels.forEach((fieldLabel) -> fieldLabel.setText(""));
+
+        setPlayerName(1, "");
+        setPlayerName(2, "");
+        setPlayerName(3, "");
+        setPlayerName(4, "");
+        fundsBoxPlayer1Money.setText("");
+        fundsBoxPlayer2Money.setText("");
+        fundsBoxPlayer3Money.setText("");
+        fundsBoxPlayer4Money.setText("");
+        fundsBoxPlayer1Credits.setText("");
+        fundsBoxPlayer2Credits.setText("");
+        fundsBoxPlayer3Credits.setText("");
+        fundsBoxPlayer4Credits.setText("");
+        player1Ball.setFill(Color.valueOf("DDDDDD"));
+        player2Ball.setFill(Color.valueOf("DDDDDD"));
+        player3Ball.setFill(Color.valueOf("DDDDDD"));
+        player4Ball.setFill(Color.valueOf("DDDDDD"));
     }
 }

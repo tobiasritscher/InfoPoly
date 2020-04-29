@@ -9,12 +9,20 @@ import java.util.Optional;
  * To create an informational window, you will need to instance it permanently. You can simply create one by using:
  * InformationalWindow thisQuestion = new InformationalWindow("The title","The text you want to tell the user);
  * And you can retrieve a boolean value of the user's input by thisQuestion.getAnswer; - It's simple!
+ *
+ * @author corrooli
  */
 public class QuestionWindow {
+    /**
+     * Spawns a new question window.
+     */
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
-    private final Optional<ButtonType> result;
+    /**
+     * Stores the result retrieved from the GUI.
+     */
+    private final Optional<ButtonType> answer;
     private final ButtonType yesButton;
-    private ButtonType noButton;
 
     /**
      * Constructor for the question window. Needs a header text (e.g. The name of the class/job) and a message text.
@@ -23,17 +31,15 @@ public class QuestionWindow {
      * @param messageText String for the message text.
      */
     public QuestionWindow(String headerText, String messageText) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Question");
         alert.setHeaderText(headerText);
         alert.setContentText(messageText);
 
         yesButton = new ButtonType("Yes");
-        noButton = new ButtonType("No");
-
+        ButtonType noButton = new ButtonType("No");
         alert.getButtonTypes().setAll(yesButton, noButton);
 
-        result = alert.showAndWait();
+        answer = alert.showAndWait();
     }
 
     /**
@@ -42,6 +48,6 @@ public class QuestionWindow {
      * @return True if the user clicked yes, false if the user clicked no or closed the window.
      */
     public boolean getAnswer() {
-        return result.get() == yesButton;
+        return answer.get() == yesButton;
     }
 }

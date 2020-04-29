@@ -8,11 +8,13 @@ import java.util.Optional;
  * (e.g. chance field, party field, zvv fee field)
  * To create an informational window, you don't need to instance it permanently. You can simply create one by using:
  * new InformationalWindow("The text you want to tell the user);
+ *
+ * @author corrooli
  */
 public class InformationalWindow {
 
     /**
-     * Spawns a new alert window.
+     * Spawns a new informational window.
      */
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
     /**

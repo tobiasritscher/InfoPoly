@@ -1502,7 +1502,7 @@
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
                               </Line>
-                              <Circle fill="#003f84" radius="9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+                              <Circle fx:id="player1Ball" fill="#003f84" radius="9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
                                  <HBox.margin>
                                     <Insets bottom="17.0" right="8.0" top="17.0" />
                                  </HBox.margin>
@@ -1523,7 +1523,7 @@
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
                               </Line>
-                              <Circle fill="#861515" layoutX="137.0" layoutY="44.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+                              <Circle fx:id="player2Ball" fill="#861515" layoutX="137.0" layoutY="44.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
                                  <HBox.margin>
                                     <Insets bottom="17.0" right="8.0" top="17.0" />
                                  </HBox.margin>
@@ -1544,7 +1544,7 @@
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
                               </Line>
-                              <Circle fill="#008631" layoutX="276.0" layoutY="44.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+                              <Circle fx:id="player3Ball" fill="#008631" layoutX="276.0" layoutY="44.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
                                  <HBox.margin>
                                     <Insets bottom="17.0" right="8.0" top="17.0" />
                                  </HBox.margin>
@@ -1565,7 +1565,7 @@
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
                               </Line>
-                              <Circle fill="#930a7f" layoutX="415.0" layoutY="61.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+                              <Circle fx:id="player4Ball" fill="#930a7f" layoutX="415.0" layoutY="61.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
                                  <HBox.margin>
                                     <Insets bottom="17.0" right="8.0" top="17.0" />
                                  </HBox.margin>
