@@ -326,7 +326,7 @@ public class mainWindowController {
         // TODO: Should work, but we first need to decide how much 'intelligence' this class needs to have
 
         // Iterate through all fields and delete current player location
-        String tempText = "";
+        String tempText;
 
         // Check if Player is in one of the fields. Loop through entire board (maybe could be made easier but i don't want to save the whole board state here
         for (Label fieldLabel : fieldLabels) {
@@ -341,7 +341,7 @@ public class mainWindowController {
                 tempText = tempText.replace(playerName, "");
 
                 // Trim leading and trailing whitepace
-                tempText.trim();
+                tempText = tempText.trim();
 
                 // Set new text to field
                 fieldLabel.setText(tempText);
@@ -360,7 +360,7 @@ public class mainWindowController {
             tempText = fieldLabels.get(fieldNumber - 1).getText() + " " + playerName;
 
             // Trim leading and trailing whitespaces
-            tempText.trim();
+            tempText = tempText.trim();
 
             // Set new text to field
             fieldLabels.get(fieldNumber - 1).setText(tempText);
@@ -458,6 +458,7 @@ public class mainWindowController {
      * @param rolledNumber rolled number, retrieved from model.
      */
     public void updateDiceRollLabel(int rolledNumber) {
+
         rollDiceOutput.setText(String.valueOf(rolledNumber));
     }
 
@@ -497,6 +498,8 @@ public class mainWindowController {
      */
     public void rollDiceAction() {
         // TODO: Tell logic to roll dice
+        new informationalWindow("The dice has been rolled ._.");
+
         // quick and dirty test: updateDiceRollLabel(4);
     }
 
