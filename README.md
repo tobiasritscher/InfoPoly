@@ -34,7 +34,7 @@ This project is licensed under the ZHAW License - see [ZHAW](http://www.zhaw.ch)
 
 # Class Diagram
 
-![Screenshot](classdiagram.jpg)
+![Screenshot](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/blob/master/pm2-proj3-class-diagramm.pdf)
 
 # Test Documentation
 
