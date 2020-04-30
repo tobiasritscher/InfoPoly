@@ -12,7 +12,4 @@ public class GameField {
         return fieldId;
     }
 
-    public enum FieldType{
-        //todo implement
-    }
 }
