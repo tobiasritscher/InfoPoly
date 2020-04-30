@@ -19,7 +19,4 @@ public class GameBoard {
         return board.get(fieldId);
     }
 
-    public class GameField {
-        //todo implement
-    }
 }
