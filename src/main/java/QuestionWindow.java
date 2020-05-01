@@ -5,10 +5,15 @@ import java.util.Optional;
 
 /**
  * Question window to ask players yes/no concerning events happening in the game.
- * (e.g. asking to close app, start a new game, acquire a field, etc. It's multi-purpose!)
- * To create an informational window, you will need to instance it permanently. You can simply create one by using:
+ * (e.g. asking to close app, start a new game, acquire a field, etc.)
+ * <p>
+ * To create a question window, you will need to instance it permanently. You can simply create one by using:
+ * <p>
  * InformationalWindow thisQuestion = new InformationalWindow("The title","The text you want to tell the user);
- * And you can retrieve a boolean value of the user's input by thisQuestion.getAnswer; - It's simple!
+ * <p>
+ * And you can retrieve a boolean value of the user's input by:
+ * <p>
+ * thisQuestion.getAnswer;
  *
  * @author corrooli
  */
@@ -45,7 +50,7 @@ public class QuestionWindow {
     /**
      * Returns a boolean answer.
      *
-     * @return True if the user clicked yes, false if the user clicked no or closed the window.
+     * @return True if the user clicked yes, false if the user clicked no.
      */
     public boolean getAnswer() {
         return answer.get() == yesButton;

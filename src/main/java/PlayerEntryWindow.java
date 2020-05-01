@@ -68,26 +68,27 @@ public class PlayerEntryWindow {
 
                 if (nameEntryDialogResult.isPresent()) {
 
-                    // Convert to upper case
-                    playerName = nameEntryDialogResult.get().toUpperCase();
+                    // Convert to upper case and trim
+                    playerName = nameEntryDialogResult.get().toUpperCase().trim();
 
                     // Check if name is already taken
                     if (playersList.contains(playerName)) {
                         new InformationalWindow("Name already taken!");
                     }
 
-                    // Check if name is just two characters long
-                    else if (playerName.length() == 2) {
+                    // Check if name is just two characters long and contains no numbers + special characters
+                    else if (playerName.length() == 2 && playerName.matches("[a-zA-Z]*")) {
 
                         // Success: Adding player to ArrayList
                         this.playersList.add(playerName);
 
                         // Exit loop
                         falseOrIncompleteInput = false;
+
                     } else {
 
                         // Error message & retry
-                        new InformationalWindow("Make sure your name is just two characters long!");
+                        new InformationalWindow("Make sure your name is just two alphabetical characters!");
                     }
                 }
             }
