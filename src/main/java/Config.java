@@ -1,5 +1,5 @@
 public class Config {
-    public final int START_MONEY = 100;
+    public static final int START_MONEY = 100;
 
     public enum FieldType {
         MODULE("Module"),STARTUP("Startup"),
