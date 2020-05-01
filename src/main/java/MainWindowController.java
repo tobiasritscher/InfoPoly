@@ -2,10 +2,10 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +13,10 @@ import java.util.Objects;
 
 /**
  * Main Window UI Controller. Contains all fields to address the main window, and all methods used to update fields.
+ * <p>
+ * Displays players on field, can move players, can indicate if a player takes over a field, calls dice rolls and
+ * starts/stops a game as well as spawns a dialog to enter player names / number.
+ * <p>
  * This controller is deliberately kept dumb, and it does not handle any business logic. This ensures a correct MVP
  * pattern.
  *
@@ -21,25 +25,89 @@ import java.util.Objects;
 public class MainWindowController {
 
     /**
-     * Game menu commands.
+     * All fields in the game. Can be formatted to our liking.
      */
     @FXML
-    public MenuItem newGame;
+    public BorderPane field01; // START
     @FXML
-    public MenuItem quit;
+    public BorderPane field02; // CLASS : Programming
+    @FXML
+    public BorderPane field03; // CLASS : Discrete Mathematics
+    @FXML
+    public BorderPane field04; // CLASS : Information Theory & Coding
+    @FXML
+    public BorderPane field05; // SEMESTER TUITION
+    @FXML
+    public BorderPane field06; // JOB   : BarStucks
+    @FXML
+    public BorderPane field07; // CLASS : Software Project
+    @FXML
+    public BorderPane field08; // CHANCE
+    @FXML
+    public BorderPane field09; // CLASS : Electronics & digital technology
+    @FXML
+    public BorderPane field10; // CLASS : Analysis
+    @FXML
+    public BorderPane field11; // REPEATING SEMESTER
+    @FXML
+    public BorderPane field12; // CLASS : Databases
+    @FXML
+    public BorderPane field13; // CLASS : Communication Competence
+    @FXML
+    public BorderPane field14; // CLASS : Linear Algebra
+    @FXML
+    public BorderPane field15; // CLASS : Communication Technologies
+    @FXML
+    public BorderPane field16; // JOB   : McBurger
+    @FXML
+    public BorderPane field17; // CHANCE
+    @FXML
+    public BorderPane field18; // CLASS : System Orientated Programming
+    @FXML
+    public BorderPane field19; // CLASS : Web Development
+    @FXML
+    public BorderPane field20; // ZVV FEES
+    @FXML
+    public BorderPane field22; // CLASS : Algorithms & Data Structures
+    @FXML
+    public BorderPane field23; // CLASS : Stochastics & Statistics
+    @FXML
+    public BorderPane field24; // CHANCE
+    @FXML
+    public BorderPane field25; // CLASS : Computer Engineering
+    @FXML
+    public BorderPane field26; // JOB   : AnalogTec
+    @FXML
+    public BorderPane field27; // CLASS : IT Security
+    @FXML
+    public BorderPane field28; // CLASS : Higher Mathematics
+    @FXML
+    public BorderPane field29; // CLASS : Physics Engines
+    @FXML
+    public BorderPane field30; // CLASS : Business Administration
+    @FXML
+    public BorderPane field31; // EXAM FAILED
+    @FXML
+    public BorderPane field32; // CLASS : Project Thesis
+    @FXML
+    public BorderPane field33; // CLASS : Machine Learning
+    @FXML
+    public BorderPane field34; // CLASS : Cloud Computing
+    @FXML
+    public BorderPane field35; // CLASS : Game Development
+    @FXML
+    public BorderPane field36; // JOB   : CashBank
+    @FXML
+    public BorderPane field37; // CHANCE
+    @FXML
+    public BorderPane field38; // CLASS : Mobile Applications
+    @FXML
+    public BorderPane field39; // PARTY
+    @FXML
+    public BorderPane field40; // CLASS : Bachelor Thesis
 
     /**
-     * Window menu commands.
-     */
-    @FXML
-    public MenuItem resize;
-    @FXML
-    public MenuItem saveWindowConfiguration;
-    @FXML
-    public MenuItem loadWindowConfiguration;
-
-    /**
-     * Bottom fields where player initials are used to indicate which players are on which field.
+     * Bottom of fields where player initials are used to indicate which players are on which field.
      */
     @FXML
     public Label field01Players; // START
@@ -121,6 +189,12 @@ public class MainWindowController {
     public Label field39Players; // PARTY
     @FXML
     public Label field40Players; // CLASS : Bachelor Thesis
+    /**
+     * Content of 'Repeating Semester/Repeating:' text label. Indicates which player has to repeat currently.
+     */
+    @FXML
+    public Label repeatingPlayers;
+
 
     /**
      * Top / Middle title fields. The background colors of these fields will switch to the player
@@ -190,8 +264,11 @@ public class MainWindowController {
     public BorderPane dummyPane;    // Dummy Pane to make ArrayList easier to handle
 
     /**
-     * Content of fundsBox. This box indicates player names, their color, their credits and money.
+     * Content of fundsBox. This box indicates labels indicating their info (player names, their color, their credits
+     * and money.) as well as line separators.
      */
+    @FXML
+    public VBox fundsBoxLabels;
     @FXML
     public Label fundsBoxPlayer1Name;
     @FXML
@@ -216,26 +293,6 @@ public class MainWindowController {
     public Label fundsBoxPlayer4Credits;
     @FXML
     public Label fundsBoxPlayer4Money;
-
-    /**
-     * Content of Game controls (current player, rollDiceButton, rollDiceOutput)
-     */
-    @FXML
-    public Label currentPlayer;
-    @FXML
-    public Label rollDiceOutput;
-    @FXML
-    public Button rollDiceButton;
-
-    /**
-     * Content of 'Repeating Semester/Repeating:' text label. Indicates which player has to repeat currently.
-     */
-    @FXML
-    public Label repeatingPlayers;
-
-    /**
-     * Circle shapes corresponding to players.
-     */
     @FXML
     public Circle player1Ball;
     @FXML
@@ -244,19 +301,53 @@ public class MainWindowController {
     public Circle player3Ball;
     @FXML
     public Circle player4Ball;
+    @FXML
+    public Line seperator0;
+    @FXML
+    public Line seperator1;
+    @FXML
+    public Line seperator2;
+    @FXML
+    public Line seperator3;
+
+    /**
+     * Content of Game controls (current player, rollDiceButton, rollDiceOutput)
+     */
+    @FXML
+    public Label currentPlayer;
+    @FXML
+    public Label currentPlayerLabel;
+    @FXML
+    public Label rollDiceOutput;
+    @FXML
+    public Label rollDiceLabel;
+    @FXML
+    public Button rollDiceButton;
+
+    /**
+     * ArrayList for all fields on the board.
+     */
+    private ArrayList<BorderPane> fields;
 
     /**
      * ArrayList for all player position Labels (fieldXXPlayers) on the board.
      */
-    ArrayList<Label> fieldLabels;
+    private ArrayList<Label> fieldLabels;
 
     /**
      * ArrayList for all changeable BorderPanes (fieldXXColor) on the board.
      */
-    ArrayList<BorderPane> fieldPanes;
+    private ArrayList<BorderPane> fieldColors;
 
     /**
-     * Empty Constructor of UIController Class. Needs to be empty!
+     * Boolean indicating if no game has started yet. This will eliminate the "Are you sure?" dialog when starting a
+     * new game.
+     */
+    private Boolean newGameConfirmationNeeded = true;
+
+    /**
+     * Empty Constructor of UIController Class. Needs to be empty (FXML convention)
+     * initialize() will automatically be called after.
      */
     public MainWindowController() {
     }
@@ -267,6 +358,7 @@ public class MainWindowController {
      * replaced with an invisible dummyPane object so the order of this ArrayList harmonizes with the fields on
      * the board.
      */
+
     @FXML
     private void initialize() {
         fieldLabels = new ArrayList<>(Arrays.asList(
@@ -276,30 +368,72 @@ public class MainWindowController {
                 field19Players, field20Players, field21Players, field22Players, field23Players, field24Players,
                 field25Players, field26Players, field27Players, field28Players, field29Players, field30Players,
                 field31Players, field32Players, field33Players, field34Players, field35Players, field36Players,
-                field37Players, field38Players, field39Players, field40Players
+                field37Players, field38Players, field39Players, field40Players, repeatingPlayers
         ));
 
-        fieldPanes = new ArrayList<>(Arrays.asList(
-                dummyPane, field02Color, field03Color, field04Color, dummyPane, field06Color, field07Color, field09Color, field10Color,
-                dummyPane, field12Color, field13Color, field14Color, field15Color, field16Color, dummyPane, field18Color, field19Color,
-                field21Color, dummyPane, field22Color, field23Color, dummyPane, field25Color, field26Color, field27Color, field28Color,
-                field29Color, field30Color, dummyPane, field32Color, field33Color, field34Color, field35Color, field36Color,
+        fieldColors = new ArrayList<>(Arrays.asList(
+                dummyPane, field02Color, field03Color, field04Color, dummyPane, field06Color, field07Color,
+                field09Color, field10Color, dummyPane, field12Color, field13Color, field14Color, field15Color,
+                field16Color, dummyPane, field18Color, field19Color, field21Color, dummyPane, field22Color,
+                field23Color, dummyPane, field25Color, field26Color, field27Color, field28Color, field29Color,
+                field30Color, dummyPane, field32Color, field33Color, field34Color, field35Color, field36Color,
                 dummyPane, field38Color, dummyPane, field40Color
         ));
 
-        initializeField();
+        fields = new ArrayList<>(Arrays.asList(
+                field01, field02, field03, field04, field05, field06, field07, field08, field09, field10, field11,
+                field12, field13, field14, field15, field16, field17, field18, field19, field20, field21Color, field22,
+                field23, field24, field25, field26, field27, field28, field29, field30, field31, field32, field33,
+                field34, field35, field36, field37, field38, field39, field40
+        ));
+
+        initializeGame();
+    }
+
+    /**
+     * Initializes / resets all fieldLabels, player names and funds values with an empty String, as well as making the
+     * 'Roll Dice' button, colored balls and separator lines invisible. Needs to be a separate method since the player
+     * can start a new game while the application is running.
+     */
+    public void initializeGame() {
+        fieldLabels.forEach((fieldLabel) -> fieldLabel.setText(""));
+        fieldColors.forEach((fieldColor) -> fieldColor.setStyle("-fx-background-color: " + PlayerColor.UNOCCUPIED.getColorValue()));
+        setBoardVisibility(false);
+
+        setPlayerName(1, "");
+        setPlayerName(2, "");
+        setPlayerName(3, "");
+        setPlayerName(4, "");
+
+        fundsBoxPlayer1Money.setText("");
+        fundsBoxPlayer2Money.setText("");
+        fundsBoxPlayer3Money.setText("");
+        fundsBoxPlayer4Money.setText("");
+
+        fundsBoxPlayer1Credits.setText("");
+        fundsBoxPlayer2Credits.setText("");
+        fundsBoxPlayer3Credits.setText("");
+        fundsBoxPlayer4Credits.setText("");
+
+        player1Ball.setOpacity(0.0);
+        player2Ball.setOpacity(0.0);
+        player3Ball.setOpacity(0.0);
+        player4Ball.setOpacity(0.0);
+
+        seperator0.setOpacity(0.0);
+        seperator1.setOpacity(0.0);
+        seperator2.setOpacity(0.0);
+        seperator3.setOpacity(0.0);
     }
 
     /**
      * Moves a player to a new field. Checks which field the player is on right now, deletes its name and moves it
      * to another field. Field numbers must be given explicitly.
      *
-     * @param playerName  Current player number (1-4).
-     * @param fieldNumber The number of the field that the player moves to. (See documentation)
+     * @param playerName     Name of player (call with playerInstance.getName())
+     * @param newFieldNumber The number of the field that the player moves to. (See documentation)
      */
-    public void movePlayer(String playerName, int fieldNumber) {
-
-        // Iterate through all fields and delete current player location
+    public void movePlayer(String playerName, int newFieldNumber) {
         String tempText;
 
         // Check if Player is in one of the fields. Loop through entire board (maybe could be made easier but i don't want to save the whole board state here
@@ -322,22 +456,31 @@ public class MainWindowController {
             }
         }
 
-        // Move player to new field after checking if he isn't already on this field
-        if (fieldLabels.get(fieldNumber - 1).getText().contains(playerName)) {
-
-            // Error msg if Player is already on this field (not really necessary but helps debugging
-            new InformationalWindow("Player already on this field!");
-        } else {
+        // Move player to new field after checking if he/she isn't already on this field
+        // Error msg if Player is already on this field (not really necessary but helps debugging
+        if (fieldLabels.get(newFieldNumber - 1).getText().contains(playerName))
+            new InformationalWindow("Player already on this field!"); // TODO: Create exception
+        else {
 
             // Extract text from field and concatenate it with whitespace and Player name
-            tempText = fieldLabels.get(fieldNumber - 1).getText() + " " + playerName;
+            tempText = fieldLabels.get(newFieldNumber - 1).getText() + " " + playerName;
 
             // Trim leading and trailing whitespaces
             tempText = tempText.trim();
 
             // Set new text to field
-            fieldLabels.get(fieldNumber - 1).setText(tempText);
+            fieldLabels.get(newFieldNumber - 1).setText(tempText);
         }
+    }
+
+    /**
+     * Sends a player to repetition. This is a helper method to ease code readability. Repeating player field is fixed
+     * to field number 41, this way there is no need for code duplication.
+     *
+     * @param playerName Player name who failed the exam
+     */
+    public void updateRepeatingPlayers(String playerName) {
+        movePlayer(playerName, 41);
     }
 
     /**
@@ -347,35 +490,39 @@ public class MainWindowController {
      * @param fieldNumber The number of the field that was taken over. (See documentation)
      */
     public void takeOverField(PlayerColor playerColor, int fieldNumber) {
-        fieldPanes.get(fieldNumber - 1).setStyle("-fx-background-color: " + playerColor.getColorValue());
+        fieldColors.get(fieldNumber - 1).setStyle("-fx-background-color: " + playerColor.getColorValue());
     }
 
     /**
-     * Set player names.
+     * Set player names and makes the colored balls and separator lines visible.
      *
      * @param playerNumber Current player number (1-4).
      * @param playerName   Name of Player (uppercase initials).
      */
-    public void setPlayerName(int playerNumber, String playerName) {
+    private void setPlayerName(int playerNumber, String playerName) {
         switch (playerNumber) {
             case 1:
                 fundsBoxPlayer1Name.setText(playerName);
-                player1Ball.setFill(Color.valueOf(PlayerColor.PLAYER1.getColorValue()));
+                player1Ball.setOpacity(1.0);
+                seperator0.setOpacity(1.0);
                 break;
             case 2:
                 fundsBoxPlayer2Name.setText(playerName);
-                player2Ball.setFill(Color.valueOf(PlayerColor.PLAYER2.getColorValue()));
+                player2Ball.setOpacity(1.0);
+                seperator1.setOpacity(1.0);
                 break;
             case 3:
                 fundsBoxPlayer3Name.setText(playerName);
-                player3Ball.setFill(Color.valueOf(PlayerColor.PLAYER3.getColorValue()));
+                player3Ball.setOpacity(1.0);
+                seperator2.setOpacity(1.0);
                 break;
             case 4:
                 fundsBoxPlayer4Name.setText(playerName);
-                player4Ball.setFill(Color.valueOf(PlayerColor.PLAYER4.getColorValue()));
+                player4Ball.setOpacity(1.0);
+                seperator3.setOpacity(1.0);
                 break;
             default:
-                System.out.println("playerNumber out of range!");
+                new InformationalWindow("playerNumber out of range!"); // TODO: Create exception
         }
     }
 
@@ -400,7 +547,7 @@ public class MainWindowController {
                 fundsBoxPlayer4Credits.setText(String.valueOf(credits));
                 break;
             default:
-                System.out.println("credits out of range!");
+                new InformationalWindow("credits out of range!"); // TODO: Create exception
         }
     }
 
@@ -425,8 +572,17 @@ public class MainWindowController {
                 fundsBoxPlayer4Money.setText(String.valueOf(money));
                 break;
             default:
-                new InformationalWindow("Invalid amount of money!");
+                new InformationalWindow("Invalid amount of money!"); // TODO: Create exception
         }
+    }
+
+    /**
+     * Updates the current player label on the GUI to indicate whose turn it is.
+     *
+     * @param playerNumber Current player name.
+     */
+    public void updateCurrentPlayer(String playerNumber) {
+        currentPlayer.setText(playerNumber);
     }
 
     /**
@@ -434,38 +590,62 @@ public class MainWindowController {
      *
      * @param rolledNumber rolled number, retrieved from model.
      */
-    public void updateDiceRollLabel(int rolledNumber) {
+    public void updateRollDiceLabel(int rolledNumber) {
 
         rollDiceOutput.setText(String.valueOf(rolledNumber));
     }
 
     /**
-     * Updates the current player label on the GUI to indicate whose turn it is.
-     *
-     * @param playerNumber Current player number (1-4).
+     * Tells the model to roll the dice via button action.
      */
-    public void updateCurrentPlayer(int playerNumber) {
-        currentPlayer.setText(String.valueOf(playerNumber));
+    public void rollDiceAction() {
+        // TODO: Tell model to roll dice. DON'T FORGET: Report back with rolled number with updateRollDiceLabel()!
+        new InformationalWindow("Dice not yet implemented!");
     }
 
     /**
      * Tells the model to start a new game.
      */
     public void newGameAction() {
-        // TODO: Could/should be refactored into model.
-        PlayerEntryWindow entry = null;
-        QuestionWindow newGameQuestion = new QuestionWindow(
-                "Are you sure?", "You really want to start a new game?"
-        );
-        if (newGameQuestion.getAnswer()) {
-            initializeField();
-            entry = new PlayerEntryWindow();
+        if (newGameConfirmationNeeded) {
+            setUpGame();
+        } else {
+            QuestionWindow newGameQuestion = new QuestionWindow(
+                    "Are you sure?", "You really want to start a new game?"
+            );
+            if (newGameQuestion.getAnswer()) {
+                setUpGame();
+            }
         }
-        for (int i = 0; i < Objects.requireNonNull(entry).getPlayersList().size(); i++) {
-            setPlayerName(i + 1, entry.getPlayersList().get(i));
-            setPlayerMoney(i + 1, 0);
-            setPlayerCredits(i + 1, 0);
-            movePlayer(entry.getPlayersList().get(i), 1);
+    }
+
+    /**
+     * Helper method to set up the game. Spawns a series of windows asking number of players and their names.
+     * TODO: This code should/could be outsourced to model. Code is already prepared for this, just use public methods within this class
+     */
+    private void setUpGame() {
+        //
+        PlayerEntryWindow entry = null;
+
+        // Clean up board, empty out all the fields,
+        initializeGame();
+        setBoardVisibility(false);
+        entry = new PlayerEntryWindow(); // TODO: This is where new user entries come from!
+
+        try {
+            setBoardVisibility(true);
+
+            for (int i = 0; i < Objects.requireNonNull(entry).getPlayersList().size(); i++) {
+                setPlayerName(i + 1, entry.getPlayersList().get(i));
+                setPlayerMoney(i + 1, Config.START_MONEY);
+                setPlayerCredits(i + 1, 0);
+                movePlayer(entry.getPlayersList().get(i), 1);
+            }
+            updateCurrentPlayer(entry.getPlayersList().get(0));
+            newGameConfirmationNeeded = false;
+        } catch (Exception e) {
+            setBoardVisibility(false);
+            newGameConfirmationNeeded = true;
         }
     }
 
@@ -482,58 +662,20 @@ public class MainWindowController {
     }
 
     /**
-     * Opens a new window, prompting the user for a new display resolution.
-     * TODO: This seems kinda redundant since it's easy to resize the window with the mouse. I'd kill this feature
+     * Makes the board visible or invisible.
+     *
+     * @param visibility true for visible, false for invisible
      */
-    public void resizeAction() {
-        // TODO: Implement window asking for resize
+    public void setBoardVisibility(boolean visibility) {
+        rollDiceButton.setVisible(visibility);
+        fundsBoxLabels.setVisible(visibility);
+        currentPlayerLabel.setVisible(visibility);
+        currentPlayer.setVisible(visibility);
+        rollDiceLabel.setVisible(visibility);
+        fields.forEach((field) -> field.setVisible(visibility));
     }
 
-    /**
-     * Tells the model to roll the dice via button action.
-     */
-    public void rollDiceAction() {
-        // TODO: Tell logic to roll dice
-        new InformationalWindow("The dice has been rolled ._.");
-
-        // quick and dirty test: updateDiceRollLabel(4);
-    }
-
-    /**
-     * Saves the current window configuration to a text file.
-     */
-    public void saveWindowConfigurationAction() {
-        // TODO: implement
-    }
-
-    /**
-     * Loads the current window configuration from a text file.
-     */
-    public void loadWindowConfigurationAction() {
-        // TODO: implement
-    }
-
-    /**
-     * Initialize all fieldLabels with an empty String
-     */
-    public void initializeField() {
-        fieldLabels.forEach((fieldLabel) -> fieldLabel.setText(""));
-
-        setPlayerName(1, "");
-        setPlayerName(2, "");
-        setPlayerName(3, "");
-        setPlayerName(4, "");
-        fundsBoxPlayer1Money.setText("");
-        fundsBoxPlayer2Money.setText("");
-        fundsBoxPlayer3Money.setText("");
-        fundsBoxPlayer4Money.setText("");
-        fundsBoxPlayer1Credits.setText("");
-        fundsBoxPlayer2Credits.setText("");
-        fundsBoxPlayer3Credits.setText("");
-        fundsBoxPlayer4Credits.setText("");
-        player1Ball.setFill(Color.valueOf("DDDDDD"));
-        player2Ball.setFill(Color.valueOf("DDDDDD"));
-        player3Ball.setFill(Color.valueOf("DDDDDD"));
-        player4Ball.setFill(Color.valueOf("DDDDDD"));
+    public void setNewGameConfirmationNeeded(Boolean newGameConfirmationNeeded) {
+        this.newGameConfirmationNeeded = newGameConfirmationNeeded;
     }
 }

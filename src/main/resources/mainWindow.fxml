@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
@@ -21,14 +22,6 @@
                         <MenuItem fx:id="newGame" mnemonicParsing="false" onAction="#newGameAction" text="New Game" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem fx:id="quit" mnemonicParsing="false" onAction="#quitAction" text="Quit" />
-                     </items>
-                  </Menu>
-                  <Menu fx:id="windowSettingsMenu" mnemonicParsing="false" text="Window Settings">
-                     <items>
-                        <MenuItem fx:id="resize" mnemonicParsing="false" onAction="#resizeAction" text="Resize" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="saveWindowConfiguration" mnemonicParsing="false" onAction="#saveWindowConfigurationAction" text="Save Window Configuration" />
-                        <MenuItem fx:id="loadWindowConfiguration" mnemonicParsing="false" onAction="#loadWindowConfigurationAction" text="Load Window Configuration" />
                      </items>
                   </Menu>
                </menus>
@@ -67,7 +60,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <BorderPane style="-fx-border-color: BBBBBB;" GridPane.columnIndex="2" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field22" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="2" GridPane.rowSpan="2">
                      <center>
                         <BorderPane fx:id="field22Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
                            <center>
@@ -102,7 +95,7 @@
                         </BorderPane>
                      </bottom>
                   </BorderPane>
-                  <BorderPane style="-fx-border-color: BBBBBB; -fx-background-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field01" style="-fx-border-color: BBBBBB; -fx-background-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="11" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
@@ -122,7 +115,7 @@
                         </Label>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="1026.0" layoutY="593.0" style="-fx-border-color: BF6D5F; -fx-background-color: BF6D5F;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field31" layoutX="1026.0" layoutY="593.0" style="-fx-border-color: BF6D5F; -fx-background-color: BF6D5F;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
@@ -142,7 +135,7 @@
                         </Label>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="1026.0" layoutY="593.0" style="-fx-border-color: BF6D5F; -fx-background-color: BF6D5F;" GridPane.columnSpan="2" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field11" layoutX="1026.0" layoutY="593.0" style="-fx-border-color: BF6D5F; -fx-background-color: BF6D5F;" GridPane.columnSpan="2" GridPane.rowIndex="11" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
@@ -188,7 +181,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                  <BorderPane fx:id="field32" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -227,7 +220,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="1026.0" layoutY="134.0" style="-fx-border-color: BF6D5F;" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                  <BorderPane fx:id="field20" layoutX="1026.0" layoutY="134.0" style="-fx-border-color: BF6D5F;" GridPane.columnSpan="2" GridPane.rowIndex="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -255,7 +248,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="15.0" layoutY="134.0" style="-fx-border-color: BF6D5F;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="9">
+                  <BorderPane fx:id="field39" layoutX="15.0" layoutY="134.0" style="-fx-border-color: BF6D5F;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="9">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -283,7 +276,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="382.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="5" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field07" layoutX="382.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="5" GridPane.rowIndex="11" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -318,7 +311,7 @@
                         </BorderPane>
                      </top>
                   </BorderPane>
-                  <BorderPane layoutX="382.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="6" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field06" layoutX="382.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="6" GridPane.rowIndex="11" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -353,7 +346,7 @@
                         </BorderPane>
                      </top>
                   </BorderPane>
-                  <BorderPane layoutX="566.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="6" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field26" layoutX="566.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="6" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -388,7 +381,7 @@
                         </BorderPane>
                      </top>
                   </BorderPane>
-                  <BorderPane layoutX="1026.0" layoutY="122.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="6">
+                  <BorderPane fx:id="field16" layoutX="1026.0" layoutY="122.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="6">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -427,7 +420,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="15.0" layoutY="330.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="6">
+                  <BorderPane fx:id="field36" layoutX="15.0" layoutY="330.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="6">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -466,7 +459,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="15.0" layoutY="122.0" style="-fx-border-color: #094F95;" GridPane.columnSpan="2" GridPane.rowIndex="5">
+                  <BorderPane fx:id="field17" layoutX="15.0" layoutY="122.0" style="-fx-border-color: #094F95;" GridPane.columnSpan="2" GridPane.rowIndex="5">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -494,7 +487,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="15.0" layoutY="278.0" style="-fx-border-color: #094F95;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="7">
+                  <BorderPane fx:id="field37" layoutX="15.0" layoutY="278.0" style="-fx-border-color: #094F95;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="7">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -522,7 +515,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="1026.0" layoutY="15.0" style="-fx-border-color: #094F95; -fx-background-color: #094F95;" GridPane.columnIndex="4" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field24" layoutX="1026.0" layoutY="15.0" style="-fx-border-color: #094F95; -fx-background-color: #094F95;" GridPane.columnIndex="4" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
@@ -545,7 +538,7 @@
                         </Label>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="382.0" layoutY="15.0" style="-fx-border-color: #094F95; -fx-background-color: #094F95;" GridPane.columnIndex="4" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field08" layoutX="382.0" layoutY="15.0" style="-fx-border-color: #094F95; -fx-background-color: #094F95;" GridPane.columnIndex="4" GridPane.rowIndex="11" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
@@ -568,7 +561,7 @@
                         </Label>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="382.0" layoutY="590.0" style="-fx-border-color: BF6D5F; -fx-background-color: BF6D5F;" GridPane.columnIndex="7" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field05" layoutX="382.0" layoutY="590.0" style="-fx-border-color: BF6D5F; -fx-background-color: BF6D5F;" GridPane.columnIndex="7" GridPane.rowIndex="11" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
@@ -591,7 +584,7 @@
                         </Label>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="1026.0" layoutY="122.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                  <BorderPane fx:id="field33" layoutX="1026.0" layoutY="122.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="3">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -630,7 +623,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="1026.0" layoutY="174.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                  <BorderPane fx:id="field34" layoutX="1026.0" layoutY="174.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="4">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -669,7 +662,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="1026.0" layoutY="226.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="5">
+                  <BorderPane fx:id="field35" layoutX="1026.0" layoutY="226.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="5">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -708,7 +701,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="1026.0" layoutY="278.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="8">
+                  <BorderPane fx:id="field38" layoutX="1026.0" layoutY="278.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="8">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -747,7 +740,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="1026.0" layoutY="122.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="10">
+                  <BorderPane fx:id="field40" layoutX="1026.0" layoutY="122.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="10">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -786,7 +779,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="1026.0" layoutY="538.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                  <BorderPane fx:id="field19" layoutX="1026.0" layoutY="538.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="3">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -825,7 +818,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="15.0" layoutY="174.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                  <BorderPane fx:id="field18" layoutX="15.0" layoutY="174.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="4">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -864,7 +857,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="15.0" layoutY="226.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="7">
+                  <BorderPane fx:id="field15" layoutX="15.0" layoutY="226.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="7">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -903,7 +896,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="15.0" layoutY="382.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="8">
+                  <BorderPane fx:id="field14" layoutX="15.0" layoutY="382.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="8">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -942,7 +935,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="15.0" layoutY="434.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="9">
+                  <BorderPane fx:id="field13" layoutX="15.0" layoutY="434.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="9">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -981,7 +974,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="15.0" layoutY="486.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="10">
+                  <BorderPane fx:id="field12" layoutX="15.0" layoutY="486.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="10">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -1020,7 +1013,7 @@
                         </BorderPane>
                      </center>
                   </BorderPane>
-                  <BorderPane layoutX="198.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="3" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field23" layoutX="198.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="3" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -1055,7 +1048,7 @@
                         </BorderPane>
                      </top>
                   </BorderPane>
-                  <BorderPane layoutX="290.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="5" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field25" layoutX="290.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="5" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -1090,7 +1083,7 @@
                         </BorderPane>
                      </top>
                   </BorderPane>
-                  <BorderPane layoutX="474.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="7" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field27" layoutX="474.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="7" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -1125,7 +1118,7 @@
                         </BorderPane>
                      </top>
                   </BorderPane>
-                  <BorderPane layoutX="658.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="8" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field28" layoutX="658.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="8" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -1160,7 +1153,7 @@
                         </BorderPane>
                      </top>
                   </BorderPane>
-                  <BorderPane layoutX="750.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="9" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field29" layoutX="750.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="9" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -1195,7 +1188,7 @@
                         </BorderPane>
                      </top>
                   </BorderPane>
-                  <BorderPane layoutX="842.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="10" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field30" layoutX="842.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="10" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -1230,7 +1223,7 @@
                         </BorderPane>
                      </top>
                   </BorderPane>
-                  <BorderPane layoutX="934.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="2" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field10" layoutX="934.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="2" GridPane.rowIndex="11" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -1265,7 +1258,7 @@
                         </BorderPane>
                      </top>
                   </BorderPane>
-                  <BorderPane layoutX="198.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="3" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field09" layoutX="198.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="3" GridPane.rowIndex="11" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -1300,7 +1293,7 @@
                         </BorderPane>
                      </top>
                   </BorderPane>
-                  <BorderPane layoutX="290.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="8" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field04" layoutX="290.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="8" GridPane.rowIndex="11" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -1335,7 +1328,7 @@
                         </BorderPane>
                      </top>
                   </BorderPane>
-                  <BorderPane layoutX="750.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="9" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field03" layoutX="750.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="9" GridPane.rowIndex="11" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -1370,7 +1363,7 @@
                         </BorderPane>
                      </top>
                   </BorderPane>
-                  <BorderPane layoutX="842.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="10" GridPane.rowIndex="11" GridPane.rowSpan="2">
+                  <BorderPane fx:id="field02" layoutX="842.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="10" GridPane.rowIndex="11" GridPane.rowSpan="2">
                      <bottom>
                         <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
                            <center>
@@ -1426,6 +1419,15 @@
                      </center>
                   </BorderPane>
                   <BorderPane fx:id="dummyPane" opacity="0.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                  <BorderPane fx:id="centerPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="9" GridPane.rowIndex="2" GridPane.rowSpan="9">
+                     <center>
+                        <ImageView fx:id="logo" fitHeight="150.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                           <image>
+                              <Image url="@/InfoPolyLogo.png" />
+                           </image>
+                        </ImageView>
+                     </center>
+                  </BorderPane>
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -1437,7 +1439,7 @@
                <right>
                   <HBox prefHeight="67.0" prefWidth="272.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label maxHeight="65.0" minHeight="65.0" minWidth="50.0" prefHeight="65.0" prefWidth="102.0" text="Dice roll:" textFill="WHITE">
+                        <Label fx:id="rollDiceLabel" maxHeight="65.0" minHeight="65.0" minWidth="50.0" prefHeight="65.0" prefWidth="102.0" text="Dice roll:" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -1478,7 +1480,7 @@
                      <children>
                         <HBox alignment="BOTTOM_CENTER" maxHeight="65.0" minHeight="65.0" style="-fx-background-color: #DDDDDD;">
                            <children>
-                              <VBox alignment="CENTER_LEFT" minWidth="100.0">
+                              <VBox fx:id="fundsBoxLabels" alignment="CENTER_LEFT" minWidth="100.0">
                                  <children>
                                     <Label text="Player">
                                        <font>
@@ -1497,7 +1499,7 @@
                                     </Label>
                                  </children>
                               </VBox>
-                              <Line startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
+                              <Line fx:id="seperator0" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
@@ -1518,7 +1520,7 @@
                                     <Label fx:id="fundsBoxPlayer1Money" text="-" />
                                  </children>
                               </VBox>
-                              <Line startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
+                              <Line fx:id="seperator1" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
@@ -1539,7 +1541,7 @@
                                     <Label fx:id="fundsBoxPlayer2Money" text="-" />
                                  </children>
                               </VBox>
-                              <Line startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
+                              <Line fx:id="seperator2" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
@@ -1560,7 +1562,7 @@
                                     <Label fx:id="fundsBoxPlayer3Money" text="-" />
                                  </children>
                               </VBox>
-                              <Line startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
+                              <Line fx:id="seperator3" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
@@ -1589,7 +1591,7 @@
                               <Insets right="15.0" />
                            </HBox.margin>
                         </HBox>
-                        <Label maxHeight="65.0" minHeight="65.0" text="Current Player:" textFill="WHITE">
+                        <Label fx:id="currentPlayerLabel" maxHeight="65.0" minHeight="65.0" text="Current Player:" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>

@@ -9,7 +9,8 @@ public enum PlayerColor {
     PLAYER1("#003f84"), // RED
     PLAYER2("#861515"), // BLUE
     PLAYER3("#008631"), // GREEN
-    PLAYER4("#930a7f"); // PURPLE
+    PLAYER4("#930a7f"), // PURPLE
+    UNOCCUPIED("#000000"); // BLACK
 
     /**
      * Hexadecimal color value to be used by FXML.
