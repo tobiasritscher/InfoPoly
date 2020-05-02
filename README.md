@@ -1,7 +1,7 @@
 # gruppe2-CaffeineAddicts-projekt2
 ## Infopoly
 
-
+![Screenshot](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/blob/master/InfoPolyLogo.png)
 
 ## Getting Started
 
