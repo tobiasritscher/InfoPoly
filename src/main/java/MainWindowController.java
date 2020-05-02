@@ -396,7 +396,7 @@ public class MainWindowController {
      */
     public void initializeGame() {
         fieldLabels.forEach((fieldLabel) -> fieldLabel.setText(""));
-        fieldColors.forEach((fieldColor) -> fieldColor.setStyle("-fx-background-color: " + PlayerColor.UNOCCUPIED.getColorValue()));
+        fieldColors.forEach((fieldColor) -> fieldColor.setStyle("-fx-background-color: " + Config.PlayerColor.UNOCCUPIED.getColorValue()));
         setBoardVisibility(false);
 
         setPlayerName(1, "");
@@ -488,7 +488,7 @@ public class MainWindowController {
      * @param playerColor The Player's color enum value. (See documentation)
      * @param fieldNumber The number of the field that was taken over. (See documentation)
      */
-    public void takeOverField(PlayerColor playerColor, int fieldNumber) {
+    public void takeOverField(Config.PlayerColor playerColor, int fieldNumber) {
         fieldColors.get(fieldNumber - 1).setStyle("-fx-background-color: " + playerColor.getColorValue());
     }
 
@@ -578,10 +578,10 @@ public class MainWindowController {
     /**
      * Updates the current player label on the GUI to indicate whose turn it is.
      *
-     * @param playerNumber Current player name.
+     * @param playerName Current player name.
      */
-    public void updateCurrentPlayer(String playerNumber) {
-        currentPlayer.setText(playerNumber);
+    public void updateCurrentPlayer(String playerName) {
+        currentPlayer.setText(playerName);
     }
 
     /**
