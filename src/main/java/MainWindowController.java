@@ -358,7 +358,6 @@ public class MainWindowController {
      * replaced with an invisible dummyPane object so the order of this ArrayList harmonizes with the fields on
      * the board.
      */
-
     @FXML
     private void initialize() {
         fieldLabels = new ArrayList<>(Arrays.asList(
