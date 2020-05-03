@@ -345,10 +345,17 @@ public class MainWindowController {
      */
     private Boolean newGameConfirmationNeeded = true;
 
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
+    }
+
     /**
      * Empty Constructor of UIController Class. Needs to be empty (FXML convention)
      * initialize() will automatically be called after.
      */
+
+    private GameController gameController;
+
     public MainWindowController() {
     }
 
@@ -498,7 +505,7 @@ public class MainWindowController {
      * @param playerNumber Current player number (1-4).
      * @param playerName   Name of Player (uppercase initials).
      */
-    private void setPlayerName(int playerNumber, String playerName) {
+    void setPlayerName(int playerNumber, String playerName) {
         switch (playerNumber) {
             case 1:
                 fundsBoxPlayer1Name.setText(playerName);
@@ -607,44 +614,14 @@ public class MainWindowController {
      */
     public void newGameAction() {
         if (newGameConfirmationNeeded) {
-            setUpGame();
+            gameController.addPlayers();
         } else {
             QuestionWindow newGameQuestion = new QuestionWindow(
                     "Are you sure?", "You really want to start a new game?"
             );
             if (newGameQuestion.getAnswer()) {
-                setUpGame();
+                gameController.addPlayers();
             }
-        }
-    }
-
-    /**
-     * Helper method to set up the game. Spawns a series of windows asking number of players and their names.
-     * TODO: This code should/could be outsourced to model. Code is already prepared for this, just use public methods within this class
-     */
-    private void setUpGame() {
-        //
-        PlayerEntryWindow entry = null;
-
-        // Clean up board, empty out all the fields,
-        initializeGame();
-        setBoardVisibility(false);
-        entry = new PlayerEntryWindow(); // TODO: This is where new user entries come from!
-
-        try {
-            setBoardVisibility(true);
-
-            for (int i = 0; i < Objects.requireNonNull(entry).getPlayersList().size(); i++) {
-                setPlayerName(i + 1, entry.getPlayersList().get(i));
-                setPlayerMoney(i + 1, Config.START_MONEY);
-                setPlayerCredits(i + 1, 0);
-                movePlayer(entry.getPlayersList().get(i), 1);
-            }
-            updateCurrentPlayer(entry.getPlayersList().get(0));
-            newGameConfirmationNeeded = false;
-        } catch (Exception e) {
-            setBoardVisibility(false);
-            newGameConfirmationNeeded = true;
         }
     }
 

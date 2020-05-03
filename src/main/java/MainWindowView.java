@@ -13,18 +13,19 @@ import java.io.FileInputStream;
  * @author corrooli
  */
 public class MainWindowView extends Application {
+
     /**
      * Explicitly declared controller class.
      */
     MainWindowController controller = new MainWindowController();
+    /**
+     * Parent root node.
+     */
     Parent root;
-
-    public static void main(String[] args){
-        Application.launch();
-    }
 
     @Override
     public void start(Stage stage) throws Exception {
+
         FXMLLoader loader = new FXMLLoader();
         String mainWindowPath = "src/main/resources/mainWindow.fxml";
         loader.setController(controller);
@@ -37,5 +38,13 @@ public class MainWindowView extends Application {
         stage.setMinWidth(root.prefWidth(1200));
         stage.setMinHeight(root.prefHeight(800));
         stage.show();
+    }
+
+    public MainWindowController getController() {
+        return controller;
+    }
+
+    public void startUI(){
+        Application.launch();
     }
 }

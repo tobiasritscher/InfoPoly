@@ -1,14 +1,16 @@
 public class Player {
+    private int playerNumber;
     private int money;
     private int credits;
     private String name;
     private boolean isBroke = false;
     private boolean isWaiting = false;
 
-    public Player(String name, int money, int credits) {
+    public Player(String name, int money, int credits, int playerNumber) {
         this.name = name;
         this.credits = credits;
         this.money = money;
+        this.playerNumber = playerNumber;
     }
 
     public Player() {

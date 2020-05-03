@@ -1,5 +1,6 @@
 public class Config {
     public static final int START_MONEY = 100;
+    public static final int START_CREDITS = 0;
     //clockwise
     FieldType[] gameBoard = {FieldType.START, FieldType.MODULE, FieldType.MODULE, FieldType.MODULE,};
 

@@ -84,7 +84,7 @@
                         </BorderPane>
                      </top>
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field22Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
@@ -183,7 +183,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field32" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="2">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field32Players" BorderPane.alignment="CENTER">
                                  <font>
@@ -222,7 +222,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field20" layoutX="1026.0" layoutY="134.0" style="-fx-border-color: BF6D5F;" GridPane.columnSpan="2" GridPane.rowIndex="2">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field20Players" BorderPane.alignment="CENTER">
                                  <font>
@@ -250,7 +250,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field39" layoutX="15.0" layoutY="134.0" style="-fx-border-color: BF6D5F;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="9">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field39Players" BorderPane.alignment="CENTER">
                                  <font>
@@ -278,7 +278,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field07" layoutX="382.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="5" GridPane.rowIndex="11" GridPane.rowSpan="2">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field07Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
@@ -313,7 +313,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field06" layoutX="382.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="6" GridPane.rowIndex="11" GridPane.rowSpan="2">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field06Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
@@ -348,7 +348,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field26" layoutX="566.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="6" GridPane.rowSpan="2">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field26Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
@@ -383,7 +383,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field16" layoutX="1026.0" layoutY="122.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="6">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field16Players" BorderPane.alignment="CENTER">
                                  <font>
@@ -422,7 +422,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field36" layoutX="15.0" layoutY="330.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="6">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field36Players" BorderPane.alignment="CENTER">
                                  <font>
@@ -461,7 +461,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field17" layoutX="15.0" layoutY="122.0" style="-fx-border-color: #094F95;" GridPane.columnSpan="2" GridPane.rowIndex="5">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field17Players" BorderPane.alignment="CENTER">
                                  <font>
@@ -489,7 +489,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field37" layoutX="15.0" layoutY="278.0" style="-fx-border-color: #094F95;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="7">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field37Players" BorderPane.alignment="CENTER">
                                  <font>
@@ -586,7 +586,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field33" layoutX="1026.0" layoutY="122.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="3">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field33Players" BorderPane.alignment="CENTER">
                                  <font>
@@ -625,7 +625,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field34" layoutX="1026.0" layoutY="174.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="4">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field34Players" BorderPane.alignment="CENTER">
                                  <font>
@@ -664,7 +664,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field35" layoutX="1026.0" layoutY="226.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="5">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field35Players" BorderPane.alignment="CENTER">
                                  <font>
@@ -703,7 +703,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field38" layoutX="1026.0" layoutY="278.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="8">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field38Players" BorderPane.alignment="CENTER">
                                  <font>
@@ -742,7 +742,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field40" layoutX="1026.0" layoutY="122.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="10">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field40Players" BorderPane.alignment="CENTER">
                                  <font>
@@ -781,7 +781,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field19" layoutX="1026.0" layoutY="538.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="3">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field19Players" BorderPane.alignment="CENTER">
                                  <font>
@@ -820,7 +820,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field18" layoutX="15.0" layoutY="174.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="4">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field18Players" BorderPane.alignment="CENTER">
                                  <font>
@@ -859,7 +859,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field15" layoutX="15.0" layoutY="226.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="7">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field15Players" BorderPane.alignment="CENTER">
                                  <font>
@@ -898,7 +898,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field14" layoutX="15.0" layoutY="382.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="8">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field14Players" BorderPane.alignment="CENTER">
                                  <font>
@@ -937,7 +937,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field13" layoutX="15.0" layoutY="434.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="9">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field13Players" BorderPane.alignment="CENTER">
                                  <font>
@@ -976,7 +976,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field12" layoutX="15.0" layoutY="486.0" style="-fx-border-color: BBBBBB;" GridPane.columnSpan="2" GridPane.rowIndex="10">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field12Players" BorderPane.alignment="CENTER">
                                  <font>
@@ -1015,7 +1015,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field23" layoutX="198.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="3" GridPane.rowSpan="2">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field23Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
@@ -1050,7 +1050,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field25" layoutX="290.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="5" GridPane.rowSpan="2">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field25Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
@@ -1085,7 +1085,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field27" layoutX="474.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="7" GridPane.rowSpan="2">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field27Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
@@ -1120,7 +1120,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field28" layoutX="658.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="8" GridPane.rowSpan="2">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field28Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
@@ -1155,7 +1155,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field29" layoutX="750.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="9" GridPane.rowSpan="2">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field29Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
@@ -1190,7 +1190,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field30" layoutX="842.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="10" GridPane.rowSpan="2">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field30Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
@@ -1225,7 +1225,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field10" layoutX="934.0" layoutY="15.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="2" GridPane.rowIndex="11" GridPane.rowSpan="2">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field10Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
@@ -1260,7 +1260,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field09" layoutX="198.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="3" GridPane.rowIndex="11" GridPane.rowSpan="2">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field09Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
@@ -1295,7 +1295,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field04" layoutX="290.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="8" GridPane.rowIndex="11" GridPane.rowSpan="2">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field04Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
@@ -1330,7 +1330,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field03" layoutX="750.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="9" GridPane.rowIndex="11" GridPane.rowSpan="2">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field03Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
@@ -1365,7 +1365,7 @@
                   </BorderPane>
                   <BorderPane fx:id="field02" layoutX="842.0" layoutY="590.0" style="-fx-border-color: BBBBBB;" GridPane.columnIndex="10" GridPane.rowIndex="11" GridPane.rowSpan="2">
                      <bottom>
-                        <BorderPane prefHeight="26.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="26.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                            <center>
                               <Label fx:id="field02Players" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
