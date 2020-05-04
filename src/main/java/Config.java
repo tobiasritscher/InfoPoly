@@ -1,3 +1,6 @@
+
+import java.util.Random;
+
 public class Config {
     public static final int START_MONEY = 100;
     public static final int START_CREDITS = 0;
@@ -45,8 +48,29 @@ public class Config {
             this.colorValue = colorValue;
         }
 
-        public String getColorValue(){
+        public String getColorValue() {
             return colorValue;
+        }
+    }
+
+
+    /**
+     * Static Dice class. Due to the nature of how java.util.Random works, the class will have to be instanced and can't
+     * be fully static
+     *
+     * @author Corroli
+     */
+    public static class Dice {
+        private final Random random = new Random();
+        private final int sides = 6;
+
+        /**
+         * Returns a dice value.
+         *
+         * @return Random value between 1 and 6
+         */
+        public int rollDice() {
+            return random.nextInt(sides) + 1;
         }
     }
 }
