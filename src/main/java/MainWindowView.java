@@ -25,7 +25,6 @@ public class MainWindowView extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
         FXMLLoader loader = new FXMLLoader();
         String mainWindowPath = "src/main/resources/mainWindow.fxml";
         loader.setController(controller);
@@ -44,7 +43,7 @@ public class MainWindowView extends Application {
         return controller;
     }
 
-    public void startUI(){
+    public void startUI() {
         Application.launch();
     }
 }

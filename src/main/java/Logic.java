@@ -3,6 +3,11 @@ import java.util.ArrayList;
 public class Logic {
     private int roundsWaiting;
     private static int playerTurn = 0;
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
     private ArrayList<Player> players = new ArrayList<>();
 
     public void addPlayer(Player player) {

@@ -1,4 +1,8 @@
 import javafx.application.Platform;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,6 +14,7 @@ import javafx.scene.shape.Line;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Random;
 
 /**
  * Main Window UI Controller. Contains all fields to address the main window, and all methods used to update fields.
@@ -345,17 +350,13 @@ public class MainWindowController {
      */
     private Boolean newGameConfirmationNeeded = true;
 
-    public void setGameController(GameController gameController) {
-        this.gameController = gameController;
-    }
+    private Logic logic = new Logic();
+    private GameBoard gameBoard = new GameBoard();
 
     /**
      * Empty Constructor of UIController Class. Needs to be empty (FXML convention)
      * initialize() will automatically be called after.
      */
-
-    private GameController gameController;
-
     public MainWindowController() {
     }
 
@@ -605,8 +606,8 @@ public class MainWindowController {
      * Tells the model to roll the dice via button action.
      */
     public void rollDiceAction() {
-        // TODO: Tell model to roll dice. DON'T FORGET: Report back with rolled number with updateRollDiceLabel()!
-        new InformationalWindow("Dice not yet implemented!");
+        Config.Dice dice = new Config.Dice();
+        updateRollDiceLabel(dice.rollDice());
     }
 
     /**
@@ -614,14 +615,64 @@ public class MainWindowController {
      */
     public void newGameAction() {
         if (newGameConfirmationNeeded) {
-            gameController.addPlayers();
+            addPlayers();
         } else {
             QuestionWindow newGameQuestion = new QuestionWindow(
                     "Are you sure?", "You really want to start a new game?"
             );
             if (newGameQuestion.getAnswer()) {
-                gameController.addPlayers();
+                addPlayers();
             }
+        }
+    }
+
+    private void addPlayers() {
+        PlayerEntryWindow entry = null;
+
+        // Clean up board, empty out all the fields
+        initializeGame();
+        setBoardVisibility(false);
+
+        // Spawn player entry windows
+        entry = new PlayerEntryWindow(); // TODO: This is where new user entries come from!
+
+        try {
+            setBoardVisibility(true);
+
+            for (int i = 0; i < Objects.requireNonNull(entry).getPlayersList().size(); i++) {
+
+                // Add players to UI
+                setPlayerName(i + 1, entry.getPlayersList().get(i));
+                setPlayerMoney(i + 1, Config.START_MONEY);
+                setPlayerCredits(i + 1, Config.START_CREDITS);
+
+                // Add players to Logic
+
+                logic.addPlayer(new Player(entry.getPlayersList().get(i), Config.START_MONEY, Config.START_CREDITS, i + 1));
+
+                // Add listeners to money and credits.
+                int playerNumber = i;
+                logic.getPlayers().get(i).getMoneyProperty().addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ObservableValue o, Object oldVal, Object newVal) {
+                        setPlayerMoney(playerNumber + 1, (int) newVal);
+                    }
+                });
+                logic.getPlayers().get(i).getCreditsProperty().addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ObservableValue o, Object oldVal, Object newVal) {
+                        setPlayerCredits(playerNumber + 1, (Integer) newVal);
+                    }
+                });
+                movePlayer(entry.getPlayersList().get(i), 1);
+            }
+
+
+            updateCurrentPlayer(entry.getPlayersList().get(0));
+            setNewGameConfirmationNeeded(false);
+        } catch (Exception e) {
+            setBoardVisibility(false);
+            setNewGameConfirmationNeeded(true);
         }
     }
 
