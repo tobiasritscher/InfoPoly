@@ -11,14 +11,29 @@ group 'org.example'
 version '1.0-SNAPSHOT'
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 
+// by default use Java 11
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    // Use JUnit Jupiter API for testing.
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
+
+    // Use JUnit Jupiter Engine for testing.
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
 }
 
 javafx {
     version = '11.0.2'
     modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+test {
+    // Use junit platform for unit tests
+    useJUnitPlatform()
 }
