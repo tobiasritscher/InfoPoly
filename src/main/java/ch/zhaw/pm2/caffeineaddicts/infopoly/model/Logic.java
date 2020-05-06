@@ -96,7 +96,12 @@ public class Logic {
     }
 
     private void startup() {
+        if(players.get(currentPlayer.getValue()).getCredits() >= 100){
+            QuestionWindow questionWindow = new QuestionWindow("Startup Manager","Would you like to create your first startup?");
+            if(questionWindow.getAnswer()){
 
+            }
+        }
     }
 
     private void getChance() {
