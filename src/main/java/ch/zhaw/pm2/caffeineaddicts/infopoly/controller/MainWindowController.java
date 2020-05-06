@@ -617,26 +617,34 @@ public class MainWindowController {
         Config.Dice dice = new Config.Dice();
         int diceRoll = dice.rollDice();
         updateRollDiceLabel(diceRoll);
-        logic.getPlayersTurn().movePlayer(diceRoll);
-        logic.nextPlayer(logic.getPlayers());
 
-        // TODO: Tell logic a dice was rolled and pass diceRoll int
+        // TODO ADD CODE HERE to determine logic behavior.
+
+        /**
+         * Debug. TODO: example for moving players (doesn't work right now!). Delete dis once implemented
+         */
+
+        /*
+        logic.movePlayer(diceRoll);
+        logic.nextPlayer(logic.getPlayers());
+        */
+
+        // END ADD CODE HERE
 
 
         /**
          * Debug. TODO: example for chance dialog and action. Delete dis once implemented
          */
-        /*movePlayer(logic.getPlayersTurn().getName(), diceRoll);
+
+        /*
+        movePlayer(logic.getPlayersTurn().getName(), diceRoll);
         Chance.ChanceEvent chanceEvent = chance.getChanceEvent();
         new InformationalWindow(chanceEvent.getMessage());
         int newMoney = logic.getPlayersTurn().getMoney() + chance.getChanceEvent().getMoneyDeviation();
         int newCredits = logic.getPlayersTurn().getCredits() + chance.getChanceEvent().getCreditsDeviation();
         logic.getPlayersTurn().setMoney(newMoney);
         logic.getPlayersTurn().setCredits(newCredits);
-
          */
-
-
     }
 
     /**
