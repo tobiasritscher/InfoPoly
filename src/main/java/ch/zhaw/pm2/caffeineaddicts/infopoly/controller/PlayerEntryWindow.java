@@ -1,3 +1,5 @@
+package ch.zhaw.pm2.caffeineaddicts.infopoly.controller;
+
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.TextInputDialog;
 
@@ -98,4 +100,5 @@ public class PlayerEntryWindow {
     public ArrayList<String> getPlayersList() {
         return playersList;
     }
+
 }

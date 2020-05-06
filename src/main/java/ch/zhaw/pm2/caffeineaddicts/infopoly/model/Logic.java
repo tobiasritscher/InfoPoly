@@ -1,3 +1,5 @@
+package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 

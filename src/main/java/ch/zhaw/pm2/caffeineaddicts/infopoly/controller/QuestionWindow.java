@@ -1,3 +1,5 @@
+package ch.zhaw.pm2.caffeineaddicts.infopoly.controller;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 

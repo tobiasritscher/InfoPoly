@@ -1,7 +1,7 @@
-import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config;
-import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameBoard;
+package ch.zhaw.pm2.caffeineaddicts.infopoly.controller;
+
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.*;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -619,16 +619,16 @@ public class MainWindowController {
         /**
          * Debug. TODO: delete dis
          */
-        /*
+
         movePlayer(logic.getPlayersTurn().getName(), diceRoll);
-        logic.nextPlayer(logic.getPlayers());
         Chance.ChanceEvent chanceEvent = chance.getChanceEvent();
         new InformationalWindow(chanceEvent.getMessage());
-        int newMoney = logic.getPlayersTurn().getMoney() +     chance.getChanceEvent().getMoneyDeviation();
+        int newMoney = logic.getPlayersTurn().getMoney() + chance.getChanceEvent().getMoneyDeviation();
         int newCredits = logic.getPlayersTurn().getCredits() + chance.getChanceEvent().getCreditsDeviation();
         logic.getPlayersTurn().setMoney(newMoney);
         logic.getPlayersTurn().setCredits(newCredits);
-         */
+        logic.nextPlayer(logic.getPlayers());
+
 
     }
 
