@@ -11,7 +11,7 @@ import java.util.Optional;
  * <p>
  * To create a question window, you will need to instance it permanently. You can simply create one by using:
  * <p>
- * InformationalWindow thisQuestion = new InformationalWindow("The title","The text you want to tell the user);
+ * QuestionWindow thisQuestion = new QuestionWindow("The title","The text you want to tell the user);
  * <p>
  * And you can retrieve a boolean value of the user's input by:
  * <p>
