@@ -13,6 +13,8 @@ public class Logic {
         return players;
     }
 
+    GameBoard gameBoard = new GameBoard();
+
     private ArrayList<Player> players = new ArrayList<>();
 
     public void addPlayer(Player player) {
@@ -36,6 +38,10 @@ public class Logic {
             throw new IllegalArgumentException("Makes no sense to wait negative amount dude");
         }
         roundsWaiting = amount;
+    }
+
+    public void movePlayer(int rolledNumber){
+       players.get(playerTurn.getValue()).setPosition((players.get(playerTurn.getValue()).getPosition() + rolledNumber)%gameBoard.getBoardSize());
     }
 
     public int getRoundsWaiting() {

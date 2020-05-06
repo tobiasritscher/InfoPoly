@@ -31,6 +31,18 @@ public class Player {
         this.position.setValue(1);
     }
 
+    public int getPosition() {
+        return position.get();
+    }
+
+    public IntegerProperty positionProperty() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position.set(position);
+    }
+
     public Player() {
     }
 
