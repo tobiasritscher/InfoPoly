@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Logic {
     private int roundsWaiting;
-    private static IntegerProperty playerTurn = new SimpleIntegerProperty(0);
+    private static IntegerProperty currentPlayer = new SimpleIntegerProperty(0);
 
     public ArrayList<Player> getPlayers() {
         return players;
@@ -22,15 +22,15 @@ public class Logic {
     }
 
     public Player getPlayersTurn() {
-        return players.get(playerTurn.getValue());
+        return players.get(currentPlayer.getValue());
     }
 
     public Player nextPlayer(ArrayList<Player> player) {
-        playerTurn.setValue((1 + playerTurn.get()) % players.size());
-        if (players.get(playerTurn.get()).getIsWaiting()) {
-            playerTurn.setValue((1 + playerTurn.get()) % players.size());
+        currentPlayer.setValue((1 + currentPlayer.get()) % players.size());
+        if (players.get(currentPlayer.get()).getIsWaiting()) {
+            currentPlayer.setValue((1 + currentPlayer.get()) % players.size());
         }
-        return player.get(playerTurn.getValue());
+        return player.get(currentPlayer.getValue());
     }
 
     public void setRoundsWaiting(int amount) {
@@ -41,7 +41,38 @@ public class Logic {
     }
 
     public void movePlayer(int rolledNumber){
-       players.get(playerTurn.getValue()).setPosition((players.get(playerTurn.getValue()).getPosition() + rolledNumber)%gameBoard.getBoardSize());
+       players.get(currentPlayer.getValue()).setPosition((players.get(currentPlayer.getValue()).getPosition() + rolledNumber)%gameBoard.getBoardSize());
+       Config.FieldType fieldType = gameBoard.getFieldType(players.get(currentPlayer.getValue()).getPosition());
+       switch(fieldType){
+           case MODULE: processModule();
+               break;
+           case STARTUP: startup();
+               break;
+           case JOB:
+               break;
+           case CHANCE:
+               break;
+           case START:
+               break;
+           case FEE_TYPE_ONE:
+               break;
+           case FEE_TYPE_TWO:
+               break;
+           case FEE_TYPE_THREE:
+               break;
+           case REPETITION:
+               break;
+           case EXAM:
+               break;
+       }
+    }
+
+    private void processModule(){
+
+    }
+
+    private void startup(){
+
     }
 
     public int getRoundsWaiting() {
@@ -54,6 +85,6 @@ public class Logic {
      * @return playerTurn IntegerProperty
      */
     public IntegerProperty getPlayerTurnProperty() {
-        return playerTurn;
+        return currentPlayer;
     }
 }
