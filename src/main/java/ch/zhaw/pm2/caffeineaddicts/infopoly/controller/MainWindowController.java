@@ -35,7 +35,7 @@ public class MainWindowController {
      */
     private GameBoard gameBoard = new GameBoard();
 
-    private Chance chance = new Chance();
+    private final Chance chance = new Chance();
 
     /**
      * All fields in the game. Can be formatted to our liking.
@@ -545,6 +545,9 @@ public class MainWindowController {
      * @param credits      New amount of credits currently obtained.
      */
     public void setPlayerCredits(int playerNumber, int credits) {
+
+
+
         switch (playerNumber) {
             case 1:
                 fundsBoxPlayer1Credits.setText(String.valueOf(credits));
@@ -614,20 +617,24 @@ public class MainWindowController {
         Config.Dice dice = new Config.Dice();
         int diceRoll = dice.rollDice();
         updateRollDiceLabel(diceRoll);
+        logic.getPlayersTurn().movePlayer(diceRoll);
+        logic.nextPlayer(logic.getPlayers());
+
         // TODO: Tell logic a dice was rolled and pass diceRoll int
 
-        /**
-         * Debug. TODO: delete dis
-         */
 
-        movePlayer(logic.getPlayersTurn().getName(), diceRoll);
+        /**
+         * Debug. TODO: example for chance dialog and action. Delete dis once implemented
+         */
+        /*movePlayer(logic.getPlayersTurn().getName(), diceRoll);
         Chance.ChanceEvent chanceEvent = chance.getChanceEvent();
         new InformationalWindow(chanceEvent.getMessage());
         int newMoney = logic.getPlayersTurn().getMoney() + chance.getChanceEvent().getMoneyDeviation();
         int newCredits = logic.getPlayersTurn().getCredits() + chance.getChanceEvent().getCreditsDeviation();
         logic.getPlayersTurn().setMoney(newMoney);
         logic.getPlayersTurn().setCredits(newCredits);
-        logic.nextPlayer(logic.getPlayers());
+
+         */
 
 
     }
@@ -690,6 +697,9 @@ public class MainWindowController {
                                 setPlayerMoney(playerNumber + 1, (Integer) newValue));
                 logic.getPlayers().get(i).getCreditsProperty().addListener((observableValue, oldValue, newValue) ->
                                 setPlayerCredits(playerNumber + 1, (Integer) newValue));
+                logic.getPlayers().get(i).getPositionProperty().addListener((observableValue, oldValue, newValue) ->
+                                movePlayer(logic.getPlayers().get(playerNumber).getName(), (Integer) newValue));
+
 
                 // Move players to first field TODO: Replace with listener
                 movePlayer(entry.getPlayersList().get(i), 1);
