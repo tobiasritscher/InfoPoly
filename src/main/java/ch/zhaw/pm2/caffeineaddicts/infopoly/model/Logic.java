@@ -1,6 +1,7 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.QuestionWindow;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -42,55 +43,81 @@ public class Logic {
         roundsWaiting = amount;
     }
 
-    public void movePlayer(int rolledNumber){
-       players.get(currentPlayer.getValue()).setPosition((players.get(currentPlayer.getValue()).getPosition() + rolledNumber)%gameBoard.getBoardSize());
-       Config.FieldType fieldType = gameBoard.getFieldType(players.get(currentPlayer.getValue()).getPosition());
-       switch(fieldType){
-           case MODULE: processModule();
-               break;
-           case STARTUP: startup();
-               break;
-           case JOB:
-               break;
-           case CHANCE: getChance();
-               break;
-           case START:
-               break;
-           case FEE_TYPE_ONE:
-               break;
-           case FEE_TYPE_TWO:
-               break;
-           case FEE_TYPE_THREE:
-               break;
-           case REPETITION:
-               break;
-           case EXAM:
-               break;
-       }
+    public void movePlayer(int rolledNumber) {
+        players.get(currentPlayer.getValue()).setPosition((players.get(currentPlayer.getValue()).getPosition() + rolledNumber) % gameBoard.getBoardSize());
+        int fieldId = players.get(currentPlayer.getValue()).getPosition();
+        Config.FieldType fieldType = gameBoard.getFieldType(fieldId);
+        switch (fieldType) {
+            case MODULE:
+                processModule(fieldId);
+                break;
+            case STARTUP:
+                startup();
+                break;
+            case JOB:
+                break;
+            case CHANCE:
+                getChance();
+                break;
+            case START:
+                break;
+            case FEE_TYPE_ONE:
+                break;
+            case FEE_TYPE_TWO:
+                break;
+            case FEE_TYPE_THREE:
+                break;
+            case REPETITION:
+                break;
+            case EXAM:
+                break;
+        }
     }
 
-    private void processModule(){
-        Config.FieldType fieldType = gameBoard.getFieldType(players.get(currentPlayer.getValue()).getPosition());
+    private void processModule(int fieldId) {
+        ModuleGameField gameField = (ModuleGameField) gameBoard.getField(fieldId);
+        if (gameField.fieldHasOwner()) {
+            if (gameField.getFieldOwnerId() == players.get(currentPlayer.getValue()).getPlayerNumber()) {
+            } else if (players.get(currentPlayer.getValue()).getMoney() < gameField.getFieldMoneyCharge()) {
+                players.get(currentPlayer.getValue()).setMoney(0);
+                waitForScholarship();
+            } else {
+                players.get(currentPlayer.getValue()).setMoney(players.get(currentPlayer.getValue()).getMoney() - gameField.getFieldMoneyCharge());
+                players.get(gameField.getFieldOwnerId()).setMoney(gameField.getFieldMoneyCharge());
+                players.get(gameField.getFieldOwnerId()).setCredits(gameField.getCreditsGain());
+            }
+        } else {
+            QuestionWindow questionWindow = new QuestionWindow("Buy course","Would you like to buy this course");
+            if(questionWindow.getAnswer()){
+                players.get(currentPlayer.getValue()).setMoney(players.get(currentPlayer.getValue()).getMoney() - gameField.getFieldPrice());
+                gameField.setFieldOwner(players.get(currentPlayer.getValue()).getPlayerNumber());
+            }
+        }
+    }
+
+    private void startup() {
 
     }
 
-    private void startup(){
-
-    }
-
-    private void getChance(){
+    private void getChance() {
         Chance.ChanceEvent chanceEvent = chance.getChanceEvent();
         new InformationalWindow(chanceEvent.getMessage());
-        if(players.get(currentPlayer.getValue()).getMoney()+chanceEvent.getMoneyDeviation() <0){
-            waitForStypen();
+        if (players.get(currentPlayer.getValue()).getMoney() + chanceEvent.getMoneyDeviation() < 0) {
+            waitForScholarship();
         } else {
-            players.get(currentPlayer.getValue()).setMoney(players.get(currentPlayer.getValue()).getMoney()+chanceEvent.getMoneyDeviation());
+            players.get(currentPlayer.getValue()).setMoney(players.get(currentPlayer.getValue()).getMoney() + chanceEvent.getMoneyDeviation());
         }
         players.get(currentPlayer.getValue()).setCredits(chanceEvent.getCreditsDeviation());
     }
-    private void waitForStypen(){
 
+    private void waitForScholarship() {
+        new InformationalWindow("You ran out of money so now you will apply for a scholarship. That usually takes up to 3 Weeks");
+        setRoundsWaiting(3);
+        if (roundsWaiting == 0) {
+            players.get(currentPlayer.getValue()).setMoney(100);
+        }
     }
+
     public int getRoundsWaiting() {
         return roundsWaiting;
     }

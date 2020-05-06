@@ -31,6 +31,11 @@ public class Player {
         this.position.setValue(1);
     }
 
+
+    public int getPlayerNumber() {
+        return playerNumber;
+    }
+
     public int getPosition() {
         return position.get();
     }
