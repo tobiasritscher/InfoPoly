@@ -17,6 +17,8 @@ public class Player {
      */
     private IntegerProperty credits = new SimpleIntegerProperty();
 
+    private IntegerProperty position = new SimpleIntegerProperty();
+
     private String name;
     private boolean isBroke = false;
     private boolean isWaiting = false;
@@ -26,6 +28,7 @@ public class Player {
         this.credits.setValue(credits);
         this.money.setValue(money);
         this.playerNumber = playerNumber;
+        this.position.setValue(1);
     }
 
     public Player() {
@@ -49,6 +52,10 @@ public class Player {
 
     public IntegerProperty getCreditsProperty() {
         return credits;
+    }
+
+    public IntegerProperty getPositionProperty() {
+        return position;
     }
 
     public boolean getIsWaiting() {
@@ -80,5 +87,12 @@ public class Player {
         } else {
             money.set(money.getValue() - amount);
         }
+    }
+
+    public void movePlayer(int position){
+        int oldPosition = this.position.getValue();
+        int newPosition = oldPosition + position;
+        //TODO:
+        this.position.setValue(newPosition);
     }
 }
