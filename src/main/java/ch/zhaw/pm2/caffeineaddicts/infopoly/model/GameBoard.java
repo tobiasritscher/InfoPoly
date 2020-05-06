@@ -42,10 +42,12 @@ public class GameBoard {
         validateFieldId(fieldId);
         return board.get(fieldId).getFieldType();
     }
-    public String getFieldName(int fieldId){
+
+    public String getFieldName(int fieldId) {
         validateFieldId(fieldId);
         return board.get(fieldId).getFieldName();
     }
+
     public int getBoardSize() {
         if (board.isEmpty()) {
             throw new RuntimeException("invalid operation: game field must be initialized first");
