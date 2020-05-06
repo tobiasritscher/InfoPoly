@@ -22,8 +22,13 @@ public class GameBoard {
     }
 
     GameField getField(int fieldId) {
+        validateFieldId(fieldId);
+        return board.get(fieldId);
+    }
+
+    private void validateFieldId(int fieldId) {
         if (board.isEmpty()) {
-            throw new RuntimeException("invalid operation: game field must be initialized first");
+            throw new RuntimeException("invalid operation: game bord must be initialized first");
         }
         if (fieldId < 0) {
             throw new RuntimeException("invalid index: must be positive");
@@ -31,9 +36,16 @@ public class GameBoard {
         if (fieldId >= board.size()) {
             throw new RuntimeException("invalid index: out of bound");
         }
-        return board.get(fieldId);
     }
 
+    public Config.FieldType getFieldType(int fieldId) {
+        validateFieldId(fieldId);
+        return board.get(fieldId).getFieldType();
+    }
+    public String getFieldName(int fieldId){
+        validateFieldId(fieldId);
+        return board.get(fieldId).getFieldName();
+    }
     public int getBoardSize() {
         if (board.isEmpty()) {
             throw new RuntimeException("invalid operation: game field must be initialized first");

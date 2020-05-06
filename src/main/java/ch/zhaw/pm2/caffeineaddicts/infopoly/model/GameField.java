@@ -14,6 +14,14 @@ public class GameField {
         this.fieldName = fieldName;
     }
 
+    public Config.FieldType getFieldType() {
+        return fieldType;
+    }
+
+    public String getFieldName() {
+        return fieldName;
+    }
+
     public int getFieldId() {
         return fieldId;
     }
