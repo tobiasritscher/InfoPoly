@@ -24,7 +24,6 @@ public class GameBoard {
     GameField getField(int fieldId) {
         if (board.isEmpty()) {
             throw new RuntimeException("invalid operation: game field must be initialized first");
-
         }
         if (fieldId < 0) {
             throw new RuntimeException("invalid index: must be positive");
@@ -33,6 +32,13 @@ public class GameBoard {
             throw new RuntimeException("invalid index: out of bound");
         }
         return board.get(fieldId);
+    }
+
+    public int getBoardSize() {
+        if (board.isEmpty()) {
+            throw new RuntimeException("invalid operation: game field must be initialized first");
+        }
+        return board.size();
     }
 
     public void loadGameBoard() {
