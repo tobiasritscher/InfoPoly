@@ -23,7 +23,7 @@ public class PlayerEntryWindow {
     /**
      * Main array for registered player initials.
      */
-    private ArrayList<String> playersList = new ArrayList<>();
+    private final ArrayList<String> playersList = new ArrayList<>();
 
     /**
      * Constructor for PlayerEntryWindow. This is where all the magic happens.

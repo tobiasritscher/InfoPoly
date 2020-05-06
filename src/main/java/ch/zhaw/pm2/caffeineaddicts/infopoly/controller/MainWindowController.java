@@ -359,6 +359,11 @@ public class MainWindowController {
     private Boolean newGameConfirmationNeeded = true;
 
     /**
+     * Boolean indicating if no game has started yet. Will be needed to switch text of the Button.
+     */
+    private Boolean gameWasStarted = false;
+
+    /**
      * Empty Constructor of UIController Class. Needs to be empty (FXML convention)
      * initialize() will automatically be called after.
      */
@@ -614,37 +619,29 @@ public class MainWindowController {
      * Tells the model to roll the dice via button action.
      */
     public void rollDiceAction() {
-        Config.Dice dice = new Config.Dice();
-        int diceRoll = dice.rollDice();
-        updateRollDiceLabel(diceRoll);
+        if(gameWasStarted){
+            Config.Dice dice = new Config.Dice();
+            int diceRoll = dice.rollDice();
+            updateRollDiceLabel(diceRoll);
 
-        // TODO ADD CODE HERE to determine logic behavior.
+            // TODO ADD CODE HERE to determine logic behavior.
 
-        /**
-         * Debug. TODO: example for moving players (doesn't work right now!). Delete dis once implemented
-         */
+            /**
+             * Debug. TODO: example for moving players (doesn't work right now!). Delete dis once implemented
+             */
 
-        /*
-        logic.movePlayer(diceRoll);
-        logic.nextPlayer(logic.getPlayers());
-        */
+            /*
+            logic.movePlayer(diceRoll);
+            logic.nextPlayer(logic.getPlayers());
+            */
 
-        // END ADD CODE HERE
+            // END ADD CODE HERE
 
+        } else {
+            newGameAction();
+            gameWasStarted = true;
+        }
 
-        /**
-         * Debug. TODO: example for chance dialog and action. Delete dis once implemented
-         */
-
-        /*
-        movePlayer(logic.getPlayersTurn().getName(), diceRoll);
-        Chance.ChanceEvent chanceEvent = chance.getChanceEvent();
-        new InformationalWindow(chanceEvent.getMessage());
-        int newMoney = logic.getPlayersTurn().getMoney() + chance.getChanceEvent().getMoneyDeviation();
-        int newCredits = logic.getPlayersTurn().getCredits() + chance.getChanceEvent().getCreditsDeviation();
-        logic.getPlayersTurn().setMoney(newMoney);
-        logic.getPlayersTurn().setCredits(newCredits);
-         */
     }
 
     /**
@@ -685,39 +682,44 @@ public class MainWindowController {
         try {
             setBoardVisibility(true);
 
-            for (int i = 0; i < Objects.requireNonNull(entry).getPlayersList().size(); i++) {
+            if (entry.getPlayersList().isEmpty()) {
+                gameWasStarted = false;
+                throw new Exception();
+            } else {
+                for (int i = 0; i < Objects.requireNonNull(entry).getPlayersList().size(); i++) {
 
-                // Add players to UI
-                setPlayerName(i + 1, entry.getPlayersList().get(i));
-                setPlayerMoney(i + 1, Config.START_MONEY);
-                setPlayerCredits(i + 1, Config.START_CREDITS);
+                    // Add players to UI
+                    setPlayerName(i + 1, entry.getPlayersList().get(i));
+                    setPlayerMoney(i + 1, Config.START_MONEY);
+                    setPlayerCredits(i + 1, Config.START_CREDITS);
 
-                // Instantiating players, add them to Logic
-                logic.addPlayer(new Player(
-                        entry.getPlayersList().get(i),
-                        Config.START_MONEY,
-                        Config.START_CREDITS,
-                        i + 1));
+                    // Instantiating players, add them to Logic
+                    logic.addPlayer(new Player(
+                            entry.getPlayersList().get(i),
+                            Config.START_MONEY,
+                            Config.START_CREDITS,
+                            i + 1));
 
-                // Add listeners to money and credits.
-                int playerNumber = i;
-                logic.getPlayers().get(i).getMoneyProperty().addListener((observableValue, oldValue, newValue) ->
-                                setPlayerMoney(playerNumber + 1, (Integer) newValue));
-                logic.getPlayers().get(i).getCreditsProperty().addListener((observableValue, oldValue, newValue) ->
-                                setPlayerCredits(playerNumber + 1, (Integer) newValue));
-                logic.getPlayers().get(i).getPositionProperty().addListener((observableValue, oldValue, newValue) ->
-                                movePlayer(logic.getPlayers().get(playerNumber).getName(), (Integer) newValue));
+                    // Add listeners to money and credits.
+                    int playerNumber = i;
+                    logic.getPlayers().get(i).getMoneyProperty().addListener((observableValue, oldValue, newValue) ->
+                                    setPlayerMoney(playerNumber + 1, (Integer) newValue));
+                    logic.getPlayers().get(i).getCreditsProperty().addListener((observableValue, oldValue, newValue) ->
+                                    setPlayerCredits(playerNumber + 1, (Integer) newValue));
+                    logic.getPlayers().get(i).getPositionProperty().addListener((observableValue, oldValue, newValue) ->
+                                    movePlayer(logic.getPlayers().get(playerNumber).getName(), (Integer) newValue));
 
 
-                // Move players to first field TODO: Replace with listener
-                movePlayer(entry.getPlayersList().get(i), 1);
+                    // Move players to first field TODO: Replace with listener
+                    movePlayer(entry.getPlayersList().get(i), 1);
+                    newGameConfirmationNeeded = false;
+                    gameWasStarted = true;
+                }
             }
-
-            //updateCurrentPlayer(entry.getPlayersList().get(0));
-            setNewGameConfirmationNeeded(false);
         } catch (Exception e) {
             setBoardVisibility(false);
-            setNewGameConfirmationNeeded(true);
+            newGameConfirmationNeeded = true;
+            gameWasStarted = false;
         }
     }
 
@@ -739,11 +741,16 @@ public class MainWindowController {
      * @param visibility true for visible, false for invisible
      */
     public void setBoardVisibility(boolean visibility) {
-        rollDiceButton.setVisible(visibility);
+        if(visibility){
+            rollDiceButton.setText("Roll Dice");
+        } else {
+            rollDiceButton.setText("Start Game");
+        }
         fundsBoxLabels.setVisible(visibility);
         currentPlayerLabel.setVisible(visibility);
         currentPlayer.setVisible(visibility);
         rollDiceLabel.setVisible(visibility);
+        rollDiceLabel.setText("");
         fields.forEach((field) -> field.setVisible(visibility));
     }
 
