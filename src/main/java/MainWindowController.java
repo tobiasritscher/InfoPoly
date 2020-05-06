@@ -1,6 +1,6 @@
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameBoard;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -14,7 +14,6 @@ import javafx.scene.shape.Line;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.Random;
 
 /**
  * Main Window UI Controller. Contains all fields to address the main window, and all methods used to update fields.
