@@ -19,7 +19,7 @@ public class ModuleGameField extends GameField {
     }
 
     public boolean fieldHasOwner() {
-        return (fieldOwnerId == -1) ? true : false;
+        return (fieldOwnerId == -1) ? false : true;
     }
 
     public int getFieldOwnerId() {
