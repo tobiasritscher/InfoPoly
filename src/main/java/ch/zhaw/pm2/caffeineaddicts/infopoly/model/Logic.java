@@ -1,5 +1,6 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
+import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 public class Logic {
     private int roundsWaiting;
     private static IntegerProperty currentPlayer = new SimpleIntegerProperty(0);
+    private Chance chance;
 
     public ArrayList<Player> getPlayers() {
         return players;
@@ -50,7 +52,7 @@ public class Logic {
                break;
            case JOB:
                break;
-           case CHANCE:
+           case CHANCE: getChance();
                break;
            case START:
                break;
@@ -68,6 +70,7 @@ public class Logic {
     }
 
     private void processModule(){
+        Config.FieldType fieldType = gameBoard.getFieldType(players.get(currentPlayer.getValue()).getPosition());
 
     }
 
@@ -75,6 +78,19 @@ public class Logic {
 
     }
 
+    private void getChance(){
+        Chance.ChanceEvent chanceEvent = chance.getChanceEvent();
+        new InformationalWindow(chanceEvent.getMessage());
+        if(players.get(currentPlayer.getValue()).getMoney()+chanceEvent.getMoneyDeviation() <0){
+            waitForStypen();
+        } else {
+            players.get(currentPlayer.getValue()).setMoney(players.get(currentPlayer.getValue()).getMoney()+chanceEvent.getMoneyDeviation());
+        }
+        players.get(currentPlayer.getValue()).setCredits(chanceEvent.getCreditsDeviation());
+    }
+    private void waitForStypen(){
+
+    }
     public int getRoundsWaiting() {
         return roundsWaiting;
     }
