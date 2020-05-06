@@ -1,8 +1,11 @@
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 import java.util.ArrayList;
 
 public class Logic {
     private int roundsWaiting;
-    private static int playerTurn = 0;
+    private static IntegerProperty playerTurn = new SimpleIntegerProperty(0);
 
     public ArrayList<Player> getPlayers() {
         return players;
@@ -15,15 +18,15 @@ public class Logic {
     }
 
     public Player getPlayersTurn() {
-        return players.get(playerTurn);
+        return players.get(playerTurn.getValue());
     }
 
     public Player nextPlayer(ArrayList<Player> player) {
-        playerTurn = (++playerTurn) % players.size();
-        if (players.get(playerTurn).getIsWaiting()) {
-            playerTurn = (++playerTurn) % players.size();
+        playerTurn.setValue((1 + playerTurn.get()) % players.size());
+        if (players.get(playerTurn.get()).getIsWaiting()) {
+            playerTurn.setValue((1 + playerTurn.get()) % players.size());
         }
-        return player.get(playerTurn);
+        return player.get(playerTurn.getValue());
     }
 
     public void setRoundsWaiting(int amount) {
@@ -35,5 +38,14 @@ public class Logic {
 
     public int getRoundsWaiting() {
         return roundsWaiting;
+    }
+
+    /**
+     * Property getter, used by UI to update if a player turn has been updated.
+     *
+     * @return playerTurn IntegerProperty
+     */
+    public IntegerProperty getPlayerTurnProperty() {
+        return playerTurn;
     }
 }

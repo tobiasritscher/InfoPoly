@@ -15,10 +15,6 @@ import java.io.FileInputStream;
 public class MainWindowView extends Application {
 
     /**
-     * Explicitly declared controller class.
-     */
-    MainWindowController controller = new MainWindowController();
-    /**
      * Parent root node.
      */
     Parent root;
@@ -27,7 +23,6 @@ public class MainWindowView extends Application {
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         String mainWindowPath = "src/main/resources/mainWindow.fxml";
-        loader.setController(controller);
         FileInputStream mainWindowStream = new FileInputStream(mainWindowPath);
 
         root = (VBox) loader.load(mainWindowStream);
@@ -37,10 +32,6 @@ public class MainWindowView extends Application {
         stage.setMinWidth(root.prefWidth(1200));
         stage.setMinHeight(root.prefHeight(800));
         stage.show();
-    }
-
-    public MainWindowController getController() {
-        return controller;
     }
 
     public void startUI() {

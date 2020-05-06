@@ -2,7 +2,6 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameBoard;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -27,6 +26,16 @@ import java.util.Objects;
  * @author corrooli
  */
 public class MainWindowController {
+    /**
+     * Game logic instance
+     */
+    private Logic logic = new Logic();
+    /**
+     * Game board instance
+     */
+    private GameBoard gameBoard = new GameBoard();
+
+    private Chance chance = new Chance();
 
     /**
      * All fields in the game. Can be formatted to our liking.
@@ -111,7 +120,7 @@ public class MainWindowController {
     public BorderPane field40; // CLASS : Bachelor Thesis
 
     /**
-     * Bottom of fields where player initials are used to indicate which players are on which field.
+     * Bottom of fields. This is where player initials are used to indicate which players are on which field.
      */
     @FXML
     public Label field01Players; // START
@@ -349,9 +358,6 @@ public class MainWindowController {
      */
     private Boolean newGameConfirmationNeeded = true;
 
-    private Logic logic = new Logic();
-    private GameBoard gameBoard = new GameBoard();
-
     /**
      * Empty Constructor of UIController Class. Needs to be empty (FXML convention)
      * initialize() will automatically be called after.
@@ -528,7 +534,7 @@ public class MainWindowController {
                 seperator3.setOpacity(1.0);
                 break;
             default:
-                new InformationalWindow("playerNumber out of range!"); // TODO: Create exception
+                new InformationalWindow("Player number out of range!"); // TODO: Create exception
         }
     }
 
@@ -553,7 +559,7 @@ public class MainWindowController {
                 fundsBoxPlayer4Credits.setText(String.valueOf(credits));
                 break;
             default:
-                new InformationalWindow("credits out of range!"); // TODO: Create exception
+                new InformationalWindow("Player number out of range!"); // TODO: Create exception
         }
     }
 
@@ -578,7 +584,7 @@ public class MainWindowController {
                 fundsBoxPlayer4Money.setText(String.valueOf(money));
                 break;
             default:
-                new InformationalWindow("Invalid amount of money!"); // TODO: Create exception
+                new InformationalWindow("Player number out of range!"); // TODO: Create exception
         }
     }
 
@@ -606,7 +612,24 @@ public class MainWindowController {
      */
     public void rollDiceAction() {
         Config.Dice dice = new Config.Dice();
-        updateRollDiceLabel(dice.rollDice());
+        int diceRoll = dice.rollDice();
+        updateRollDiceLabel(diceRoll);
+        // TODO: Tell logic a dice was rolled and pass diceRoll int
+
+        /**
+         * Debug. TODO: delete dis
+         */
+        /*
+        movePlayer(logic.getPlayersTurn().getName(), diceRoll);
+        logic.nextPlayer(logic.getPlayers());
+        Chance.ChanceEvent chanceEvent = chance.getChanceEvent();
+        new InformationalWindow(chanceEvent.getMessage());
+        int newMoney = logic.getPlayersTurn().getMoney() +     chance.getChanceEvent().getMoneyDeviation();
+        int newCredits = logic.getPlayersTurn().getCredits() + chance.getChanceEvent().getCreditsDeviation();
+        logic.getPlayersTurn().setMoney(newMoney);
+        logic.getPlayersTurn().setCredits(newCredits);
+         */
+
     }
 
     /**
@@ -623,9 +646,18 @@ public class MainWindowController {
                 addPlayers();
             }
         }
+
+        // Listener for current player
+        logic.getPlayerTurnProperty().addListener((observableValue, oldValue, newValue) ->
+                updateCurrentPlayer(logic.getPlayers().get(newValue.intValue()).getName()));
     }
 
     private void addPlayers() {
+        // Resetting logic and game board
+        logic = new Logic();
+        gameBoard = new GameBoard();
+
+        // Preparing player entry windows
         PlayerEntryWindow entry = null;
 
         // Clean up board, empty out all the fields
@@ -645,29 +677,25 @@ public class MainWindowController {
                 setPlayerMoney(i + 1, Config.START_MONEY);
                 setPlayerCredits(i + 1, Config.START_CREDITS);
 
-                // Add players to Logic
-
-                logic.addPlayer(new Player(entry.getPlayersList().get(i), Config.START_MONEY, Config.START_CREDITS, i + 1));
+                // Instantiating players, add them to Logic
+                logic.addPlayer(new Player(
+                        entry.getPlayersList().get(i),
+                        Config.START_MONEY,
+                        Config.START_CREDITS,
+                        i + 1));
 
                 // Add listeners to money and credits.
                 int playerNumber = i;
-                logic.getPlayers().get(i).getMoneyProperty().addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ObservableValue o, Object oldVal, Object newVal) {
-                        setPlayerMoney(playerNumber + 1, (int) newVal);
-                    }
-                });
-                logic.getPlayers().get(i).getCreditsProperty().addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ObservableValue o, Object oldVal, Object newVal) {
-                        setPlayerCredits(playerNumber + 1, (Integer) newVal);
-                    }
-                });
+                logic.getPlayers().get(i).getMoneyProperty().addListener((observableValue, oldValue, newValue) ->
+                                setPlayerMoney(playerNumber + 1, (Integer) newValue));
+                logic.getPlayers().get(i).getCreditsProperty().addListener((observableValue, oldValue, newValue) ->
+                                setPlayerCredits(playerNumber + 1, (Integer) newValue));
+
+                // Move players to first field TODO: Replace with listener
                 movePlayer(entry.getPlayersList().get(i), 1);
             }
 
-
-            updateCurrentPlayer(entry.getPlayersList().get(0));
+            //updateCurrentPlayer(entry.getPlayersList().get(0));
             setNewGameConfirmationNeeded(false);
         } catch (Exception e) {
             setBoardVisibility(false);
