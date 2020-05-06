@@ -1,28 +1,35 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 public class ModuleGameField extends GameField {
     private final int fieldPrice;
-    private final int fieldMoneyCharge;
+    private final int fieldMoneyChargeProperty;
     private final int creditsGain;
-    private int fieldOwnerId;
+    private IntegerProperty fieldOwnerId = new SimpleIntegerProperty();
 
     public ModuleGameField(int fieldId, Config.FieldType fieldType, String fieldName, int fieldPrice, int fieldMoneyCharge, int creditsGain) {
         super(fieldId, fieldType, fieldName);
         this.fieldPrice = fieldPrice;
-        this.fieldMoneyCharge = fieldMoneyCharge;
+        this.fieldMoneyChargeProperty = fieldMoneyCharge;
         this.creditsGain = creditsGain;
-        this.fieldOwnerId = -1;
+        this.fieldOwnerId.set(-1);
     }
 
     public int getFieldMoneyCharge() {
-        return fieldMoneyCharge;
+        return fieldMoneyChargeProperty;
     }
 
     public boolean fieldHasOwner() {
-        return (fieldOwnerId == -1) ? false : true;
+        return (fieldOwnerId.get() == -1) ? false : true;
     }
 
     public int getFieldOwnerId() {
+        return fieldOwnerId.get();
+    }
+
+    public IntegerProperty fieldOwnerIdProperty() {
         return fieldOwnerId;
     }
 
@@ -30,7 +37,7 @@ public class ModuleGameField extends GameField {
         if (fieldHasOwner()) {
             throw new RuntimeException("invalid operation: the field already has owner");
         }
-        this.fieldOwnerId = fieldOwnerId;
+        this.fieldOwnerId.set(fieldOwnerId);
     }
 
     public int getFieldPrice() {
