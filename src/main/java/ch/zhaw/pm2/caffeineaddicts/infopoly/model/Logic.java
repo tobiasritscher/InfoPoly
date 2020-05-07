@@ -12,6 +12,7 @@ public class Logic {
     private static IntegerProperty currentPlayer = new SimpleIntegerProperty(0);
     private Chance chance;
     private GameField.StartupGameField startupGameField;
+    private GameField.JobGameField jobGameField;
 
     public ArrayList<Player> getPlayers() {
         return players;
@@ -56,6 +57,7 @@ public class Logic {
                 startup();
                 break;
             case JOB:
+                job(fieldId);
                 break;
             case CHANCE:
                 getChance();
@@ -73,6 +75,33 @@ public class Logic {
                 break;
             case EXAM:
                 break;
+        }
+    }
+
+    private void job(int fieldId) {
+        if (jobGameField.hasWorker()) {
+            if (players.get(currentPlayer.getValue()).getPlayerNumber() == jobGameField.workerIdProperty().getValue()) {
+            } else {
+                new InformationalWindow("Thank you for shopping with us!");
+                players.get(currentPlayer.getValue()).addMoney(-10);
+                players.get(jobGameField.workerIdProperty().getValue()).addMoney(10);
+            }
+
+        } else {
+            QuestionWindow questionWindow = new QuestionWindow("Job Application","Would you like to start working here?");
+            if(questionWindow.getAnswer()){
+                jobGameField.setWorker(players.get(currentPlayer.getValue()).getPlayerNumber());
+                jobGameField.payWage(players.get(currentPlayer.getValue()).getPlayerNumber());
+            }
+        }
+    }
+
+    private void quitWork(){
+        if(jobGameField.isWorker(currentPlayer.getValue())){
+            QuestionWindow questionWindow = new QuestionWindow("Quit job","Do you really want to quit your job?");
+            if(questionWindow.getAnswer()){
+                jobGameField.removeWorker();
+            }
         }
     }
 
@@ -98,7 +127,7 @@ public class Logic {
     }
 
     private void startup() {
-        if(startupGameField.getFounderId() == players.get(currentPlayer.getValue()).getPlayerNumber()){
+        if (startupGameField.getFounderId() == players.get(currentPlayer.getValue()).getPlayerNumber()) {
             new InformationalWindow("Your startup made quite the turnover this week! +200CHF");
             players.get(currentPlayer.getValue()).addMoney(200);
         } else if (startupGameField.isLaunched()) {
@@ -109,7 +138,7 @@ public class Logic {
                     QuestionWindow questionWindow = new QuestionWindow("Startup Manager", "Would you like to create your first startup?");
                     if (questionWindow.getAnswer()) {
                         startupGameField.setFounderId(players.get(currentPlayer.getValue()).getPlayerNumber());
-                        players.get(currentPlayer.getValue()).setMoney(players.get(currentPlayer.getValue()).getMoney()-startupGameField.getMoneyNeeded());
+                        players.get(currentPlayer.getValue()).setMoney(players.get(currentPlayer.getValue()).getMoney() - startupGameField.getMoneyNeeded());
                     } else {
                         new InformationalWindow("I guess not everyone is up to the challenge...");
                     }
@@ -122,7 +151,7 @@ public class Logic {
         }
     }
 
-    private void start(){
+    private void start() {
         players.get(currentPlayer.getValue()).addMoney(200);
     }
 
