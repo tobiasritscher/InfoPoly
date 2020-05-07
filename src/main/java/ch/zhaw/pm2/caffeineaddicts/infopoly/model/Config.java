@@ -33,7 +33,7 @@ public class Config {
         /**
          * Field with random possibility to create some event.
          */
-        CHANCE("Chance"),
+        CHANCE("ChanceGameField"),
         /**
          * Field all players to start on.
          * <p>Players which have no possibility to pay will be moved here. Random waiting time will be applied in order to get money.</p>

@@ -35,7 +35,7 @@ public class MainWindowController {
      */
     private GameBoard gameBoard = new GameBoard();
 
-    private final GameField.Chance chance = new GameField.Chance();
+    private final GameField.ChanceGameField chanceGameField = new GameField.ChanceGameField();
 
     /**
      * All fields in the game. Can be formatted to our liking.
@@ -633,15 +633,15 @@ public class MainWindowController {
 
 
         /**
-         * Debug. TODO: example for chance dialog and action. Delete dis once implemented
+         * Debug. TODO: example for chanceGameField dialog and action. Delete dis once implemented
          */
 
         /*
         movePlayer(logic.getPlayersTurn().getName(), diceRoll);
-        Chance.ChanceEvent chanceEvent = chance.getChanceEvent();
+        ChanceGameField.ChanceEvent chanceEvent = chanceGameField.getChanceEvent();
         new InformationalWindow(chanceEvent.getMessage());
-        int newMoney = logic.getPlayersTurn().getMoney() + chance.getChanceEvent().getMoneyDeviation();
-        int newCredits = logic.getPlayersTurn().getCredits() + chance.getChanceEvent().getCreditsDeviation();
+        int newMoney = logic.getPlayersTurn().getMoney() + chanceGameField.getChanceEvent().getMoneyDeviation();
+        int newCredits = logic.getPlayersTurn().getCredits() + chanceGameField.getChanceEvent().getCreditsDeviation();
         logic.getPlayersTurn().setMoney(newMoney);
         logic.getPlayersTurn().setCredits(newCredits);
          */

@@ -11,7 +11,7 @@ public class Logic {
     private static IntegerProperty currentPlayer = new SimpleIntegerProperty(0);
     GameBoard gameBoard = new GameBoard();
     private int roundsWaiting;
-    private GameField.Chance chance;
+    private GameField.ChanceGameField chanceGameField;
     private GameField.StartupGameField startupGameField;
     private GameField.JobGameField jobGameField;
     private ArrayList<Player> players = new ArrayList<>();
@@ -143,7 +143,7 @@ public class Logic {
     }
 
     private void getChance() {
-        GameField.Chance.ChanceEvent chanceEvent = chance.getChanceEvent();
+        GameField.ChanceGameField.ChanceEvent chanceEvent = chanceGameField.getChanceEvent();
         new InformationalWindow(chanceEvent.getMessage());
         if (players.get(currentPlayer.getValue()).getMoney() + chanceEvent.getMoneyDeviation() < 0) {
             waitForScholarship();
