@@ -46,20 +46,20 @@ public class GameField {
 
     public static class ModuleGameField extends GameField {
         private final int fieldPrice;
-        private final int fieldMoneyChargeProperty;
+        private final int fieldMoneyCharge;
         private final int creditsGain;
         private IntegerProperty fieldOwnerId = new SimpleIntegerProperty();
 
         public ModuleGameField(int fieldId, Config.FieldType fieldType, String fieldName, int fieldPrice, int fieldMoneyCharge, int creditsGain) {
             super(fieldId, fieldType, fieldName);
             this.fieldPrice = fieldPrice;
-            this.fieldMoneyChargeProperty = fieldMoneyCharge;
+            this.fieldMoneyCharge = fieldMoneyCharge;
             this.creditsGain = creditsGain;
             this.fieldOwnerId.set(-1);
         }
 
         public int getFieldMoneyCharge() {
-            return fieldMoneyChargeProperty;
+            return fieldMoneyCharge;
         }
 
         public boolean fieldHasOwner() {
