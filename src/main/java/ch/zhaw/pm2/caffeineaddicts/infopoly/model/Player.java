@@ -89,6 +89,10 @@ public class Player {
 
     public void setMoney(int money) { this.money.set(money);}
 
+    public void addMoney(int amount){
+        money.set(money.getValue() + amount);
+    }
+
     public void setCredits(int credits) { this.credits.set(credits); }
 
     public boolean isBroke() {

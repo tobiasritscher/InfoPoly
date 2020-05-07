@@ -11,6 +11,7 @@ public class Logic {
     private int roundsWaiting;
     private static IntegerProperty currentPlayer = new SimpleIntegerProperty(0);
     private Chance chance;
+    private StartupGameField startupGameField;
 
     public ArrayList<Player> getPlayers() {
         return players;
@@ -60,6 +61,7 @@ public class Logic {
                 getChance();
                 break;
             case START:
+                start();
                 break;
             case FEE_TYPE_ONE:
                 break;
@@ -87,8 +89,8 @@ public class Logic {
                 players.get(gameField.getFieldOwnerId()).setCredits(gameField.getCreditsGain());
             }
         } else {
-            QuestionWindow questionWindow = new QuestionWindow("Buy course","Would you like to buy this course");
-            if(questionWindow.getAnswer()){
+            QuestionWindow questionWindow = new QuestionWindow("Buy course", "Would you like to buy this course");
+            if (questionWindow.getAnswer()) {
                 players.get(currentPlayer.getValue()).setMoney(players.get(currentPlayer.getValue()).getMoney() - gameField.getFieldPrice());
                 gameField.setFieldOwner(players.get(currentPlayer.getValue()).getPlayerNumber());
             }
@@ -96,12 +98,32 @@ public class Logic {
     }
 
     private void startup() {
-        if(players.get(currentPlayer.getValue()).getCredits() >= 100){
-            QuestionWindow questionWindow = new QuestionWindow("Startup Manager","Would you like to create your first startup?");
-            if(questionWindow.getAnswer()){
-
+        if(startupGameField.getFounderId() == players.get(currentPlayer.getValue()).getPlayerNumber()){
+            new InformationalWindow("Your startup made quite the turnover this week! +200CHF");
+            players.get(currentPlayer.getValue()).addMoney(200);
+        } else if (startupGameField.isLaunched()) {
+            new InformationalWindow("Startup is already created with your Idea...had to be fast!");
+        } else {
+            if (players.get(currentPlayer.getValue()).getCredits() >= 100) {
+                if (players.get(currentPlayer.getValue()).getMoney() > startupGameField.getMoneyNeeded()) {
+                    QuestionWindow questionWindow = new QuestionWindow("Startup Manager", "Would you like to create your first startup?");
+                    if (questionWindow.getAnswer()) {
+                        startupGameField.setFounderId(players.get(currentPlayer.getValue()).getPlayerNumber());
+                        players.get(currentPlayer.getValue()).setMoney(players.get(currentPlayer.getValue()).getMoney()-startupGameField.getMoneyNeeded());
+                    } else {
+                        new InformationalWindow("I guess not everyone is up to the challenge...");
+                    }
+                } else {
+                    new InformationalWindow("You require: " + startupGameField.getMoneyNeeded() + " in order to start your first Startup");
+                }
+            } else {
+                new InformationalWindow("A successful startup requires the needed knowledge...(100 Credits)");
             }
         }
+    }
+
+    private void start(){
+        players.get(currentPlayer.getValue()).addMoney(200);
     }
 
     private void getChance() {
