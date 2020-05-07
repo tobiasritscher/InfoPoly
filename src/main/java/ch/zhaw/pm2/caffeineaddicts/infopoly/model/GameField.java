@@ -3,6 +3,8 @@ package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class GameField {
@@ -106,10 +108,10 @@ public class GameField {
         }
 
         /**
-         * Note: before calling call @{@link StartupGameField#isLaunched()}
+         * Note: before calling call {@link StartupGameField#isLaunched()}.
          * Will throw exception if not launched.
          *
-         * @return
+         * @return player id
          */
         public int getFounderId() {
             if (!isLaunched()) {
@@ -166,7 +168,7 @@ public class GameField {
         }
 
         /**
-         * <p>Note: Call @{@link JobGameField#isWorker(int)} before invocation of the method. If the player no assigned exception will be thrown.</p>
+         * <p>Note: Call {@link JobGameField#isWorker(int)} before invocation of the method. If the player no assigned exception will be thrown.</p>
          *
          * @return payment for last turn
          */
@@ -182,7 +184,7 @@ public class GameField {
         }
 
         /**
-         * <p>Note: Must be called before each invocation of @{@link JobGameField#setWorker(int)}</p>
+         * <p>Note: Must be called before each invocation of {@link JobGameField#setWorker(int)}</p>
          *
          * @return true, if there is some worker assigned
          */
@@ -192,7 +194,7 @@ public class GameField {
 
         /**
          * <p>Note: If player was already assigned last round, causes the worker wage to be increase.</p>
-         * <p>Note: Call @{@link JobGameField#hasWorker()} before invocation of the method. If no worker assigned exception will be thrown.</p>
+         * <p>Note: Call {@link JobGameField#hasWorker()} before invocation of the method. If no worker assigned exception will be thrown.</p>
          *
          * @param playerId player to be assigned
          */
@@ -210,9 +212,9 @@ public class GameField {
         }
 
         /**
-         * After player moved to another field this function musst be called.
+         * After player moved to another field this function must be called.
          *
-         * <p>Note: Call @{@link JobGameField#hasWorker()} before invocation of the method. If no worker assigned exception will be thrown.</p>
+         * <p>Note: Call {@link JobGameField#hasWorker()} before invocation of the method. If no worker assigned exception will be thrown.</p>
          */
         public void removeWorker() {
             if (!hasWorker()) {
@@ -220,6 +222,51 @@ public class GameField {
             }
             workerId.set(-1);
             numberTurnsWorked = 0;
+        }
+    }
+
+    /**
+     * Represents {@link Config.FieldType#REPETITION}
+     */
+    public class RepetitionGameField {
+        private final Map<Integer, Integer> students = new HashMap<>();
+
+        /**
+         * Will reduce the number of rounds to wait by one for each player waiting on the field.
+         */
+        public void countdownWaitingTime() {
+            students.replaceAll((k, v) -> Math.min(0, v - 1));
+        }
+
+        /**
+         * @param playerId player id
+         * @return true, if waiting time for the player if greater than zero.
+         */
+        public boolean isRepeating(int playerId) {
+            return students.containsKey(playerId) && (students.get(playerId) > 0);
+        }
+
+        /**
+         * Will add the player to
+         * <p>Note: Call {@link GameField.RepetitionGameField#isRepeating(int)} before the method invocation. Otherwise may throw exception.</p>
+         *
+         * @param playerId player id
+         * @return number of rounds the player will have to wait
+         */
+        public int addStudent(int playerId) {
+            if (students.containsKey(playerId)) {
+                throw new RuntimeException("invalid operation: the player is already repeating");
+            }
+            int rolledNumber = Config.Dice.rollDice();
+            students.put(playerId, rolledNumber);
+            return rolledNumber;
+        }
+
+        public void removeStudent(int playerId) {
+            if (!students.containsKey(playerId)) {
+                throw new RuntimeException("invalid operation: the player is not repeating");
+            }
+            students.remove(playerId);
         }
     }
 }
