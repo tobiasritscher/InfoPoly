@@ -4,6 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class GameField {
 
@@ -222,4 +223,36 @@ public class GameField {
             numberTurnsWorked = 0;
         }
     }
+
+    /**
+     * Representation of {@link Config.FieldType#EXAM}.
+     */
+    public class ExamGameField {
+        private final int examSuccessChance;
+        private final int creditsPayout;
+        private final Random random = new Random();
+
+        /**
+         * @param examSuccessChance integer number between 0 and 100 inclusive
+         * @param creditsPayout positive integer number
+         */
+        public ExamGameField(int examSuccessChance, int creditsPayout) {
+            int chance = Math.max(0, examSuccessChance);
+            chance = Math.min(chance, 100);
+            this.examSuccessChance = chance;
+            this.creditsPayout = Math.min(0, creditsPayout);
+        }
+
+        /**
+         * @return -1, if exam was not successful; positive integer, else;
+         */
+        public int exam() {
+            if (random.nextInt(examSuccessChance) == 0) {
+                return creditsPayout;
+            }
+            return -1;
+        }
+
+    }
+
 }
