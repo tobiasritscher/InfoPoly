@@ -47,6 +47,9 @@ public class GameField {
         return Objects.hash(fieldId, fieldType, fieldName);
     }
 
+    /**
+     * Representation of {@link Config.FieldType#MODULE}
+     */
     public static class ModuleGameField extends GameField {
         private final int fieldPrice;
         private final int fieldMoneyCharge;
@@ -93,6 +96,9 @@ public class GameField {
         }
     }
 
+    /**
+     * Representation of {@link Config.FieldType#STARTUP}.
+     */
     public static class StartupGameField {
         private final int moneyNeeded;
         private final int moneyPayout;
@@ -144,6 +150,9 @@ public class GameField {
         }
     }
 
+    /**
+     * Representation of {@link Config.FieldType#JOB}.
+     */
     public class JobGameField {
         private final int baseWage;
         private final int wageIncreaseRate;
@@ -227,7 +236,6 @@ public class GameField {
     }
 
     /**
-
      * Representation of {@link Config.FieldType#EXAM}.
      */
     public class ExamGameField {
@@ -237,7 +245,7 @@ public class GameField {
 
         /**
          * @param examSuccessChance integer number between 0 and 100 inclusive
-         * @param creditsPayout positive integer number
+         * @param creditsPayout     positive integer number
          */
         public ExamGameField(int examSuccessChance, int creditsPayout) {
             int chance = Math.max(0, examSuccessChance);
@@ -258,8 +266,8 @@ public class GameField {
 
     }
 
-
-     * Represents {@link Config.FieldType#REPETITION}
+    /**
+     * Represents {@link Config.FieldType#REPETITION}.
      */
     public class RepetitionGameField {
         private final Map<Integer, Integer> students = new HashMap<>();
