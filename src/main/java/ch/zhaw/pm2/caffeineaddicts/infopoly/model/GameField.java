@@ -93,16 +93,16 @@ public class GameField {
     public static class StartupGameField {
         private final int moneyNeeded;
         private final int moneyPayout;
-        private int founderId;
+        private IntegerProperty founderId = new SimpleIntegerProperty();
 
         public StartupGameField(int moneyNeeded, int moneyPayout) {
             this.moneyNeeded = moneyNeeded;
             this.moneyPayout = moneyPayout;
-            founderId = -1;
+            this.founderId.set(-1);
         }
 
         public boolean isLaunched() {
-            return (founderId == -1) ? false : true;
+            return (founderId.get() == -1) ? false : true;
         }
 
         /**
@@ -115,14 +115,14 @@ public class GameField {
             if (!isLaunched()) {
                 throw new RuntimeException("invalid operation: field already has founder");
             }
-            return founderId;
+            return founderId.get();
         }
 
         public void setFounderId(int founderId) {
             if (isLaunched()) {
                 throw new RuntimeException("invalid operation: field already has founder");
             }
-            this.founderId = founderId;
+            this.founderId.set(founderId);
         }
 
         public int getMoneyNeeded() {
@@ -134,6 +134,10 @@ public class GameField {
                 throw new RuntimeException("invalid operation: no may money may obtained, startup is not launched yet.");
             }
             return moneyPayout;
+        }
+
+        public IntegerProperty founderIdProperty() {
+            return founderId;
         }
     }
 }
