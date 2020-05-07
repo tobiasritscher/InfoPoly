@@ -190,12 +190,42 @@ public class GameField {
     /**
      * Represents @{@link Config.FieldType#CHANCE}.
      */
-    public static class ChanceGameField{
+    public static class ChanceGameField extends GameField {
         private final Random random = new Random();
+        private ChanceEvent event;
 
+        public ChanceGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
+            super(fieldId, fieldType, fieldName);
+            generateEvent();
+        }
 
+        public void generateEvent() {
+            int eventId = random.nextInt(ChanceEvent.values().length - 1);
+            event = ChanceEvent.values()[eventId];
+        }
 
-        public enum ChanceEvent {
+        public String getMessage() {
+            if (event == null) {
+                throw new RuntimeException("invalid operation: generate event first.");
+            }
+            return event.getMessage();
+        }
+
+        public int getCreditsDeviation() {
+            if (event == null) {
+                throw new RuntimeException("invalid operation: generate event first.");
+            }
+            return event.creditsDeviation;
+        }
+
+        public int getMoneyDeviation() {
+            if (event == null) {
+                throw new RuntimeException("invalid operation: generate event first.");
+            }
+            return event.moneyDeviation;
+        }
+
+        private enum ChanceEvent {
             EVENT1("You got run over by a bus. The medical fees cost CHF 150.-",
                     0, -150),
             EVENT2(
