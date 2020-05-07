@@ -35,7 +35,7 @@ public class MainWindowController {
      */
     private GameBoard gameBoard = new GameBoard();
 
-    private final Chance chance = new Chance();
+    private final GameField.Chance chance = new GameField.Chance();
 
     /**
      * All fields in the game. Can be formatted to our liking.
