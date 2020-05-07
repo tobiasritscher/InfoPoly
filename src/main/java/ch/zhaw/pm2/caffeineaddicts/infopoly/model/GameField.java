@@ -48,7 +48,7 @@ public class GameField {
         private final int fieldPrice;
         private final int fieldMoneyCharge;
         private final int creditsGain;
-        private IntegerProperty fieldOwnerId = new SimpleIntegerProperty();
+        private final IntegerProperty fieldOwnerId = new SimpleIntegerProperty();
 
         public ModuleGameField(int fieldId, Config.FieldType fieldType, String fieldName, int fieldPrice, int fieldMoneyCharge, int creditsGain) {
             super(fieldId, fieldType, fieldName);
@@ -63,7 +63,7 @@ public class GameField {
         }
 
         public boolean fieldHasOwner() {
-            return (fieldOwnerId.get() == -1) ? false : true;
+            return fieldOwnerId.get() != -1;
         }
 
         public int getFieldOwnerId() {
@@ -93,7 +93,7 @@ public class GameField {
     public static class StartupGameField {
         private final int moneyNeeded;
         private final int moneyPayout;
-        private IntegerProperty founderId = new SimpleIntegerProperty();
+        private final IntegerProperty founderId = new SimpleIntegerProperty();
 
         public StartupGameField(int moneyNeeded, int moneyPayout) {
             this.moneyNeeded = moneyNeeded;
@@ -102,7 +102,7 @@ public class GameField {
         }
 
         public boolean isLaunched() {
-            return (founderId.get() == -1) ? false : true;
+            return founderId.get() != -1;
         }
 
         /**
@@ -138,6 +138,88 @@ public class GameField {
 
         public IntegerProperty founderIdProperty() {
             return founderId;
+        }
+    }
+
+    public class JobGameField {
+        private final int baseWage;
+        private final int wageIncreaseRate;
+        private final IntegerProperty workerId = new SimpleIntegerProperty();
+        private int numberTurnsWorked;
+
+        public JobGameField(int baseWage, int wageIncreaseRate) {
+            this.baseWage = baseWage;
+            this.wageIncreaseRate = wageIncreaseRate;
+            workerId.set(-1);
+            numberTurnsWorked = 0;
+        }
+
+        public boolean isWorker(int playerId) {
+            if (playerId < 0) {
+                throw new IllegalArgumentException("invalid parameter: player index must be positive number");
+            }
+            return workerId.get() == playerId;
+        }
+
+        public IntegerProperty workerIdProperty() {
+            return workerId;
+        }
+
+        /**
+         * <p>Note: Call @{@link JobGameField#isWorker(int)} before invocation of the method. If the player no assigned exception will be thrown.</p>
+         *
+         * @return payment for last turn
+         */
+        public int payWage(int playerId) {
+            if (!hasWorker()) {
+                throw new RuntimeException("invalid operation: no worker assigned yet.");
+            }
+            if (!isWorker(playerId)) {
+                throw new RuntimeException("invalid operation: the player is not assigned for the work yet");
+            }
+            numberTurnsWorked++;
+            return baseWage + wageIncreaseRate * baseWage * (numberTurnsWorked - 1);
+        }
+
+        /**
+         * <p>Note: Must be called before each invocation of @{@link JobGameField#setWorker(int)}</p>
+         *
+         * @return true, if there is some worker assigned
+         */
+        public boolean hasWorker() {
+            return workerId.get() != -1;
+        }
+
+        /**
+         * <p>Note: If player was already assigned last round, causes the worker wage to be increase.</p>
+         * <p>Note: Call @{@link JobGameField#hasWorker()} before invocation of the method. If no worker assigned exception will be thrown.</p>
+         *
+         * @param playerId player to be assigned
+         */
+        public void setWorker(int playerId) {
+            if (hasWorker()) {
+                throw new RuntimeException("invalid operation: there is already some worker");
+            }
+            if (playerId < 0) {
+                throw new IllegalArgumentException("invalid parameter: playerId should be positive number");
+            }
+            if (isWorker(playerId)) {
+                numberTurnsWorked++;
+            }
+            workerId.set(playerId);
+        }
+
+        /**
+         * After player moved to another field this function musst be called.
+         *
+         * <p>Note: Call @{@link JobGameField#hasWorker()} before invocation of the method. If no worker assigned exception will be thrown.</p>
+         */
+        public void removeWorker() {
+            if (!hasWorker()) {
+                throw new RuntimeException("invalid operation: no worker assigned yet.");
+            }
+            workerId.set(-1);
+            numberTurnsWorked = 0;
         }
     }
 }
