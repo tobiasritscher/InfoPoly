@@ -11,7 +11,7 @@ public class Logic {
     private int roundsWaiting;
     private static IntegerProperty currentPlayer = new SimpleIntegerProperty(0);
     private Chance chance;
-    private StartupGameField startupGameField;
+    private GameField.StartupGameField startupGameField;
 
     public ArrayList<Player> getPlayers() {
         return players;
@@ -77,7 +77,7 @@ public class Logic {
     }
 
     private void processModule(int fieldId) {
-        ModuleGameField gameField = (ModuleGameField) gameBoard.getField(fieldId);
+        GameField.ModuleGameField gameField = (GameField.ModuleGameField) gameBoard.getField(fieldId);
         if (gameField.fieldHasOwner()) {
             if (gameField.getFieldOwnerId() == players.get(currentPlayer.getValue()).getPlayerNumber()) {
             } else if (players.get(currentPlayer.getValue()).getMoney() < gameField.getFieldMoneyCharge()) {
