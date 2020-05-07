@@ -43,15 +43,7 @@ public class Config {
         /**
          * A player will lose fixed amount of money on the field.
          */
-        FEE_TYPE_ONE("Fee"),
-        /**
-         * A player will lose fixed amount <i>money</i> an get some amount of <i>credits</i> on the field.
-         */
-        FEE_TYPE_TWO("Fee"),
-        /**
-         * A player will lose <i>random</i> amount of money.
-         */
-        FEE_TYPE_THREE("Fee"),
+        FEE("Fee"),
         /**
          * Field with randomly set waiting-timer for player on it.
          */

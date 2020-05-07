@@ -8,19 +8,17 @@ import javafx.beans.property.SimpleIntegerProperty;
 import java.util.ArrayList;
 
 public class Logic {
-    private int roundsWaiting;
     private static IntegerProperty currentPlayer = new SimpleIntegerProperty(0);
+    GameBoard gameBoard = new GameBoard();
+    private int roundsWaiting;
     private Chance chance;
     private GameField.StartupGameField startupGameField;
     private GameField.JobGameField jobGameField;
+    private ArrayList<Player> players = new ArrayList<>();
 
     public ArrayList<Player> getPlayers() {
         return players;
     }
-
-    GameBoard gameBoard = new GameBoard();
-
-    private ArrayList<Player> players = new ArrayList<>();
 
     public void addPlayer(Player player) {
         players.add(player);
@@ -36,13 +34,6 @@ public class Logic {
             currentPlayer.setValue((1 + currentPlayer.get()) % players.size());
         }
         return player.get(currentPlayer.getValue());
-    }
-
-    public void setRoundsWaiting(int amount) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Makes no sense to wait negative amount dude");
-        }
-        roundsWaiting = amount;
     }
 
     public void movePlayer(int rolledNumber) {
@@ -65,11 +56,7 @@ public class Logic {
             case START:
                 start();
                 break;
-            case FEE_TYPE_ONE:
-                break;
-            case FEE_TYPE_TWO:
-                break;
-            case FEE_TYPE_THREE:
+            case FEE:
                 break;
             case REPETITION:
                 break;
@@ -88,18 +75,18 @@ public class Logic {
             }
 
         } else {
-            QuestionWindow questionWindow = new QuestionWindow("Job Application","Would you like to start working here?");
-            if(questionWindow.getAnswer()){
+            QuestionWindow questionWindow = new QuestionWindow("Job Application", "Would you like to start working here?");
+            if (questionWindow.getAnswer()) {
                 jobGameField.setWorker(players.get(currentPlayer.getValue()).getPlayerNumber());
                 jobGameField.payWage(players.get(currentPlayer.getValue()).getPlayerNumber());
             }
         }
     }
 
-    private void quitWork(){
-        if(jobGameField.isWorker(currentPlayer.getValue())){
-            QuestionWindow questionWindow = new QuestionWindow("Quit job","Do you really want to quit your job?");
-            if(questionWindow.getAnswer()){
+    private void quitWork() {
+        if (jobGameField.isWorker(currentPlayer.getValue())) {
+            QuestionWindow questionWindow = new QuestionWindow("Quit job", "Do you really want to quit your job?");
+            if (questionWindow.getAnswer()) {
                 jobGameField.removeWorker();
             }
         }
@@ -176,6 +163,13 @@ public class Logic {
 
     public int getRoundsWaiting() {
         return roundsWaiting;
+    }
+
+    public void setRoundsWaiting(int amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Makes no sense to wait negative amount dude");
+        }
+        roundsWaiting = amount;
     }
 
     /**
