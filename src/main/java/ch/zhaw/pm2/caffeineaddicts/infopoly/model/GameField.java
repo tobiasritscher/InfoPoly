@@ -271,6 +271,14 @@ public class GameField {
      */
     public class RepetitionGameField {
         private final Map<Integer, Integer> students = new HashMap<>();
+        private final int numberRoundsToWait;
+
+        /**
+         * @param numberRoundsToWait positive integer number
+         */
+        public RepetitionGameField(int numberRoundsToWait) {
+            this.numberRoundsToWait = Math.min(0, numberRoundsToWait);
+        }
 
         /**
          * Will reduce the number of rounds to wait by one for each player waiting on the field.
@@ -288,7 +296,6 @@ public class GameField {
         }
 
         /**
-         * Will add the player to
          * <p>Note: Call {@link GameField.RepetitionGameField#isRepeating(int)} before the method invocation. Otherwise may throw exception.</p>
          *
          * @param playerId player id
@@ -298,9 +305,8 @@ public class GameField {
             if (students.containsKey(playerId)) {
                 throw new RuntimeException("invalid operation: the player is already repeating");
             }
-            int rolledNumber = Config.Dice.rollDice();
-            students.put(playerId, rolledNumber);
-            return rolledNumber;
+            students.put(playerId, numberRoundsToWait);
+            return numberRoundsToWait;
         }
 
         public void removeStudent(int playerId) {
@@ -308,6 +314,13 @@ public class GameField {
                 throw new RuntimeException("invalid operation: the player is not repeating");
             }
             students.remove(playerId);
+        }
+
+        public int getRoundsToWait(int playerId) {
+            if (!students.containsKey(playerId)) {
+                throw new RuntimeException("invalid operation: player is not repeating");
+            }
+            return students.get(playerId);
         }
     }
 }
