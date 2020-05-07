@@ -97,7 +97,7 @@ public class GameField {
     }
 
     /**
-     * Representation of {@link Config.FieldType#STARTUP}.
+     * Represents {@link Config.FieldType#STARTUP}.
      */
     public static class StartupGameField {
         private final int moneyNeeded;
@@ -151,15 +151,16 @@ public class GameField {
     }
 
     /**
-     * Representation of {@link Config.FieldType#JOB}.
+     * Represents {@link Config.FieldType#JOB}.
      */
-    public class JobGameField {
+    public class JobGameField extends GameField {
         private final int baseWage;
         private final int wageIncreaseRate;
         private final IntegerProperty workerId = new SimpleIntegerProperty();
         private int numberTurnsWorked;
 
-        public JobGameField(int baseWage, int wageIncreaseRate) {
+        public JobGameField(int fieldId, Config.FieldType fieldType, String fieldName, int baseWage, int wageIncreaseRate) {
+            super(fieldId, fieldType, fieldName);
             this.baseWage = baseWage;
             this.wageIncreaseRate = wageIncreaseRate;
             workerId.set(-1);
@@ -238,7 +239,7 @@ public class GameField {
     /**
      * Representation of {@link Config.FieldType#EXAM}.
      */
-    public class ExamGameField {
+    public class ExamGameField extends GameField {
         private final int examSuccessChance;
         private final int creditsPayout;
         private final Random random = new Random();
@@ -247,7 +248,8 @@ public class GameField {
          * @param examSuccessChance integer number between 0 and 100 inclusive
          * @param creditsPayout     positive integer number
          */
-        public ExamGameField(int examSuccessChance, int creditsPayout) {
+        public ExamGameField(int fieldId, Config.FieldType fieldType, String fieldName, int examSuccessChance, int creditsPayout) {
+            super(fieldId, fieldType, fieldName);
             int chance = Math.max(0, examSuccessChance);
             chance = Math.min(chance, 100);
             this.examSuccessChance = chance;
@@ -269,8 +271,18 @@ public class GameField {
     /**
      * Represents {@link Config.FieldType#REPETITION}.
      */
-    public class RepetitionGameField {
+    public class RepetitionGameField extends GameField {
         private final Map<Integer, Integer> students = new HashMap<>();
+        private final int numberRoundsToWait;
+
+
+        /**
+         * @param numberRoundsToWait positive integer number
+         */
+        public RepetitionGameField(int fieldId, Config.FieldType fieldType, String fieldName, int numberRoundsToWait) {
+            super(fieldId, fieldType, fieldName);
+            this.numberRoundsToWait = Math.min(0, numberRoundsToWait);
+        }
 
         /**
          * Will reduce the number of rounds to wait by one for each player waiting on the field.
@@ -288,19 +300,15 @@ public class GameField {
         }
 
         /**
-         * Will add the player to
          * <p>Note: Call {@link GameField.RepetitionGameField#isRepeating(int)} before the method invocation. Otherwise may throw exception.</p>
          *
          * @param playerId player id
-         * @return number of rounds the player will have to wait
          */
-        public int addStudent(int playerId) {
-            if (students.containsKey(playerId)) {
+        public void addStudent(int playerId) {
+            if (students.containsKey(playerId) && !students.get(playerId).equals(0)) {
                 throw new RuntimeException("invalid operation: the player is already repeating");
             }
-            int rolledNumber = Config.Dice.rollDice();
-            students.put(playerId, rolledNumber);
-            return rolledNumber;
+            students.put(playerId, numberRoundsToWait);
         }
 
         public void removeStudent(int playerId) {
@@ -308,6 +316,69 @@ public class GameField {
                 throw new RuntimeException("invalid operation: the player is not repeating");
             }
             students.remove(playerId);
+        }
+
+        /**
+         * @param playerId player id
+         * @return 0, if never repeated or after the countdown; positive integer number of round player has to wait;
+         */
+        public int getRoundsToWait(int playerId) {
+            if (!students.containsKey(playerId)) {
+                return 0;
+            }
+            return students.get(playerId);
+        }
+    }
+
+    /**
+     * Represents {@link Config.FieldType#START}.
+     */
+    public class StartGameField extends GameField {
+        private final Map<Integer, Integer> students = new HashMap<>();
+        private final int baseScholarship;
+
+        public StartGameField(int fieldId, Config.FieldType fieldType, String fieldName, int baseScholarship) {
+            super(fieldId, fieldType, fieldName);
+            this.baseScholarship = baseScholarship;
+        }
+
+        public void applyForScholarship(int playerId) {
+            if (students.containsKey(playerId) && !students.get(playerId).equals(0)) {
+                throw new RuntimeException("invalid operation: the player already applied for scholarship");
+            }
+            students.put(playerId, Config.Dice.rollDice());
+        }
+
+        /**
+         * @param playerId player id
+         * @return 0, if never repeated or after the countdown; positive integer number of round player has to wait;
+         */
+        public int getRoundsToWait(int playerId) {
+            if (!students.containsKey(playerId)) {
+                return 0;
+            }
+            return students.get(playerId);
+        }
+
+        public void removeStudent(int playerId) {
+            if (!students.containsKey(playerId)) {
+                throw new RuntimeException("invalid operation: the player is not waiting");
+            }
+            students.remove(playerId);
+        }
+
+
+        /**
+         * @param playerId player id
+         * @return positive integer, which is the sum of baseScholarShip + money from the interaction with @{@link Config.FieldType#MODULE}
+         */
+        public int getScholarship(int playerId) {
+            if (!students.containsKey(playerId)) {
+                throw new RuntimeException("invalid operation: the player never applied");
+            }
+            removeStudent(playerId);
+            //todo implement bank
+            return baseScholarship;
         }
     }
 }
