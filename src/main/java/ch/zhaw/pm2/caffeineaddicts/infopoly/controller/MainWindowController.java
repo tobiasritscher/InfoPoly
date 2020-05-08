@@ -27,17 +27,6 @@ import java.util.Objects;
  */
 public class MainWindowController {
     /**
-     * Game logic instance
-     */
-    private Logic logic = new Logic();
-    /**
-     * Game board instance
-     */
-    private GameBoard gameBoard = new GameBoard();
-
-    private final GameField.ChanceGameField chanceGameField = new GameField.ChanceGameField();
-
-    /**
      * All fields in the game. Can be formatted to our liking.
      */
     @FXML
@@ -118,7 +107,6 @@ public class MainWindowController {
     public BorderPane field39; // PARTY
     @FXML
     public BorderPane field40; // CLASS : Bachelor Thesis
-
     /**
      * Bottom of fields. This is where player initials are used to indicate which players are on which field.
      */
@@ -207,8 +195,6 @@ public class MainWindowController {
      */
     @FXML
     public Label repeatingPlayers;
-
-
     /**
      * Top / Middle title fields. The background colors of these fields will switch to the player
      * color in case he/she decides to take a class/job/do a startup
@@ -275,7 +261,6 @@ public class MainWindowController {
     public BorderPane field40Color; // CLASS : Bachelor Thesis
     @FXML
     public BorderPane dummyPane;    // Dummy Pane to make ArrayList easier to handle
-
     /**
      * Content of fundsBox. This box indicates labels indicating their info (player names, their color, their credits
      * and money.) as well as line separators.
@@ -322,7 +307,6 @@ public class MainWindowController {
     public Line seperator2;
     @FXML
     public Line seperator3;
-
     /**
      * Content of Game controls (current player, rollDiceButton, rollDiceOutput)
      */
@@ -336,7 +320,14 @@ public class MainWindowController {
     public Label rollDiceLabel;
     @FXML
     public Button rollDiceButton;
-
+    /**
+     * Game board instance
+     */
+    private GameBoard gameBoard = new GameBoard();
+    /**
+     * Game logic instance
+     */
+    private Logic logic = new Logic(gameBoard);
     /**
      * ArrayList for all fields on the board.
      */
@@ -547,7 +538,6 @@ public class MainWindowController {
     public void setPlayerCredits(int playerNumber, int credits) {
 
 
-
         switch (playerNumber) {
             case 1:
                 fundsBoxPlayer1Credits.setText(String.valueOf(credits));
@@ -669,8 +659,9 @@ public class MainWindowController {
 
     private void addPlayers() {
         // Resetting logic and game board
-        logic = new Logic();
+
         gameBoard = new GameBoard();
+        logic = new Logic(gameBoard);
 
         // Preparing player entry windows
         PlayerEntryWindow entry = null;
@@ -702,11 +693,11 @@ public class MainWindowController {
                 // Add listeners to money and credits.
                 int playerNumber = i;
                 logic.getPlayers().get(i).getMoneyProperty().addListener((observableValue, oldValue, newValue) ->
-                                setPlayerMoney(playerNumber + 1, (Integer) newValue));
+                        setPlayerMoney(playerNumber + 1, (Integer) newValue));
                 logic.getPlayers().get(i).getCreditsProperty().addListener((observableValue, oldValue, newValue) ->
-                                setPlayerCredits(playerNumber + 1, (Integer) newValue));
+                        setPlayerCredits(playerNumber + 1, (Integer) newValue));
                 logic.getPlayers().get(i).getPositionProperty().addListener((observableValue, oldValue, newValue) ->
-                                movePlayer(logic.getPlayers().get(playerNumber).getName(), (Integer) newValue));
+                        movePlayer(logic.getPlayers().get(playerNumber).getName(), (Integer) newValue));
 
 
                 // Move players to first field TODO: Replace with listener

@@ -16,6 +16,10 @@ public class Logic {
     private GameField.JobGameField jobGameField;
     private ArrayList<Player> players = new ArrayList<>();
 
+    public Logic(GameBoard gameBoard) {
+        this.gameBoard = gameBoard;
+    }
+
     public ArrayList<Player> getPlayers() {
         return players;
     }
