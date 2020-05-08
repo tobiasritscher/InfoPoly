@@ -3,7 +3,10 @@ package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Random;
 
 public class GameField {
 
@@ -199,10 +202,9 @@ public class GameField {
             generateEvent();
         }
 
-        public ChanceGameField generateEvent() {
+        public void generateEvent() {
             int eventId = random.nextInt(ChanceEvent.values().length - 1);
             event = ChanceEvent.values()[eventId];
-            return null;
         }
 
         public String getMessage() {
