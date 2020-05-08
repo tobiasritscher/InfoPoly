@@ -615,7 +615,7 @@ public class MainWindowController {
          */
 
         /*
-        logic.movePlayer(diceRoll);
+        logic.move(diceRoll);
         logic.nextPlayer(logic.getPlayers());
         */
 
@@ -627,7 +627,7 @@ public class MainWindowController {
          */
 
         /*
-        movePlayer(logic.getPlayersTurn().getName(), diceRoll);
+        move(logic.getPlayersTurn().getName(), diceRoll);
         ChanceGameField.ChanceEvent chanceEvent = chanceGameField.getChanceEvent();
         new InformationalWindow(chanceEvent.getMessage());
         int newMoney = logic.getPlayersTurn().getMoney() + chanceGameField.getChanceEvent().getMoneyDeviation();
