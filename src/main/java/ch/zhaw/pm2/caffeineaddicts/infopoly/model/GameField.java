@@ -199,9 +199,10 @@ public class GameField {
             generateEvent();
         }
 
-        public void generateEvent() {
+        public ChanceGameField generateEvent() {
             int eventId = random.nextInt(ChanceEvent.values().length - 1);
             event = ChanceEvent.values()[eventId];
+            return null;
         }
 
         public String getMessage() {

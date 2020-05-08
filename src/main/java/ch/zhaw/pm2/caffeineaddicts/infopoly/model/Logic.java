@@ -143,7 +143,7 @@ public class Logic {
     }
 
     private void getChance() {
-        GameField.ChanceGameField.ChanceEvent chanceEvent = chanceGameField.getChanceEvent();
+        GameField.ChanceGameField chanceEvent =  chanceGameField.generateEvent();
         new InformationalWindow(chanceEvent.getMessage());
         if (players.get(currentPlayer.getValue()).getMoney() + chanceEvent.getMoneyDeviation() < 0) {
             waitForScholarship();
