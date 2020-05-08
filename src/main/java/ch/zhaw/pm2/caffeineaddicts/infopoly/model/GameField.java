@@ -3,7 +3,10 @@ package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 
 public class GameField {
 
@@ -44,6 +47,9 @@ public class GameField {
         return Objects.hash(fieldId, fieldType, fieldName);
     }
 
+    /**
+     * Representation of {@link Config.FieldType#MODULE}
+     */
     public static class ModuleGameField extends GameField {
         private final int fieldPrice;
         private final int fieldMoneyCharge;
@@ -90,6 +96,9 @@ public class GameField {
         }
     }
 
+    /**
+     * Represents {@link Config.FieldType#STARTUP}.
+     */
     public static class StartupGameField {
         private final int moneyNeeded;
         private final int moneyPayout;
@@ -106,10 +115,10 @@ public class GameField {
         }
 
         /**
-         * Note: before calling call @{@link StartupGameField#isLaunched()}
+         * Note: before calling call {@link StartupGameField#isLaunched()}.
          * Will throw exception if not launched.
          *
-         * @return
+         * @return player id
          */
         public int getFounderId() {
             if (!isLaunched()) {
@@ -141,13 +150,160 @@ public class GameField {
         }
     }
 
-    public class JobGameField {
+    public static class FeeGameField extends GameField {
+        private final int baseFee;
+        private final FeeType feeType;
+        private final Random random = new Random();
+        private final int RATE = 3;
+
+        public FeeGameField(int fieldId, Config.FieldType fieldType, String fieldName, FeeType feeType, int baseFee) {
+            super(fieldId, fieldType, fieldName);
+            this.feeType = feeType;
+            this.baseFee = baseFee;
+        }
+
+        public FeeType getFeeType() {
+            return feeType;
+        }
+
+        public int getFee() {
+            int value = baseFee;
+            if (feeType.equals(FeeType.RANDOM)) {
+                value += random.nextInt(RATE) * baseFee;
+            }
+            return value;
+        }
+
+        public enum FeeType {
+            /**
+             * Money will be charged at fixed rate.
+             */
+            FIXED,
+            /**
+             * Random amount of money will be charged.
+             */
+            RANDOM,
+            /**
+             * Fixed amount of money will be charged in return of some credits; Money go to the bank;
+             */
+            BANK_CREDIT
+        }
+    }
+
+    /**
+     * Represents @{@link Config.FieldType#CHANCE}.
+     */
+    public static class ChanceGameField extends GameField {
+        private final Random random = new Random();
+        private ChanceEvent event;
+
+        public ChanceGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
+            super(fieldId, fieldType, fieldName);
+            generateEvent();
+        }
+
+        public void generateEvent() {
+            int eventId = random.nextInt(ChanceEvent.values().length - 1);
+            event = ChanceEvent.values()[eventId];
+        }
+
+        public String getMessage() {
+            if (event == null) {
+                throw new RuntimeException("invalid operation: generate event first.");
+            }
+            return event.getMessage();
+        }
+
+        public int getCreditsDeviation() {
+            if (event == null) {
+                throw new RuntimeException("invalid operation: generate event first.");
+            }
+            return event.creditsDeviation;
+        }
+
+        public int getMoneyDeviation() {
+            if (event == null) {
+                throw new RuntimeException("invalid operation: generate event first.");
+            }
+            return event.moneyDeviation;
+        }
+
+        private enum ChanceEvent {
+            EVENT1("You got run over by a bus. The medical fees cost CHF 150.-",
+                    0, -150),
+            EVENT2(
+                    "You got caught with no ticket on a tram. You lose CHF 80.-",
+                    0, -80),
+            EVENT3(
+                    "You got caught surfing a nasty website on the ZHAW network. You lose 5 credits.",
+                    -5, 0),
+            EVENT4(
+                    "Your new game app went viral. You earn CHF 500.- from ad revenue",
+                    0, 500),
+            EVENT5(
+                    "Your new fitness app went viral. You earn CHF 700.- from ad revenue",
+                    0, 700),
+            EVENT6(
+                    "You win a programming contest. You get the prize money of CHF 1000.-",
+                    0, 1000),
+            EVENT7(
+                    "Your program code was stolen by hackers. You lose CHF 200.- and your hard work.",
+                    0, -200),
+            EVENT8(
+                    "Your new game app gained some traction, but you got sued because you used copyrighted assets. You lose CHF 900.-",
+                    0, -900),
+            EVENT9(
+                    "Even though you have exams tomorrow, you went to a party. You lose 2 credits and spent CHF 100.-",
+                    -2, -100),
+            EVENT10(
+                    "You overslept an exam. You lose 2 credits.",
+                    -10, -100),
+            EVENT11(
+                    "Since you study Information Technology, your relatives confuse you with a PC repairman. You earn CHF 50.- by fixing your grandmother's Internet Explorer.",
+                    0, 50);
+
+            private final String message;
+            private final int creditsDeviation;
+            private final int moneyDeviation;
+
+            /**
+             * Constructor of ChanceEvent inner class.
+             *
+             * @param message          The message of the chance field.
+             * @param creditsDeviation Addition/Reduction of credits
+             * @param moneyDeviation   Addition/Reduction of money
+             */
+            ChanceEvent(String message, int creditsDeviation, int moneyDeviation) {
+                this.message = message;
+                this.creditsDeviation = creditsDeviation;
+                this.moneyDeviation = moneyDeviation;
+            }
+
+            public String getMessage() {
+                return message;
+            }
+
+            public int getCreditsDeviation() {
+                return creditsDeviation;
+            }
+
+            public int getMoneyDeviation() {
+                return moneyDeviation;
+            }
+        }
+    }
+
+    /**
+     * Represents {@link Config.FieldType#JOB}.
+     */
+    public class JobGameField extends GameField {
         private final int baseWage;
         private final int wageIncreaseRate;
         private final IntegerProperty workerId = new SimpleIntegerProperty();
         private int numberTurnsWorked;
 
-        public JobGameField(int baseWage, int wageIncreaseRate) {
+        public JobGameField(int fieldId, Config.FieldType fieldType, String fieldName, int baseWage, int wageIncreaseRate) {
+            super(fieldId, fieldType, fieldName);
             this.baseWage = baseWage;
             this.wageIncreaseRate = wageIncreaseRate;
             workerId.set(-1);
@@ -166,7 +322,7 @@ public class GameField {
         }
 
         /**
-         * <p>Note: Call @{@link JobGameField#isWorker(int)} before invocation of the method. If the player no assigned exception will be thrown.</p>
+         * <p>Note: Call {@link JobGameField#isWorker(int)} before invocation of the method. If the player no assigned exception will be thrown.</p>
          *
          * @return payment for last turn
          */
@@ -182,7 +338,7 @@ public class GameField {
         }
 
         /**
-         * <p>Note: Must be called before each invocation of @{@link JobGameField#setWorker(int)}</p>
+         * <p>Note: Must be called before each invocation of {@link JobGameField#setWorker(int)}</p>
          *
          * @return true, if there is some worker assigned
          */
@@ -192,7 +348,7 @@ public class GameField {
 
         /**
          * <p>Note: If player was already assigned last round, causes the worker wage to be increase.</p>
-         * <p>Note: Call @{@link JobGameField#hasWorker()} before invocation of the method. If no worker assigned exception will be thrown.</p>
+         * <p>Note: Call {@link JobGameField#hasWorker()} before invocation of the method. If no worker assigned exception will be thrown.</p>
          *
          * @param playerId player to be assigned
          */
@@ -210,9 +366,9 @@ public class GameField {
         }
 
         /**
-         * After player moved to another field this function musst be called.
+         * After player moved to another field this function must be called.
          *
-         * <p>Note: Call @{@link JobGameField#hasWorker()} before invocation of the method. If no worker assigned exception will be thrown.</p>
+         * <p>Note: Call {@link JobGameField#hasWorker()} before invocation of the method. If no worker assigned exception will be thrown.</p>
          */
         public void removeWorker() {
             if (!hasWorker()) {
@@ -220,6 +376,152 @@ public class GameField {
             }
             workerId.set(-1);
             numberTurnsWorked = 0;
+        }
+    }
+
+    /**
+     * Representation of {@link Config.FieldType#EXAM}.
+     */
+    public class ExamGameField extends GameField {
+        private final int examSuccessChance;
+        private final int creditsPayout;
+        private final Random random = new Random();
+
+        /**
+         * @param examSuccessChance integer number between 0 and 100 inclusive
+         * @param creditsPayout     positive integer number
+         */
+        public ExamGameField(int fieldId, Config.FieldType fieldType, String fieldName, int examSuccessChance, int creditsPayout) {
+            super(fieldId, fieldType, fieldName);
+            int chance = Math.max(0, examSuccessChance);
+            chance = Math.min(chance, 100);
+            this.examSuccessChance = chance;
+            this.creditsPayout = Math.min(0, creditsPayout);
+        }
+
+        /**
+         * @return -1, if exam was not successful; positive integer, else;
+         */
+        public int exam() {
+            if (random.nextInt(examSuccessChance) == 0) {
+                return creditsPayout;
+            }
+            return -1;
+        }
+
+    }
+
+    /**
+     * Represents {@link Config.FieldType#REPETITION}.
+     */
+    public class RepetitionGameField extends GameField {
+        private final Map<Integer, Integer> students = new HashMap<>();
+        private final int numberRoundsToWait;
+
+
+        /**
+         * @param numberRoundsToWait positive integer number
+         */
+        public RepetitionGameField(int fieldId, Config.FieldType fieldType, String fieldName, int numberRoundsToWait) {
+            super(fieldId, fieldType, fieldName);
+            this.numberRoundsToWait = Math.min(0, numberRoundsToWait);
+        }
+
+        /**
+         * Will reduce the number of rounds to wait by one for each player waiting on the field.
+         */
+        public void countdownWaitingTime() {
+            students.replaceAll((k, v) -> Math.min(0, v - 1));
+        }
+
+        /**
+         * @param playerId player id
+         * @return true, if waiting time for the player if greater than zero.
+         */
+        public boolean isRepeating(int playerId) {
+            return students.containsKey(playerId) && (students.get(playerId) > 0);
+        }
+
+        /**
+         * <p>Note: Call {@link GameField.RepetitionGameField#isRepeating(int)} before the method invocation. Otherwise may throw exception.</p>
+         *
+         * @param playerId player id
+         */
+        public void addStudent(int playerId) {
+            if (students.containsKey(playerId) && !students.get(playerId).equals(0)) {
+                throw new RuntimeException("invalid operation: the player is already repeating");
+            }
+            students.put(playerId, numberRoundsToWait);
+        }
+
+        public void removeStudent(int playerId) {
+            if (!students.containsKey(playerId)) {
+                throw new RuntimeException("invalid operation: the player is not repeating");
+            }
+            students.remove(playerId);
+        }
+
+        /**
+         * @param playerId player id
+         * @return 0, if never repeated or after the countdown; positive integer number of round player has to wait;
+         */
+        public int getRoundsToWait(int playerId) {
+            if (!students.containsKey(playerId)) {
+                return 0;
+            }
+            return students.get(playerId);
+        }
+    }
+
+    /**
+     * Represents {@link Config.FieldType#START}.
+     */
+    public class StartGameField extends GameField {
+        private final Map<Integer, Integer> students = new HashMap<>();
+        private final int baseScholarship;
+
+        public StartGameField(int fieldId, Config.FieldType fieldType, String fieldName, int baseScholarship) {
+            super(fieldId, fieldType, fieldName);
+            this.baseScholarship = baseScholarship;
+        }
+
+        public void applyForScholarship(int playerId) {
+            if (students.containsKey(playerId) && !students.get(playerId).equals(0)) {
+                throw new RuntimeException("invalid operation: the player already applied for scholarship");
+            }
+            students.put(playerId, Config.Dice.rollDice());
+        }
+
+        /**
+         * @param playerId player id
+         * @return 0, if never repeated or after the countdown; positive integer number of round player has to wait;
+         */
+        public int getRoundsToWait(int playerId) {
+            if (!students.containsKey(playerId)) {
+                return 0;
+            }
+            return students.get(playerId);
+        }
+
+        public void removeStudent(int playerId) {
+            if (!students.containsKey(playerId)) {
+                throw new RuntimeException("invalid operation: the player is not waiting");
+            }
+            students.remove(playerId);
+        }
+
+
+        /**
+         * @param playerId player id
+         * @return positive integer, which is the sum of baseScholarShip + money from the interaction with @{@link Config.FieldType#MODULE}
+         */
+        public int getScholarship(int playerId) {
+            if (!students.containsKey(playerId)) {
+                throw new RuntimeException("invalid operation: the player never applied");
+            }
+            removeStudent(playerId);
+            //todo implement bank
+            return baseScholarship;
         }
     }
 }

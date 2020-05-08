@@ -5,6 +5,7 @@ import java.util.Random;
 public class Config {
     public static final int START_MONEY = 100;
     public static final int START_CREDITS = 0;
+    public static final int NUMBER_DICE_SIDES = 6;
     private static String fieldLayoutPath = "src\\main\\resources\\field-layout.txt";
 
     //clockwise
@@ -32,7 +33,7 @@ public class Config {
         /**
          * Field with random possibility to create some event.
          */
-        CHANCE("Chance"),
+        CHANCE("ChanceGameField"),
         /**
          * Field all players to start on.
          * <p>Players which have no possibility to pay will be moved here. Random waiting time will be applied in order to get money.</p>
@@ -42,15 +43,7 @@ public class Config {
         /**
          * A player will lose fixed amount of money on the field.
          */
-        FEE_TYPE_ONE("Fee"),
-        /**
-         * A player will lose fixed amount <i>money</i> an get some amount of <i>credits</i> on the field.
-         */
-        FEE_TYPE_TWO("Fee"),
-        /**
-         * A player will lose <i>random</i> amount of money.
-         */
-        FEE_TYPE_THREE("Fee"),
+        FEE("Fee"),
         /**
          * Field with randomly set waiting-timer for player on it.
          */
@@ -101,22 +94,20 @@ public class Config {
 
 
     /**
-     * Static Dice class. Due to the nature of how java.util.Random works, the class will have to be instanced and can't
-     * be fully static
+     * Logical representation of physical dice.
      *
      * @author Corroli
      */
     public static class Dice {
-        private final Random random = new Random();
-        private final int sides = 6;
+        private static final Random random = new Random();
 
         /**
          * Returns a dice value.
          *
-         * @return Random value between 1 and 6
+         * @return Random value between 1 and @{@link Config#NUMBER_DICE_SIDES}
          */
-        public int rollDice() {
-            return random.nextInt(sides) + 1;
+        public static int rollDice() {
+            return random.nextInt(NUMBER_DICE_SIDES) + 1;
         }
     }
 }

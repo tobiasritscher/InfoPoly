@@ -32,6 +32,9 @@ public class Player {
     }
 
 
+    public Player() {
+    }
+
     public int getPlayerNumber() {
         return playerNumber;
     }
@@ -40,23 +43,28 @@ public class Player {
         return position.get();
     }
 
-    public IntegerProperty positionProperty() {
-        return position;
-    }
-
     public void setPosition(int position) {
         this.position.set(position);
     }
 
-    public Player() {
+    public IntegerProperty positionProperty() {
+        return position;
     }
 
     public int getMoney() {
         return money.getValue();
     }
 
+    public void setMoney(int money) {
+        this.money.set(money);
+    }
+
     public int getCredits() {
         return credits.getValue();
+    }
+
+    public void setCredits(int credits) {
+        this.credits.set(credits);
     }
 
     public String getName() {
@@ -87,13 +95,23 @@ public class Player {
         isWaiting = false;
     }
 
-    public void setMoney(int money) { this.money.set(money);}
-
-    public void addMoney(int amount){
+    /**
+     * Add or charge money.
+     *
+     * @param amount positive or negative integer.
+     */
+    public void alterMoney(int amount) {
         money.set(money.getValue() + amount);
     }
 
-    public void setCredits(int credits) { this.credits.set(credits); }
+    /**
+     * Add or charge credits.
+     *
+     * @param credits positive or negative integer.
+     */
+    public void alterCredits(int credits) {
+        this.credits.set(this.credits.get() + credits);
+    }
 
     public boolean isBroke() {
         return isBroke;
@@ -110,7 +128,7 @@ public class Player {
         }
     }
 
-    public void movePlayer(int position){
+    public void move(int position) {
         int oldPosition = this.position.getValue();
         int newPosition = oldPosition + position;
         //TODO:
