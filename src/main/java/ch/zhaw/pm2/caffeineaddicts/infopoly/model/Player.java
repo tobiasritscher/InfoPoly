@@ -137,9 +137,9 @@ public class Player {
     }
 
     public void move(int position) {
-        int oldPosition = this.position.getValue();
-        int newPosition = oldPosition + position;
+        //int oldPosition = this.position.getValue();
+        //int newPosition = oldPosition + position;
         //TODO:
-        this.position.setValue(newPosition);
+        this.position.setValue(position);
     }
 }

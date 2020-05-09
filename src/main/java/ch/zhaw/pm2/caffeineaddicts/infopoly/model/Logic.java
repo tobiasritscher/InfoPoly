@@ -1,7 +1,6 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
-import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.MainWindowController;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.QuestionWindow;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -16,7 +15,6 @@ public class Logic {
     private int roundsWaiting;
     private StartupGameField startupGameField;
     private ArrayList<Player> players = new ArrayList<>();
-    private MainWindowController mainWindowController;
 
     public Logic(GameBoard gameBoard) {
         this.gameBoard = gameBoard;
@@ -50,21 +48,16 @@ public class Logic {
     }
 
     private int calculateNextFieldId(int currentFieldId, int numberFieldToMove) {
-        if (currentFieldId < 0 || currentFieldId > 40 || numberFieldToMove < 0 || numberFieldToMove > 12) {
-            throw new IllegalArgumentException("Something went wrong");
-        }
-        return (currentFieldId + numberFieldToMove) % gameBoard.getBoardSize();
+        return (currentFieldId + numberFieldToMove) % Config.BOARD_SIZE;
     }
 
     /**
      * @param rolledNumber the number between 0 and {@link Config inclusive
      */
     public void movePlayer(int rolledNumber) {
-        if (rolledNumber > 12 || rolledNumber < 0) {
-            throw new RuntimeException("invalid rolled number");
-        }
+
         int fieldId = calculateNextFieldId(getCurrentPlayer().getPosition(), rolledNumber);
-        //mainWindowController.movePlayer(getCurrentPlayer().getName(),fieldId);
+        getPlayersTurn().move(fieldId);
         makeAction(fieldId);
         nextPlayer(players);
     }
@@ -172,7 +165,6 @@ public class Logic {
     private void verifyCurrentPlayerHasMoney() {
         if (players.get(currentPlayer.getValue()).getMoney() <= 0) {
             new InformationalWindow("You are fucking broke mate. Next time you may want to sell you kidneys to get some money. For now wait for help");
-            mainWindowController.movePlayer(getCurrentPlayer().getName(),1);
             waitForScholarship();
         }
     }

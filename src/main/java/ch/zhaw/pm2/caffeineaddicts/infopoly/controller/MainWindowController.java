@@ -423,7 +423,9 @@ public class MainWindowController {
         setBoardVisibility(false);
 
         rollDiceLabel.setText("");
-
+        //Config.Dice.getFinalRoll().addListener((observableValue, oldValue, newValue) ->
+        //        updateRollDiceLabel(newValue);); TODO: Listener doesnt work!
+        
         setPlayerName(1, "");
         setPlayerName(2, "");
         setPlayerName(3, "");
@@ -626,40 +628,12 @@ public class MainWindowController {
      */
     public void rollDiceAction() {
         if(gameWasStarted){
-
-            Config.Dice.rollDice();
-
-        // TODO ADD CODE HERE to determine logic behavior.
-
-        /**
-         * Debug. TODO: example for moving players (doesn't work right now!). Delete dis once implemented
-         */
-
-        /*
-        logic.movePlayer(diceRoll);
-        logic.nextPlayer(logic.getPlayers());
-        */
-
-        // END ADD CODE HERE
+            Config.Dice.rollDice(logic);
 
         } else {
             newGameAction();
             gameWasStarted = true;
         }
-
-        /**
-         * Debug. TODO: example for chance dialog and action. Delete dis once implemented
-         */
-
-        /*
-        movePlayer(logic.getPlayersTurn().getName(), diceRoll);
-        Chance.ChanceEvent chanceEvent = chance.getChanceEvent();
-        new InformationalWindow(chanceEvent.getMessage());
-        int newMoney = logic.getPlayersTurn().getMoney() + chance.getChanceEvent().getMoneyDeviation();
-        int newCredits = logic.getPlayersTurn().getCredits() + chance.getChanceEvent().getCreditsDeviation();
-        logic.getPlayersTurn().setMoney(newMoney);
-        logic.getPlayersTurn().setCredits(newCredits);
-         */
     }
 
     /**
