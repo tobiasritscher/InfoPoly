@@ -318,7 +318,7 @@ public class MainWindowController {
     @FXML
     public Label currentPlayerLabel;
     @FXML
-    public Label rollDiceOutput;
+    public static Label rollDiceOutput;
     @FXML
     public Label rollDiceLabel;
     @FXML
@@ -598,7 +598,7 @@ public class MainWindowController {
      *
      * @param rolledNumber rolled number, retrieved from model.
      */
-    public void updateRollDiceLabel(int rolledNumber) {
+    public static void updateRollDiceLabel(int rolledNumber) {
 
         rollDiceOutput.setText(String.valueOf(rolledNumber));
     }
@@ -607,8 +607,7 @@ public class MainWindowController {
      * Tells the model to roll the dice via button action.
      */
     public void rollDiceAction() {
-        int diceRoll = Config.Dice.rollDice();
-        updateRollDiceLabel(diceRoll);
+        Config.Dice.rollDice();
 
         // TODO ADD CODE HERE to determine logic behavior.
 

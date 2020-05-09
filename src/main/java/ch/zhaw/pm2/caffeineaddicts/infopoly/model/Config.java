@@ -1,10 +1,17 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
+import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.MainWindowController;
+
 import java.util.Random;
 
 public class Config {
     public static final int START_MONEY = 100;
     public static final int START_CREDITS = 0;
+    public static final int MINIMUM_CREDITS = 4;
+    public static final int MEDIUM_CREDITS = 8;
+    public static final int MANY_CREDITS = 12;
+
     private static String fieldLayoutPath = "src\\main\\resources\\field-layout.txt";
     private static Logic logic;
 
@@ -102,28 +109,37 @@ public class Config {
         private static final Random random = new Random();
 
         /**
-         * Returns a dice value.
-         *
-         * @return Random value between 1 and @{@link Config}
+         * rolls two dices and moves the current player
+         * if the player has three doubles, he has to repeate.
          */
-        public static int rollDice() {
-            boolean again = false;
+        public static void rollDice() {
+            boolean again;
             int counter = 0;
             int firstDice;
             int secondDice;
+
             do {
-                 firstDice = random.nextInt(7);
-                 secondDice = random.nextInt(7);
+                firstDice = random.nextInt(6) + 1;
+                secondDice = random.nextInt(6) + 1;
+                int rolledNumber = firstDice + secondDice;
+
                 if (firstDice == secondDice) {
+                    new InformationalWindow("You rolled a double! YAY\nYou can move again.");
                     again = true;
-                    counter+=1;
-                }
-                if(counter == 3){
+                    ++counter;
+                } else {
                     again = false;
-                    logic.makeAction(11);
                 }
-            }while (again);
-            return firstDice + secondDice;
+
+                if (counter == 3) {
+                    new InformationalWindow("You rolled three times doubles, you have to repeate this semester.");
+                    logic.makeAction(11);
+                } else {
+                    logic.movePlayer(rolledNumber);
+                    MainWindowController.updateRollDiceLabel(rolledNumber);
+                }
+
+            } while (again);
         }
     }
 }

@@ -489,7 +489,8 @@ public class GameField {
             if (students.containsKey(playerId) && !students.get(playerId).equals(0)) {
                 throw new RuntimeException("invalid operation: the player already applied for scholarship");
             }
-            students.put(playerId, Config.Dice.rollDice());
+            //students.put(playerId, Config.Dice.rollDice());
+            //TODO: chume chume nöd drus, chume chume nöd drus?????
         }
 
         /**
