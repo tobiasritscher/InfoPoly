@@ -1,7 +1,6 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.controller;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config;
-import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameBoard;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Logic;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
 import javafx.application.Platform;
@@ -34,11 +33,6 @@ public class MainWindowController {
      * Game logic instance
      */
     private Logic logic;
-
-    /**
-     * Game board instance
-     */
-    private GameBoard gameBoard;
 
     /**
      * All fields in the game. Can be formatted to our liking.
@@ -340,10 +334,6 @@ public class MainWindowController {
     public Button rollDiceButton;
 
     /**
-     * Game logic instance
-     */
-    private Logic logic;
-    /**
      * ArrayList for all fields on the board.
      */
     private ArrayList<BorderPane> fields;
@@ -419,17 +409,14 @@ public class MainWindowController {
      * can start a new game while the application is running.
      */
     public void initializeGame() {
-        gameBoard = new GameBoard();
-        logic = new Logic(gameBoard);
+        logic = new Logic();
 
         fieldLabels.forEach((fieldLabel) -> fieldLabel.setText(""));
         fieldColors.forEach((fieldColor) -> fieldColor.setStyle("-fx-background-color: " + Config.PlayerColor.UNOCCUPIED.getColorValue()));
         setBoardVisibility(false);
 
-        rollDiceLabel.setText("");
-        //Config.Dice.getFinalRoll().addListener((observableValue, oldValue, newValue) ->
-        //        updateRollDiceLabel(newValue);); TODO: Listener doesnt work!
-        
+        rollDiceOutput.setText("");
+
         setPlayerName(1, "");
         setPlayerName(2, "");
         setPlayerName(3, "");
@@ -622,7 +609,7 @@ public class MainWindowController {
      *
      * @param rolledNumber rolled number, retrieved from model.
      */
-    public void updateRollDiceLabel(int rolledNumber) {
+    public void updateRollDiceOutput(int rolledNumber) {
 
         rollDiceOutput.setText(String.valueOf(rolledNumber));
     }
@@ -631,7 +618,7 @@ public class MainWindowController {
      * Tells the model to roll the dice via button action.
      */
     public void rollDiceAction() {
-        if(gameWasStarted){
+        if (gameWasStarted) {
             Config.Dice.rollDice(logic);
 
         } else {
@@ -658,12 +645,16 @@ public class MainWindowController {
         // Listener for current player
         logic.getPlayerTurnProperty().addListener((observableValue, oldValue, newValue) ->
                 updateCurrentPlayer(logic.getPlayers().get(newValue.intValue()).getName()));
+
+        // Listener for dice
+        Config.Dice.getFinalRollProperty().addListener((observableValue, oldValue, newValue) ->
+                updateRollDiceOutput(newValue.intValue()));
     }
 
     private void addPlayers() {
         // Resetting logic and game board
         logic = new Logic();
-      
+
         // Preparing player entry windows
         PlayerEntryWindow entry = null;
 
@@ -697,11 +688,11 @@ public class MainWindowController {
                     // Add listeners to money and credits.
                     int playerNumber = i;
                     logic.getPlayers().get(i).getMoneyProperty().addListener((observableValue, oldValue, newValue) ->
-                                    setPlayerMoney(playerNumber + 1, (Integer) newValue));
+                            setPlayerMoney(playerNumber + 1, (Integer) newValue));
                     logic.getPlayers().get(i).getCreditsProperty().addListener((observableValue, oldValue, newValue) ->
-                                    setPlayerCredits(playerNumber + 1, (Integer) newValue));
+                            setPlayerCredits(playerNumber + 1, (Integer) newValue));
                     logic.getPlayers().get(i).getPositionProperty().addListener((observableValue, oldValue, newValue) ->
-                                    movePlayer(logic.getPlayers().get(playerNumber).getName(), (Integer) newValue));
+                            movePlayer(logic.getPlayers().get(playerNumber).getName(), (Integer) newValue));
 
 
                     // Move players to first field TODO: Replace with listener
@@ -738,7 +729,7 @@ public class MainWindowController {
      * @param visibility true for visible, false for invisible
      */
     public void setBoardVisibility(boolean visibility) {
-        if(visibility){
+        if (visibility) {
             rollDiceButton.setText("Roll Dice");
         } else {
             rollDiceButton.setText("Start Game");
@@ -747,19 +738,11 @@ public class MainWindowController {
         currentPlayerLabel.setVisible(visibility);
         currentPlayer.setVisible(visibility);
         rollDiceLabel.setVisible(visibility);
-        rollDiceLabel.setText("");
+        rollDiceOutput.setText("");
         fields.forEach((field) -> field.setVisible(visibility));
     }
 
     public void setNewGameConfirmationNeeded(Boolean newGameConfirmationNeeded) {
         this.newGameConfirmationNeeded = newGameConfirmationNeeded;
-    }
-
-    public GameBoard getGameBoard() {
-        return gameBoard;
-    }
-
-    public Logic getLogic() {
-        return logic;
     }
 }

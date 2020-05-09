@@ -108,10 +108,10 @@ public class Config {
      */
     public static class Dice {
         private static final Random random = new Random();
-        public static IntegerProperty finalRollProperty() {
-            return finalRoll;
-        }
 
+        /**
+         * IntegerProperty for final dice roll. Needed for UI
+         */
         private static IntegerProperty finalRoll = new SimpleIntegerProperty();
 
         /**
@@ -141,16 +141,14 @@ public class Config {
                     new InformationalWindow("You rolled three times doubles, you have to repeate this semester.");
                     logic.makeAction(11);
                 } else {
+                    finalRoll.setValue(rolledNumber);
                     logic.movePlayer(rolledNumber);
                 }
-
-                finalRoll.setValue(rolledNumber);
-
             } while (again);
         }
 
-        public static int getFinalRoll() {
-            return finalRoll.get();
+        public static IntegerProperty getFinalRollProperty() {
+            return finalRoll;
         }
     }
 }
