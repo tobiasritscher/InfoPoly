@@ -4,7 +4,6 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.QuestionWindow;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-
 import java.util.ArrayList;
 
 import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameField.*;
@@ -14,9 +13,7 @@ public class Logic {
     private final int startGameFieldId = 0;
     private GameBoard gameBoard;
     private int roundsWaiting;
-    private ChanceGameField chanceGameField;
     private StartupGameField startupGameField;
-    private GameField.JobGameField jobGameField;
     private ArrayList<Player> players = new ArrayList<>();
 
     public Logic(GameBoard gameBoard) {
@@ -51,25 +48,27 @@ public class Logic {
     }
 
     private int calculateNextFieldId(int currentFieldId, int numberFieldToMove) {
-        //todo check arguments if needed
+        if (currentFieldId < 0 || currentFieldId > 40 || numberFieldToMove < 0 || numberFieldToMove > 12) {
+            throw new IllegalArgumentException("Something went wrong");
+        }
         return (currentFieldId + numberFieldToMove) % gameBoard.getBoardSize();
     }
 
     /**
-     * @param rolledNumber the number between 0 and {@link Config#NUMBER_DICE_SIDES} inclusive
+     * @param rolledNumber the number between 0 and {@link Config inclusive
      */
     public void movePlayer(int rolledNumber) {
-        if (rolledNumber > Config.NUMBER_DICE_SIDES || rolledNumber < 0) {
+        if (rolledNumber > 12 || rolledNumber < 0) {
             throw new RuntimeException("invalid rolled number");
         }
         int fieldId = calculateNextFieldId(getCurrentPlayer().getPosition(), rolledNumber);
-        moveCurrentPlayer(fieldId);
+        makeAction(fieldId);
     }
 
     /**
      * @param fieldId positive zero based integer number, field id where current player to be moved to.
      */
-    private void moveCurrentPlayer(int fieldId) {
+    public void makeAction(int fieldId) {
         getCurrentPlayer().setPosition(fieldId);
         GameField gameField = gameBoard.getField(fieldId);
         switch (gameBoard.getFieldType(fieldId)) {
@@ -80,7 +79,7 @@ public class Logic {
                 startup();
                 break;
             case JOB:
-                job(fieldId);
+                job(gameField);
                 break;
             case CHANCE:
                 processCaseChance((ChanceGameField) gameField);
@@ -93,13 +92,17 @@ public class Logic {
             case FEE:
                 break;
             case REPETITION:
+                repeat(gameField);
                 break;
             case EXAM:
+                exam((GameField.ExamGameField) gameField);
                 break;
         }
     }
 
-    private void job(int fieldId) {
+    private void job(GameField gameField) {
+        boolean noBetterFix = false;
+        GameField.JobGameField jobGameField = (GameField.JobGameField) gameField;
         if (jobGameField.hasWorker()) {
             if (players.get(currentPlayer.getValue()).getPlayerNumber() == jobGameField.workerIdProperty().getValue()) {
             } else {
@@ -107,8 +110,16 @@ public class Logic {
                 players.get(currentPlayer.getValue()).alterMoney(-10);
                 players.get(jobGameField.workerIdProperty().getValue()).alterMoney(10);
             }
-
         } else {
+            if (players.get(currentPlayer.getValue()).isWorking()) {
+                QuestionWindow questionWindow = new QuestionWindow("Job Application", "You already have a job!\nWould you like to quit it?");
+                if (questionWindow.getAnswer()) {
+                    quitWork(jobGameField);
+                    noBetterFix = true;
+                }
+            }
+        }
+        if(noBetterFix) {
             QuestionWindow questionWindow = new QuestionWindow("Job Application", "Would you like to start working here?");
             if (questionWindow.getAnswer()) {
                 jobGameField.setWorker(players.get(currentPlayer.getValue()).getPlayerNumber());
@@ -117,6 +128,23 @@ public class Logic {
         }
     }
 
+    private void exam(GameField gamefield) {
+        new InformationalWindow("You are taking an exam, if you fail you have to repeat!");
+        Player player = getCurrentPlayer();
+        GameField.ExamGameField examGameField = (GameField.ExamGameField) gamefield;
+
+        if (examGameField.exam()) {
+            new InformationalWindow("You have passed your exam! YAY");
+            player.alterCredits(Config.MANY_CREDITS);
+        } else {
+            new InformationalWindow("You have failed, you need to repeat this semester!");
+            repeat(gamefield);
+        }
+    }
+
+    private void repeat(GameField gameField) {
+
+    }
 
     /**
      * Show message
@@ -137,15 +165,21 @@ public class Logic {
      * If current player has no money move to the @{@link Config.FieldType#START} field.
      */
     private void verifyCurrentPlayerHasMoney() {
-        new InformationalWindow("You are fucking broke mate. Next time you may want to sell you kidneys to get some money. For now wait for help");
-        movePlayer(startGameFieldId);
+        if (players.get(currentPlayer.getValue()).getMoney() <= 0) {
+            new InformationalWindow("You are fucking broke mate. Next time you may want to sell you kidneys to get some money. For now wait for help");
+            movePlayer(startGameFieldId);
+            waitForScholarship();
+        }
     }
 
     private void verifyCurrentPlayerIsWinner() {
-        //todo
+        if (players.get(currentPlayer.getValue()).getCredits() >= 180) {
+            new InformationalWindow("Congratulations! You just graduated from ZHAW! Now go and get a job in the real world!");
+
+        }
     }
 
-    private void quitWork() {
+    private void quitWork(GameField.JobGameField jobGameField) {
         if (jobGameField.isWorker(currentPlayer.getValue())) {
             QuestionWindow questionWindow = new QuestionWindow("Quit job", "Do you really want to quit your job?");
             if (questionWindow.getAnswer()) {
@@ -159,7 +193,7 @@ public class Logic {
             if (gameField.getFieldOwnerId() == players.get(currentPlayer.getValue()).getPlayerNumber()) {
             } else if (players.get(currentPlayer.getValue()).getMoney() < gameField.getFieldMoneyCharge()) {
                 players.get(currentPlayer.getValue()).setMoney(0);
-                waitForScholarship();
+                verifyCurrentPlayerHasMoney();
             } else {
                 players.get(currentPlayer.getValue()).setMoney(players.get(currentPlayer.getValue()).getMoney() - gameField.getFieldMoneyCharge());
                 players.get(gameField.getFieldOwnerId()).setMoney(gameField.getFieldMoneyCharge());

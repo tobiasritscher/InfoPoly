@@ -22,6 +22,7 @@ public class Player {
     private String name;
     private boolean isBroke = false;
     private boolean isWaiting = false;
+    private boolean isWorking = false;
 
     public Player(String name, int money, int credits, int playerNumber) {
         this.name = name;
@@ -31,6 +32,13 @@ public class Player {
         this.position.setValue(1);
     }
 
+    public boolean isWorking() {
+        return isWorking;
+    }
+
+    public void setWorking(boolean working) {
+        isWorking = working;
+    }
 
     public Player() {
     }
