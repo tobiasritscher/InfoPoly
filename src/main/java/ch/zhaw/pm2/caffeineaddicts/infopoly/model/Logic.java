@@ -11,13 +11,13 @@ import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameField.*;
 public class Logic {
     private static IntegerProperty currentPlayer = new SimpleIntegerProperty(0);
     private final int startGameFieldId = 0;
-    private GameBoard gameBoard;
+    private final GameBoard gameBoard;
     private int roundsWaiting;
     private StartupGameField startupGameField;
     private ArrayList<Player> players = new ArrayList<>();
 
-    public Logic(GameBoard gameBoard) {
-        this.gameBoard = gameBoard;
+    public Logic() {
+        gameBoard = new GameBoard();
     }
 
     public ArrayList<Player> getPlayers() {
@@ -32,12 +32,11 @@ public class Logic {
         return players.get(currentPlayer.getValue());
     }
 
-    public Player nextPlayer(ArrayList<Player> player) {
-        currentPlayer.setValue((1 + currentPlayer.get()) % players.size());
+    public void nextPlayer(ArrayList<Player> player) {
+        currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
         if (players.get(currentPlayer.get()).getIsWaiting()) {
-            currentPlayer.setValue((1 + currentPlayer.get()) % players.size());
+            currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
         }
-        return player.get(currentPlayer.getValue());
     }
 
     private Player getCurrentPlayer() {
