@@ -66,6 +66,7 @@ public class Logic {
         int fieldId = calculateNextFieldId(getCurrentPlayer().getPosition(), rolledNumber);
         mainWindowController.movePlayer(getCurrentPlayer().getName(),fieldId);
         makeAction(fieldId);
+        nextPlayer(players);
     }
 
     /**
@@ -105,10 +106,10 @@ public class Logic {
         boolean noBetterFix = false;
         GameField.JobGameField jobGameField = (GameField.JobGameField) gameField;
         if (jobGameField.hasWorker()) {
-            if (players.get(currentPlayer.getValue()).getPlayerNumber() == jobGameField.workerIdProperty().getValue()) {
+            if (getCurrentPlayer().getPlayerNumber() == jobGameField.workerIdProperty().getValue()) {
             } else {
                 new InformationalWindow("Thank you for shopping with us!");
-                players.get(currentPlayer.getValue()).alterMoney(-10);
+                getCurrentPlayer().alterMoney(-10);
                 players.get(jobGameField.workerIdProperty().getValue()).alterMoney(10);
                 verifyCurrentPlayerHasMoney();
             }
@@ -171,7 +172,7 @@ public class Logic {
     private void verifyCurrentPlayerHasMoney() {
         if (players.get(currentPlayer.getValue()).getMoney() <= 0) {
             new InformationalWindow("You are fucking broke mate. Next time you may want to sell you kidneys to get some money. For now wait for help");
-            //movePlayer(startGameFieldId); YOU CANT GIVE A FIELD NUMBER INSTEAD OF A DICE ROLL ==> CHECK THE METHOD BEFORE USING IT
+            mainWindowController.movePlayer(getCurrentPlayer().getName(),1);
             waitForScholarship();
         }
     }
@@ -187,6 +188,7 @@ public class Logic {
             QuestionWindow questionWindow = new QuestionWindow("Quit job", "Do you really want to quit your job?");
             if (questionWindow.getAnswer()) {
                 jobGameField.removeWorker();
+                new InformationalWindow("Done...you are now jobless");
             }
         }
     }
@@ -201,18 +203,20 @@ public class Logic {
                 players.get(currentPlayer.getValue()).setMoney(players.get(currentPlayer.getValue()).getMoney() - gameField.getFieldMoneyCharge());
                 players.get(gameField.getFieldOwnerId()).setMoney(gameField.getFieldMoneyCharge());
                 players.get(gameField.getFieldOwnerId()).setCredits(gameField.getCreditsGain());
+                verifyCurrentPlayerIsWinner();
             }
         } else {
             QuestionWindow questionWindow = new QuestionWindow("Buy course", "Would you like to buy this course");
             if (questionWindow.getAnswer()) {
                 players.get(currentPlayer.getValue()).setMoney(players.get(currentPlayer.getValue()).getMoney() - gameField.getFieldPrice());
                 gameField.setFieldOwner(players.get(currentPlayer.getValue()).getPlayerNumber());
+                verifyCurrentPlayerHasMoney();
             }
         }
     }
 
     private void startup() {
-        if (startupGameField.getFounderId() == players.get(currentPlayer.getValue()).getPlayerNumber()) {
+        if (startupGameField.getFounderId() == getCurrentPlayer().getPlayerNumber()) {
             new InformationalWindow("Your startup made quite the turnover this week! +200CHF");
             players.get(currentPlayer.getValue()).alterMoney(200);
         } else if (startupGameField.isLaunched()) {
@@ -223,7 +227,8 @@ public class Logic {
                     QuestionWindow questionWindow = new QuestionWindow("Startup Manager", "Would you like to create your first startup?");
                     if (questionWindow.getAnswer()) {
                         startupGameField.setFounderId(players.get(currentPlayer.getValue()).getPlayerNumber());
-                        players.get(currentPlayer.getValue()).setMoney(players.get(currentPlayer.getValue()).getMoney() - startupGameField.getMoneyNeeded());
+                        getCurrentPlayer().setMoney(getCurrentPlayer().getMoney() - startupGameField.getMoneyNeeded());
+                        verifyCurrentPlayerHasMoney();
                     } else {
                         new InformationalWindow("I guess not everyone is up to the challenge...");
                     }
@@ -244,7 +249,7 @@ public class Logic {
         new InformationalWindow("You ran out of money so now you will apply for a scholarship. That usually takes up to 3 Weeks");
         setRoundsWaiting(3);
         if (roundsWaiting == 0) {
-            players.get(currentPlayer.getValue()).setMoney(100);
+            getCurrentPlayer().setMoney(100);
         }
     }
 
