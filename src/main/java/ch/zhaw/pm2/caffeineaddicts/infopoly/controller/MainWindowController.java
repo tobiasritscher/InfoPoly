@@ -1,6 +1,9 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.controller;
 
-import ch.zhaw.pm2.caffeineaddicts.infopoly.model.*;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameBoard;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Logic;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -604,13 +607,12 @@ public class MainWindowController {
      * Tells the model to roll the dice via button action.
      */
     public void rollDiceAction() {
-        Config.Dice dice = new Config.Dice();
-        int diceRoll = dice.rollDice();
+        int diceRoll = Config.Dice.rollDice();
         updateRollDiceLabel(diceRoll);
 
         // TODO ADD CODE HERE to determine logic behavior.
 
-        /**
+        /*
          * Debug. TODO: example for moving players (doesn't work right now!). Delete dis once implemented
          */
 
@@ -622,7 +624,7 @@ public class MainWindowController {
         // END ADD CODE HERE
 
 
-        /**
+        /*
          * Debug. TODO: example for chanceGameField dialog and action. Delete dis once implemented
          */
 
