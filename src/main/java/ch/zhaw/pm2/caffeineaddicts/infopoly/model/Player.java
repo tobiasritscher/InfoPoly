@@ -3,6 +3,9 @@ package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
     /**
      * Numerical player number. Ranges between 1 to 4
@@ -23,6 +26,7 @@ public class Player {
     private boolean isBroke = false;
     private boolean isWaiting = false;
     private boolean isWorking = false;
+    private List<GameField> ownerShips;
 
     public Player(String name, int money, int credits, int playerNumber) {
         this.name = name;
@@ -30,6 +34,28 @@ public class Player {
         this.money.setValue(money);
         this.playerNumber = playerNumber;
         this.position.setValue(1);
+        ownerShips = new ArrayList<>();
+    }
+
+    public Player() {
+    }
+
+    public List<GameField> getOwnerShips() {
+        return ownerShips;
+    }
+
+    public void addOwnerShip(GameField field) {
+        ownerShips.add(field);
+    }
+
+    public void removeWork() {
+        for (GameField value: ownerShips) {
+            if (value.getFieldType().equals(Config.FieldType.JOB)) {
+                value.resetOwner();
+                ownerShips.remove(value);
+                return;
+            }
+        }
     }
 
     public boolean isWorking() {
@@ -38,9 +64,6 @@ public class Player {
 
     public void setWorking(boolean working) {
         isWorking = working;
-    }
-
-    public Player() {
     }
 
     public int getPlayerNumber() {

@@ -323,14 +323,11 @@ public class MainWindowController {
     public Label rollDiceLabel;
     @FXML
     public Button rollDiceButton;
-    /**
-     * Game board instance
-     */
-    private GameBoard gameBoard = new GameBoard();
+
     /**
      * Game logic instance
      */
-    private Logic logic = new Logic(gameBoard);
+    private Logic logic;
     /**
      * ArrayList for all fields on the board.
      */
@@ -661,8 +658,7 @@ public class MainWindowController {
     private void addPlayers() {
         // Resetting logic and game board
 
-        gameBoard = new GameBoard();
-        logic = new Logic(gameBoard);
+        logic = new Logic();
 
         // Preparing player entry windows
         PlayerEntryWindow entry = null;

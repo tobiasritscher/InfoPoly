@@ -104,7 +104,11 @@ public class GameBoard {
                     }
                     sc.nextLine().strip();
                 }
-                board.add(new GameField(fieldId, fieldType, fieldName));
+
+
+                //TODO: add all fields with the right subclas
+                //board.add(new GameField.StartupGameField(fieldId, fieldType, fieldName, 10, 10));
+
             }
         } catch (FileNotFoundException e) {
             System.out.println("file not found: " + e.getMessage());
