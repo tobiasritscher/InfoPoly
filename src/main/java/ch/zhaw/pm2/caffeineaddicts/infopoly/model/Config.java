@@ -5,8 +5,8 @@ import java.util.Random;
 public class Config {
     public static final int START_MONEY = 100;
     public static final int START_CREDITS = 0;
-    public static final int NUMBER_DICE_SIDES = 6;
     private static String fieldLayoutPath = "src\\main\\resources\\field-layout.txt";
+    private static Logic logic;
 
     //clockwise
     public static String getFieldLayoutPath() {
@@ -104,10 +104,26 @@ public class Config {
         /**
          * Returns a dice value.
          *
-         * @return Random value between 1 and @{@link Config#NUMBER_DICE_SIDES}
+         * @return Random value between 1 and @{@link Config}
          */
         public static int rollDice() {
-            return random.nextInt(NUMBER_DICE_SIDES) + 1;
+            boolean again = false;
+            int counter = 0;
+            int firstDice;
+            int secondDice;
+            do {
+                 firstDice = random.nextInt(7);
+                 secondDice = random.nextInt(7);
+                if (firstDice == secondDice) {
+                    again = true;
+                    counter+=1;
+                }
+                if(counter == 3){
+                    again = false;
+                    logic.moveCurrentPlayer(11);
+                }
+            }while (again);
+            return firstDice + secondDice;
         }
     }
 }

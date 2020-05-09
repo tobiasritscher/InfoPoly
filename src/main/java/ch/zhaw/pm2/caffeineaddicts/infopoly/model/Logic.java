@@ -58,10 +58,10 @@ public class Logic {
     }
 
     /**
-     * @param rolledNumber the number between 0 and {@link Config#NUMBER_DICE_SIDES} inclusive
+     * @param rolledNumber the number between 0 and {@link Config inclusive
      */
     public void movePlayer(int rolledNumber) {
-        if (rolledNumber > Config.NUMBER_DICE_SIDES || rolledNumber < 0) {
+        if (rolledNumber > 12 || rolledNumber < 0) {
             throw new RuntimeException("invalid rolled number");
         }
         int fieldId = calculateNextFieldId(getCurrentPlayer().getPosition(), rolledNumber);
@@ -71,7 +71,7 @@ public class Logic {
     /**
      * @param fieldId positive zero based integer number, field id where current player to be moved to.
      */
-    private void moveCurrentPlayer(int fieldId) {
+    public void moveCurrentPlayer(int fieldId) {
         getCurrentPlayer().setPosition(fieldId);
         GameField gameField = gameBoard.getField(fieldId);
         switch (gameBoard.getFieldType(fieldId)) {
@@ -139,9 +139,11 @@ public class Logic {
      * If current player has no money move to the @{@link Config.FieldType#START} field.
      */
     private void verifyCurrentPlayerHasMoney() {
-        new InformationalWindow("You are fucking broke mate. Next time you may want to sell you kidneys to get some money. For now wait for help");
-        movePlayer(startGameFieldId);
-        waitForScholarship();
+        if(players.get(currentPlayer.getValue()).getMoney() <= 0) {
+            new InformationalWindow("You are fucking broke mate. Next time you may want to sell you kidneys to get some money. For now wait for help");
+            movePlayer(startGameFieldId);
+            waitForScholarship();
+        }
     }
 
     private void verifyCurrentPlayerIsWinner() {
@@ -165,7 +167,7 @@ public class Logic {
             if (gameField.getFieldOwnerId() == players.get(currentPlayer.getValue()).getPlayerNumber()) {
             } else if (players.get(currentPlayer.getValue()).getMoney() < gameField.getFieldMoneyCharge()) {
                 players.get(currentPlayer.getValue()).setMoney(0);
-                waitForScholarship();
+                verifyCurrentPlayerHasMoney();
             } else {
                 players.get(currentPlayer.getValue()).setMoney(players.get(currentPlayer.getValue()).getMoney() - gameField.getFieldMoneyCharge());
                 players.get(gameField.getFieldOwnerId()).setMoney(gameField.getFieldMoneyCharge());
