@@ -171,7 +171,7 @@ public class Logic {
     private void verifyCurrentPlayerHasMoney() {
         if (players.get(currentPlayer.getValue()).getMoney() <= 0) {
             new InformationalWindow("You are fucking broke mate. Next time you may want to sell you kidneys to get some money. For now wait for help");
-            //movePlayer(startGameFieldId); YOU CANT GIVE A FIELD NUMBER INSTEAD OF A DICE ROLL ==> CHECK THE METHOD BEFORE USING IT
+            mainWindowController.movePlayer(getCurrentPlayer().getName(),1);
             waitForScholarship();
         }
     }
@@ -187,6 +187,7 @@ public class Logic {
             QuestionWindow questionWindow = new QuestionWindow("Quit job", "Do you really want to quit your job?");
             if (questionWindow.getAnswer()) {
                 jobGameField.removeWorker();
+                new InformationalWindow("Done...you are now jobless");
             }
         }
     }
