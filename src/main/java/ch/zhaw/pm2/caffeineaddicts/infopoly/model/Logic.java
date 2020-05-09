@@ -51,7 +51,9 @@ public class Logic {
     }
 
     private int calculateNextFieldId(int currentFieldId, int numberFieldToMove) {
-        //todo check arguments if needed
+        if(currentFieldId < 0 || currentFieldId > 40 || numberFieldToMove < 0 || numberFieldToMove > 12){
+            throw new IllegalArgumentException("Something went wrong");
+        }
         return (currentFieldId + numberFieldToMove) % gameBoard.getBoardSize();
     }
 
@@ -139,10 +141,14 @@ public class Logic {
     private void verifyCurrentPlayerHasMoney() {
         new InformationalWindow("You are fucking broke mate. Next time you may want to sell you kidneys to get some money. For now wait for help");
         movePlayer(startGameFieldId);
+        waitForScholarship();
     }
 
     private void verifyCurrentPlayerIsWinner() {
-        //todo
+        if(players.get(currentPlayer.getValue()).getCredits() >= 180){
+            new InformationalWindow("Congratulations! You just graduated from ZHAW! Now go and get a job in the real world!");
+
+        }
     }
 
     private void quitWork() {
