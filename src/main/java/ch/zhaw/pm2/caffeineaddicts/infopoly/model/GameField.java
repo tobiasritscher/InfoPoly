@@ -1,5 +1,7 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
+import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.QuestionWindow;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -8,11 +10,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
-public class GameField {
-
+public abstract class GameField {
     private final int fieldId;
     private final Config.FieldType fieldType;
     private final String fieldName;
+    private Player owner = null;
 
     public GameField(int fieldId, Config.FieldType fieldType, String fieldName) {
         this.fieldId = fieldId;
@@ -24,6 +26,22 @@ public class GameField {
         return fieldType;
     }
 
+    public Player getOwner() {
+        return owner;
+    }
+
+    public boolean hasOwner() {
+        return owner != null;
+    }
+
+    public void setOwner(Player owner) {
+        this.owner = owner;
+    }
+
+    public void resetOwner() {
+        owner = null;
+    }
+
     public String getFieldName() {
         return fieldName;
     }
@@ -31,6 +49,8 @@ public class GameField {
     public int getFieldId() {
         return fieldId;
     }
+
+    public abstract void action(Player currentPlayer);
 
     @Override
     public boolean equals(Object o) {
@@ -47,44 +67,24 @@ public class GameField {
         return Objects.hash(fieldId, fieldType, fieldName);
     }
 
+
     /**
      * Representation of {@link Config.FieldType#MODULE}
      */
-    public static class ModuleGameField extends GameField {
+    public class ModuleGameField extends GameField {
         private final int fieldPrice;
         private final int fieldMoneyCharge;
         private final int creditsGain;
-        private final IntegerProperty fieldOwnerId = new SimpleIntegerProperty();
 
         public ModuleGameField(int fieldId, Config.FieldType fieldType, String fieldName, int fieldPrice, int fieldMoneyCharge, int creditsGain) {
             super(fieldId, fieldType, fieldName);
             this.fieldPrice = fieldPrice;
             this.fieldMoneyCharge = fieldMoneyCharge;
             this.creditsGain = creditsGain;
-            this.fieldOwnerId.set(-1);
         }
 
         public int getFieldMoneyCharge() {
             return fieldMoneyCharge;
-        }
-
-        public boolean fieldHasOwner() {
-            return fieldOwnerId.get() != -1;
-        }
-
-        public int getFieldOwnerId() {
-            return fieldOwnerId.get();
-        }
-
-        public IntegerProperty fieldOwnerIdProperty() {
-            return fieldOwnerId;
-        }
-
-        public void setFieldOwner(int fieldOwnerId) {
-            if (fieldHasOwner()) {
-                throw new RuntimeException("invalid operation: the field already has owner");
-            }
-            this.fieldOwnerId.set(fieldOwnerId);
         }
 
         public int getFieldPrice() {
@@ -94,17 +94,47 @@ public class GameField {
         public int getCreditsGain() {
             return creditsGain;
         }
+
+        @Override
+        public void action(Player currentPlayer) {
+
+            if (hasOwner()) {
+                if (owner.equals(currentPlayer)) {
+                    new InformationalWindow("You allredy own this field");
+
+                } else if (currentPlayer.getMoney() < getFieldMoneyCharge()) {
+                    owner.setMoney(currentPlayer.getMoney());
+                    owner.setCredits(getCreditsGain());
+                    currentPlayer.setMoney(0);
+                } else {
+                    currentPlayer.setMoney(currentPlayer.getMoney() - getFieldMoneyCharge());
+                    owner.setMoney(getFieldMoneyCharge());
+                    owner.setCredits(getCreditsGain());
+                }
+            } else {
+                if (currentPlayer.getMoney() >= getFieldPrice()) {
+                    QuestionWindow questionWindow = new QuestionWindow("Buy course", "Would you like to buy this course");
+                    if (questionWindow.getAnswer()) {
+                        currentPlayer.setMoney(currentPlayer.getMoney() - getFieldPrice());
+                        owner = currentPlayer;
+                    }
+                } else {
+                    new InformationalWindow("You are to poor to buy this field. Get a job!");
+                }
+            }
+        }
     }
 
     /**
      * Represents {@link Config.FieldType#STARTUP}.
      */
-    public static class StartupGameField {
+    public class StartupGameField extends GameField {
         private final int moneyNeeded;
         private final int moneyPayout;
-        private final IntegerProperty founderId = new SimpleIntegerProperty();
+        private final IntegerProperty founderId = new SimpleIntegerProperty(); //TODO: for what????
 
-        public StartupGameField(int moneyNeeded, int moneyPayout) {
+        public StartupGameField(int fieldId, Config.FieldType fieldType, String fieldName, int moneyNeeded, int moneyPayout) {
+            super(fieldId, fieldType, fieldName);
             this.moneyNeeded = moneyNeeded;
             this.moneyPayout = moneyPayout;
             this.founderId.set(-1);
@@ -148,6 +178,36 @@ public class GameField {
         public IntegerProperty founderIdProperty() {
             return founderId;
         }
+
+        @Override
+        public void action(Player currentPlayer) {
+            final int NEEDED_AMOUNT_CREDITS = 100;
+
+            if (owner.equals(currentPlayer)) {
+                if (isLaunched()) {
+                    new InformationalWindow("Startup is already created with your Idea...had to be fast!");
+                } else {
+                    new InformationalWindow("Your startup made quite the turnover this week! +200CHF");
+                    currentPlayer.alterMoney(200);
+                }
+            } else {
+                if (currentPlayer.getCredits() >= NEEDED_AMOUNT_CREDITS) {
+                    if (currentPlayer.getMoney() >= getMoneyNeeded()) {
+                        QuestionWindow questionWindow = new QuestionWindow("Startup Manager", "Would you like to create your first startup?");
+                        if (questionWindow.getAnswer()) {
+                            owner = currentPlayer;
+                            currentPlayer.setMoney(currentPlayer.getMoney() - getMoneyNeeded());
+                        } else {
+                            new InformationalWindow("I guess not everyone is up to the challenge...");
+                        }
+                    } else {
+                        new InformationalWindow("You require: " + getMoneyNeeded() + " in order to start your first Startup");
+                    }
+                } else {
+                    new InformationalWindow("A successful startup requires the needed knowledge...(" + NEEDED_AMOUNT_CREDITS + " Credits)");
+                }
+            }
+        }
     }
 
     public static class FeeGameField extends GameField {
@@ -172,6 +232,11 @@ public class GameField {
                 value += random.nextInt(RATE) * baseFee;
             }
             return value;
+        }
+
+        @Override
+        public void action(Player currentPlayer) {
+            //TODO
         }
 
         public enum FeeType {
@@ -200,6 +265,21 @@ public class GameField {
         public ChanceGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
             super(fieldId, fieldType, fieldName);
             generateEvent();
+        }
+
+        /**
+         * Show message
+         * Note: player may be broke or may win after the method was processed. Make sure in the caller function to consider the cases;
+         *
+         * @param currentPlayer the player who is standing on the field
+         */
+        @Override
+        public void action(Player currentPlayer) {
+            generateEvent();
+            //todo just idea >> could be used listeners instead.
+            new InformationalWindow(getMessage());
+            currentPlayer.alterMoney(getMoneyDeviation());
+            currentPlayer.alterCredits(getCreditsDeviation());
         }
 
         public void generateEvent() {
@@ -297,85 +377,49 @@ public class GameField {
      * Represents {@link Config.FieldType#JOB}.
      */
     public class JobGameField extends GameField {
-        private final int baseWage;
-        private final int wageIncreaseRate;
-        private final IntegerProperty workerId = new SimpleIntegerProperty();
-        private int numberTurnsWorked;
+        private int baseWage;
 
-        public JobGameField(int fieldId, Config.FieldType fieldType, String fieldName, int baseWage, int wageIncreaseRate) {
+        public JobGameField(int fieldId, Config.FieldType fieldType, String fieldName, int baseWage) {
             super(fieldId, fieldType, fieldName);
             this.baseWage = baseWage;
-            this.wageIncreaseRate = wageIncreaseRate;
-            workerId.set(-1);
-            numberTurnsWorked = 0;
         }
 
-        public boolean isWorker(int playerId) {
-            if (playerId < 0) {
-                throw new IllegalArgumentException("invalid parameter: player index must be positive number");
+        private void quitWork(Player player) {
+            QuestionWindow questionWindow = new QuestionWindow("Quit job", "Do you really want to quit your job?");
+            if (questionWindow.getAnswer()) {
+                player.setWorking(false);
+                player.removeWork();
             }
-            return workerId.get() == playerId;
         }
 
-        public IntegerProperty workerIdProperty() {
-            return workerId;
-        }
+        @Override
+        public void action(Player currentPlayer) {
 
-        /**
-         * <p>Note: Call {@link JobGameField#isWorker(int)} before invocation of the method. If the player no assigned exception will be thrown.</p>
-         *
-         * @return payment for last turn
-         */
-        public int payWage(int playerId) {
-            if (!hasWorker()) {
-                throw new RuntimeException("invalid operation: no worker assigned yet.");
+            if (hasOwner()) {
+                if (currentPlayer.equals(owner)) {
+                    new InformationalWindow("You are already working here. You made an extra shift: +" + baseWage + "CHF");
+                    currentPlayer.alterMoney(baseWage);
+                } else {
+                    new InformationalWindow("Thank you for shopping with us!");
+                    currentPlayer.alterMoney(baseWage * -1);
+                    owner.alterMoney(baseWage);
+                }
+            } else {
+                if (currentPlayer.isWorking()) {
+                    QuestionWindow questionWindow = new QuestionWindow("Job Application " + fieldName + " (" + baseWage + "CHF)",
+                            "You already have a job!\nWould you like to quit it?");
+                    if (questionWindow.getAnswer()) {
+                        quitWork(currentPlayer);
+                    }
+                } else {
+                    QuestionWindow questionWindow = new QuestionWindow("Job Application " + fieldName + " (" + baseWage + "CHF)",
+                            "Would you like to start working here?");
+                    if (questionWindow.getAnswer()) {
+                        owner = currentPlayer;
+                        currentPlayer.setWorking(true);
+                    }
+                }
             }
-            if (!isWorker(playerId)) {
-                throw new RuntimeException("invalid operation: the player is not assigned for the work yet");
-            }
-            numberTurnsWorked++;
-            return baseWage + wageIncreaseRate * baseWage * (numberTurnsWorked - 1);
-        }
-
-        /**
-         * <p>Note: Must be called before each invocation of {@link JobGameField#setWorker(int)}</p>
-         *
-         * @return true, if there is some worker assigned
-         */
-        public boolean hasWorker() {
-            return workerId.get() != -1;
-        }
-
-        /**
-         * <p>Note: If player was already assigned last round, causes the worker wage to be increase.</p>
-         * <p>Note: Call {@link JobGameField#hasWorker()} before invocation of the method. If no worker assigned exception will be thrown.</p>
-         *
-         * @param playerId player to be assigned
-         */
-        public void setWorker(int playerId) {
-            if (hasWorker()) {
-                throw new RuntimeException("invalid operation: there is already some worker");
-            }
-            if (playerId < 0) {
-                throw new IllegalArgumentException("invalid parameter: playerId should be positive number");
-            }
-            if (isWorker(playerId)) {
-                numberTurnsWorked++;
-            }
-            workerId.set(playerId);
-        }
-
-        /**
-         * After player moved to another field this function must be called.
-         *
-         * <p>Note: Call {@link JobGameField#hasWorker()} before invocation of the method. If no worker assigned exception will be thrown.</p>
-         */
-        public void removeWorker() {
-            if (!hasWorker()) {
-                throw new RuntimeException("invalid operation: no worker assigned yet.");
-            }
-            workerId.set(-1);
-            numberTurnsWorked = 0;
         }
     }
 
@@ -385,18 +429,32 @@ public class GameField {
     public class ExamGameField extends GameField {
 
         /**
+         *
          */
-        public ExamGameField() {
-            super(31, Config.FieldType.EXAM, "Exam");
+        public ExamGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
+            super(fieldId, fieldType, fieldName);
         }
 
         /**
-         * @return -1, if exam was not successful; positive integer, else;
+         * @return if exam was passed
          */
-        public boolean exam() {
+        public boolean passed() {
             return new Random().nextBoolean();
         }
 
+        @Override
+        public void action(Player currentPlayer) {
+            new InformationalWindow("You are taking an exam, if you fail you have to repeat!");
+
+            if (passed()) {
+                new InformationalWindow("You have passed your exam! YAY");
+                currentPlayer.alterCredits(Config.MANY_CREDITS);
+            } else {
+                new InformationalWindow("You have failed, you need to repeat this semester!");
+                currentPlayer.setPosition(11);
+                //TODO repeating?
+            }
+        }
     }
 
     /**
@@ -459,6 +517,11 @@ public class GameField {
             }
             return students.get(playerId);
         }
+
+        @Override
+        public void action(Player currentPlayer) {
+            //TODO: repeating
+        }
     }
 
     /**
@@ -478,7 +541,7 @@ public class GameField {
                 throw new RuntimeException("invalid operation: the player already applied for scholarship");
             }
             //students.put(playerId, Config.Dice.rollDice());
-            //TODO: chume chume nöd drus, chume chume nöd drus?????
+            //TODO: chume chume nöd drus, chume chume nöd drus????? Was macht die Zeile obe?
         }
 
         /**
@@ -511,6 +574,12 @@ public class GameField {
             removeStudent(playerId);
             //todo implement bank
             return baseScholarship;
+        }
+
+        @Override
+        public void action(Player currentPlayer) {
+            currentPlayer.alterMoney(200);
+            //TODO: what is when walking over it?
         }
     }
 }

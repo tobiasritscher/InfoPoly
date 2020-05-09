@@ -340,6 +340,10 @@ public class MainWindowController {
     public Button rollDiceButton;
 
     /**
+     * Game logic instance
+     */
+    private Logic logic;
+    /**
      * ArrayList for all fields on the board.
      */
     private ArrayList<BorderPane> fields;
@@ -657,6 +661,9 @@ public class MainWindowController {
     }
 
     private void addPlayers() {
+        // Resetting logic and game board
+        logic = new Logic();
+      
         // Preparing player entry windows
         PlayerEntryWindow entry = null;
 
