@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.shape.*?>
@@ -105,7 +106,7 @@
                         </BorderPane>
                      </bottom>
                      <center>
-                        <Label text="START" BorderPane.alignment="CENTER">
+                        <Label fx:id="field01Label" text="START" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="11.0" />
                            </font>
@@ -147,7 +148,7 @@
                      <center>
                         <BorderPane BorderPane.alignment="CENTER">
                            <center>
-                              <Label text="Repeating semester" textFill="WHITE" BorderPane.alignment="CENTER">
+                              <Label fx:id="field11Label" text="Repeating semester" textFill="WHITE" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="11.0" />
                                  </font>
@@ -234,7 +235,7 @@
                            <center>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BF6D5F;" BorderPane.alignment="CENTER">
                                  <center>
-                                    <Label text="ZVV fees" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                    <Label fx:id="field20Label" text="ZVV fees" textFill="#ebebeb" BorderPane.alignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="11.0" />
                                        </font>
@@ -288,7 +289,7 @@
                      <center>
                         <BorderPane fx:id="field07Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
                            <center>
-                              <Label text="Software Project" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                              <Label fx:id="field07Label" text="Software Project" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
@@ -323,7 +324,7 @@
                      <center>
                         <BorderPane fx:id="field06Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
                            <center>
-                              <Label text="BarStucks" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                              <Label fx:id="field06Label" text="BarStucks" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
@@ -395,7 +396,7 @@
                            <center>
                               <BorderPane fx:id="field16Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
                                  <center>
-                                    <Label text="McBurger" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                    <Label fx:id="field16Label" text="McBurger" textFill="#ebebeb" BorderPane.alignment="CENTER">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
@@ -473,7 +474,7 @@
                            <center>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #094F95;" BorderPane.alignment="CENTER">
                                  <center>
-                                    <Label text="Chance" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                    <Label fx:id="field17Label" text="Chance" textFill="#ebebeb" BorderPane.alignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="11.0" />
                                        </font>
@@ -548,7 +549,7 @@
                         </BorderPane>
                      </bottom>
                      <center>
-                        <Label text="Chance" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                        <Label fx:id="field08Label" text="Chance" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="11.0" />
                            </font>
@@ -571,7 +572,7 @@
                         </BorderPane>
                      </bottom>
                      <center>
-                        <Label text="Semester tuition" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                        <Label fx:id="field05Label" text="Semester tuition" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="11.0" />
                            </font>
@@ -793,7 +794,7 @@
                            <center>
                               <BorderPane fx:id="field19Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
                                  <center>
-                                    <Label text="Web Development" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                    <Label fx:id="field19Label" text="Web Development" textFill="#ebebeb" BorderPane.alignment="CENTER">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
@@ -832,7 +833,7 @@
                            <center>
                               <BorderPane fx:id="field18Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
                                  <center>
-                                    <Label text="System Orientated Programming" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                    <Label fx:id="field18Label" text="System Orientated Programming" textFill="#ebebeb" BorderPane.alignment="CENTER">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
@@ -871,7 +872,7 @@
                            <center>
                               <BorderPane fx:id="field15Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
                                  <center>
-                                    <Label text="Communication Technology" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                    <Label fx:id="field15Label" text="Communication Technology" textFill="#ebebeb" BorderPane.alignment="CENTER">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
@@ -910,7 +911,7 @@
                            <center>
                               <BorderPane fx:id="field14Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
                                  <center>
-                                    <Label text="Linear Algebra" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                    <Label fx:id="field14Label" text="Linear Algebra" textFill="#ebebeb" BorderPane.alignment="CENTER">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
@@ -949,7 +950,7 @@
                            <center>
                               <BorderPane fx:id="field13Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
                                  <center>
-                                    <Label text="Communication Competence" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                    <Label fx:id="field13Label" text="Communication Competence" textFill="#ebebeb" BorderPane.alignment="CENTER">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
@@ -988,7 +989,7 @@
                            <center>
                               <BorderPane fx:id="field12Color" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
                                  <center>
-                                    <Label text="Databases" textFill="#ebebeb" BorderPane.alignment="CENTER">
+                                    <Label fx:id="field12Label" text="Databases" textFill="#ebebeb" BorderPane.alignment="CENTER">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
@@ -1235,7 +1236,7 @@
                      <center>
                         <BorderPane fx:id="field10Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
                            <center>
-                              <Label text="Analysis" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                              <Label fx:id="field10Label" text="Analysis" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
@@ -1270,7 +1271,7 @@
                      <center>
                         <BorderPane fx:id="field09Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
                            <center>
-                              <Label text="Electronics &amp; digital technology" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                              <Label fx:id="field09Label" text="Electronics &amp; digital technology" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
@@ -1305,7 +1306,7 @@
                      <center>
                         <BorderPane fx:id="field04Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
                            <center>
-                              <Label text="Information Theory &amp; Coding" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                              <Label fx:id="field04Label" text="Information Theory &amp; Coding" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
@@ -1340,7 +1341,7 @@
                      <center>
                         <BorderPane fx:id="field03Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
                            <center>
-                              <Label text="Discrete Mathematics" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                              <Label fx:id="field03Label" text="Discrete Mathematics" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
@@ -1375,7 +1376,7 @@
                      <center>
                         <BorderPane fx:id="field02Color" minHeight="-Infinity" prefHeight="14.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
                            <center>
-                              <Label text="Programming" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+                              <Label fx:id="field02Label" text="Programming" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
@@ -1408,7 +1409,7 @@
                         </BorderPane>
                      </bottom>
                      <center>
-                        <Label text="Startup" textFill="WHITE" BorderPane.alignment="CENTER">
+                        <Label fx:id="field21Label" text="Startup" textFill="WHITE" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="11.0" />
                            </font>

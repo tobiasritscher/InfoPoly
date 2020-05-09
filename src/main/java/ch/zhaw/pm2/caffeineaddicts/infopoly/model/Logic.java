@@ -29,12 +29,11 @@ public class Logic {
         return players.get(currentPlayer.getValue());
     }
 
-    public Player nextPlayer(ArrayList<Player> player) {
-        currentPlayer.setValue((1 + currentPlayer.get()) % players.size());
+    public void nextPlayer(ArrayList<Player> player) {
+        currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
         if (players.get(currentPlayer.get()).getIsWaiting()) {
-            currentPlayer.setValue((1 + currentPlayer.get()) % players.size());
+            currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
         }
-        return player.get(currentPlayer.getValue());
     }
 
     private Player getCurrentPlayer() {
@@ -45,10 +44,7 @@ public class Logic {
     }
 
     private int calculateNextFieldId(int currentFieldId, int numberFieldToMove) {
-        if (currentFieldId < 0 || currentFieldId > 40 || numberFieldToMove < 0 || numberFieldToMove > 12) {
-            throw new IllegalArgumentException("Something went wrong");
-        }
-        return (currentFieldId + numberFieldToMove) % gameBoard.getBoardSize();
+        return (currentFieldId + numberFieldToMove) % Config.BOARD_SIZE;
     }
 
     /**
@@ -61,10 +57,10 @@ public class Logic {
             throw new RuntimeException("invalid rolled number");
         }
 
-        int fieldId = calculateNextFieldId(position, rolledNumber);
+        int fieldId = calculateNextFieldId(getCurrentPlayer().getPosition(), rolledNumber);
+        getPlayersTurn().move(fieldId);
         makeAction(fieldId);
-        verifyCurrentPlayerHasMoney();
-        verifyCurrentPlayerIsWinner();
+        nextPlayer(players);
     }
 
     /**
@@ -82,7 +78,6 @@ public class Logic {
     private void verifyCurrentPlayerHasMoney() {
         if (players.get(currentPlayer.getValue()).getMoney() <= 0) {
             new InformationalWindow("You are fucking broke mate. Next time you may want to sell you kidneys to get some money. For now wait for help");
-            movePlayer(startGameFieldId);
             waitForScholarship();
         }
     }
@@ -90,7 +85,6 @@ public class Logic {
     private void verifyCurrentPlayerIsWinner() {
         if (players.get(currentPlayer.getValue()).getCredits() >= 180) {
             new InformationalWindow("Congratulations! You just graduated from ZHAW! Now go and get a job in the real world!");
-
         }
     }
 
@@ -98,7 +92,7 @@ public class Logic {
         new InformationalWindow("You ran out of money so now you will apply for a scholarship. That usually takes up to 3 Weeks");
         setRoundsWaiting(3);
         if (roundsWaiting == 0) {
-            players.get(currentPlayer.getValue()).setMoney(100);
+            getCurrentPlayer().setMoney(100);
         }
     }
 

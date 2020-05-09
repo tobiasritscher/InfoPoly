@@ -1,7 +1,8 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
-import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.MainWindowController;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.Random;
 
@@ -11,9 +12,9 @@ public class Config {
     public static final int MINIMUM_CREDITS = 4;
     public static final int MEDIUM_CREDITS = 8;
     public static final int MANY_CREDITS = 12;
+    public static final int BOARD_SIZE = 40;
 
     private static String fieldLayoutPath = "src\\main\\resources\\field-layout.txt";
-    private static Logic logic;
 
     //clockwise
     public static String getFieldLayoutPath() {
@@ -107,12 +108,17 @@ public class Config {
      */
     public static class Dice {
         private static final Random random = new Random();
+        public static IntegerProperty finalRollProperty() {
+            return finalRoll;
+        }
+
+        private static IntegerProperty finalRoll = new SimpleIntegerProperty();
 
         /**
          * rolls two dices and moves the current player
          * if the player has three doubles, he has to repeate.
          */
-        public static void rollDice() {
+        public static void rollDice(Logic logic) {
             boolean again;
             int counter = 0;
             int firstDice;
@@ -136,10 +142,15 @@ public class Config {
                     logic.makeAction(11);
                 } else {
                     logic.movePlayer(rolledNumber);
-                    MainWindowController.updateRollDiceLabel(rolledNumber);
                 }
 
+                finalRoll.setValue(rolledNumber);
+
             } while (again);
+        }
+
+        public static int getFinalRoll() {
+            return finalRoll.get();
         }
     }
 }
