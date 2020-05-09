@@ -120,7 +120,7 @@ public class Config {
                 }
                 if(counter == 3){
                     again = false;
-                    logic.moveCurrentPlayer(11);
+                    logic.makeAction(11);
                 }
             }while (again);
             return firstDice + secondDice;

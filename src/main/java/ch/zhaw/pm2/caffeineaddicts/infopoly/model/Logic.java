@@ -65,13 +65,13 @@ public class Logic {
             throw new RuntimeException("invalid rolled number");
         }
         int fieldId = calculateNextFieldId(getCurrentPlayer().getPosition(), rolledNumber);
-        moveCurrentPlayer(fieldId);
+        makeAction(fieldId);
     }
 
     /**
      * @param fieldId positive zero based integer number, field id where current player to be moved to.
      */
-    public void moveCurrentPlayer(int fieldId) {
+    public void makeAction(int fieldId) {
         getCurrentPlayer().setPosition(fieldId);
         GameField gameField = gameBoard.getField(fieldId);
         switch (gameBoard.getFieldType(fieldId)) {
