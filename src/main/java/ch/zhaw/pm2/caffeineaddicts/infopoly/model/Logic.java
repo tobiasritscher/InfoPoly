@@ -66,6 +66,7 @@ public class Logic {
         int fieldId = calculateNextFieldId(getCurrentPlayer().getPosition(), rolledNumber);
         mainWindowController.movePlayer(getCurrentPlayer().getName(),fieldId);
         makeAction(fieldId);
+        nextPlayer(players);
     }
 
     /**
