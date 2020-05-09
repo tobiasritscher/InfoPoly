@@ -257,7 +257,7 @@ public class GameField {
                     -2, -100),
             EVENT10(
                     "You overslept an exam. You lose 2 credits.",
-                    -10, -100),
+                    -2, 0),
             EVENT11(
                     "Since you study Information Technology, your relatives confuse you with a PC repairman. You earn CHF 50.- by fixing your grandmother's Internet Explorer.",
                     0, 50);

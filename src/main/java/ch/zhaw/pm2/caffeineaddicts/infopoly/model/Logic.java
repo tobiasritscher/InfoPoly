@@ -1,6 +1,7 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.MainWindowController;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.QuestionWindow;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -15,6 +16,7 @@ public class Logic {
     private int roundsWaiting;
     private StartupGameField startupGameField;
     private ArrayList<Player> players = new ArrayList<>();
+    private MainWindowController mainWindowController;
 
     public Logic(GameBoard gameBoard) {
         this.gameBoard = gameBoard;
@@ -62,6 +64,7 @@ public class Logic {
             throw new RuntimeException("invalid rolled number");
         }
         int fieldId = calculateNextFieldId(getCurrentPlayer().getPosition(), rolledNumber);
+        mainWindowController.movePlayer(getCurrentPlayer().getName(),fieldId);
         makeAction(fieldId);
     }
 
@@ -83,8 +86,6 @@ public class Logic {
                 break;
             case CHANCE:
                 processCaseChance((ChanceGameField) gameField);
-                verifyCurrentPlayerHasMoney();
-                verifyCurrentPlayerIsWinner();
                 break;
             case START:
                 start();
@@ -109,6 +110,7 @@ public class Logic {
                 new InformationalWindow("Thank you for shopping with us!");
                 players.get(currentPlayer.getValue()).alterMoney(-10);
                 players.get(jobGameField.workerIdProperty().getValue()).alterMoney(10);
+                verifyCurrentPlayerHasMoney();
             }
         } else {
             if (players.get(currentPlayer.getValue()).isWorking()) {
@@ -159,6 +161,8 @@ public class Logic {
         Player player = getCurrentPlayer();
         player.alterMoney(gameField.getMoneyDeviation());
         player.alterCredits(gameField.getCreditsDeviation());
+        verifyCurrentPlayerHasMoney();
+        verifyCurrentPlayerIsWinner();
     }
 
     /**
@@ -167,7 +171,7 @@ public class Logic {
     private void verifyCurrentPlayerHasMoney() {
         if (players.get(currentPlayer.getValue()).getMoney() <= 0) {
             new InformationalWindow("You are fucking broke mate. Next time you may want to sell you kidneys to get some money. For now wait for help");
-            movePlayer(startGameFieldId);
+            //movePlayer(startGameFieldId); YOU CANT GIVE A FIELD NUMBER INSTEAD OF A DICE ROLL ==> CHECK THE METHOD BEFORE USING IT
             waitForScholarship();
         }
     }
@@ -175,7 +179,6 @@ public class Logic {
     private void verifyCurrentPlayerIsWinner() {
         if (players.get(currentPlayer.getValue()).getCredits() >= 180) {
             new InformationalWindow("Congratulations! You just graduated from ZHAW! Now go and get a job in the real world!");
-
         }
     }
 
