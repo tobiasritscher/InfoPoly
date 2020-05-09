@@ -5,7 +5,6 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.MainWindowController;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.QuestionWindow;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-
 import java.util.ArrayList;
 
 import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameField.*;
@@ -15,7 +14,6 @@ public class Logic {
     private final int startGameFieldId = 0;
     private GameBoard gameBoard;
     private int roundsWaiting;
-    private ChanceGameField chanceGameField;
     private StartupGameField startupGameField;
     private ArrayList<Player> players = new ArrayList<>();
     private MainWindowController mainWindowController;
@@ -97,8 +95,10 @@ public class Logic {
             case FEE:
                 break;
             case REPETITION:
+                repeat(gameField);
                 break;
             case EXAM:
+                exam((GameField.ExamGameField) gameField);
                 break;
         }
     }
@@ -132,6 +132,23 @@ public class Logic {
         }
     }
 
+    private void exam(GameField gamefield) {
+        new InformationalWindow("You are taking an exam, if you fail you have to repeat!");
+        Player player = getCurrentPlayer();
+        GameField.ExamGameField examGameField = (GameField.ExamGameField) gamefield;
+
+        if (examGameField.exam()) {
+            new InformationalWindow("You have passed your exam! YAY");
+            player.alterCredits(Config.MANY_CREDITS);
+        } else {
+            new InformationalWindow("You have failed, you need to repeat this semester!");
+            repeat(gamefield);
+        }
+    }
+
+    private void repeat(GameField gameField) {
+
+    }
 
     /**
      * Show message

@@ -257,7 +257,7 @@ public class GameField {
                     -2, -100),
             EVENT10(
                     "You overslept an exam. You lose 2 credits.",
-                    -10, -100),
+                    -2, 0),
             EVENT11(
                     "Since you study Information Technology, your relatives confuse you with a PC repairman. You earn CHF 50.- by fixing your grandmother's Internet Explorer.",
                     0, 50);
@@ -383,30 +383,18 @@ public class GameField {
      * Representation of {@link Config.FieldType#EXAM}.
      */
     public class ExamGameField extends GameField {
-        private final int examSuccessChance;
-        private final int creditsPayout;
-        private final Random random = new Random();
 
         /**
-         * @param examSuccessChance integer number between 0 and 100 inclusive
-         * @param creditsPayout     positive integer number
          */
-        public ExamGameField(int fieldId, Config.FieldType fieldType, String fieldName, int examSuccessChance, int creditsPayout) {
-            super(fieldId, fieldType, fieldName);
-            int chance = Math.max(0, examSuccessChance);
-            chance = Math.min(chance, 100);
-            this.examSuccessChance = chance;
-            this.creditsPayout = Math.min(0, creditsPayout);
+        public ExamGameField() {
+            super(31, Config.FieldType.EXAM, "Exam");
         }
 
         /**
          * @return -1, if exam was not successful; positive integer, else;
          */
-        public int exam() {
-            if (random.nextInt(examSuccessChance) == 0) {
-                return creditsPayout;
-            }
-            return -1;
+        public boolean exam() {
+            return new Random().nextBoolean();
         }
 
     }
