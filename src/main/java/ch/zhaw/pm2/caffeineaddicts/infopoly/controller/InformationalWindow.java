@@ -16,20 +16,13 @@ import java.util.Optional;
 public class InformationalWindow {
 
     /**
-     * Spawns a new informational window.
-     */
-    private Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    /**
-     * Header and title text
-     */
-    private final String header = "Information";
-
-    /**
-     * Constructor of the informational window.
+     * Constructor of the informational window. Spawns a new informational window.
      *
      * @param message The message for the player.
      */
     public InformationalWindow(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        String header = "Information";
         alert.setTitle(header);
         alert.setHeaderText(header);
         alert.setContentText(message);

@@ -29,6 +29,17 @@ import java.util.Objects;
  * @author corrooli
  */
 public class MainWindowController {
+
+    /**
+     * Game logic instance
+     */
+    private Logic logic;
+
+    /**
+     * Game board instance
+     */
+    private GameBoard gameBoard;
+
     /**
      * All fields in the game. Can be formatted to our liking.
      */
@@ -198,6 +209,8 @@ public class MainWindowController {
      */
     @FXML
     public Label repeatingPlayers;
+
+
     /**
      * Top / Middle title fields. The background colors of these fields will switch to the player
      * color in case he/she decides to take a class/job/do a startup
@@ -264,6 +277,7 @@ public class MainWindowController {
     public BorderPane field40Color; // CLASS : Bachelor Thesis
     @FXML
     public BorderPane dummyPane;    // Dummy Pane to make ArrayList easier to handle
+
     /**
      * Content of fundsBox. This box indicates labels indicating their info (player names, their color, their credits
      * and money.) as well as line separators.
@@ -310,6 +324,7 @@ public class MainWindowController {
     public Line seperator2;
     @FXML
     public Line seperator3;
+
     /**
      * Content of Game controls (current player, rollDiceButton, rollDiceOutput)
      */
@@ -318,19 +333,12 @@ public class MainWindowController {
     @FXML
     public Label currentPlayerLabel;
     @FXML
-    public static Label rollDiceOutput;
+    public Label rollDiceOutput;
     @FXML
     public Label rollDiceLabel;
     @FXML
     public Button rollDiceButton;
-    /**
-     * Game board instance
-     */
-    private GameBoard gameBoard = new GameBoard();
-    /**
-     * Game logic instance
-     */
-    private Logic logic = new Logic(gameBoard);
+
     /**
      * ArrayList for all fields on the board.
      */
@@ -407,9 +415,14 @@ public class MainWindowController {
      * can start a new game while the application is running.
      */
     public void initializeGame() {
+        gameBoard = new GameBoard();
+        logic = new Logic(gameBoard);
+
         fieldLabels.forEach((fieldLabel) -> fieldLabel.setText(""));
         fieldColors.forEach((fieldColor) -> fieldColor.setStyle("-fx-background-color: " + Config.PlayerColor.UNOCCUPIED.getColorValue()));
         setBoardVisibility(false);
+
+        rollDiceLabel.setText("");
 
         setPlayerName(1, "");
         setPlayerName(2, "");
@@ -603,7 +616,7 @@ public class MainWindowController {
      *
      * @param rolledNumber rolled number, retrieved from model.
      */
-    public static void updateRollDiceLabel(int rolledNumber) {
+    public void updateRollDiceLabel(int rolledNumber) {
 
         rollDiceOutput.setText(String.valueOf(rolledNumber));
     }
@@ -623,7 +636,7 @@ public class MainWindowController {
          */
 
         /*
-        logic.move(diceRoll);
+        logic.movePlayer(diceRoll);
         logic.nextPlayer(logic.getPlayers());
         */
 
@@ -635,15 +648,15 @@ public class MainWindowController {
         }
 
         /**
-         * Debug. TODO: example for chanceGameField dialog and action. Delete dis once implemented
+         * Debug. TODO: example for chance dialog and action. Delete dis once implemented
          */
 
         /*
-        move(logic.getPlayersTurn().getName(), diceRoll);
-        ChanceGameField.ChanceEvent chanceEvent = chanceGameField.getChanceEvent();
+        movePlayer(logic.getPlayersTurn().getName(), diceRoll);
+        Chance.ChanceEvent chanceEvent = chance.getChanceEvent();
         new InformationalWindow(chanceEvent.getMessage());
-        int newMoney = logic.getPlayersTurn().getMoney() + chanceGameField.getChanceEvent().getMoneyDeviation();
-        int newCredits = logic.getPlayersTurn().getCredits() + chanceGameField.getChanceEvent().getCreditsDeviation();
+        int newMoney = logic.getPlayersTurn().getMoney() + chance.getChanceEvent().getMoneyDeviation();
+        int newCredits = logic.getPlayersTurn().getCredits() + chance.getChanceEvent().getCreditsDeviation();
         logic.getPlayersTurn().setMoney(newMoney);
         logic.getPlayersTurn().setCredits(newCredits);
          */
@@ -670,11 +683,6 @@ public class MainWindowController {
     }
 
     private void addPlayers() {
-        // Resetting logic and game board
-
-        gameBoard = new GameBoard();
-        logic = new Logic(gameBoard);
-
         // Preparing player entry windows
         PlayerEntryWindow entry = null;
 
@@ -758,10 +766,19 @@ public class MainWindowController {
         currentPlayerLabel.setVisible(visibility);
         currentPlayer.setVisible(visibility);
         rollDiceLabel.setVisible(visibility);
+        rollDiceLabel.setText("");
         fields.forEach((field) -> field.setVisible(visibility));
     }
 
     public void setNewGameConfirmationNeeded(Boolean newGameConfirmationNeeded) {
         this.newGameConfirmationNeeded = newGameConfirmationNeeded;
+    }
+
+    public GameBoard getGameBoard() {
+        return gameBoard;
+    }
+
+    public Logic getLogic() {
+        return logic;
     }
 }

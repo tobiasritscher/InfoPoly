@@ -64,7 +64,7 @@ public class Logic {
             throw new RuntimeException("invalid rolled number");
         }
         int fieldId = calculateNextFieldId(getCurrentPlayer().getPosition(), rolledNumber);
-        mainWindowController.movePlayer(getCurrentPlayer().getName(),fieldId);
+        //mainWindowController.movePlayer(getCurrentPlayer().getName(),fieldId);
         makeAction(fieldId);
         nextPlayer(players);
     }

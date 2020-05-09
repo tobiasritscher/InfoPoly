@@ -136,7 +136,6 @@ public class Config {
                     logic.makeAction(11);
                 } else {
                     logic.movePlayer(rolledNumber);
-                    MainWindowController.updateRollDiceLabel(rolledNumber);
                 }
 
             } while (again);
