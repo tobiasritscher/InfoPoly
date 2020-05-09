@@ -86,8 +86,6 @@ public class Logic {
                 break;
             case CHANCE:
                 processCaseChance((ChanceGameField) gameField);
-                verifyCurrentPlayerHasMoney();
-                verifyCurrentPlayerIsWinner();
                 break;
             case START:
                 start();
@@ -163,6 +161,8 @@ public class Logic {
         Player player = getCurrentPlayer();
         player.alterMoney(gameField.getMoneyDeviation());
         player.alterCredits(gameField.getCreditsDeviation());
+        verifyCurrentPlayerHasMoney();
+        verifyCurrentPlayerIsWinner();
     }
 
     /**
