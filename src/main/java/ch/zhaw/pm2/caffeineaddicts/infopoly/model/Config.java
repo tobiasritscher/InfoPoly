@@ -13,6 +13,7 @@ public class Config {
     public static final int MEDIUM_CREDITS = 8;
     public static final int MANY_CREDITS = 12;
     public static final int BOARD_SIZE = 40;
+    public static final int DICE_NUMBER_SIDES = 6;
 
     private static String fieldLayoutPath = "src\\main\\resources\\field-layout.txt";
 
@@ -125,8 +126,8 @@ public class Config {
             int secondDice;
 
             do {
-                firstDice = random.nextInt(6) + 1;
-                secondDice = random.nextInt(6) + 1;
+                firstDice = random.nextInt(DICE_NUMBER_SIDES) + 1;
+                secondDice = random.nextInt(DICE_NUMBER_SIDES) + 1;
                 int rolledNumber = firstDice + secondDice;
 
                 if (firstDice == secondDice) {
