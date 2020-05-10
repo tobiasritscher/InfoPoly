@@ -58,8 +58,8 @@ public class Player {
         this.name = name;
         this.credits.setValue(credits);
         this.money.setValue(money);
-        this.playerNumber = playerNumber;
-        this.position.setValue(1);
+        this.playerId = playerId;
+        this.position.setValue(Config.PLAYER_START_POSITION);
         ownerShips = new ArrayList<>();
         roundsWaiting = 0;
     }

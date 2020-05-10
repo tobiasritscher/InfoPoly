@@ -4,6 +4,8 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,11 +22,13 @@ public class GameBoard {
     final List<GameField> board = new ArrayList<>();
 
     public GameBoard() {
-        logger.setLevel(Level.ALL);
-        Handler consoleHandler = new ConsoleHandler();
-        consoleHandler.setFormatter(new SimpleFormatter());
-        consoleHandler.setLevel(Level.FINE);
-        logger.addHandler(consoleHandler);
+        InputStream logConfig = this.getClass().getClassLoader().getResourceAsStream("log.properties");
+        try {
+            LogManager.getLogManager().readConfiguration(logConfig);
+        } catch (IOException e) {
+            logger.log(Level.WARNING, "No log.properties", e);
+        }
+        Logger.getLogger(GameBoard.class.getPackageName());
         loadGameBoard();
     }
 
@@ -62,7 +66,7 @@ public class GameBoard {
         return board.size();
     }
 
-    private void loadGameBoard() {
+    void loadGameBoard() {
         File file = null;
         Scanner sc = null;
         String pathName = Config.getFieldLayoutPath();
