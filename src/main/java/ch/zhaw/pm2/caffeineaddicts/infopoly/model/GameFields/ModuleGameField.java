@@ -51,7 +51,7 @@ public class ModuleGameField extends GameField {
             }
         } else {
             if (currentPlayer.getMoney() >= getFieldPrice()) {
-                QuestionWindow questionWindow = new QuestionWindow("Buy course",  currentPlayer.getName()+ " Would you like to buy this course");
+                QuestionWindow questionWindow = new QuestionWindow("Buy course",  currentPlayer.getName()+ " would you like to buy the course: "+ getFieldName().toUpperCase());
                 if (questionWindow.getAnswer()) {
                     currentPlayer.setMoney(currentPlayer.getMoney() - getFieldPrice());
                     setOwner(currentPlayer);
@@ -61,4 +61,5 @@ public class ModuleGameField extends GameField {
             }
         }
     }
+
 }

@@ -21,7 +21,7 @@ import java.util.Objects;
  * starts/stops a game as well as spawns a dialog to enter player names / number.
  * <p>
  * This controller is deliberately kept (kinda) dumb, and it does not handle any business logic. This ensures a correct
- * MVP pattern. All information on the UI is updated via PropertyListeners (from JavaFx 🅱️eans)
+ * MVP pattern. All information on the UI is updated via PropertyListeners (from JavaFx Beans)
  *
  * @author corrooli
  */
@@ -409,8 +409,6 @@ public class MainWindowController {
      * can start a new game while the application is running.
      */
     public void initializeGame() {
-        logic = new Logic();
-
         fieldLabels.forEach((fieldLabel) -> fieldLabel.setText(""));
         fieldColors.forEach((fieldColor) -> fieldColor.setStyle("-fx-background-color: " + Config.PlayerColor.UNOCCUPIED.getColorValue()));
         setBoardVisibility(false);
