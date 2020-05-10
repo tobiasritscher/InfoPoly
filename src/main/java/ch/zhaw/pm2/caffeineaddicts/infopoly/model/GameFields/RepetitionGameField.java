@@ -38,7 +38,6 @@ public class RepetitionGameField extends GameField {
     }
 
     /**
-     * <p>Note: Call {@link GameField.RepetitionGameField#isRepeating(int)} before the method invocation. Otherwise may throw exception.</p>
      *
      * @param playerId player id
      */

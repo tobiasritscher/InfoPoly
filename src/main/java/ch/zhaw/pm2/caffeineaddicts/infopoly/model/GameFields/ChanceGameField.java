@@ -97,7 +97,7 @@ public class ChanceGameField extends GameField {
         private final int moneyDeviation;
 
         /**
-         * Constructor of ChanceEvent inner class.
+         * Constructor of ChanceEvent class.
          *
          * @param message          The message of the chance field.
          * @param creditsDeviation Addition/Reduction of credits

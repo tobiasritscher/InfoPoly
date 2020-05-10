@@ -51,15 +51,13 @@ public class Logic {
      * @param rolledNumber the number between 0 and {@link Config inclusive
      */
     public void movePlayer(int rolledNumber) {
-        int position = getCurrentPlayer().getPosition();
-
-        if (rolledNumber > 12 || rolledNumber < 0) {
-            throw new RuntimeException("invalid rolled number");
-        }
-
         int fieldId = calculateNextFieldId(getCurrentPlayer().getPosition(), rolledNumber);
         getPlayersTurn().move(fieldId);
         makeAction(fieldId);
+
+        verifyCurrentPlayerHasMoney();
+        verifyCurrentPlayerIsWinner();
+
         nextPlayer(players);
     }
 

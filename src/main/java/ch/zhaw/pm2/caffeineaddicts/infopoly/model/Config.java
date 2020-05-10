@@ -139,7 +139,7 @@ public class Config {
 
                 if (counter == 3) {
                     new InformationalWindow("You rolled three times doubles, you have to repeate this semester.");
-                    logic.makeAction(11);
+                    logic.makeAction(41);
                 } else {
                     finalRoll.setValue(rolledNumber);
                     logic.movePlayer(rolledNumber);
