@@ -20,6 +20,9 @@ import static java.lang.Integer.parseInt;
  */
 public class PlayerEntryWindow {
 
+
+    private boolean entrySuccess = true;
+
     /**
      * Main array for registered player initials.
      */
@@ -50,6 +53,11 @@ public class PlayerEntryWindow {
 
         // Loop through number of players
         for (int i = 1; i <= numberOfPlayers.get(); i++) {
+
+            // Break out of loop if an entry was cancelled
+            if (!entrySuccess) {
+                break;
+            }
 
             // Loop condition
             boolean falseOrIncompleteInput = true;
@@ -92,6 +100,10 @@ public class PlayerEntryWindow {
                         // Error message & retry
                         new InformationalWindow("Make sure your name is just two alphabetical characters!");
                     }
+                } else {
+                    // Exit for loop
+                    entrySuccess = false;
+                    break;
                 }
             }
         }
@@ -101,4 +113,7 @@ public class PlayerEntryWindow {
         return playersList;
     }
 
+    public boolean isEntrySuccess() {
+        return entrySuccess;
+    }
 }

@@ -666,11 +666,11 @@ public class MainWindowController {
         entry = new PlayerEntryWindow(); // TODO: This is where new user entries come from!
 
         try {
-            setBoardVisibility(true);
-
-            if (entry.getPlayersList().isEmpty()) {
+            if (!entry.isEntrySuccess()) {
                 gameWasStarted = false;
             } else {
+                setBoardVisibility(true);
+
                 for (int i = 0; i < Objects.requireNonNull(entry).getPlayersList().size(); i++) {
 
                     // Add players to UI
