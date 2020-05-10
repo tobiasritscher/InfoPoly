@@ -5,7 +5,7 @@
 
 ## Getting Started
 
-
+The game has been testet on Intellij and works with gradle.
 
 ## Team
 
