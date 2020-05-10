@@ -1,6 +1,6 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
-import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.GameField;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -106,6 +106,34 @@ public class GameBoard {
                         throw new RuntimeException("invalid file format: an attribute is expected");
                     }
                     sc.nextLine().strip();
+                }
+                FeeGameField.FeeType feeType = FeeGameField.FeeType.FIXED;
+                switch (fieldType) {
+
+                    case MODULE:
+                        board.add(new ModuleGameField(fieldId, fieldType, fieldName, 10, 20, 30));
+                        break;
+                    case STARTUP:
+                        board.add(new StartupGameField(fieldId, fieldType, fieldName, 10, 10));
+                        break;
+                    case JOB:
+                        board.add(new JobGameField(fieldId, fieldType, fieldName, 10));
+                        break;
+                    case CHANCE:
+                        board.add(new ChanceGameField(fieldId, fieldType, fieldName));
+                        break;
+                    case START:
+                        board.add(new StartupGameField(fieldId, fieldType, fieldName, 20, 30));
+                        break;
+                    case FEE:
+                        board.add(new FeeGameField(fieldId, fieldType, fieldName, feeType, 30));
+                        break;
+                    case REPETITION:
+                        board.add(new RepetitionGameField(fieldId, fieldType, fieldName, 2));
+                        break;
+                    case EXAM:
+                        board.add(new ExamGameField(fieldId, fieldType, fieldName));
+                        break;
                 }
 
 
