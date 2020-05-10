@@ -114,7 +114,7 @@ public abstract class GameField {
 
             if (hasOwner()) {
                 if (owner.equals(currentPlayer)) {
-                    new InformationalWindow("You allredy own this field");
+                    new InformationalWindow("You already own this field");
 
                 } else if (currentPlayer.getMoney() < getFieldMoneyCharge()) {
                     owner.setMoney(currentPlayer.getMoney());

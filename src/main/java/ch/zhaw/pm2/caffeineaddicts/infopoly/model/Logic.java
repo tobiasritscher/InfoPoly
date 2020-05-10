@@ -10,7 +10,6 @@ public class Logic {
     private static IntegerProperty currentPlayer = new SimpleIntegerProperty(0);
     private final int startGameFieldId = 0;
     private final GameBoard gameBoard;
-    private int roundsWaiting;
     private ArrayList<Player> players = new ArrayList<>();
 
     public Logic() {
@@ -32,6 +31,7 @@ public class Logic {
     public void nextPlayer(ArrayList<Player> player) {
         currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
         if (players.get(currentPlayer.get()).getIsWaiting()) {
+            players.get(currentPlayer.getValue()).setRoundsWaiting(players.get(currentPlayer.getValue()).getRoundsWaiting()-1);
             currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
         }
     }
@@ -90,22 +90,12 @@ public class Logic {
 
     private void waitForScholarship() {
         new InformationalWindow("You ran out of money so now you will apply for a scholarship. That usually takes up to 3 Weeks");
-        setRoundsWaiting(3);
-        if (roundsWaiting == 0) {
+        getCurrentPlayer().setRoundsWaiting(3);
+        if (getCurrentPlayer().getRoundsWaiting() == 0) {
             getCurrentPlayer().setMoney(100);
         }
     }
 
-    public int getRoundsWaiting() {
-        return roundsWaiting;
-    }
-
-    public void setRoundsWaiting(int amount) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Makes no sense to wait negative amount dude");
-        }
-        roundsWaiting = amount;
-    }
 
     /**
      * Property getter, used by UI to update if a player turn has been updated.

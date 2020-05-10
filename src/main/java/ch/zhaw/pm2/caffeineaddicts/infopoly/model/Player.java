@@ -8,6 +8,10 @@ import java.util.List;
 
 public class Player {
     /**
+     * How many rounds a player must wait
+     */
+    private int roundsWaiting;
+    /**
      * Numerical player number. Ranges between 1 to 4
      */
     private int playerNumber;
@@ -53,9 +57,18 @@ public class Player {
         this.playerNumber = playerNumber;
         this.position.setValue(1);
         ownerShips = new ArrayList<>();
+        roundsWaiting = 0;
     }
 
     public Player() {
+    }
+
+    public int getRoundsWaiting() {
+        return roundsWaiting;
+    }
+
+    public void setRoundsWaiting(int amount) {
+        roundsWaiting += amount;
     }
 
     public List<GameField> getOwnerShips() {
