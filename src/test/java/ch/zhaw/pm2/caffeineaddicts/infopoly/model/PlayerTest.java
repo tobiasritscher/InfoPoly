@@ -4,6 +4,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest {
@@ -36,7 +39,9 @@ public class PlayerTest {
     void removeWorkTest(){
         assert(player.getOwnerShips().isEmpty());
         player.addOwnerShip(Burger);
-
+        assertNotNull(player.getOwnerShips());
+        player.removeWork();
+        assert(player.getOwnerShips().isEmpty());
     }
 
     @Test
@@ -47,9 +52,8 @@ public class PlayerTest {
     @Test
     void addOwnershipTest(){
         assert(player.getOwnerShips().isEmpty());
-        //player.addOwnerShip(Analysis);
-        //assertEquals(Analysis,player.getOwnerShips().get(0));
-
+        player.addOwnerShip(Burger);
+        assertEquals(Burger,player.getOwnerShips().get(0));
     }
 
 
@@ -62,4 +66,10 @@ public class PlayerTest {
         assertEquals(2,player.getRoundsWaiting());
     }
 
+    @Test
+    void addWorkTest(){
+        assertFalse(player.isWorking());
+        player.addWork(Burger);
+        assertEquals(Burger,player.getOwnerShips().get(0));
+    }
 }

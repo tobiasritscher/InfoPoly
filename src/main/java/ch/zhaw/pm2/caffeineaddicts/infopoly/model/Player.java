@@ -89,7 +89,7 @@ public class Player {
      *
      * @param job The field in which the player works
      */
-    public void addWork(GameField.JobGameField job) {
+    public void addWork(JobGameField job) {
         if (!isWorking()) {
             addOwnerShip(job);
             setWorking(true);
