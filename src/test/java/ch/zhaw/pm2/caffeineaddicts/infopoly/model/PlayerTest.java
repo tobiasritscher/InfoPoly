@@ -43,7 +43,7 @@ public class PlayerTest {
 
     @Test
     void moveTest(){
-        player.move(2);
+        player.setPosition(2);
         assertEquals(2,player.getPositionProperty().getValue());
     }
     @Test

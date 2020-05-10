@@ -7,13 +7,15 @@ import javafx.beans.property.SimpleIntegerProperty;
 import java.util.Random;
 
 public class Config {
+    public static final int NUMBER_DICES = 2;
     public static final int START_MONEY = 100;
     public static final int START_CREDITS = 0;
     public static final int MINIMUM_CREDITS = 4;
     public static final int MEDIUM_CREDITS = 8;
     public static final int MANY_CREDITS = 12;
     public static final int BOARD_SIZE = 40;
-    public static final int DICE_NUMBER_SIDES = 6;
+    public static final int NUMBER_DICE_SIDES = 6;
+    public static final int PLAYER_START_POSITION = 0;
 
     private static String fieldLayoutPath = "src\\main\\resources\\field-layout.txt";
 
@@ -126,8 +128,8 @@ public class Config {
             int secondDice;
 
             do {
-                firstDice = random.nextInt(DICE_NUMBER_SIDES) + 1;
-                secondDice = random.nextInt(DICE_NUMBER_SIDES) + 1;
+                firstDice = random.nextInt(NUMBER_DICE_SIDES) + 1;
+                secondDice = random.nextInt(NUMBER_DICE_SIDES) + 1;
                 int rolledNumber = firstDice + secondDice;
 
                 if (firstDice == secondDice) {

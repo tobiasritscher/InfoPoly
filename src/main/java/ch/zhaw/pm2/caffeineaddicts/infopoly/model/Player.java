@@ -7,8 +7,10 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Player {
+    private static final Logger logger = Logger.getLogger(Player.class.getCanonicalName());
     /**
      * How many rounds a player must wait
      */
@@ -16,7 +18,7 @@ public class Player {
     /**
      * Numerical player number. Ranges between 1 to 4
      */
-    private int playerNumber;
+    private int playerId;
     /**
      * Money of the player. Is SimpleIntegerProperty type to allow support for PropertyListener.
      */
@@ -52,7 +54,7 @@ public class Player {
      */
     private List<GameField> ownerShips;
 
-    public Player(String name, int money, int credits, int playerNumber) {
+    public Player(String name, int money, int credits, int playerId) {
         this.name = name;
         this.credits.setValue(credits);
         this.money.setValue(money);
@@ -60,9 +62,6 @@ public class Player {
         this.position.setValue(1);
         ownerShips = new ArrayList<>();
         roundsWaiting = 0;
-    }
-
-    public Player() {
     }
 
     public int getRoundsWaiting() {
@@ -119,8 +118,8 @@ public class Player {
         isWorking = working;
     }
 
-    public int getPlayerNumber() {
-        return playerNumber;
+    public int getPlayerId() {
+        return playerId;
     }
 
     public int getPosition() {
@@ -128,12 +127,10 @@ public class Player {
     }
 
     public void setPosition(int position) {
+        logger.info(String.format("Player %s position changed from %d to %d", name.toUpperCase(), this.position.get(), position));
         this.position.set(position);
     }
 
-    public IntegerProperty positionProperty() {
-        return position;
-    }
 
     public int getMoney() {
         return money.getValue();
@@ -201,15 +198,4 @@ public class Player {
         return isBroke;
     }
 
-    /**
-     * Moves the player around the board
-     *
-     * @param position Defines in which position the player will move
-     */
-    public void move(int position) {
-        //int oldPosition = this.position.getValue();
-        //int newPosition = oldPosition + position;
-        //TODO:
-        this.position.setValue(position);
-    }
 }
