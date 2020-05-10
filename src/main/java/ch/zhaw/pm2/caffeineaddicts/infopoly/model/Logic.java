@@ -31,8 +31,10 @@ public class Logic {
     public void nextPlayer(ArrayList<Player> player) {
         currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
         if (players.get(currentPlayer.get()).getIsWaiting()) {
+            new InformationalWindow(players.get(currentPlayer.getValue()).getName() + " has to sit this round out...You know why!");
             players.get(currentPlayer.getValue()).setRoundsWaiting(players.get(currentPlayer.getValue()).getRoundsWaiting() - 1);
             currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
+
         }
     }
 
