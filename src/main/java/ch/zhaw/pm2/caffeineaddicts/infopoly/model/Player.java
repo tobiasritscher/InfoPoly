@@ -48,6 +48,13 @@ public class Player {
         ownerShips.add(field);
     }
 
+    public void addWork(GameField.JobGameField job){
+        if(!isWorking()){
+            addOwnerShip(job);
+            setWorking(true);
+        }
+    }
+
     public void removeWork() {
         for (GameField value: ownerShips) {
             if (value.getFieldType().equals(Config.FieldType.JOB)) {
@@ -146,17 +153,6 @@ public class Player {
 
     public boolean isBroke() {
         return isBroke;
-    }
-
-    public void winMoney(int amount) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Cannot earn negative amount or 0");
-        }
-        if ((money.getValue() - amount) <= 0) {
-            isBroke = true;
-        } else {
-            money.set(money.getValue() - amount);
-        }
     }
 
     public void move(int position) {
