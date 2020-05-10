@@ -6,8 +6,10 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class Logic {
+    private final static Logger logger = Logger.getLogger(Logic.class.getCanonicalName());
     private static IntegerProperty currentPlayer = new SimpleIntegerProperty(0);
     private final GameBoard gameBoard;
     private ArrayList<Player> players = new ArrayList<>();
@@ -24,14 +26,11 @@ public class Logic {
         players.add(player);
     }
 
-    public Player getPlayersTurn() {
-        return players.get(currentPlayer.getValue());
-    }
 
-    public void nextPlayer(ArrayList<Player> player) {
+    public void switchToNextPlayer(ArrayList<Player> player) {
         currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
         if (player.get(currentPlayer.get()).getIsWaiting()) {
-            new InformationalWindow(player.get(currentPlayer.getValue()).getName() + " has to sit this round out...You know why!");
+            new InformationalWindow(player.get(currentPlayer.getValue()).getName() + " has to sit this round out...You know why...Small carrot!");
             player.get(currentPlayer.getValue()).setRoundsWaiting(player.get(currentPlayer.getValue()).getRoundsWaiting() - 1);
             currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
 
@@ -45,28 +44,31 @@ public class Logic {
         return players.get(currentPlayer.getValue());
     }
 
-    private int calculateNextFieldId(int currentFieldId, int numberFieldToMove) {
-        return (currentFieldId + numberFieldToMove) % Config.BOARD_SIZE;
+    int calculateNextFieldId(int currentFieldId, int numberFieldToMove) {
+        return (currentFieldId + numberFieldToMove) % gameBoard.getBoardSize();
     }
 
     /**
-     * @param rolledNumber the number between 0 and {@link Config inclusive
+     * <p>Set new player position according to the given rolled number.</p>
+     * <p></p>Checks if player has money of if he has won.</p>
+     *
+     * @param rolledNumber the number between 1 and {@link Config#NUMBER_DICES} * {@link Config#NUMBER_DICE_SIDES} inclusive.
      */
     public void movePlayer(int rolledNumber) {
         int fieldId = calculateNextFieldId(getCurrentPlayer().getPosition(), rolledNumber);
-        getPlayersTurn().move(fieldId);
-        makeAction(fieldId);
-
+        logger.info(String.format("Rolled number: %d; Next field id: %d", rolledNumber, fieldId));
+        moveCurrentPlayerToField(fieldId);
         verifyCurrentPlayerHasMoney();
         verifyCurrentPlayerIsWinner();
-
-        nextPlayer(players);
+        switchToNextPlayer(players);
     }
 
     /**
+     * Set current player position to the give field id.
+     *
      * @param fieldId positive zero based integer number, field id where current player to be moved to.
      */
-    public void makeAction(int fieldId) {
+    public void moveCurrentPlayerToField(int fieldId) {
         GameField gameField = gameBoard.getField(fieldId);
         getCurrentPlayer().setPosition(fieldId);
         gameField.action(getCurrentPlayer());
