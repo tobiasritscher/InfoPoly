@@ -64,6 +64,7 @@ public class Player {
 
     /**
      * Adds a new Field to the players list
+     *
      * @param field the field which the player has bought
      */
     public void addOwnerShip(GameField field) {
@@ -72,10 +73,11 @@ public class Player {
 
     /**
      * Adds the work which the player has decided to work
+     *
      * @param job The field in which the player works
      */
-    public void addWork(GameField.JobGameField job){
-        if(!isWorking()){
+    public void addWork(GameField.JobGameField job) {
+        if (!isWorking()) {
             addOwnerShip(job);
             setWorking(true);
         }
@@ -85,7 +87,7 @@ public class Player {
      * Removes the job which the player had...Mainly if he decides for another job
      */
     public void removeWork() {
-        for (GameField value: ownerShips) {
+        for (GameField value : ownerShips) {
             if (value.getFieldType().equals(Config.FieldType.JOB)) {
                 value.resetOwner();
                 ownerShips.remove(value);
@@ -186,6 +188,7 @@ public class Player {
 
     /**
      * Moves the player around the board
+     *
      * @param position Defines in which position the player will move
      */
     public void move(int position) {
