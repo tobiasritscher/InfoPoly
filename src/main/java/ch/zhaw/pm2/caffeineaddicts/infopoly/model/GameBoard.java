@@ -21,7 +21,7 @@ public class GameBoard {
     final List<GameField> board = new ArrayList<>();
 
     public GameBoard() {
-        //loadGameBoard();
+        loadGameBoard();
     }
 
     GameField getField(int fieldId) {

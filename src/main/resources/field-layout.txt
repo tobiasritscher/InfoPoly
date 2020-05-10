@@ -12,7 +12,7 @@ discrete mathematics
 module
 information theory & coding
 2
-fee_type_two
+fee
 semester tuition
 2
 job
@@ -57,7 +57,7 @@ system orientated programming
 module
 web development
 2
-fee_type_one
+fee
 zvv fees
 2
 startup
@@ -114,7 +114,7 @@ chance
 module
 mobile applications
 2
-fee_type_three
+fee
 party
 2
 module
