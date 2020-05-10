@@ -20,7 +20,6 @@ import static java.lang.Integer.parseInt;
  */
 public class PlayerEntryWindow {
 
-
     private boolean entrySuccess = true;
 
     /**

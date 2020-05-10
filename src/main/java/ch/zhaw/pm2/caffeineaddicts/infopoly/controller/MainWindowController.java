@@ -669,7 +669,6 @@ public class MainWindowController {
             if (!entry.isEntrySuccess()) {
                 gameWasStarted = false;
             } else {
-                setBoardVisibility(true);
 
                 for (int i = 0; i < Objects.requireNonNull(entry).getPlayersList().size(); i++) {
 
@@ -699,6 +698,7 @@ public class MainWindowController {
                     movePlayer(entry.getPlayersList().get(i), 1);
                     newGameConfirmationNeeded = false;
                     gameWasStarted = true;
+                    setBoardVisibility(true);
                 }
             }
 
