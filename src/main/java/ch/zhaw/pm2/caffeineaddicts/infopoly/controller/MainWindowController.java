@@ -385,12 +385,12 @@ public class MainWindowController {
         ));
 
         fieldColors = new ArrayList<>(Arrays.asList(
-                dummyPane, field02Color, field03Color, field04Color, dummyPane, field06Color, field07Color,
+                dummyPane, field02Color, field03Color, field04Color, dummyPane, field06Color, field07Color, dummyPane,
                 field09Color, field10Color, dummyPane, field12Color, field13Color, field14Color, field15Color,
-                field16Color, dummyPane, field18Color, field19Color, field21Color, dummyPane, field22Color,
+                field16Color, dummyPane, field18Color, field19Color, dummyPane, field21Color, field22Color,
                 field23Color, dummyPane, field25Color, field26Color, field27Color, field28Color, field29Color,
                 field30Color, dummyPane, field32Color, field33Color, field34Color, field35Color, field36Color,
-                dummyPane, field38Color, dummyPane, field40Color
+                dummyPane, field38Color, dummyPane, field40Color, dummyPane
         ));
 
         fields = new ArrayList<>(Arrays.asList(
