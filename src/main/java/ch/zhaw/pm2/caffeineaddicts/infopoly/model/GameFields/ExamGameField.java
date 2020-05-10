@@ -1,6 +1,8 @@
-package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
+package ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
 
 import java.util.Random;
 

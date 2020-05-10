@@ -1,5 +1,6 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.GameField;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;

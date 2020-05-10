@@ -1,5 +1,7 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.GameField;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

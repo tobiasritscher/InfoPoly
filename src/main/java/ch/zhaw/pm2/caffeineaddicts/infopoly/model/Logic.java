@@ -1,6 +1,7 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.GameField;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -8,7 +9,6 @@ import java.util.ArrayList;
 
 public class Logic {
     private static IntegerProperty currentPlayer = new SimpleIntegerProperty(0);
-    private final int startGameFieldId = 0;
     private final GameBoard gameBoard;
     private ArrayList<Player> players = new ArrayList<>();
 

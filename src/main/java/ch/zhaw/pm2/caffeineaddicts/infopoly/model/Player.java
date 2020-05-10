@@ -1,5 +1,7 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.GameField;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.JobGameField;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
