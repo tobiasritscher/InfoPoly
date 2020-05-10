@@ -39,7 +39,7 @@ public abstract class GameField {
      */
     public void setOwner(Player owner) {
         this.owner = owner;
-        ownerProperty.setValue(owner.getPlayerNumber());
+        ownerProperty.setValue(owner.getPlayerId());
     }
 
     public boolean hasOwner() {
@@ -81,6 +81,6 @@ public abstract class GameField {
 
     @Override
     public String toString() {
-        return String.format("%d %s %s", fieldId, fieldName, fieldType.name()) ;
+        return String.format("%d %s %s", fieldId, fieldName, fieldType.name());
     }
 }

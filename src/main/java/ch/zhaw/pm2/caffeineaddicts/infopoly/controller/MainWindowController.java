@@ -28,22 +28,6 @@ import java.util.Objects;
 public class MainWindowController {
 
     /**
-     * Game logic instance
-     */
-    private Logic logic;
-
-    /**
-     * Boolean indicating if no game has started yet. This will eliminate the "Are you sure?" dialog when starting a
-     * new game.
-     */
-    private Boolean newGameConfirmationNeeded = true;
-
-    /**
-     * Boolean indicating if no game has started yet. Will be needed to switch text of the Button.
-     */
-    private Boolean gameWasStarted = false;
-
-    /**
      * All fields in the game. Can be formatted to our liking.
      */
     @FXML
@@ -124,7 +108,6 @@ public class MainWindowController {
     public BorderPane field39; // PARTY
     @FXML
     public BorderPane field40; // CLASS : Bachelor
-
     /**
      * Bottom of fields (player area). This is where player initials are used to indicate which players are on which
      * field.
@@ -214,8 +197,6 @@ public class MainWindowController {
      */
     @FXML
     public Label repeatingPlayers;
-
-
     /**
      * Top / Middle title fields. The background colors of these fields will switch to the player
      * color using Listeners in case he/she decides to take a class/job/do a startup
@@ -282,7 +263,6 @@ public class MainWindowController {
     public BorderPane field40Color; // CLASS : Bachelor Thesis
     @FXML
     public BorderPane dummyPane;    // Dummy Pane to make ArrayList easier to handle
-
     /**
      * Content of fundsBox. This box indicates labels indicating their info (player names, their color, their credits
      * and money.) as well as line separators.
@@ -329,7 +309,6 @@ public class MainWindowController {
     public Line seperator2;
     @FXML
     public Line seperator3;
-
     /**
      * Content of Game controls (current player, rollDiceButton, rollDiceOutput)
      */
@@ -343,7 +322,19 @@ public class MainWindowController {
     public Label rollDiceLabel;
     @FXML
     public Button rollDiceButton;
-
+    /**
+     * Game logic instance
+     */
+    private Logic logic;
+    /**
+     * Boolean indicating if no game has started yet. This will eliminate the "Are you sure?" dialog when starting a
+     * new game.
+     */
+    private Boolean newGameConfirmationNeeded = true;
+    /**
+     * Boolean indicating if no game has started yet. Will be needed to switch text of the Button.
+     */
+    private Boolean gameWasStarted = false;
     /**
      * ArrayList for all fields on the board.
      */
@@ -445,10 +436,10 @@ public class MainWindowController {
      * Moves a player to a new field. Checks which field the player is on right now, deletes its name and moves it
      * to another field. Field numbers must be given explicitly.
      *
-     * @param playerName     Name of player (call with playerInstance.getName())
-     * @param newFieldNumber The number of the field that the player moves to. (See documentation)
+     * @param playerName Name of player (call with playerInstance.getName())
+     * @param fieldId    The id of the field to which player will be moved (See documentation)
      */
-    public void movePlayer(String playerName, int newFieldNumber) {
+    public void movePlayer(String playerName, int fieldId) {
         String tempText;
 
         // Check if Player is in one of the fields. Loop through entire board (maybe could be made easier but i don't want to save the whole board state here
@@ -473,18 +464,18 @@ public class MainWindowController {
 
         // Move player to new field after checking if he/she isn't already on this field
         // Error msg if Player is already on this field (not really necessary but helps debugging
-        if (fieldLabels.get(newFieldNumber - 1).getText().contains(playerName))
+        if (fieldLabels.get(fieldId).getText().contains(playerName))
             new InformationalWindow("Player already on this field!"); // TODO: Create exception
         else {
 
             // Extract text from field and concatenate it with whitespace and Player name
-            tempText = fieldLabels.get(newFieldNumber - 1).getText() + " " + playerName;
+            tempText = fieldLabels.get(fieldId).getText() + " " + playerName;
 
             // Trim leading and trailing whitespaces
             tempText = tempText.trim();
 
             // Set new text to field
-            fieldLabels.get(newFieldNumber - 1).setText(tempText);
+            fieldLabels.get(fieldId).setText(tempText);
         }
     }
 
@@ -502,7 +493,7 @@ public class MainWindowController {
      * Take over field and color the BorderPane color to the player's colo
      *
      * @param playerNumber The Player's number. (See documentation)
-     * @param fieldNumber The number of the field that was taken over. (See documentation)
+     * @param fieldNumber  The number of the field that was taken over. (See documentation)
      */
     public void takeOverField(int playerNumber, int fieldNumber) {
         Config.PlayerColor color = Config.PlayerColor.UNOCCUPIED;
@@ -717,7 +708,7 @@ public class MainWindowController {
 
 
                     // Move players to first field TODO: Replace with listener
-                    movePlayer(entry.getPlayersList().get(i), 1);
+                    movePlayer(entry.getPlayersList().get(i), Config.PLAYER_START_POSITION);
                     newGameConfirmationNeeded = false;
                     gameWasStarted = true;
                     setBoardVisibility(true);
@@ -731,7 +722,7 @@ public class MainWindowController {
             GameBoard gameboard = logic.getGameBoard();
             gameboard.getBoard().forEach((field) -> field.getOwnerProperty().addListener(
                     (observableValue, oldValue, newValue) ->
-                    takeOverField(newValue.intValue(), field.getFieldId()))
+                            takeOverField(newValue.intValue(), field.getFieldId()))
             );
 
         } catch (Exception e) {
