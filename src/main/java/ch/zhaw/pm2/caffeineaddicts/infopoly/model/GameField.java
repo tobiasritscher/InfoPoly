@@ -3,6 +3,7 @@ package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.QuestionWindow;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.HashMap;
@@ -15,12 +16,15 @@ public abstract class GameField {
     private final Config.FieldType fieldType;
     private final String fieldName;
     private Player owner = null;
+    private IntegerProperty ownerProperty = new SimpleIntegerProperty();
 
     public GameField(int fieldId, Config.FieldType fieldType, String fieldName) {
         this.fieldId = fieldId;
         this.fieldType = fieldType;
         this.fieldName = fieldName;
     }
+
+    public IntegerProperty getOwnerProperty() { return ownerProperty; };
 
     public Config.FieldType getFieldType() {
         return fieldType;
@@ -34,12 +38,22 @@ public abstract class GameField {
         return owner != null;
     }
 
+    /**
+     * Sets a new owner and changes the ownerProperty to the according playerNumber.
+     *
+     * @param owner The Player object which is subject to change.
+     */
     public void setOwner(Player owner) {
         this.owner = owner;
+        ownerProperty.setValue(owner.getPlayerNumber());
     }
 
+    /**
+     * Resets the field owner and changes the ownerProperty to zero.
+     */
     public void resetOwner() {
         owner = null;
+        ownerProperty.setValue(0);
     }
 
     public String getFieldName() {

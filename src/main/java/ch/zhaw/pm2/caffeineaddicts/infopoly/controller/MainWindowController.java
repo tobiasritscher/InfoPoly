@@ -1,8 +1,6 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.controller;
 
-import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config;
-import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Logic;
-import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,8 +20,8 @@ import java.util.Objects;
  * Displays players on field, can move players, can indicate if a player takes over a field, calls dice rolls and
  * starts/stops a game as well as spawns a dialog to enter player names / number.
  * <p>
- * This controller is deliberately kept dumb, and it does not handle any business logic. This ensures a correct MVP
- * pattern.
+ * This controller is deliberately kept (kinda) dumb, and it does not handle any business logic. This ensures a correct
+ * MVP pattern. All information on the UI is updated via PropertyListeners.
  *
  * @author corrooli
  */
@@ -33,6 +31,17 @@ public class MainWindowController {
      * Game logic instance
      */
     private Logic logic;
+
+    /**
+     * Boolean indicating if no game has started yet. This will eliminate the "Are you sure?" dialog when starting a
+     * new game.
+     */
+    private Boolean newGameConfirmationNeeded = true;
+
+    /**
+     * Boolean indicating if no game has started yet. Will be needed to switch text of the Button.
+     */
+    private Boolean gameWasStarted = false;
 
     /**
      * All fields in the game. Can be formatted to our liking.
@@ -114,9 +123,11 @@ public class MainWindowController {
     @FXML
     public BorderPane field39; // PARTY
     @FXML
-    public BorderPane field40; // CLASS : Bachelor Thesis
+    public BorderPane field40; // CLASS : Bachelor
+
     /**
-     * Bottom of fields. This is where player initials are used to indicate which players are on which field.
+     * Bottom of fields (player area). This is where player initials are used to indicate which players are on which
+     * field.
      */
     @FXML
     public Label field01Players; // START
@@ -207,7 +218,7 @@ public class MainWindowController {
 
     /**
      * Top / Middle title fields. The background colors of these fields will switch to the player
-     * color in case he/she decides to take a class/job/do a startup
+     * color using Listeners in case he/she decides to take a class/job/do a startup
      */
     @FXML
     public BorderPane field02Color; // CLASS : Programming
@@ -347,17 +358,6 @@ public class MainWindowController {
      * ArrayList for all changeable BorderPanes (fieldXXColor) on the board.
      */
     private ArrayList<BorderPane> fieldColors;
-
-    /**
-     * Boolean indicating if no game has started yet. This will eliminate the "Are you sure?" dialog when starting a
-     * new game.
-     */
-    private Boolean newGameConfirmationNeeded = true;
-
-    /**
-     * Boolean indicating if no game has started yet. Will be needed to switch text of the Button.
-     */
-    private Boolean gameWasStarted = false;
 
     /**
      * Empty Constructor of UIController Class. Needs to be empty (FXML convention)
@@ -503,11 +503,32 @@ public class MainWindowController {
     /**
      * Take over field and color the BorderPane color to the player's colo
      *
-     * @param playerColor The Player's color enum value. (See documentation)
+     * @param playerNumber The Player's number. (See documentation)
      * @param fieldNumber The number of the field that was taken over. (See documentation)
      */
-    public void takeOverField(Config.PlayerColor playerColor, int fieldNumber) {
-        fieldColors.get(fieldNumber - 1).setStyle("-fx-background-color: " + playerColor.getColorValue());
+    public void takeOverField(int playerNumber, int fieldNumber) {
+        Config.PlayerColor color = Config.PlayerColor.UNOCCUPIED;
+        switch (playerNumber) {
+            case 0:
+                color = Config.PlayerColor.UNOCCUPIED;
+                break;
+            case 1:
+                color = Config.PlayerColor.PLAYER1;
+                break;
+            case 2:
+                color = Config.PlayerColor.PLAYER2;
+                break;
+            case 3:
+                color = Config.PlayerColor.PLAYER3;
+                break;
+            case 4:
+                color = Config.PlayerColor.PLAYER4;
+                break;
+            default:
+                new InformationalWindow("Illegal Color!");
+                break;
+        }
+        fieldColors.get(fieldNumber - 1).setStyle("-fx-background-color: " + color.getColorValue());
     }
 
     /**
@@ -651,6 +672,9 @@ public class MainWindowController {
                 updateRollDiceOutput(newValue.intValue()));
     }
 
+    /**
+     * Helper method for adding players. Spawns a new PlayerEntryWindow and calls Logic to add new Player objects.
+     */
     private void addPlayers() {
         // Resetting logic and game board
         logic = new Logic();
@@ -704,6 +728,12 @@ public class MainWindowController {
 
             //updateCurrentPlayer(entry.getPlayersList().get(0));
             setNewGameConfirmationNeeded(false);
+
+            // Add listeners to game fields
+            GameBoard gameboard = logic.getGameBoard();
+            gameboard.getBoard().forEach((field) -> field.getOwnerProperty().addListener((observableValue, oldValue, newValue) ->
+                    takeOverField(newValue.intValue(), field.getFieldId())));
+
         } catch (Exception e) {
             setBoardVisibility(false);
             newGameConfirmationNeeded = true;

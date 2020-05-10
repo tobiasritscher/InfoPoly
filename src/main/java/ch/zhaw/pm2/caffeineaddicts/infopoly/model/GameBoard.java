@@ -15,6 +15,7 @@ import java.util.logging.Logger;
  */
 public class GameBoard {
     private final static Logger logger = Logger.getLogger(GameBoard.class.getCanonicalName());
+
     final List<GameField> board = new ArrayList<>();
 
     public GameBoard() {
@@ -118,5 +119,15 @@ public class GameBoard {
         }
 
     }
+
+    /**
+     * Board getter. Needed for UI Listeners
+     *
+     * @return entire GameBoard list
+     */
+    public List<GameField> getBoard() {
+        return board;
+    }
+
 
 }

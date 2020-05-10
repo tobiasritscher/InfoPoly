@@ -115,4 +115,8 @@ public class Logic {
     public IntegerProperty getPlayerTurnProperty() {
         return currentPlayer;
     }
+
+    public GameBoard getGameBoard() {
+        return gameBoard;
+    }
 }
