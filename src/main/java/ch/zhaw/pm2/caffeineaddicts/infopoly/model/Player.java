@@ -20,12 +20,30 @@ public class Player {
      */
     private IntegerProperty credits = new SimpleIntegerProperty();
 
+    /**
+     * Current position of the player on the field
+     */
     private IntegerProperty position = new SimpleIntegerProperty();
 
+    /**
+     * Name of the player
+     */
     private String name;
+    /**
+     * Defines if the player has no money
+     */
     private boolean isBroke = false;
+    /**
+     * Defines if the player is waiting due to being broke or failed exams
+     */
     private boolean isWaiting = false;
+    /**
+     * Defines if the player has a job
+     */
     private boolean isWorking = false;
+    /**
+     * List of all the courses and jobs that the player has
+     */
     private List<GameField> ownerShips;
 
     public Player(String name, int money, int credits, int playerNumber) {
@@ -44,10 +62,18 @@ public class Player {
         return ownerShips;
     }
 
+    /**
+     * Adds a new Field to the players list
+     * @param field the field which the player has bought
+     */
     public void addOwnerShip(GameField field) {
         ownerShips.add(field);
     }
 
+    /**
+     * Adds the work which the player has decided to work
+     * @param job The field in which the player works
+     */
     public void addWork(GameField.JobGameField job){
         if(!isWorking()){
             addOwnerShip(job);
@@ -55,6 +81,9 @@ public class Player {
         }
     }
 
+    /**
+     * Removes the job which the player had...Mainly if he decides for another job
+     */
     public void removeWork() {
         for (GameField value: ownerShips) {
             if (value.getFieldType().equals(Config.FieldType.JOB)) {
@@ -155,6 +184,10 @@ public class Player {
         return isBroke;
     }
 
+    /**
+     * Moves the player around the board
+     * @param position Defines in which position the player will move
+     */
     public void move(int position) {
         //int oldPosition = this.position.getValue();
         //int newPosition = oldPosition + position;
