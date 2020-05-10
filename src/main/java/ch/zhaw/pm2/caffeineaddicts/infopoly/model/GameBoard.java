@@ -7,8 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 
 /**
  * The class stores game fields of the game board.
@@ -21,6 +20,11 @@ public class GameBoard {
     final List<GameField> board = new ArrayList<>();
 
     public GameBoard() {
+        logger.setLevel(Level.ALL);
+        Handler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new SimpleFormatter());
+        consoleHandler.setLevel(Level.FINE);
+        logger.addHandler(consoleHandler);
         loadGameBoard();
     }
 
@@ -58,7 +62,7 @@ public class GameBoard {
         return board.size();
     }
 
-    public void loadGameBoard() {
+    private void loadGameBoard() {
         File file = null;
         Scanner sc = null;
         String pathName = Config.getFieldLayoutPath();
@@ -108,38 +112,39 @@ public class GameBoard {
                     sc.nextLine().strip();
                 }
                 FeeGameField.FeeType feeType = FeeGameField.FeeType.FIXED;
+                GameField gameField;
                 switch (fieldType) {
 
                     case MODULE:
-                        board.add(new ModuleGameField(fieldId, fieldType, fieldName, 10, 20, 30));
+                        gameField = new ModuleGameField(fieldId, fieldType, fieldName, 10, 20, 30);
                         break;
                     case STARTUP:
-                        board.add(new StartupGameField(fieldId, fieldType, fieldName, 10, 10));
+                        gameField = new StartupGameField(fieldId, fieldType, fieldName, 10, 10);
                         break;
                     case JOB:
-                        board.add(new JobGameField(fieldId, fieldType, fieldName, 10));
+                        gameField = new JobGameField(fieldId, fieldType, fieldName, 10);
                         break;
                     case CHANCE:
-                        board.add(new ChanceGameField(fieldId, fieldType, fieldName));
+                        gameField = new ChanceGameField(fieldId, fieldType, fieldName);
                         break;
                     case START:
-                        board.add(new StartupGameField(fieldId, fieldType, fieldName, 20, 30));
+                        gameField = new StartupGameField(fieldId, fieldType, fieldName, 20, 30);
                         break;
                     case FEE:
-                        board.add(new FeeGameField(fieldId, fieldType, fieldName, feeType, 30));
+                        gameField = new FeeGameField(fieldId, fieldType, fieldName, feeType, 30);
                         break;
                     case REPETITION:
-                        board.add(new RepetitionGameField(fieldId, fieldType, fieldName, 2));
+                        gameField = new RepetitionGameField(fieldId, fieldType, fieldName, 2);
                         break;
                     case EXAM:
-                        board.add(new ExamGameField(fieldId, fieldType, fieldName));
+                        gameField = new ExamGameField(fieldId, fieldType, fieldName);
                         break;
+
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + fieldType);
                 }
-
-
-                //TODO: add all fields with the right subclas
-                //board.add(new GameField.StartupGameField(fieldId, fieldType, fieldName, 10, 10));
-
+                board.add(gameField);
+                logger.log(Level.FINE, "Field added: " + gameField.toString());
             }
         } catch (FileNotFoundException e) {
             System.out.println("file not found: " + e.getMessage());

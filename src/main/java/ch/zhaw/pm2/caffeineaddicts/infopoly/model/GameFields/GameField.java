@@ -32,10 +32,6 @@ public abstract class GameField {
         return owner;
     }
 
-    public boolean hasOwner() {
-        return owner != null;
-    }
-
     /**
      * Sets a new owner and changes the ownerProperty to the according playerNumber.
      *
@@ -44,6 +40,10 @@ public abstract class GameField {
     public void setOwner(Player owner) {
         this.owner = owner;
         ownerProperty.setValue(owner.getPlayerNumber());
+    }
+
+    public boolean hasOwner() {
+        return owner != null;
     }
 
     /**
@@ -77,5 +77,10 @@ public abstract class GameField {
     @Override
     public int hashCode() {
         return Objects.hash(fieldId, fieldType, fieldName);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d %s %s", fieldId, fieldName, fieldType.name()) ;
     }
 }
