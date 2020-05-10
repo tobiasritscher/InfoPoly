@@ -3,7 +3,6 @@ package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.QuestionWindow;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.Property;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.HashMap;
@@ -24,7 +23,9 @@ public abstract class GameField {
         this.fieldName = fieldName;
     }
 
-    public IntegerProperty getOwnerProperty() { return ownerProperty; };
+    public IntegerProperty getOwnerProperty() {
+        return ownerProperty;
+    }
 
     public Config.FieldType getFieldType() {
         return fieldType;
@@ -130,7 +131,7 @@ public abstract class GameField {
                     QuestionWindow questionWindow = new QuestionWindow("Buy course", "Would you like to buy this course");
                     if (questionWindow.getAnswer()) {
                         currentPlayer.setMoney(currentPlayer.getMoney() - getFieldPrice());
-                        owner = currentPlayer;
+                        setOwner(currentPlayer);
                     }
                 } else {
                     new InformationalWindow("You are to poor to buy this field. Get a job!");
@@ -209,7 +210,7 @@ public abstract class GameField {
                     if (currentPlayer.getMoney() >= getMoneyNeeded()) {
                         QuestionWindow questionWindow = new QuestionWindow("Startup Manager", "Would you like to create your first startup?");
                         if (questionWindow.getAnswer()) {
-                            owner = currentPlayer;
+                            setOwner(currentPlayer);
                             currentPlayer.setMoney(currentPlayer.getMoney() - getMoneyNeeded());
                         } else {
                             new InformationalWindow("I guess not everyone is up to the challenge...");
@@ -429,7 +430,7 @@ public abstract class GameField {
                     QuestionWindow questionWindow = new QuestionWindow("Job Application " + fieldName + " (" + baseWage + "CHF)",
                             "Would you like to start working here?");
                     if (questionWindow.getAnswer()) {
-                        owner = currentPlayer;
+                        setOwner(currentPlayer);
                         currentPlayer.setWorking(true);
                     }
                 }
