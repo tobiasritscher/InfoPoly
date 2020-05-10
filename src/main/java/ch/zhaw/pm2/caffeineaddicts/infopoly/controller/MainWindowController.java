@@ -21,7 +21,7 @@ import java.util.Objects;
  * starts/stops a game as well as spawns a dialog to enter player names / number.
  * <p>
  * This controller is deliberately kept (kinda) dumb, and it does not handle any business logic. This ensures a correct
- * MVP pattern. All information on the UI is updated via PropertyListeners.
+ * MVP pattern. All information on the UI is updated via PropertyListeners (from JavaFx 🅱️eans)
  *
  * @author corrooli
  */
@@ -528,7 +528,7 @@ public class MainWindowController {
                 new InformationalWindow("Illegal Color!");
                 break;
         }
-        fieldColors.get(fieldNumber - 1).setStyle("-fx-background-color: " + color.getColorValue());
+        fieldColors.get(fieldNumber).setStyle("-fx-background-color: " + color.getColorValue());
     }
 
     /**
@@ -731,8 +731,10 @@ public class MainWindowController {
 
             // Add listeners to game fields
             GameBoard gameboard = logic.getGameBoard();
-            gameboard.getBoard().forEach((field) -> field.getOwnerProperty().addListener((observableValue, oldValue, newValue) ->
-                    takeOverField(newValue.intValue(), field.getFieldId())));
+            gameboard.getBoard().forEach((field) -> field.getOwnerProperty().addListener(
+                    (observableValue, oldValue, newValue) ->
+                    takeOverField(newValue.intValue(), field.getFieldId()))
+            );
 
         } catch (Exception e) {
             setBoardVisibility(false);

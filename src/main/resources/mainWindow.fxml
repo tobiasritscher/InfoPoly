@@ -126,7 +126,7 @@
                         </BorderPane>
                      </bottom>
                      <center>
-                        <Label text="Exam failed" textFill="WHITE" BorderPane.alignment="CENTER">
+                        <Label text="Exam" textFill="WHITE" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="11.0" />
                            </font>

@@ -465,7 +465,7 @@ public abstract class GameField {
                 currentPlayer.alterCredits(Config.MANY_CREDITS);
             } else {
                 new InformationalWindow("You have failed, you need to repeat this semester!");
-                currentPlayer.setPosition(11);
+                currentPlayer.setPosition(41); // TODO Field 41 is reserved for repetition. Change code if needed
                 //TODO repeating?
             }
         }
