@@ -27,7 +27,6 @@ public class ChanceGameField extends GameField {
     @Override
     public void action(Player currentPlayer) {
         generateEvent();
-        //todo just idea >> could be used listeners instead.
         new InformationalWindow(getMessage());
         currentPlayer.alterMoney(getMoneyDeviation());
         currentPlayer.alterCredits(getCreditsDeviation());
