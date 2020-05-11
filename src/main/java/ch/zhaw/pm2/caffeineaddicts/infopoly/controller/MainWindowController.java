@@ -390,7 +390,6 @@ public class MainWindowController {
                 field23, field24, field25, field26, field27, field28, field29, field30, field31, field32, field33,
                 field34, field35, field36, field37, field38, field39, field40
         ));
-
         initializeGame();
     }
 

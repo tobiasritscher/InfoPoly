@@ -2,6 +2,7 @@ package ch.zhaw.pm2.caffeineaddicts.infopoly.controller;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.Region;
 
 import java.util.Optional;
 
@@ -38,6 +39,7 @@ public class QuestionWindow {
      * @param messageText String for the message text.
      */
     public QuestionWindow(String headerText, String messageText) {
+        alert.setResizable(true);
         alert.setTitle("Question");
         alert.setHeaderText(headerText);
         alert.setContentText(messageText);

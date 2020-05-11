@@ -1,5 +1,6 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields;
 
+import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
 
@@ -25,6 +26,6 @@ public class RepetitionGameField extends GameField {
 
     @Override
     public void action(Player currentPlayer) {
-        //TODO: repeating
+        new InformationalWindow("You are laugingh at the students that are repeating!");
     }
 }
