@@ -1,6 +1,7 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.MainWindowController;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.GameField;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -99,6 +100,11 @@ public class Logic {
         }
     }
 
+
+    private void repeating(Player currentPlayer){
+        currentPlayer.setPosition(41);
+        currentPlayer.setRoundsWaiting(3);
+    }
 
     /**
      * Property getter, used by UI to update if a player turn has been updated.
