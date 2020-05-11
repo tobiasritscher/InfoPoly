@@ -467,7 +467,7 @@ public class MainWindowController {
         // Move player to new field after checking if he/she isn't already on this field
         // Error msg if Player is already on this field (not really necessary but helps debugging
         if (fieldLabels.get(fieldId).getText().contains(playerName))
-            new InformationalWindow("Player already on this field!"); // TODO: Create exception
+            new InformationalWindow("Nope","Player already on this field!"); // TODO: Create exception
         else {
 
             // Extract text from field and concatenate it with whitespace and Player name
@@ -516,7 +516,7 @@ public class MainWindowController {
                 color = Config.PlayerColor.PLAYER4;
                 break;
             default:
-                new InformationalWindow("Illegal Color!");
+                new InformationalWindow("Color","Illegal Color!");
                 break;
         }
         fieldColors.get(fieldNumber).setStyle("-fx-background-color: " + color.getColorValue());
@@ -551,7 +551,7 @@ public class MainWindowController {
                 seperator3.setOpacity(1.0);
                 break;
             default:
-                new InformationalWindow("Player number out of range!"); // TODO: Create exception
+                new InformationalWindow("","Player number out of range!"); // TODO: Create exception
         }
     }
 
@@ -578,7 +578,7 @@ public class MainWindowController {
                 fundsBoxPlayer4Credits.setText(String.valueOf(credits));
                 break;
             default:
-                new InformationalWindow("Player number out of range!"); // TODO: Create exception
+                new InformationalWindow("","Player number out of range!"); // TODO: Create exception
         }
     }
 
@@ -603,7 +603,7 @@ public class MainWindowController {
                 fundsBoxPlayer4Money.setText(String.valueOf(money));
                 break;
             default:
-                new InformationalWindow("Player number out of range!"); // TODO: Create exception
+                new InformationalWindow("","Player number out of range!"); // TODO: Create exception
         }
     }
 

@@ -27,13 +27,13 @@ public class ExamGameField extends GameField {
 
     @Override
     public void action(Player currentPlayer) {
-        new InformationalWindow("You are taking an exam, if you fail you have to repeat!");
+        new InformationalWindow("Noooo","You are taking an exam, if you fail you have to repeat!");
 
         if (passed()) {
-            new InformationalWindow("You have passed your exam! YAY");
+            new InformationalWindow("Impossible!","You have passed your exam! YAY");
             currentPlayer.alterCredits(Config.MANY_CREDITS);
         } else {
-            new InformationalWindow("You have failed, you need to repeat this semester!");
+            new InformationalWindow("As expected!","You have failed, you need to repeat this semester!");
             currentPlayer.setPosition(41); // TODO Field 41 is reserved for repetition. Change code if needed
             //TODO repeating?
         }

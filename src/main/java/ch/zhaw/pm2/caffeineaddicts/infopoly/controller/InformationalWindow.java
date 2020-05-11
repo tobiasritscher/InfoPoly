@@ -15,20 +15,23 @@ import java.util.Optional;
  * @author corrooli
  */
 public class InformationalWindow {
+    private Alert alert;
 
     /**
      * Constructor of the informational window. Spawns a new informational window.
      *
-     * @param message The message for the player.
+     * @param messageText The message for the player.
      */
-    public InformationalWindow(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    public InformationalWindow(String headerText, String messageText) {
+        alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setResizable(true);
         alert.getDialogPane().setMinWidth(Region.USE_PREF_SIZE);
-        String header = "Information";
-        alert.setTitle(header);
-        alert.setHeaderText(header);
-        alert.setContentText(message);
+        if (headerText.isEmpty()) {
+            headerText = "Information";
+        }
+        alert.setTitle(headerText);
+        alert.setHeaderText(headerText);
+        alert.setContentText(messageText);
         Optional<ButtonType> buttonType = alert.showAndWait();
     }
 }

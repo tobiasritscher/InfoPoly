@@ -29,10 +29,10 @@ public class JobGameField extends GameField {
 
         if (hasOwner()) {
             if (currentPlayer.equals(getOwner())) {
-                new InformationalWindow("You are already working here. You made an extra shift: +" + baseWage + "CHF");
+                new InformationalWindow("Forgot?","You are already working here. You made an extra shift: +" + baseWage + "CHF");
                 currentPlayer.alterMoney(baseWage);
             } else {
-                new InformationalWindow("Thank you for shopping with us!");
+                new InformationalWindow("Shopping?","Thank you for shopping with us!");
                 currentPlayer.alterMoney(baseWage * -1);
                 getOwner().alterMoney(baseWage);
             }

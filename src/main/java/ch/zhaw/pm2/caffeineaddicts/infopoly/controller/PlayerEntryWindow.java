@@ -82,7 +82,7 @@ public class PlayerEntryWindow {
 
                     // Check if name is already taken
                     if (playersList.contains(playerName)) {
-                        new InformationalWindow("Name already taken!");
+                        new InformationalWindow("Be more creative!","Name already taken!");
                     }
 
                     // Check if name is just two characters long and contains no numbers + special characters
@@ -97,7 +97,7 @@ public class PlayerEntryWindow {
                     } else {
 
                         // Error message & retry
-                        new InformationalWindow("Make sure your name is just two alphabetical characters!");
+                        new InformationalWindow("Can you read?","Make sure your name is just two alphabetical characters!");
                     }
                 } else {
                     // Exit for loop

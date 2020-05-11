@@ -40,7 +40,7 @@ public class ModuleGameField extends GameField {
 
         if (hasOwner()) {
             if (owner.equals(currentPlayer)) {
-                new InformationalWindow("You already own this field");
+                new InformationalWindow("Forgot?","You already own this field");
 
             } else if (currentPlayer.getMoney() < getFieldMoneyCharge()) {
                 owner.setMoney(currentPlayer.getMoney());
@@ -60,7 +60,7 @@ public class ModuleGameField extends GameField {
                     currentPlayer.alterCredits(MEDIUM_CREDITS);
                 }
             } else {
-                new InformationalWindow("You are to poor to buy this field. Get a job!");
+                new InformationalWindow("Get a job!","You are to poor to buy this field.");
             }
         }
     }

@@ -35,7 +35,7 @@ public class Logic {
     public void switchToNextPlayer(ArrayList<Player> player) {
         currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
         if (getCurrentPlayer().getIsWaiting()) {
-            new InformationalWindow(getCurrentPlayer().getName() + " has to sit this round out...You know why...\nSmall carrot!");
+            new InformationalWindow("Small carrot!",getCurrentPlayer().getName() + " has to sit this round out...You know why!");
             getCurrentPlayer().setRoundsWaiting(getCurrentPlayer().getRoundsWaiting() - 1);
             currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
 
@@ -90,19 +90,19 @@ public class Logic {
      */
     private void verifyCurrentPlayerHasMoney() {
         if (players.get(currentPlayer.getValue()).getMoney() <= 0) {
-            new InformationalWindow("You are fucking broke mate.\nNext time you may want to sell you kidneys to get some money.\nFor now wait for help");
+            new InformationalWindow("Broke!", "You have no money left!");
             waitForScholarship();
         }
     }
 
     private void verifyCurrentPlayerIsWinner() {
         if (players.get(currentPlayer.getValue()).getCredits() >= 180) {
-            new InformationalWindow("Congratulations! You just graduated from ZHAW!\nNow go and get a job in the real world!");
+            new InformationalWindow("Bye bye dear school!", "Congratulations! You just graduated from ZHAW!\nNow go and get a job in the real world!");
         }
     }
 
     private void waitForScholarship() {
-        new InformationalWindow("You ran out of money so now you will apply for a scholarship.\nThat usually takes up to 3 Weeks");
+        new InformationalWindow("Broke!", "You ran out of money so now you will apply for a scholarship.\nThat usually takes up to 3 Weeks");
         getCurrentPlayer().setRoundsWaiting(3);
         if (getCurrentPlayer().getRoundsWaiting() == 0) {
             getCurrentPlayer().setMoney(100);
@@ -111,7 +111,8 @@ public class Logic {
 
     private void transferMoneyOnRunThroughStartField() {
         int money = ((StartGameField) gameBoard.getStartGameField()).getBaseScholarship();
-        new InformationalWindow("PARTYYYYY! You got %dCHF from you parents!" + money);
+
+        new InformationalWindow("Parents help", String.format("You got %d CHF from you parents!", money));
         getCurrentPlayer().alterMoney(money);
     }
 
@@ -119,6 +120,7 @@ public class Logic {
         currentPlayer.setPosition(41);
         currentPlayer.setRoundsWaiting(3);
     }
+
     /**
      * Property getter, used by UI to update if a player turn has been updated.
      *
@@ -147,7 +149,7 @@ public class Logic {
         roll.setValue(rolledNumber);
 
         if (firstDice == secondDice) {
-            new InformationalWindow("You rolled a double! YAY\nYou can move again.");
+            new InformationalWindow("Dice roll", "You rolled a double! YAY\nYou can move again.");
             again = true;
         }
         movePlayer(rolledNumber, again);

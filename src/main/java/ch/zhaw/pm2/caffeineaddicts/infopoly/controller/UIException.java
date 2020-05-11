@@ -6,7 +6,7 @@ public class UIException extends RuntimeException{
 
     public UIException(String message) {
         this.message = message;
-        new InformationalWindow(message);
+        new InformationalWindow("",message);
     }
 
     @Override

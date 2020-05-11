@@ -67,9 +67,9 @@ public class StartupGameField extends GameField {
 
         if (getOwner().equals(currentPlayer)) {
             if (isLaunched()) {
-                new InformationalWindow("Startup is already created with your Idea...had to be fast!");
+                new InformationalWindow("", "Startup is already created with your Idea...had to be fast!");
             } else {
-                new InformationalWindow("Your startup made quite the turnover this week! +200CHF");
+                new InformationalWindow("", "Your startup made quite the turnover this week! +200CHF");
                 currentPlayer.alterMoney(200);
             }
         } else {
@@ -80,13 +80,13 @@ public class StartupGameField extends GameField {
                         setOwner(currentPlayer);
                         currentPlayer.setMoney(currentPlayer.getMoney() - getMoneyNeeded());
                     } else {
-                        new InformationalWindow("I guess not everyone is up to the challenge...");
+                        new InformationalWindow("","I guess not everyone is up to the challenge...");
                     }
                 } else {
-                    new InformationalWindow("You require: " + getMoneyNeeded() + " in order to start your first Startup");
+                    new InformationalWindow("","You require: " + getMoneyNeeded() + " in order to start your first Startup");
                 }
             } else {
-                new InformationalWindow("A successful startup requires the needed knowledge...(" + NEEDED_AMOUNT_CREDITS + " Credits)");
+                new InformationalWindow("" ,"A successful startup requires the needed knowledge...(" + NEEDED_AMOUNT_CREDITS + " Credits)");
             }
         }
     }
