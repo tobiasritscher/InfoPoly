@@ -20,6 +20,7 @@ public class GameBoard {
     private final static Logger logger = Logger.getLogger(GameBoard.class.getCanonicalName());
 
     final List<GameField> board = new ArrayList<>();
+    private int startGameFieldId = 0;
 
     public GameBoard() {
         InputStream logConfig = this.getClass().getClassLoader().getResourceAsStream("log.properties");
@@ -30,6 +31,10 @@ public class GameBoard {
         }
         Logger.getLogger(GameBoard.class.getPackageName());
         loadGameBoard();
+    }
+
+    public int getStartGameFieldId() {
+        return startGameFieldId;
     }
 
     GameField getField(int fieldId) {
@@ -132,7 +137,7 @@ public class GameBoard {
                         gameField = new ChanceGameField(fieldId, fieldType, fieldName);
                         break;
                     case START:
-                        gameField = new StartupGameField(fieldId, fieldType, fieldName, 20, 30);
+                        gameField = new StartGameField(fieldId, fieldType, fieldName, 200);
                         break;
                     case FEE:
                         gameField = new FeeGameField(fieldId, fieldType, fieldName, feeType, 30);
