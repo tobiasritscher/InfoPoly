@@ -2,6 +2,7 @@ package ch.zhaw.pm2.caffeineaddicts.infopoly.controller;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.Region;
 
 import java.util.Optional;
 
@@ -22,6 +23,8 @@ public class InformationalWindow {
      */
     public InformationalWindow(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setResizable(true);
+        alert.getDialogPane().setMinWidth(Region.USE_PREF_SIZE);
         String header = "Information";
         alert.setTitle(header);
         alert.setHeaderText(header);
