@@ -33,8 +33,8 @@ public class GameBoard {
         loadGameBoard();
     }
 
-    public int getStartGameFieldId() {
-        return startGameFieldId;
+    public GameField getStartGameField() {
+        return board.get(startGameFieldId);
     }
 
     GameField getField(int fieldId) {

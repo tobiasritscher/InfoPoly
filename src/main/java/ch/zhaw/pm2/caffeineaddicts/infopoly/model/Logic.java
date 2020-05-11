@@ -1,8 +1,8 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
-import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.MainWindowController;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.GameField;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.StartGameField;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -57,6 +57,9 @@ public class Logic {
      */
     public void movePlayer(int rolledNumber) {
         int fieldId = calculateNextFieldId(getCurrentPlayer().getPosition(), rolledNumber);
+        if (getCurrentPlayer().getPosition() > fieldId) {
+            transferMoneyOnRunThroughStartField();
+        }
         logger.info(String.format("Rolled number: %d; Next field id: %d", rolledNumber, fieldId));
         moveCurrentPlayerToField(fieldId);
         verifyCurrentPlayerHasMoney();
@@ -100,8 +103,13 @@ public class Logic {
         }
     }
 
+    private void transferMoneyOnRunThroughStartField() {
+        int money = ((StartGameField) gameBoard.getStartGameField()).getBaseScholarship();
+        new InformationalWindow("PARTYYYYY! You got %dCHF from you parents!" + money);
+        getCurrentPlayer().alterMoney(money);
+    }
 
-    private void repeating(Player currentPlayer){
+    private void repeating(Player currentPlayer) {
         currentPlayer.setPosition(41);
         currentPlayer.setRoundsWaiting(3);
     }

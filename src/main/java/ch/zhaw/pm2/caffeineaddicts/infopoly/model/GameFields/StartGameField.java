@@ -18,6 +18,10 @@ public class StartGameField extends GameField {
         this.baseScholarship = baseScholarship;
     }
 
+    public int getBaseScholarship() {
+        return baseScholarship;
+    }
+
     public void applyForScholarship(int playerId) {
         if (students.containsKey(playerId) && !students.get(playerId).equals(0)) {
             throw new RuntimeException("invalid operation: the player already applied for scholarship");
