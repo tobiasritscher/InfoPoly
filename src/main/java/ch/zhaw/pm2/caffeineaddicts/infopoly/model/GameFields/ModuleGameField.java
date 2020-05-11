@@ -5,6 +5,8 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.QuestionWindow;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
 
+import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config.MEDIUM_CREDITS;
+
 /**
  * Representation of {@link Config.FieldType#MODULE}
  */
@@ -51,11 +53,11 @@ public class ModuleGameField extends GameField {
             }
         } else {
             if (currentPlayer.getMoney() >= getFieldPrice()) {
-                QuestionWindow questionWindow = new QuestionWindow("Buy course",  currentPlayer.getName()+ " \nwould you like to buy the course: "+ getFieldName().toUpperCase());
+                QuestionWindow questionWindow = new QuestionWindow("Buy course", currentPlayer.getName() + " \nwould you like to buy the course: " + getFieldName().toUpperCase());
                 if (questionWindow.getAnswer()) {
                     currentPlayer.setMoney(currentPlayer.getMoney() - getFieldPrice());
                     setOwner(currentPlayer);
-                    currentPlayer.alterCredits(creditsGain);
+                    currentPlayer.alterCredits(MEDIUM_CREDITS);
                 }
             } else {
                 new InformationalWindow("You are to poor to buy this field. Get a job!");
