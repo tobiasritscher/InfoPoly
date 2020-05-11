@@ -7,7 +7,10 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Logger;
+
+import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config.NUMBER_DICE_SIDES;
 
 public class Logic {
     private final static Logger logger = Logger.getLogger(Logic.class.getCanonicalName());
@@ -55,13 +58,15 @@ public class Logic {
      *
      * @param rolledNumber the number between 1 and {@link Config#NUMBER_DICES} * {@link Config#NUMBER_DICE_SIDES} inclusive.
      */
-    public void movePlayer(int rolledNumber) {
+    public void movePlayer(int rolledNumber, boolean moveAgain) {
         int fieldId = calculateNextFieldId(getCurrentPlayer().getPosition(), rolledNumber);
-        logger.info(String.format("Rolled number: %d; Next field id: %d", rolledNumber, fieldId));
+        logger.info(String.format("Rolled number: %d; Next field id: %d; Player can move again: %b", rolledNumber, fieldId, moveAgain));
         moveCurrentPlayerToField(fieldId);
         verifyCurrentPlayerHasMoney();
         verifyCurrentPlayerIsWinner();
-        switchToNextPlayer(players);
+        if (!moveAgain) {
+            switchToNextPlayer(players);
+        }
     }
 
 
@@ -118,4 +123,26 @@ public class Logic {
     public GameBoard getGameBoard() {
         return gameBoard;
     }
+
+    public void rollDice() {
+        Random random = new Random();
+        boolean again = false;
+        int firstDice;
+        int secondDice;
+
+        //IntegerProperty for final dice roll. Needed for UI
+        IntegerProperty roll = new SimpleIntegerProperty();
+
+        firstDice = random.nextInt(NUMBER_DICE_SIDES) + 1;
+        secondDice = random.nextInt(NUMBER_DICE_SIDES) + 1;
+        int rolledNumber = firstDice + secondDice;
+        roll.setValue(rolledNumber);
+
+        if (firstDice == secondDice) {
+            new InformationalWindow("You rolled a double! YAY\nYou can move again.");
+            again = true;
+        }
+        movePlayer(rolledNumber, again);
+    }
+
 }
