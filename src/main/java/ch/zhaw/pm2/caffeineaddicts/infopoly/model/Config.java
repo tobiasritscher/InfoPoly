@@ -10,9 +10,7 @@ public class Config {
     public static final int NUMBER_DICES = 2;
     public static final int START_MONEY = 100;
     public static final int START_CREDITS = 0;
-    public static final int MINIMUM_CREDITS = 4;
-    public static final int MEDIUM_CREDITS = 8;
-    public static final int MANY_CREDITS = 12;
+    public static final int MANY_CREDITS = 30;
     public static final int BOARD_SIZE = 40;
     public static final int NUMBER_DICE_SIDES = 6;
     public static final int PLAYER_START_POSITION = 0;
