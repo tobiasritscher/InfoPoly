@@ -40,7 +40,7 @@ public class ModuleGameField extends GameField {
 
         if (hasOwner()) {
             if (owner.equals(currentPlayer)) {
-                new InformationalWindow("Forgot?","You already own this field");
+                new InformationalWindow("Forgot?", "You already own this field");
 
             } else if (currentPlayer.getMoney() < getFieldMoneyCharge()) {
                 owner.setMoney(currentPlayer.getMoney());
@@ -53,14 +53,14 @@ public class ModuleGameField extends GameField {
             }
         } else {
             if (currentPlayer.getMoney() >= getFieldPrice()) {
-                QuestionWindow questionWindow = new QuestionWindow("Buy course", currentPlayer.getName() + " \nwould you like to buy the course: " + getFieldName().toUpperCase());
+                QuestionWindow questionWindow = new QuestionWindow("Purchase course?", String.format(" %s would you like to buy the course: %s", currentPlayer.getName().toUpperCase(), getFieldName().toUpperCase()));
                 if (questionWindow.getAnswer()) {
                     currentPlayer.setMoney(currentPlayer.getMoney() - getFieldPrice());
                     setOwner(currentPlayer);
                     currentPlayer.alterCredits(MEDIUM_CREDITS);
                 }
             } else {
-                new InformationalWindow("Get a job!","You are to poor to buy this field.");
+                new InformationalWindow("Get a job!", "You are to poor to buy this field.");
             }
         }
     }
