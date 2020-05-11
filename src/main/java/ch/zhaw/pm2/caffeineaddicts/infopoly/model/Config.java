@@ -17,7 +17,7 @@ public class Config {
     public static final int NUMBER_DICE_SIDES = 6;
     public static final int PLAYER_START_POSITION = 0;
 
-    private static String fieldLayoutPath = "src\\main\\resources\\field-layout.txt";
+    private static String fieldLayoutPath = "src/main/resources/field-layout.txt";
 
     //clockwise
     public static String getFieldLayoutPath() {
