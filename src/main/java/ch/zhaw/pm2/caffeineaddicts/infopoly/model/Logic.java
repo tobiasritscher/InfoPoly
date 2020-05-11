@@ -102,7 +102,7 @@ public class Logic {
     }
 
     private void waitForScholarship() {
-        new InformationalWindow("Broke!", "You ran out of money so now you will apply for a scholarship.\nThat usually takes up to 3 Weeks");
+        new InformationalWindow("Scholarship!", "You ran out of money so now you will apply for a scholarship.\nThat usually takes up to 3 Weeks");
         getCurrentPlayer().setRoundsWaiting(3);
         if (getCurrentPlayer().getRoundsWaiting() == 0) {
             getCurrentPlayer().setMoney(100);
@@ -112,7 +112,7 @@ public class Logic {
     private void transferMoneyOnRunThroughStartField() {
         int money = ((StartGameField) gameBoard.getStartGameField()).getBaseScholarship();
 
-        new InformationalWindow("Parents help", String.format("You got %d CHF from you parents!", money));
+        new InformationalWindow("Parents help!", String.format("You got %d CHF from you parents!", money));
         getCurrentPlayer().alterMoney(money);
     }
 
@@ -149,7 +149,7 @@ public class Logic {
         roll.setValue(rolledNumber);
 
         if (firstDice == secondDice) {
-            new InformationalWindow("Dice roll", "You rolled a double! YAY\nYou can move again.");
+            new InformationalWindow("Wow! Rolled a double!", "You can move again.");
             again = true;
         }
         movePlayer(rolledNumber, again);
