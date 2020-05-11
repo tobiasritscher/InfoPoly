@@ -30,7 +30,7 @@ public class Logic {
     public void switchToNextPlayer(ArrayList<Player> player) {
         currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
         if (player.get(currentPlayer.get()).getIsWaiting()) {
-            new InformationalWindow(player.get(currentPlayer.getValue()).getName() + " has to sit this round out...You know why...Small carrot!");
+            new InformationalWindow(player.get(currentPlayer.getValue()).getName() + " has to sit this round out...You know why...\nSmall carrot!");
             player.get(currentPlayer.getValue()).setRoundsWaiting(player.get(currentPlayer.getValue()).getRoundsWaiting() - 1);
             currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
 
@@ -80,19 +80,19 @@ public class Logic {
      */
     private void verifyCurrentPlayerHasMoney() {
         if (players.get(currentPlayer.getValue()).getMoney() <= 0) {
-            new InformationalWindow("You are fucking broke mate. Next time you may want to sell you kidneys to get some money. For now wait for help");
+            new InformationalWindow("You are fucking broke mate.\nNext time you may want to sell you kidneys to get some money.\nFor now wait for help");
             waitForScholarship();
         }
     }
 
     private void verifyCurrentPlayerIsWinner() {
         if (players.get(currentPlayer.getValue()).getCredits() >= 180) {
-            new InformationalWindow("Congratulations! You just graduated from ZHAW! Now go and get a job in the real world!");
+            new InformationalWindow("Congratulations! You just graduated from ZHAW!\nNow go and get a job in the real world!");
         }
     }
 
     private void waitForScholarship() {
-        new InformationalWindow("You ran out of money so now you will apply for a scholarship. That usually takes up to 3 Weeks");
+        new InformationalWindow("You ran out of money so now you will apply for a scholarship.\nThat usually takes up to 3 Weeks");
         getCurrentPlayer().setRoundsWaiting(3);
         if (getCurrentPlayer().getRoundsWaiting() == 0) {
             getCurrentPlayer().setMoney(100);
