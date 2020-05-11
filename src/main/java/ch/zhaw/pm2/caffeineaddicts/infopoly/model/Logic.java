@@ -33,9 +33,9 @@ public class Logic {
 
     public void switchToNextPlayer(ArrayList<Player> player) {
         currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
-        if (player.get(currentPlayer.get()).getIsWaiting()) {
-            new InformationalWindow(player.get(currentPlayer.getValue()).getName() + " has to sit this round out...You know why...\nSmall carrot!");
-            player.get(currentPlayer.getValue()).setRoundsWaiting(player.get(currentPlayer.getValue()).getRoundsWaiting() - 1);
+        if (getCurrentPlayer().getIsWaiting()) {
+            new InformationalWindow(getCurrentPlayer().getName() + " has to sit this round out...You know why...\nSmall carrot!");
+            getCurrentPlayer().setRoundsWaiting(getCurrentPlayer().getRoundsWaiting() - 1);
             currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
 
         }
@@ -109,11 +109,7 @@ public class Logic {
     private void repeating(Player currentPlayer){
         currentPlayer.setPosition(41);
         currentPlayer.setRoundsWaiting(3);
-        if(currentPlayer.getRoundsWaiting() == 0){
-            currentPlayer.setPosition(11);
-        }
     }
-
     /**
      * Property getter, used by UI to update if a player turn has been updated.
      *
