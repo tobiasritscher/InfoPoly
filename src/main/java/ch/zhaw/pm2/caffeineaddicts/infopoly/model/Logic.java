@@ -109,6 +109,9 @@ public class Logic {
     private void repeating(Player currentPlayer){
         currentPlayer.setPosition(41);
         currentPlayer.setRoundsWaiting(3);
+        if(currentPlayer.getRoundsWaiting() == 0){
+            currentPlayer.setPosition(11);
+        }
     }
 
     /**
