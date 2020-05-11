@@ -59,37 +59,37 @@ public class ChanceGameField extends GameField {
     }
 
     private enum ChanceEvent {
-        EVENT1("You got run over by a bus. The medical fees cost CHF 150.-",
-                0, -150),
+        EVENT1("You got run over by a bus.\nThe medical fees cost CHF 50.-",
+                0, -50),
         EVENT2(
-                "You got caught with no ticket on a tram. You lose CHF 80.-",
+                "You got caught with no ticket on a tram.\nYou lose CHF 80.-",
                 0, -80),
         EVENT3(
-                "You got caught surfing a nasty website on the ZHAW network. You lose 5 credits.",
+                "You got caught surfing a nasty website on the ZHAW network.\nYou lose 5 credits.",
                 -5, 0),
         EVENT4(
-                "Your new game app went viral. You earn CHF 500.- from ad revenue",
-                0, 500),
+                "Your new game app went viral. You earn CHF 100.- from ad revenue",
+                0, 100),
         EVENT5(
-                "Your new fitness app went viral. You earn CHF 700.- from ad revenue",
-                0, 700),
+                "Your new fitness app went viral. You earn CHF 200.- from ad revenue",
+                0, 200),
         EVENT6(
-                "You win a programming contest. You get the prize money of CHF 1000.-",
-                0, 1000),
+                "You win a programming contest.\nYou get the prize money of CHF 100.-",
+                0, 100),
         EVENT7(
-                "Your program code was stolen by hackers. You lose CHF 200.- and your hard work.",
-                0, -200),
+                "Your program code was stolen by hackers.\nYou lose CHF 100.- and your hard work.",
+                0, -100),
         EVENT8(
-                "Your new game app gained some traction, but you got sued because you used copyrighted assets. You lose CHF 900.-",
-                0, -900),
+                "Your new game app gained some traction, but you got sued because you used copyrighted assets.\nYou lose CHF 90.-",
+                0, -90),
         EVENT9(
-                "Even though you have exams tomorrow, you went to a party. You lose 2 credits and spent CHF 100.-",
-                -2, -100),
+                "Even though you have exams tomorrow, you went to a party.\nYou lose 2 credits and spent CHF 40.-",
+                -2, -40),
         EVENT10(
                 "You overslept an exam. You lose 2 credits.",
                 -2, 0),
         EVENT11(
-                "Since you study Information Technology, your relatives confuse you with a PC repairman. You earn CHF 50.- by fixing your grandmother's Internet Explorer.",
+                "Since you study Information Technology, your relatives \nconfuse you with a PC repairman.\nYou earn CHF 50.- by fixing your grandmother's Internet Explorer.",
                 0, 50);
 
         private final String message;
