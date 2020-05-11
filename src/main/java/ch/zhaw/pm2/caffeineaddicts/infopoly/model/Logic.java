@@ -63,6 +63,7 @@ public class Logic {
         switchToNextPlayer(players);
     }
 
+
     /**
      * Set current player position to the give field id.
      *
