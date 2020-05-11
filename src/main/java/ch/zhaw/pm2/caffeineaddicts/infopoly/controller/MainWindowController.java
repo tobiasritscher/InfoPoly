@@ -1,6 +1,9 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.controller;
 
-import ch.zhaw.pm2.caffeineaddicts.infopoly.model.*;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameBoard;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Logic;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -628,8 +631,7 @@ public class MainWindowController {
      */
     public void rollDiceAction() {
         if (gameWasStarted) {
-            Config.Dice.rollDice(logic);
-
+            logic.rollDice();
         } else {
             newGameAction();
             gameWasStarted = true;
@@ -654,10 +656,6 @@ public class MainWindowController {
         // Listener for current player
         logic.getPlayerTurnProperty().addListener((observableValue, oldValue, newValue) ->
                 updateCurrentPlayer(logic.getPlayers().get(newValue.intValue()).getName()));
-
-        // Listener for dice
-        Config.Dice.getFinalRollProperty().addListener((observableValue, oldValue, newValue) ->
-                updateRollDiceOutput(newValue.intValue()));
     }
 
     /**

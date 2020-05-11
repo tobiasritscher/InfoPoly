@@ -55,6 +55,7 @@ public class ModuleGameField extends GameField {
                 if (questionWindow.getAnswer()) {
                     currentPlayer.setMoney(currentPlayer.getMoney() - getFieldPrice());
                     setOwner(currentPlayer);
+                    currentPlayer.alterCredits(creditsGain);
                 }
             } else {
                 new InformationalWindow("You are to poor to buy this field. Get a job!");

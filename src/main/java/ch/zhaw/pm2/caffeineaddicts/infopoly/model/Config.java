@@ -10,9 +10,7 @@ public class Config {
     public static final int NUMBER_DICES = 2;
     public static final int START_MONEY = 100;
     public static final int START_CREDITS = 0;
-    public static final int MINIMUM_CREDITS = 4;
-    public static final int MEDIUM_CREDITS = 8;
-    public static final int MANY_CREDITS = 12;
+    public static final int MANY_CREDITS = 30;
     public static final int BOARD_SIZE = 40;
     public static final int NUMBER_DICE_SIDES = 6;
     public static final int PLAYER_START_POSITION = 0;
@@ -103,56 +101,4 @@ public class Config {
         }
     }
 
-
-    /**
-     * Logical representation of physical dice.
-     *
-     * @author Corroli
-     */
-    public static class Dice {
-        private static final Random random = new Random();
-
-        /**
-         * IntegerProperty for final dice roll. Needed for UI
-         */
-        private static IntegerProperty finalRoll = new SimpleIntegerProperty();
-
-        /**
-         * rolls two dices and moves the current player
-         * if the player has three doubles, he has to repeate.
-         */
-        public static void rollDice(Logic logic) {
-            boolean again;
-            int counter = 0;
-            int firstDice;
-            int secondDice;
-
-            do {
-                firstDice = random.nextInt(NUMBER_DICE_SIDES) + 1;
-                secondDice = random.nextInt(NUMBER_DICE_SIDES) + 1;
-                int rolledNumber = firstDice + secondDice;
-
-                if (firstDice == secondDice) {
-                    new InformationalWindow("You rolled a double! YAY\nYou can move again.");
-                    again = true;
-                    ++counter;
-                } else {
-                    again = false;
-                }
-
-                if (counter == 3) {
-                    new InformationalWindow("You rolled three times doubles, you have to repeate this semester.");
-                    //todo not part of config!! > Logik
-                    logic.moveCurrentPlayerToField(41);
-                } else {
-                    finalRoll.setValue(rolledNumber);
-                    logic.movePlayer(rolledNumber);
-                }
-            } while (again);
-        }
-
-        public static IntegerProperty getFinalRollProperty() {
-            return finalRoll;
-        }
-    }
 }

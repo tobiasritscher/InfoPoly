@@ -1,13 +1,17 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.MainWindowController;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.GameField;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.StartGameField;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Logger;
+
+import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config.NUMBER_DICE_SIDES;
 
 public class Logic {
     private final static Logger logger = Logger.getLogger(Logic.class.getCanonicalName());
@@ -30,9 +34,9 @@ public class Logic {
 
     public void switchToNextPlayer(ArrayList<Player> player) {
         currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
-        if (player.get(currentPlayer.get()).getIsWaiting()) {
-            new InformationalWindow(player.get(currentPlayer.getValue()).getName() + " has to sit this round out...You know why...\nSmall carrot!");
-            player.get(currentPlayer.getValue()).setRoundsWaiting(player.get(currentPlayer.getValue()).getRoundsWaiting() - 1);
+        if (getCurrentPlayer().getIsWaiting()) {
+            new InformationalWindow(getCurrentPlayer().getName() + " has to sit this round out...You know why...\nSmall carrot!");
+            getCurrentPlayer().setRoundsWaiting(getCurrentPlayer().getRoundsWaiting() - 1);
             currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
 
         }
@@ -55,7 +59,7 @@ public class Logic {
      *
      * @param rolledNumber the number between 1 and {@link Config#NUMBER_DICES} * {@link Config#NUMBER_DICE_SIDES} inclusive.
      */
-    public void movePlayer(int rolledNumber) {
+    public void movePlayer(int rolledNumber, boolean moveAgain) {
         int fieldId = calculateNextFieldId(getCurrentPlayer().getPosition(), rolledNumber);
         if (getCurrentPlayer().getPosition() > fieldId) {
             transferMoneyOnRunThroughStartField();
@@ -64,7 +68,9 @@ public class Logic {
         moveCurrentPlayerToField(fieldId);
         verifyCurrentPlayerHasMoney();
         verifyCurrentPlayerIsWinner();
-        switchToNextPlayer(players);
+        if (!moveAgain) {
+            switchToNextPlayer(players);
+        }
     }
 
 
@@ -113,7 +119,6 @@ public class Logic {
         currentPlayer.setPosition(41);
         currentPlayer.setRoundsWaiting(3);
     }
-
     /**
      * Property getter, used by UI to update if a player turn has been updated.
      *
@@ -126,4 +131,26 @@ public class Logic {
     public GameBoard getGameBoard() {
         return gameBoard;
     }
+
+    public void rollDice() {
+        Random random = new Random();
+        boolean again = false;
+        int firstDice;
+        int secondDice;
+
+        //IntegerProperty for final dice roll. Needed for UI
+        IntegerProperty roll = new SimpleIntegerProperty();
+
+        firstDice = random.nextInt(NUMBER_DICE_SIDES) + 1;
+        secondDice = random.nextInt(NUMBER_DICE_SIDES) + 1;
+        int rolledNumber = firstDice + secondDice;
+        roll.setValue(rolledNumber);
+
+        if (firstDice == secondDice) {
+            new InformationalWindow("You rolled a double! YAY\nYou can move again.");
+            again = true;
+        }
+        movePlayer(rolledNumber, again);
+    }
+
 }
