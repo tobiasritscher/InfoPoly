@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
@@ -354,8 +353,6 @@ public class MainWindowController {
      */
     private ArrayList<BorderPane> fieldColors;
 
-    private ArrayList<Circle> balls;
-
     /**
      * Empty Constructor of UIController Class. Needs to be empty (FXML convention)
      * initialize() will automatically be called after.
@@ -397,9 +394,6 @@ public class MainWindowController {
                 field34, field35, field36, field37, field38, field39, field40
         ));
 
-        balls = new ArrayList<>(Arrays.asList(
-                player1Ball, player2Ball, player3Ball, player4Ball
-        ));
         initializeGame();
     }
 
@@ -434,6 +428,11 @@ public class MainWindowController {
         player2Ball.setOpacity(0.0);
         player3Ball.setOpacity(0.0);
         player4Ball.setOpacity(0.0);
+
+        player1Ball.setFill(Config.PlayerColor.PLAYER1.getColor());
+        player2Ball.setFill(Config.PlayerColor.PLAYER2.getColor());
+        player3Ball.setFill(Config.PlayerColor.PLAYER3.getColor());
+        player4Ball.setFill(Config.PlayerColor.PLAYER4.getColor());
 
         separator0.setOpacity(0.0);
         separator1.setOpacity(0.0);
@@ -520,7 +519,7 @@ public class MainWindowController {
         switch (playerNumber) {
             case 1:
                 fundsBoxPlayer1Name.setText(playerName);
-                //player1Ball.setFill(new Color(Config.PlayerColor.PLAYER1.getColorValue()));
+
                 player1Ball.setOpacity(1.0);
                 separator0.setOpacity(1.0);
                 break;

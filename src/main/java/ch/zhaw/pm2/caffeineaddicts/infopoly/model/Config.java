@@ -1,10 +1,6 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
-import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-
-import java.util.Random;
+import javafx.scene.paint.Color;
 
 public class Config {
     public static final int NUMBER_DICES = 2;
@@ -99,6 +95,10 @@ public class Config {
 
         public String getColorValue() {
             return colorValue;
+        }
+
+        public Color getColor() {
+            return Color.web(colorValue);
         }
     }
 
