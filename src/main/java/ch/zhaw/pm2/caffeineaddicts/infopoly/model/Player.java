@@ -36,7 +36,7 @@ public class Player {
     }
 
     public void setRoundsWaiting(int amount) {
-        roundsWaiting += amount;
+        roundsWaiting = amount;
     }
 
     public List<GameField> getOwnerShips() {
