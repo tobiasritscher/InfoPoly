@@ -125,25 +125,25 @@ public class GameBoard {
                 switch (fieldType) {
 
                     case MODULE:
-                        gameField = new ModuleGameField(fieldId, fieldType, fieldName, 10, 20, 30);
+                        gameField = new ModuleGameField(fieldId, fieldType, fieldName);
                         break;
                     case STARTUP:
                         gameField = new StartupGameField(fieldId, fieldType, fieldName);
                         break;
                     case JOB:
-                        gameField = new JobGameField(fieldId, fieldType, fieldName, 10);
+                        gameField = new JobGameField(fieldId, fieldType, fieldName);
                         break;
                     case CHANCE:
                         gameField = new ChanceGameField(fieldId, fieldType, fieldName);
                         break;
                     case START:
-                        gameField = new StartGameField(fieldId, fieldType, fieldName, 200);
+                        gameField = new StartGameField(fieldId, fieldType, fieldName);
                         break;
                     case FEE:
                         gameField = new FeeGameField(fieldId, fieldType, fieldName, feeType, 30);
                         break;
                     case REPETITION:
-                        gameField = new RepetitionGameField(fieldId, fieldType, fieldName, 2);
+                        gameField = new RepetitionGameField(fieldId, fieldType, fieldName);
                         break;
                     case EXAM:
                         gameField = new ExamGameField(fieldId, fieldType, fieldName);

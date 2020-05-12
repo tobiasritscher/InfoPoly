@@ -9,11 +9,10 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
  * Represents {@link Config.FieldType#JOB}.
  */
 public class JobGameField extends GameField {
-    private int baseWage;
+    private int baseWage = 10;
 
-    public JobGameField(int fieldId, Config.FieldType fieldType, String fieldName, int baseWage) {
+    public JobGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
         super(fieldId, fieldType, fieldName);
-        this.baseWage = baseWage;
     }
 
     private void quitWork(Player player) {
@@ -29,10 +28,10 @@ public class JobGameField extends GameField {
 
         if (hasOwner()) {
             if (currentPlayer.equals(getOwner())) {
-                new InformationalWindow("Forgot?","You are already working here. You made an extra shift: +" + baseWage + "CHF");
+                new InformationalWindow("Forgot?", "You are already working here. You made an extra shift: +" + baseWage + "CHF");
                 currentPlayer.alterMoney(baseWage);
             } else {
-                new InformationalWindow("Shopping?","Thank you for shopping with us!");
+                new InformationalWindow("Shopping?", "Thank you for shopping with us!");
                 currentPlayer.alterMoney(baseWage * -1);
                 getOwner().alterMoney(baseWage);
             }

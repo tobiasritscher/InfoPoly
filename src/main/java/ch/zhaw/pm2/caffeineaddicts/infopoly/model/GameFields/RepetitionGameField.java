@@ -12,20 +12,20 @@ import java.util.Map;
  */
 public class RepetitionGameField extends GameField {
     private final Map<Integer, Integer> students = new HashMap<>();
-    private final int numberRoundsToWait;
+    private final int numberRoundsToWait = 3;
 
 
-    /**
-     * @param numberRoundsToWait positive integer number
-     */
-    public RepetitionGameField(int fieldId, Config.FieldType fieldType, String fieldName, int numberRoundsToWait) {
+    public RepetitionGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
         super(fieldId, fieldType, fieldName);
-        this.numberRoundsToWait = Math.min(0, numberRoundsToWait);
     }
 
 
     @Override
     public void action(Player currentPlayer) {
-        new InformationalWindow("Repetition","You are laughing at the students that are repeating!");
+        new InformationalWindow("Repetition", "You are laughing at the students that are repeating!");
+    }
+
+    public int getNumberRoundsToWait() {
+        return numberRoundsToWait;
     }
 }

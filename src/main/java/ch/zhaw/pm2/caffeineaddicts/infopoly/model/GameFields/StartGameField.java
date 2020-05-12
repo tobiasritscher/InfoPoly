@@ -11,11 +11,10 @@ import java.util.Map;
  */
 public class StartGameField extends GameField {
     private final Map<Integer, Integer> students = new HashMap<>();
-    private final int baseScholarship;
+    private final int baseScholarship = 10;
 
-    public StartGameField(int fieldId, Config.FieldType fieldType, String fieldName, int baseScholarship) {
+    public StartGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
         super(fieldId, fieldType, fieldName);
-        this.baseScholarship = baseScholarship;
     }
 
     public int getBaseScholarship() {

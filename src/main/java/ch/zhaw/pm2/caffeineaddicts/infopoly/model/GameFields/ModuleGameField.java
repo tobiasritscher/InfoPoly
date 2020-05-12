@@ -11,15 +11,12 @@ import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config.MEDIUM_CREDITS;
  * Representation of {@link Config.FieldType#MODULE}
  */
 public class ModuleGameField extends GameField {
-    private final int fieldPrice;
-    private final int fieldMoneyCharge;
-    private final int creditsGain;
+    private final int fieldPrice = 10;
+    private final int fieldMoneyCharge = 10;
+    private final int creditsGain = 10;
 
-    public ModuleGameField(int fieldId, Config.FieldType fieldType, String fieldName, int fieldPrice, int fieldMoneyCharge, int creditsGain) {
+    public ModuleGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
         super(fieldId, fieldType, fieldName);
-        this.fieldPrice = fieldPrice;
-        this.fieldMoneyCharge = fieldMoneyCharge;
-        this.creditsGain = creditsGain;
     }
 
     public int getFieldMoneyCharge() {
