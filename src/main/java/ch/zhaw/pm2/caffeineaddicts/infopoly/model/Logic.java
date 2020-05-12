@@ -1,8 +1,6 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
-import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.GameField;
-import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.StartGameField;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -10,21 +8,18 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config.CREDITS_TO_WIN;
 import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config.NUMBER_DICE_SIDES;
 
 public class Logic {
     private final static Logger logger = Logger.getLogger(Logic.class.getCanonicalName());
-    private static IntegerProperty currentPlayer = new SimpleIntegerProperty(0);
+    private static IntegerProperty currentPlayerId = new SimpleIntegerProperty(0);
     private final GameBoard gameBoard;
     IntegerProperty currentDiceRoll = new SimpleIntegerProperty();
-    private ArrayList<Player> players = new ArrayList<>();
+    private final ArrayList<Player> players = new ArrayList<>();
 
     public Logic() {
         gameBoard = new GameBoard();
-    }
-
-    public IntegerProperty currentDiceRollProperty() {
-        return currentDiceRoll;
     }
 
     public ArrayList<Player> getPlayers() {
@@ -36,21 +31,27 @@ public class Logic {
     }
 
 
-    public void switchToNextPlayer(ArrayList<Player> player) {
-        currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
-        if (players.get(currentPlayer.getValue()).getRoundsWaiting() > 0) {
-            new InformationalWindow("Small carrot!", getCurrentPlayer().getName() + " has to sit this round out...You know why!");
-            players.get(currentPlayer.getValue()).setRoundsWaiting(players.get(currentPlayer.getValue()).getRoundsWaiting() - 1);
-            currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
+    /**
+     * changes the currentPlayerId to the next player
+     */
+    public void switchToNextPlayer() {
+        int nextPlayerId = (currentPlayerId.get() + 1) % players.size();
+        currentPlayerId.setValue(nextPlayerId);
 
+        Player currentPlayer = getCurrentPlayer();
+        int waitingRounds = currentPlayer.getRoundsWaiting();
+        if (waitingRounds > 0) {
+            new InformationalWindow("Small carrot!", currentPlayer.getName() + " has to sit " + waitingRounds + " more rounds out...You know why!");
+            currentPlayer.setRoundsWaiting(waitingRounds - 1);
+            switchToNextPlayer();
         }
     }
 
     private Player getCurrentPlayer() {
-        if (players == null || players.isEmpty()) {
+        if (players.isEmpty()) {
             throw new RuntimeException("invalid operation: no players!");
         }
-        return players.get(currentPlayer.getValue());
+        return players.get(currentPlayerId.getValue());
     }
 
     int calculateNextFieldId(int currentFieldId, int numberFieldToMove) {
@@ -59,7 +60,7 @@ public class Logic {
 
     /**
      * <p>Set new player position according to the given rolled number.</p>
-     * <p></p>Checks if player has money of if he has won.</p>
+     * <p></p>Checks if player has money or if he has won.</p>
      *
      * @param rolledNumber the number between 1 and {@link Config#NUMBER_DICES} * {@link Config#NUMBER_DICE_SIDES} inclusive.
      */
@@ -74,7 +75,7 @@ public class Logic {
         verifyCurrentPlayerHasMoney();
         verifyCurrentPlayerIsWinner();
         if (!moveAgain) {
-            switchToNextPlayer(players);
+            switchToNextPlayer();
         }
     }
 
@@ -92,17 +93,18 @@ public class Logic {
      * If current player has no money move to the @{@link Config.FieldType#START} field.
      */
     private void verifyCurrentPlayerHasMoney() {
-        if (getCurrentPlayer().getMoney() <= 0) {
+        Player currentPlayer = getCurrentPlayer();
+        if (currentPlayer.getMoney() <= 0) {
             new InformationalWindow("Broke!", "You have no money left!");
-            getCurrentPlayer().setPosition(gameBoard.getStartGameField().getFieldId());
-            getCurrentPlayer().setPosition(0);
+            currentPlayer.setPosition(gameBoard.getStartGameField().getFieldId());
             waitForScholarship();
         }
     }
 
     private void verifyCurrentPlayerIsWinner() {
-        if (players.get(currentPlayer.getValue()).getCredits() >= 180) {
+        if (getCurrentPlayer().getCredits() >= CREDITS_TO_WIN) {
             new InformationalWindow("Bye bye dear school!", "Congratulations! You just graduated from ZHAW!\nNow go and get a job in the real world!");
+            //TODO: finish game
         }
     }
 
@@ -119,14 +121,16 @@ public class Logic {
     }
 
     private void transferMoneyOnRunThroughStartField() {
-        int money = ((StartGameField) gameBoard.getStartGameField()).getParentsHelp();
+        int money = gameBoard.getStartGameField().getParentsHelp();
 
         new InformationalWindow("Parents help!", String.format("You got %d CHF from you parents!", money));
         getCurrentPlayer().alterMoney(money);
     }
 
     public void repeating(Player currentPlayer) {
-        currentPlayer.setPosition(41);
+        final int REPETITION_FIELD_ID = 41;
+
+        currentPlayer.setPosition(REPETITION_FIELD_ID);
         currentPlayer.setRoundsWaiting(3);
     }
 
@@ -136,7 +140,7 @@ public class Logic {
      * @return playerTurn IntegerProperty
      */
     public IntegerProperty getPlayerTurnProperty() {
-        return currentPlayer;
+        return currentPlayerId;
     }
 
     public GameBoard getGameBoard() {
@@ -148,8 +152,6 @@ public class Logic {
         boolean again = false;
         int firstDice;
         int secondDice;
-
-        //IntegerProperty for final dice roll. Needed for UI
 
         firstDice = random.nextInt(NUMBER_DICE_SIDES) + 1;
         secondDice = random.nextInt(NUMBER_DICE_SIDES) + 1;
