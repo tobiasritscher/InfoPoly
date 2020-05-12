@@ -128,7 +128,7 @@ public class GameBoard {
                         gameField = new ModuleGameField(fieldId, fieldType, fieldName, 10, 20, 30);
                         break;
                     case STARTUP:
-                        gameField = new StartupGameField(fieldId, fieldType, fieldName, 10, 10);
+                        gameField = new StartupGameField(fieldId, fieldType, fieldName);
                         break;
                     case JOB:
                         gameField = new JobGameField(fieldId, fieldType, fieldName, 10);
