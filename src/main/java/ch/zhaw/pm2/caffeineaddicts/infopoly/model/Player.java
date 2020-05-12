@@ -19,7 +19,7 @@ public class Player {
     private final String name;
     private boolean isWorking = false;
     private List<GameField> ownerShips;
-    private boolean getsScholarship = false;
+    private boolean waitingForScholarship = false;
 
     public Player(String name, int money, int credits, int playerId) {
         this.name = name;
@@ -43,12 +43,12 @@ public class Player {
         return ownerShips;
     }
 
-    public boolean isGetsScholarship() {
-        return getsScholarship;
+    public boolean isWaitingForScholarship() {
+        return waitingForScholarship;
     }
 
-    public void setGetsScholarship(boolean getsScholarship) {
-        this.getsScholarship = getsScholarship;
+    public void setWaitingForScholarship(boolean waitingForScholarship) {
+        this.waitingForScholarship = waitingForScholarship;
     }
 
     /**

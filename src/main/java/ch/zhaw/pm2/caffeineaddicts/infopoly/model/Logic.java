@@ -35,22 +35,35 @@ public class Logic {
      * changes the currentPlayerId to the next player
      */
     private void switchToNextPlayer() {
-        final int SCHOLARSHIP_MONEY = 100;
         int nextPlayerId = (currentPlayerId.get() + 1) % players.size();
         currentPlayerId.setValue(nextPlayerId);
 
-        Player currentPlayer = getCurrentPlayer();
-        int waitingRounds = currentPlayer.getRoundsWaiting();
-
-        if (waitingRounds == 0 && currentPlayer.isGetsScholarship()) {
-            currentPlayer.alterMoney(SCHOLARSHIP_MONEY);
-            currentPlayer.setGetsScholarship(false);
-            new InformationalWindow("Poor guy!", String.format("You got some state help: %d", SCHOLARSHIP_MONEY));
-        } else if (waitingRounds > 0) {
-            new InformationalWindow("Small carrot!", currentPlayer.getName() + " has to sit " + --waitingRounds + " more rounds out...You know why!");
-            currentPlayer.setRoundsWaiting(waitingRounds);
+        if (playerHasToWait()) {
             switchToNextPlayer();
         }
+    }
+
+    private boolean playerHasToWait() {
+        Player currentPlayer = getCurrentPlayer();
+        boolean jumpPlayerTurn = false;
+        int waitingRounds = currentPlayer.getRoundsWaiting();
+
+        if (waitingRounds > 0) {
+            waitingRounds--;
+            new InformationalWindow("Small carrot!", currentPlayer.getName() + " has to sit " + waitingRounds + " more rounds out...You know why!");
+            currentPlayer.setRoundsWaiting(waitingRounds);
+            jumpPlayerTurn = true;
+        } else if (currentPlayer.isWaitingForScholarship()) {
+            getScholarship(currentPlayer);
+        }
+        return jumpPlayerTurn;
+    }
+
+    private void getScholarship(Player currentPlayer) {
+        final int SCHOLARSHIP_MONEY = 100;
+        currentPlayer.alterMoney(SCHOLARSHIP_MONEY);
+        currentPlayer.setWaitingForScholarship(false);
+        new InformationalWindow("Poor guy!", String.format("You got some state help: %d", SCHOLARSHIP_MONEY));
     }
 
     private Player getCurrentPlayer() {
@@ -94,7 +107,7 @@ public class Logic {
      */
     private void verifyCurrentPlayerHasMoney() {
         Player currentPlayer = getCurrentPlayer();
-        if (!currentPlayer.isGetsScholarship() && currentPlayer.getMoney() <= 0) {
+        if (!currentPlayer.isWaitingForScholarship() && currentPlayer.getMoney() <= 0) {
             new InformationalWindow("Broke!", "You have no money left!");
             currentPlayer.setPosition(gameBoard.getStartGameField().getFieldId());
             waitForScholarship();
@@ -113,7 +126,7 @@ public class Logic {
 
         new InformationalWindow("Scholarship!", "You ran out of money so now you will apply for a scholarship.\nThat usually takes up to 3 Weeks");
         getCurrentPlayer().setRoundsWaiting(ROUNDS_TO_WAIT);
-        getCurrentPlayer().setGetsScholarship(true);
+        getCurrentPlayer().setWaitingForScholarship(true);
     }
 
     private void transferMoneyOnRunThroughStartField() {
