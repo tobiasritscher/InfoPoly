@@ -33,6 +33,9 @@ public class FeeGameField extends GameField {
         new InformationalWindow("Nothing is free of charge...", String.format("You have to pay %sCHF!", fee));
     }
 
+    /**
+     * Enum for the different Feetypes
+     */
     public enum FeeType {
         /**
          * Money will be charged at fixed rate.
@@ -41,10 +44,6 @@ public class FeeGameField extends GameField {
         /**
          * Random amount of money will be charged.
          */
-        RANDOM,
-        /**
-         * Fixed amount of money will be charged in return of some credits; Money go to the bank;
-         */
-        BANK_CREDIT
+        RANDOM
     }
 }
