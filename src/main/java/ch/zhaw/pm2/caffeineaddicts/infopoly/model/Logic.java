@@ -1,7 +1,9 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
@@ -17,7 +19,11 @@ public class Logic {
     private final GameBoard gameBoard;
     IntegerProperty currentDiceRoll = new SimpleIntegerProperty();
     private final ArrayList<Player> players = new ArrayList<>();
+    private BooleanProperty gameWasWon = new SimpleBooleanProperty(false);
 
+    /**
+     * Constructor for Logic class.
+     */
     public Logic() {
         gameBoard = new GameBoard();
     }
@@ -26,10 +32,17 @@ public class Logic {
         return players;
     }
 
+    public BooleanProperty getGameWasWonProperty() {
+        return gameWasWon;
+    }
+
+    /**
+     * Adds player to the player list.
+     * @param player
+     */
     public void addPlayer(Player player) {
         players.add(player);
     }
-
 
     /**
      * changes the currentPlayerId to the next player
@@ -117,7 +130,7 @@ public class Logic {
     private void verifyCurrentPlayerIsWinner() {
         if (getCurrentPlayer().getCredits() >= CREDITS_TO_WIN) {
             new InformationalWindow("Bye bye dear school!", "Congratulations! You just graduated from ZHAW!\nNow go and get a job in the real world!");
-            //TODO: finish game
+            gameWasWon.setValue(true);
         }
     }
 
