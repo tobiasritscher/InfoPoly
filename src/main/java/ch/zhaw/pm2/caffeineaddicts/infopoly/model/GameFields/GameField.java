@@ -12,7 +12,7 @@ public abstract class GameField {
     private final Config.FieldType fieldType;
     private final String fieldName;
     private Player owner = null;
-    private IntegerProperty ownerProperty = new SimpleIntegerProperty(0);
+    private IntegerProperty ownerProperty = new SimpleIntegerProperty(-1);
 
     public GameField(int fieldId, Config.FieldType fieldType, String fieldName) {
         this.fieldId = fieldId;

@@ -27,7 +27,7 @@ public class ChanceGameField extends GameField {
     @Override
     public void action(Player currentPlayer) {
         generateEvent();
-        new InformationalWindow("", getMessage());
+        new InformationalWindow("Wuuups...Something has happened!!!", getMessage());
         currentPlayer.alterMoney(getMoneyDeviation());
         currentPlayer.alterCredits(getCreditsDeviation());
     }
@@ -38,23 +38,14 @@ public class ChanceGameField extends GameField {
     }
 
     public String getMessage() {
-        if (event == null) {
-            throw new RuntimeException("invalid operation: generate event first.");
-        }
         return event.getMessage();
     }
 
     public int getCreditsDeviation() {
-        if (event == null) {
-            throw new RuntimeException("invalid operation: generate event first.");
-        }
         return event.creditsDeviation;
     }
 
     public int getMoneyDeviation() {
-        if (event == null) {
-            throw new RuntimeException("invalid operation: generate event first.");
-        }
         return event.moneyDeviation;
     }
 

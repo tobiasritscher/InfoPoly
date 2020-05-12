@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
+import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config.MEDIUM_CREDITS;
+
 /**
  * Main Window UI Controller. Contains all fields to address the main window, and all methods used to update fields.
  * <p>
@@ -519,7 +521,6 @@ public class MainWindowController {
         switch (playerNumber) {
             case 1:
                 fundsBoxPlayer1Name.setText(playerName);
-
                 player1Ball.setOpacity(1.0);
                 separator0.setOpacity(1.0);
                 break;
@@ -667,13 +668,27 @@ public class MainWindowController {
                             i + 1));
 
                     // Add listeners to money and credits.
-                    int playerNumber = i;
-                    logic.getPlayers().get(i).getMoneyProperty().addListener((observableValue, oldValue, newValue) ->
-                            setPlayerMoney(playerNumber + 1, (Integer) newValue));
-                    logic.getPlayers().get(i).getCreditsProperty().addListener((observableValue, oldValue, newValue) ->
-                            setPlayerCredits(playerNumber + 1, (Integer) newValue));
-                    logic.getPlayers().get(i).getPositionProperty().addListener((observableValue, oldValue, newValue) ->
-                            movePlayer(logic.getPlayers().get(playerNumber).getName(), (Integer) newValue));
+                    int playerId = i;
+                    Player player = logic.getPlayer(i);
+                    player.getMoneyProperty().addListener((observableValue, oldMoney, newMoney) -> {
+                        new InformationalWindow("Email from bank.", String.format("%-11s%S%n%-9sAccount state%n%n%-14s%d.- CHF%n%-15s%d.- CHF%n%-16s%d.- CHF", "To:", player.getName(), "Subject:", "Money before:", oldMoney.intValue(), "Money now:", newMoney.intValue(), "Money gain:", newMoney.intValue() - oldMoney.intValue()));
+                        setPlayerMoney(playerId + 1, newMoney.intValue());
+                    });
+                    player.getCreditsProperty().addListener((observableValue, oldCredits, newCredits) -> {
+                        //new InformationalWindow("Email from ZHAW.", String.format("You lost %dCHF.", , ));
+                        new InformationalWindow("Email from ZHAW.", String.format("%-11s%S%n%-9sCredits state%n%n%-16s%d  credits%n%-16s%d credits%n%-17s%d credits", "To:", player.getName(), "Subject:", "Credits before:", oldCredits.intValue(), "Credits now:", newCredits.intValue(), "Credits gain:", newCredits.intValue() - oldCredits.intValue()));
+                        setPlayerCredits(playerId + 1, newCredits.intValue());
+                    });
+                    player.getPositionProperty().addListener((observableValue, oldPosition, newPosition) -> {
+                                final int repetitionGameFieldId = logic.getGameBoard().getRepetitionGameFieldId();
+                                final int examGameFieldId = logic.getGameBoard().getExamGameFieldId();
+                                if ((oldPosition.intValue() == examGameFieldId) && (newPosition.intValue() == repetitionGameFieldId)) {
+                                    movePlayer(player.getName(), fieldLabels.indexOf(repeatingPlayers));
+                                } else {
+                                    movePlayer(player.getName(), newPosition.intValue());
+                                }
+                            }
+                    );
 
                     movePlayer(entry.getPlayersList().get(i), Config.PLAYER_START_POSITION);
                 }
@@ -694,7 +709,7 @@ public class MainWindowController {
                         rollDiceOutput.setText(newValue.toString()));
 
                 // Listener in case game was won
-                logic.getGameWasWonProperty().addListener((observableValue, oldValue, newValue) -> endGame());
+                //logic.getGameWasWonProperty().addListener((observableValue, oldValue, newValue) -> endGame());
 
                 gameWasStarted = true;
                 setBoardVisibility(true);
@@ -742,7 +757,7 @@ public class MainWindowController {
     /**
      * Helper method for ending the game.
      */
-    private void endGame(){
+    private void endGame() {
         setBoardVisibility(false);
         gameWasStarted = false;
         newGameConfirmationNeeded = false;
