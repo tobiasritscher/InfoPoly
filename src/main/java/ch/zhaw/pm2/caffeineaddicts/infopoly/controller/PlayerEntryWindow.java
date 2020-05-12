@@ -50,6 +50,10 @@ public class PlayerEntryWindow {
         // Parse chosen integer to numberOfPlayers field
         numberOfPlayersDialogResult.ifPresent(s -> numberOfPlayers.set(parseInt(s)));
 
+        if(numberOfPlayersDialogResult.isEmpty()){
+            entrySuccess = false;
+        }
+
         // Loop through number of players
         for (int i = 1; i <= numberOfPlayers.get(); i++) {
 
@@ -95,11 +99,11 @@ public class PlayerEntryWindow {
                         falseOrIncompleteInput = false;
 
                     } else {
-
                         // Error message & retry
                         new InformationalWindow("Can you read?","Make sure your name is just two alphabetical characters!");
                     }
                 } else {
+
                     // Exit for loop
                     entrySuccess = false;
                     break;

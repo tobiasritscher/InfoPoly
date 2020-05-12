@@ -305,13 +305,13 @@ public class MainWindowController {
     @FXML
     private Circle player4Ball;
     @FXML
-    private Line seperator0;
+    private Line separator0;
     @FXML
-    private Line seperator1;
+    private Line separator1;
     @FXML
-    private Line seperator2;
+    private Line separator2;
     @FXML
-    private Line seperator3;
+    private Line separator3;
     /**
      * Content of Game controls (current player, rollDiceButton, rollDiceOutput)
      */
@@ -428,10 +428,10 @@ public class MainWindowController {
         player3Ball.setOpacity(0.0);
         player4Ball.setOpacity(0.0);
 
-        seperator0.setOpacity(0.0);
-        seperator1.setOpacity(0.0);
-        seperator2.setOpacity(0.0);
-        seperator3.setOpacity(0.0);
+        separator0.setOpacity(0.0);
+        separator1.setOpacity(0.0);
+        separator2.setOpacity(0.0);
+        separator3.setOpacity(0.0);
     }
 
     /**
@@ -466,8 +466,6 @@ public class MainWindowController {
 
         // Extract text from field and concatenate it with whitespace and Player name
         tempText = fieldLabels.get(fieldId).getText() + " " + playerName;
-
-        // Trim leading and trailing whitespaces
         tempText = tempText.trim();
 
         // Set new text to field
@@ -516,22 +514,22 @@ public class MainWindowController {
             case 1:
                 fundsBoxPlayer1Name.setText(playerName);
                 player1Ball.setOpacity(1.0);
-                seperator0.setOpacity(1.0);
+                separator0.setOpacity(1.0);
                 break;
             case 2:
                 fundsBoxPlayer2Name.setText(playerName);
                 player2Ball.setOpacity(1.0);
-                seperator1.setOpacity(1.0);
+                separator1.setOpacity(1.0);
                 break;
             case 3:
                 fundsBoxPlayer3Name.setText(playerName);
                 player3Ball.setOpacity(1.0);
-                seperator2.setOpacity(1.0);
+                separator2.setOpacity(1.0);
                 break;
             case 4:
                 fundsBoxPlayer4Name.setText(playerName);
                 player4Ball.setOpacity(1.0);
-                seperator3.setOpacity(1.0);
+                separator3.setOpacity(1.0);
                 break;
             default:
                 new InformationalWindow("", "Player number out of range!");
@@ -607,7 +605,6 @@ public class MainWindowController {
             logic.rollDice();
         } else {
             newGameAction();
-            gameWasStarted = true;
         }
     }
 
@@ -625,38 +622,30 @@ public class MainWindowController {
                 addPlayers();
             }
         }
-
-        // Listener for current player
-        logic.getPlayerTurnProperty().addListener((observableValue, oldValue, newValue) ->
-                updateCurrentPlayer(logic.getPlayers().get(newValue.intValue()).getName()));
-
-        // Listener for dice
-        logic.getCurrentDiceRollProperty().addListener((observableValue, oldValue, newValue) ->
-                rollDiceOutput.setText(newValue.toString()));
     }
 
     /**
      * Helper method for adding players. Spawns a new PlayerEntryWindow and calls Logic to add new Player objects.
      */
     private void addPlayers() {
+        // Clean up board, empty out all the fields
+        initializeGame();
+        setBoardVisibility(false);
+
+        gameWasStarted = false;
+        newGameConfirmationNeeded = false;
+
         // Resetting logic and game board
         logic = new Logic();
 
         // Preparing player entry windows
         PlayerEntryWindow entry;
 
-        // Clean up board, empty out all the fields
-        initializeGame();
-        setBoardVisibility(false);
-
         // Spawn player entry windows
         entry = new PlayerEntryWindow();
 
         try {
-            if (!entry.isEntrySuccess()) {
-                gameWasStarted = false;
-            } else {
-
+            if (entry.isEntrySuccess()) {
                 for (int i = 0; i < Objects.requireNonNull(entry).getPlayersList().size(); i++) {
                     // Add players to UI
                     setPlayerName(i + 1, entry.getPlayersList().get(i));
@@ -680,25 +669,32 @@ public class MainWindowController {
                             movePlayer(logic.getPlayers().get(playerNumber).getName(), (Integer) newValue));
 
                     movePlayer(entry.getPlayersList().get(i), Config.PLAYER_START_POSITION);
-                    newGameConfirmationNeeded = false;
-                    gameWasStarted = true;
-                    setBoardVisibility(true);
                 }
+
+                // Add occupancy listeners to game fields
+                GameBoard gameboard = logic.getGameBoard();
+                gameboard.getBoard().forEach((field) -> field.getOwnerProperty().addListener(
+                        (observableValue, oldValue, newValue) ->
+                                takeOverField(newValue.intValue(), field.getFieldId()))
+                );
+
+                // Listener for current player
+                logic.getPlayerTurnProperty().addListener((observableValue, oldValue, newValue) ->
+                        updateCurrentPlayer(logic.getPlayers().get(newValue.intValue()).getName()));
+
+                // Listener for dice
+                logic.getCurrentDiceRollProperty().addListener((observableValue, oldValue, newValue) ->
+                        rollDiceOutput.setText(newValue.toString()));
+
+                gameWasStarted = true;
+                setBoardVisibility(true);
+
+            } else {
+                endGame();
             }
 
-            newGameConfirmationNeeded = false;
-
-            // Add listeners to game fields
-            GameBoard gameboard = logic.getGameBoard();
-            gameboard.getBoard().forEach((field) -> field.getOwnerProperty().addListener(
-                    (observableValue, oldValue, newValue) ->
-                            takeOverField(newValue.intValue(), field.getFieldId()))
-            );
-
         } catch (Exception e) {
-            setBoardVisibility(false);
-            newGameConfirmationNeeded = true;
-            gameWasStarted = false;
+            endGame();
         }
     }
 
@@ -731,5 +727,14 @@ public class MainWindowController {
         rollDiceLabel.setVisible(visibility);
         rollDiceOutput.setText("");
         fields.forEach((field) -> field.setVisible(visibility));
+    }
+
+    /**
+     * Helper method for ending the game.
+     */
+    private void endGame(){
+        setBoardVisibility(false);
+        gameWasStarted = false;
+        newGameConfirmationNeeded = false;
     }
 }
