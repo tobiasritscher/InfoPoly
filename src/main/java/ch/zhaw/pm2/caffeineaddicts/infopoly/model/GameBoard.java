@@ -114,13 +114,23 @@ public class GameBoard {
 
                 numberAttributes--;
 
+                String attribute = "";
                 for (int a = 0; a < numberAttributes; a++) {
                     if (!sc.hasNext()) {
                         throw new RuntimeException("invalid file format: an attribute is expected");
                     }
-                    sc.nextLine().strip();
+                    attribute = sc.nextLine().strip();
                 }
                 FeeGameField.FeeType feeType = FeeGameField.FeeType.FIXED;
+                if (fieldType.equals(Config.FieldType.FEE)) {
+                    switch (attribute) {
+                        case "ran":
+                            feeType = FeeGameField.FeeType.RANDOM;
+                            break;
+                        default:
+                            feeType = FeeGameField.FeeType.FIXED;
+                    }
+                }
                 GameField gameField;
                 switch (fieldType) {
 
