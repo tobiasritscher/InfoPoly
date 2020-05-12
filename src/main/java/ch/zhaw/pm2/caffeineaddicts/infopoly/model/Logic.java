@@ -66,7 +66,7 @@ public class Logic {
         final int SCHOLARSHIP_MONEY = 100;
         currentPlayer.alterMoney(SCHOLARSHIP_MONEY);
         currentPlayer.setWaitingForScholarship(false);
-        new InformationalWindow("Poor guy!", String.format("You got some state help: %d", SCHOLARSHIP_MONEY));
+        new InformationalWindow("Poor guy!", String.format("You got some money from the state: %d", SCHOLARSHIP_MONEY));
     }
 
     private Player getCurrentPlayer() {
