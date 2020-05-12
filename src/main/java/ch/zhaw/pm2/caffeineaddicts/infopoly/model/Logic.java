@@ -70,6 +70,7 @@ public class Logic {
         }
         logger.info(String.format("Rolled number: %d; Next field id: %d", rolledNumber, fieldId));
         moveCurrentPlayerToField(fieldId);
+        gameBoard.getField(fieldId).action(getCurrentPlayer());
         verifyCurrentPlayerHasMoney();
         verifyCurrentPlayerIsWinner();
         if (!moveAgain) {
@@ -84,9 +85,7 @@ public class Logic {
      * @param fieldId positive zero based integer number, field id where current player to be moved to.
      */
     public void moveCurrentPlayerToField(int fieldId) {
-        GameField gameField = gameBoard.getField(fieldId);
         getCurrentPlayer().setPosition(fieldId);
-        gameField.action(getCurrentPlayer());
     }
 
     /**
