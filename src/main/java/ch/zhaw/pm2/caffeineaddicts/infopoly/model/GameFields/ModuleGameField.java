@@ -40,12 +40,9 @@ public class ModuleGameField extends GameField {
             if (owner.equals(currentPlayer)) {
                 new InformationalWindow("Hey Boss!", String.format("You got some credits: %d", creditsGainFromVisitors));
 
-            } else if (currentPlayer.getMoney() < fieldMoneyCharge) {
-                //take all money the visitor has
-                owner.alterMoney(Math.min(0, currentPlayer.getMoney()));
-                currentPlayer.alterMoney(currentPlayer.getMoney());
             } else {
-                owner.alterMoney(Math.min(0, fieldMoneyCharge));
+                new InformationalWindow("This course is so good!", String.format("You must pay: %d", fieldMoneyCharge));
+                owner.alterMoney(Math.min(0, Math.min(currentPlayer.getMoney(), fieldMoneyCharge)));
                 currentPlayer.alterMoney(-fieldMoneyCharge);
             }
             owner.setCredits(getCreditsGainFromVisitors());

@@ -193,9 +193,9 @@ public class Player {
      * @param credits positive or negative integer.
      */
     public void alterCredits(int credits) {
-        int oldState = credits;
+        int oldState = this.credits.getValue();
         this.credits.set(this.credits.get() + credits);
-        logger.info(String.format("Credits altered. Player: %s Old: %d New: %d", name, oldState, credits));
+        logger.info(String.format("Credits altered. Player: %s Old: %d New: %d", name, oldState, this.credits.getValue()));
     }
 
     public boolean isBroke() {
