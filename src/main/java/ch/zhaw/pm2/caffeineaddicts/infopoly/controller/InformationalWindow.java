@@ -31,6 +31,7 @@ public class InformationalWindow {
         alert.setTitle(headerText);
         alert.setHeaderText(headerText);
         alert.setContentText(messageText);
+        alert.getDialogPane().setMinWidth(Region.USE_PREF_SIZE);
         Optional<ButtonType> buttonType = alert.showAndWait();
     }
 }

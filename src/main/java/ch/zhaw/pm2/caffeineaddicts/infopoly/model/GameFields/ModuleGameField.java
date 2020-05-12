@@ -28,7 +28,7 @@ public class ModuleGameField extends GameField {
 
         if (hasOwner()) {
             if (owner.equals(currentPlayer)) {
-                new InformationalWindow("Hey Boss!", "You alredy own this module.");
+                new InformationalWindow("Hey Boss!", "You already own this module.");
             } else {
                 new InformationalWindow("This course is so good!", String.format("You must pay: %d CHF", FIELD_MONEY_CHARGE));
                 currentPlayer.alterMoney(-FIELD_MONEY_CHARGE);
@@ -38,12 +38,11 @@ public class ModuleGameField extends GameField {
             final int FIELD_PRICE = 10;
 
             if (currentPlayer.getMoney() >= FIELD_PRICE) {
-                QuestionWindow questionWindow = new QuestionWindow(String.format("Purchase course? (%d CHF)", FIELD_PRICE), String.format(" %s would you like to buy the course: %s", currentPlayer.getName().toUpperCase(), getFieldName().toUpperCase()));
+                QuestionWindow questionWindow = new QuestionWindow(String.format("Purchase course? (%d CHF)", FIELD_PRICE), String.format("%s would you like to buy the course: %s%nYou will get: %d credits", currentPlayer.getName().toUpperCase(), getFieldName().toUpperCase(), MEDIUM_CREDITS));
                 if (questionWindow.getAnswer()) {
                     currentPlayer.alterMoney(FIELD_PRICE * -1);
                     setOwner(currentPlayer);
                     currentPlayer.alterCredits(MEDIUM_CREDITS);
-                    new InformationalWindow("Balance", String.format("You lost %dCHF and got %d credits from this purchase.", FIELD_MONEY_CHARGE, MEDIUM_CREDITS));
                 }
             } else {
                 new InformationalWindow("Get a job!", "You are to poor to buy this field.");
