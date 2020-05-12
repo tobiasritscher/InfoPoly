@@ -10,70 +10,29 @@ import java.util.Map;
  * Represents {@link Config.FieldType#START}.
  */
 public class StartGameField extends GameField {
-    private final Map<Integer, Integer> students = new HashMap<>();
-    private final int baseScholarship = 10;
-    private final int parentsHelp = 200;
+    private final int BASE_SCHOLARSHIP = 10;
+    private final int PARENTS_HELP = 200;
+    private final int SCHOLARSHIP_WAIT_TIME = 3;
+    private final int MONEY_AMOUNT = 200;
 
     public int getScholarshipWaitTime() {
-        return scholarshipWaiteTime;
+        return SCHOLARSHIP_WAIT_TIME;
     }
-
-    private final int scholarshipWaiteTime = 3;
 
     public StartGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
         super(fieldId, fieldType, fieldName);
     }
 
     public int getParentsHelp() {
-        return parentsHelp;
+        return PARENTS_HELP;
     }
 
     public int getBaseScholarship() {
-        return baseScholarship;
-    }
-
-    public void applyForScholarship(int playerId) {
-        if (students.containsKey(playerId) && !students.get(playerId).equals(0)) {
-            throw new RuntimeException("invalid operation: the player already applied for scholarship");
-        }
-        //students.put(playerId, Config.Dice.rollDice());
-        //TODO: chume chume nöd drus, chume chume nöd drus????? Was macht die Zeile obe?
-    }
-
-    /**
-     * @param playerId player id
-     * @return 0, if never repeated or after the countdown; positive integer number of round player has to wait;
-     */
-    public int getRoundsToWait(int playerId) {
-        if (!students.containsKey(playerId)) {
-            return 0;
-        }
-        return students.get(playerId);
-    }
-
-    public void removeStudent(int playerId) {
-        if (!students.containsKey(playerId)) {
-            throw new RuntimeException("invalid operation: the player is not waiting");
-        }
-        students.remove(playerId);
-    }
-
-    /**
-     * @param playerId player id
-     * @return positive integer, which is the sum of baseScholarShip + money from the interaction with @{@link Config.FieldType#MODULE}
-     */
-    public int getScholarship(int playerId) {
-        if (!students.containsKey(playerId)) {
-            throw new RuntimeException("invalid operation: the player never applied");
-        }
-        removeStudent(playerId);
-        //todo implement bank
-        return baseScholarship;
+        return BASE_SCHOLARSHIP;
     }
 
     @Override
     public void action(Player currentPlayer) {
-        currentPlayer.alterMoney(200);
-        //TODO: what is when walking over it?
+        currentPlayer.alterMoney(MONEY_AMOUNT);
     }
 }

@@ -11,7 +11,6 @@ import java.util.Random;
  * Representation of {@link Config.FieldType#EXAM}.
  */
 public class ExamGameField extends GameField {
-    private Logic logic;
 
     /**
      *
@@ -36,7 +35,14 @@ public class ExamGameField extends GameField {
             currentPlayer.alterCredits(Config.MANY_CREDITS);
         } else {
             new InformationalWindow("As expected!","You have failed, you need to repeat this semester!");
-            logic.repeating(currentPlayer);
+            repeating(currentPlayer);
         }
+    }
+
+    public void repeating(Player currentPlayer) {
+        final int REPETITION_FIELD_ID = 41;
+
+        currentPlayer.setPosition(REPETITION_FIELD_ID);
+        currentPlayer.setRoundsWaiting(3);
     }
 }

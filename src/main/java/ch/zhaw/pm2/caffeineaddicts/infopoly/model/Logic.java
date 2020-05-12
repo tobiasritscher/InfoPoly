@@ -1,6 +1,7 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.StartGameField;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -109,8 +110,10 @@ public class Logic {
     }
 
     private void waitForScholarship() {
-        final int roundsToWait = gameBoard.getStartGameField().getScholarshipWaitTime();
-        final int scholarshipMoney = gameBoard.getStartGameField().getBaseScholarship();
+        StartGameField startGameField = gameBoard.getStartGameField();
+        int roundsToWait = startGameField.getScholarshipWaitTime();
+        int scholarshipMoney = startGameField.getBaseScholarship();
+
         new InformationalWindow("Scholarship!", "You ran out of money so now you will apply for a scholarship.\nThat usually takes up to 3 Weeks");
         getCurrentPlayer().setRoundsWaiting(roundsToWait);
         if (getCurrentPlayer().getRoundsWaiting() == 0) {
@@ -125,13 +128,6 @@ public class Logic {
 
         new InformationalWindow("Parents help!", String.format("You got %d CHF from you parents!", money));
         getCurrentPlayer().alterMoney(money);
-    }
-
-    public void repeating(Player currentPlayer) {
-        final int REPETITION_FIELD_ID = 41;
-
-        currentPlayer.setPosition(REPETITION_FIELD_ID);
-        currentPlayer.setRoundsWaiting(3);
     }
 
     /**
