@@ -1497,7 +1497,7 @@
                                     </Label>
                                  </children>
                               </VBox>
-                              <Line fx:id="seperator0" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
+                              <Line fx:id="separator0" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
@@ -1518,7 +1518,7 @@
                                     <Label fx:id="fundsBoxPlayer1Money" text="-" />
                                  </children>
                               </VBox>
-                              <Line fx:id="seperator1" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
+                              <Line fx:id="separator1" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
@@ -1539,7 +1539,7 @@
                                     <Label fx:id="fundsBoxPlayer2Money" text="-" />
                                  </children>
                               </VBox>
-                              <Line fx:id="seperator2" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
+                              <Line fx:id="separator2" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
@@ -1560,7 +1560,7 @@
                                     <Label fx:id="fundsBoxPlayer3Money" text="-" />
                                  </children>
                               </VBox>
-                              <Line fx:id="seperator3" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
+                              <Line fx:id="separator3" startY="-45.0" stroke="#bbbbbb" strokeWidth="3.0">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </HBox.margin>
