@@ -1,7 +1,5 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.view;
 
-import ch.zhaw.pm2.caffeineaddicts.infopoly.view.MainWindowView;
-
 /**
  *  /$$$$$$            /$$$$$$          /$$$$$$$           /$$
  * |_  $$_/           /$$__  $$        | $$__  $$         | $$
