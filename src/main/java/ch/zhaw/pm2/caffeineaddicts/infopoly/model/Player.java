@@ -11,14 +11,14 @@ import java.util.logging.Logger;
 
 public class Player {
     private static final Logger logger = Logger.getLogger(Player.class.getCanonicalName());
-    private int roundsWaiting;
     private final int playerId;
+    private final String name;
+    private int roundsWaiting;
     private IntegerProperty money = new SimpleIntegerProperty();
     private IntegerProperty credits = new SimpleIntegerProperty();
     private IntegerProperty position = new SimpleIntegerProperty();
-    private final String name;
     private boolean isWorking = false;
-    private List<GameField> ownerShips;
+    private JobGameField job = null;
     private boolean waitingForScholarship = false;
 
     public Player(String name, int money, int credits, int playerId) {
@@ -27,7 +27,6 @@ public class Player {
         this.money.setValue(money);
         this.playerId = playerId;
         this.position.setValue(Config.PLAYER_START_POSITION);
-        ownerShips = new ArrayList<>();
         roundsWaiting = 0;
     }
 
@@ -39,8 +38,8 @@ public class Player {
         roundsWaiting = amount;
     }
 
-    public List<GameField> getOwnerShips() {
-        return ownerShips;
+    public JobGameField getJob() {
+        return job;
     }
 
     public boolean isWaitingForScholarship() {
@@ -52,30 +51,21 @@ public class Player {
     }
 
     /**
-     * Adds a new Field to the players list
-     *
-     * @param field the field which the player has bought
-     */
-    public void addOwnerShip(GameField field) {
-        ownerShips.add(field);
-    }
-
-    /**
      * Adds the work which the player has decided to work
      *
      * @param job The field in which the player works
      */
-    public void addWork(JobGameField job) {
-        if (!isWorking()) {
-            addOwnerShip(job);
-            setWorking(true);
-        }
+    public void addJob(JobGameField job) {
+        this.job = job;
+        isWorking = true;
     }
+
 
     /**
      * Removes the job which the player had...Mainly if he decides for another job
      */
-    public void removeWork() {
+    /*
+    public void removeJob() {
         for (GameField value : ownerShips) {
             if (value.getFieldType().equals(Config.FieldType.JOB)) {
                 value.resetOwner();
@@ -83,6 +73,10 @@ public class Player {
                 return;
             }
         }
+    }*/
+    public void removeJob() {
+        isWorking = false;
+        job = null;
     }
 
     public boolean isWorking() {
@@ -106,13 +100,8 @@ public class Player {
         this.position.set(position);
     }
 
-
     public int getMoney() {
         return money.getValue();
-    }
-
-    public void setMoney(int money) {
-        this.money.set(money);
     }
 
     public int getCredits() {
@@ -123,17 +112,6 @@ public class Player {
         return name;
     }
 
-    public IntegerProperty getMoneyProperty() {
-        return money;
-    }
-
-    public IntegerProperty getCreditsProperty() {
-        return credits;
-    }
-
-    public IntegerProperty getPositionProperty() {
-        return position;
-    }
     /**
      * Add or charge money.
      *
@@ -153,9 +131,19 @@ public class Player {
     public void alterCredits(int creditChange) {
         int oldState = credits.getValue();
         int newState = oldState + creditChange;
-
         credits.set(Math.max(newState, 0));
-
         logger.info(String.format("Credits altered. Player: %s Old: %d New: %d", name, oldState, newState));
+    }
+
+    public IntegerProperty getMoneyProperty() {
+        return money;
+    }
+
+    public IntegerProperty getCreditsProperty() {
+        return credits;
+    }
+
+    public IntegerProperty getPositionProperty() {
+        return position;
     }
 }

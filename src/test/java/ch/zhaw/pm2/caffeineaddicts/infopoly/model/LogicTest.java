@@ -56,9 +56,17 @@ public class LogicTest {
 
     @Test
     void calculateNextFieldId() {
-        final int boardSize = logic.getGameBoard().getBoardSize();
-        Assertions.assertEquals(6 % boardSize, logic.calculateNextFieldId(0, 6));
-        Assertions.assertEquals((boardSize - 1 + 10) % boardSize, logic.calculateNextFieldId(boardSize - 1, 10));
+        final int boardSize = 32;
+        Assertions.assertEquals(6 % boardSize, logic.calculateNextFieldId(boardSize, 0, 6));
+        Assertions.assertEquals((boardSize - 1 + 10) % boardSize, logic.calculateNextFieldId(boardSize, boardSize - 1, 10));
 
+    }
+
+    @Test
+    void jumpedOverField() {
+        Assertions.assertTrue(Logic.jumpedOverField(0, 4, 1));
+        Assertions.assertTrue(Logic.jumpedOverField(2, 1, 3));
+        Assertions.assertFalse(Logic.jumpedOverField(0, 1, 2));
+        Assertions.assertTrue(Logic.jumpedOverField(11, 10, 1));
     }
 }
