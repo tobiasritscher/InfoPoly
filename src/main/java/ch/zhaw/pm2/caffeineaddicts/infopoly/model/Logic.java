@@ -1,6 +1,7 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.StartGameField;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -83,9 +84,9 @@ public class Logic {
     }
 
     private void getScholarship(Player currentPlayer) {
-        final int SCHOLARSHIP_MONEY = 100;
-        new InformationalWindow("Poor guy!", String.format("You got some money from the state: %d", SCHOLARSHIP_MONEY));
-        currentPlayer.alterMoney(SCHOLARSHIP_MONEY);
+        final int money = StartGameField.SCHOLARSHIP_MONEY;
+        new InformationalWindow("Poor guy!", String.format("You got some money from the state: %d", money));
+        currentPlayer.alterMoney(money);
         currentPlayer.setWaitingForScholarship(false);
     }
 
@@ -119,7 +120,7 @@ public class Logic {
         if ((getCurrentPlayer().getPosition() == gameBoard.getExamGameFieldId()) && (getCurrentPlayer().getRoundsWaiting() > 0)) {
             repetition();
         }
-        if (!getCurrentPlayer().isWaitingForScholarship() && getCurrentPlayer().getMoney() < 0) {
+        if (getCurrentPlayer().getMoney() < 0 && !getCurrentPlayer().isWaitingForScholarship()) {
             //todo
             broke();
         }
