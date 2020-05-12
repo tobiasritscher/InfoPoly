@@ -95,6 +95,7 @@ public class Logic {
         if (getCurrentPlayer().getMoney() <= 0) {
             new InformationalWindow("Broke!", "You have no money left!");
             getCurrentPlayer().setPosition(gameBoard.getStartGameField().getFieldId());
+            getCurrentPlayer().setPosition(1);
             waitForScholarship();
         }
     }
