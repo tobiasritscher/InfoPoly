@@ -9,7 +9,6 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
  * Represents {@link Config.FieldType#JOB}.
  */
 public class JobGameField extends GameField {
-    private int baseWage = 10;
 
     public JobGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
         super(fieldId, fieldType, fieldName);
@@ -25,25 +24,26 @@ public class JobGameField extends GameField {
 
     @Override
     public void action(Player currentPlayer) {
+        final int BASE_WAGE = 10;
 
         if (hasOwner()) {
             if (currentPlayer.equals(getOwner())) {
-                new InformationalWindow("Forgot?", "You are already working here. You made an extra shift: +" + baseWage + "CHF");
-                currentPlayer.alterMoney(baseWage);
+                new InformationalWindow("Forgot?", "You are already working here. You made an extra shift: +" + BASE_WAGE + "CHF");
+                currentPlayer.alterMoney(BASE_WAGE);
             } else {
                 new InformationalWindow("Shopping?", "Thank you for shopping with us!");
-                currentPlayer.alterMoney(baseWage * -1);
-                getOwner().alterMoney(baseWage);
+                currentPlayer.alterMoney(BASE_WAGE * -1);
+                getOwner().alterMoney(BASE_WAGE);
             }
         } else {
             if (currentPlayer.isWorking()) {
-                QuestionWindow questionWindow = new QuestionWindow("Job Application " + getFieldName() + " (" + baseWage + "CHF)",
+                QuestionWindow questionWindow = new QuestionWindow("Job Application " + getFieldName() + " (" + BASE_WAGE + "CHF)",
                         "You already have a job!\nWould you like to quit it?");
                 if (questionWindow.getAnswer()) {
                     quitWork(currentPlayer);
                 }
             } else {
-                QuestionWindow questionWindow = new QuestionWindow("Job Application " + getFieldName() + " (" + baseWage + "CHF)",
+                QuestionWindow questionWindow = new QuestionWindow("Job Application " + getFieldName() + " (" + BASE_WAGE + "CHF)",
                         "Would you like to start working here?");
                 if (questionWindow.getAnswer()) {
                     setOwner(currentPlayer);

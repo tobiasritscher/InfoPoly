@@ -11,54 +11,48 @@ import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config.MEDIUM_CREDITS;
  * Representation of {@link Config.FieldType#MODULE}
  */
 public class ModuleGameField extends GameField {
-    private final int fieldPrice = 10;
-    private final int fieldMoneyCharge = 10;
-    private final int creditsGainFromVisitors = 10;
-    private final int creditsGainFromPurchase = 10;
+    private final int FIELD_PRICE = 10;
+    private final int CREDITS_GAIN = 20;
 
     public ModuleGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
         super(fieldId, fieldType, fieldName);
     }
 
-    public int getFieldMoneyCharge() {
-        return fieldMoneyCharge;
-    }
-
     public int getFieldPrice() {
-        return fieldPrice;
+        return FIELD_PRICE;
     }
 
-    public int getCreditsGainFromVisitors() {
-        return creditsGainFromVisitors;
-    }
 
+    /**
+     *
+     *
+     * @param currentPlayer
+     */
     @Override
     public void action(Player currentPlayer) {
+        int FIELD_MONEY_CHARGE = 10;
         Player owner = getOwner();
 
         if (hasOwner()) {
             if (owner.equals(currentPlayer)) {
-                new InformationalWindow("Hey Boss!", String.format("You got some credits: %d", creditsGainFromVisitors));
-
+                new InformationalWindow("Hey Boss!", "You alredy own this module.");
             } else {
-                new InformationalWindow("This course is so good!", String.format("You must pay: %d", fieldMoneyCharge));
-                owner.alterMoney(Math.min(0, Math.min(currentPlayer.getMoney(), fieldMoneyCharge)));
-                currentPlayer.alterMoney(-fieldMoneyCharge);
+                new InformationalWindow("This course is so good!", String.format("You must pay: %d", FIELD_MONEY_CHARGE));
+                currentPlayer.alterMoney(-FIELD_MONEY_CHARGE);
+                owner.alterCredits(CREDITS_GAIN);
             }
-            owner.setCredits(getCreditsGainFromVisitors());
         } else {
             if (currentPlayer.getMoney() >= getFieldPrice()) {
-                QuestionWindow questionWindow = new QuestionWindow("Purchase course?", String.format(" %s would you like to buy the course: %s", currentPlayer.getName().toUpperCase(), getFieldName().toUpperCase()));
+                QuestionWindow questionWindow = new QuestionWindow(String.format("Purchase course? (%d CHF)", FIELD_PRICE), String.format(" %s would you like to buy the course: %s", currentPlayer.getName().toUpperCase(), getFieldName().toUpperCase()));
                 if (questionWindow.getAnswer()) {
                     currentPlayer.alterMoney(-getFieldPrice());
                     setOwner(currentPlayer);
-                    currentPlayer.alterCredits(creditsGainFromPurchase);
-                    new InformationalWindow("Balance",String.format("You lost %dCHF and got %d credits from this purchase.", fieldMoneyCharge, creditsGainFromPurchase));
+                    currentPlayer.alterCredits(CREDITS_GAIN);
+                    new InformationalWindow("Balance",String.format("You lost %dCHF and got %d credits from this purchase.", FIELD_MONEY_CHARGE, CREDITS_GAIN));
                 }
             } else {
                 new InformationalWindow("Get a job!", "You are to poor to buy this field.");
             }
         }
     }
-
 }
