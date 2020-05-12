@@ -10,8 +10,9 @@ import java.util.Map;
  * Represents {@link Config.FieldType#START}.
  */
 public class StartGameField extends GameField {
-    private final int PARENTS_HELP = 200;
-    private final int MONEY_AMOUNT = 200;
+    public static final int PARENTS_HELP = 200;
+    public static final int MONEY_AMOUNT = 200;
+    public static final int SCHOLARSHIP_WAITING_TIME = 3;
 
     public StartGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
         super(fieldId, fieldType, fieldName);

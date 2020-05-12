@@ -521,7 +521,6 @@ public class MainWindowController {
         switch (playerNumber) {
             case 1:
                 fundsBoxPlayer1Name.setText(playerName);
-
                 player1Ball.setOpacity(1.0);
                 separator0.setOpacity(1.0);
                 break;

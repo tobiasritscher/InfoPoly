@@ -53,7 +53,7 @@ public class Logic {
 
         if (waitingRounds > 0) {
             waitingRounds--;
-            new InformationalWindow("Small carrot!", currentPlayer.getName() + " has to sit " + waitingRounds + " more rounds out...You know why!");
+            new InformationalWindow("And we wait...", String.format("%S has to sit %d more rounds out...He knows why! Ask him!", currentPlayer.getName(), waitingRounds));
             currentPlayer.setRoundsWaiting(waitingRounds);
             jumpPlayerTurn = true;
         } else if (currentPlayer.isWaitingForScholarship()) {
@@ -107,7 +107,7 @@ public class Logic {
     }
 
     private void moveCurrentPlayerToField(int fieldId) {
-            getCurrentPlayer().setPosition(fieldId);
+        getCurrentPlayer().setPosition(fieldId);
     }
     /*
     private void moveCurrentPlayerToField(int fieldId) {
@@ -134,25 +134,21 @@ public class Logic {
 
     private void verifyCurrentPlayerIsWinner() {
         if (getCurrentPlayer().getCredits() >= CREDITS_TO_WIN) {
-            new InformationalWindow("Bye bye dear school!", "Congratulations! You just graduated from ZHAW!\nNow go and get a job in the real world!");
+            new InformationalWindow("Bye bye dear school!", String.format("Congratulations %S! You just graduated from ZHAW!%nNow go and get a job in the real world!", getCurrentPlayer().getName()));
             //TODO: finish game
         }
     }
 
-    private void moveToRepetitionGameField() {
-
-    }
 
     private void waitForScholarship() {
-        final int ROUNDS_TO_WAIT = 3;
-
-        new InformationalWindow("Scholarship!", "You ran out of money so now you will apply for a scholarship.\nThat usually takes up to 3 Weeks");
-        getCurrentPlayer().setRoundsWaiting(ROUNDS_TO_WAIT);
+        final int round = gameBoard.getStartGameField().SCHOLARSHIP_WAITING_TIME;
+        new InformationalWindow("Scholarship!", String.format("You ran out of money so now you will apply for a scholarship.%nThat usually takes up to %d Weeks", round));
+        getCurrentPlayer().setRoundsWaiting(round);
         getCurrentPlayer().setWaitingForScholarship(true);
     }
 
     private void transferMoneyOnRunThroughStartField() {
-        int money = gameBoard.getStartGameField().getParentsHelp();
+        int money = gameBoard.getStartGameField().PARENTS_HELP;
 
         new InformationalWindow("Parents help!", String.format("You got %d CHF from you parents!", money));
         getCurrentPlayer().alterMoney(money);

@@ -28,7 +28,7 @@ public class ModuleGameField extends GameField {
 
         if (hasOwner()) {
             if (owner.equals(currentPlayer)) {
-                new InformationalWindow("Hey Boss!", "You already own this module.");
+                new InformationalWindow("Hey Boss!", "Have a sit and listen to the lectures!");
             } else {
                 new InformationalWindow("This course is so good!", String.format("You must pay: %d CHF", FIELD_MONEY_CHARGE));
                 currentPlayer.alterMoney(-FIELD_MONEY_CHARGE);

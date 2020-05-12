@@ -9,6 +9,7 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
  * Represents {@link Config.FieldType#JOB}.
  */
 public class JobGameField extends GameField {
+    final int BASE_WAGE = 10;
 
     public JobGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
         super(fieldId, fieldType, fieldName);
@@ -24,7 +25,6 @@ public class JobGameField extends GameField {
 
     @Override
     public void action(Player currentPlayer) {
-        final int BASE_WAGE = 10;
 
         if (hasOwner()) {
             if (currentPlayer.equals(getOwner())) {
