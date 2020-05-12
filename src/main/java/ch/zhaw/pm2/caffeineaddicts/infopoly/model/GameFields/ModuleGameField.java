@@ -53,6 +53,7 @@ public class ModuleGameField extends GameField {
                     currentPlayer.alterMoney(-getFieldPrice());
                     setOwner(currentPlayer);
                     currentPlayer.alterCredits(creditsGainFromPurchase);
+                    new InformationalWindow("Balance",String.format("You lost %dCHF and got %d credits from this purchase.", fieldMoneyCharge, creditsGainFromPurchase));
                 }
             } else {
                 new InformationalWindow("Get a job!", "You are to poor to buy this field.");

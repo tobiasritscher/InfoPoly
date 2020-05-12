@@ -114,7 +114,7 @@ public class Logic {
     }
 
     private void transferMoneyOnRunThroughStartField() {
-        int money = ((StartGameField) gameBoard.getStartGameField()).getBaseScholarship();
+        int money = ((StartGameField) gameBoard.getStartGameField()).getParentsHelp();
 
         new InformationalWindow("Parents help!", String.format("You got %d CHF from you parents!", money));
         getCurrentPlayer().alterMoney(money);
