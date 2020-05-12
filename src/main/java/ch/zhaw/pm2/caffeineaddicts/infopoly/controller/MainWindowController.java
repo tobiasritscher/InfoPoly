@@ -464,21 +464,14 @@ public class MainWindowController {
             }
         }
 
-        // Move player to new field after checking if he/she isn't already on this field
-        // Error msg if Player is already on this field (not really necessary but helps debugging
-        if (fieldLabels.get(fieldId).getText().contains(playerName))
-            new InformationalWindow("Nope","Player already on this field!"); // TODO: Create exception
-        else {
+        // Extract text from field and concatenate it with whitespace and Player name
+        tempText = fieldLabels.get(fieldId).getText() + " " + playerName;
 
-            // Extract text from field and concatenate it with whitespace and Player name
-            tempText = fieldLabels.get(fieldId).getText() + " " + playerName;
+        // Trim leading and trailing whitespaces
+        tempText = tempText.trim();
 
-            // Trim leading and trailing whitespaces
-            tempText = tempText.trim();
-
-            // Set new text to field
-            fieldLabels.get(fieldId).setText(tempText);
-        }
+        // Set new text to field
+        fieldLabels.get(fieldId).setText(tempText);
     }
 
     /**
@@ -541,7 +534,7 @@ public class MainWindowController {
                 seperator3.setOpacity(1.0);
                 break;
             default:
-                new InformationalWindow("","Player number out of range!"); // TODO: Create exception
+                new InformationalWindow("","Player number out of range!");
         }
     }
 
@@ -568,7 +561,7 @@ public class MainWindowController {
                 fundsBoxPlayer4Credits.setText(String.valueOf(credits));
                 break;
             default:
-                new InformationalWindow("","Player number out of range!"); // TODO: Create exception
+                new InformationalWindow("","Player number out of range!");
         }
     }
 
@@ -593,7 +586,7 @@ public class MainWindowController {
                 fundsBoxPlayer4Money.setText(String.valueOf(money));
                 break;
             default:
-                new InformationalWindow("","Player number out of range!"); // TODO: Create exception
+                new InformationalWindow("","Player number out of range!");
         }
     }
 
@@ -657,7 +650,7 @@ public class MainWindowController {
         setBoardVisibility(false);
 
         // Spawn player entry windows
-        entry = new PlayerEntryWindow(); // TODO: This is where new user entries come from!
+        entry = new PlayerEntryWindow();
 
         try {
             if (!entry.isEntrySuccess()) {
@@ -665,7 +658,6 @@ public class MainWindowController {
             } else {
 
                 for (int i = 0; i < Objects.requireNonNull(entry).getPlayersList().size(); i++) {
-
                     // Add players to UI
                     setPlayerName(i + 1, entry.getPlayersList().get(i));
                     setPlayerMoney(i + 1, Config.START_MONEY);
@@ -687,8 +679,6 @@ public class MainWindowController {
                     logic.getPlayers().get(i).getPositionProperty().addListener((observableValue, oldValue, newValue) ->
                             movePlayer(logic.getPlayers().get(playerNumber).getName(), (Integer) newValue));
 
-
-                    // Move players to first field TODO: Replace with listener
                     movePlayer(entry.getPlayersList().get(i), Config.PLAYER_START_POSITION);
                     newGameConfirmationNeeded = false;
                     gameWasStarted = true;
