@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
@@ -353,6 +354,8 @@ public class MainWindowController {
      */
     private ArrayList<BorderPane> fieldColors;
 
+    private ArrayList<Circle> balls;
+
     /**
      * Empty Constructor of UIController Class. Needs to be empty (FXML convention)
      * initialize() will automatically be called after.
@@ -392,6 +395,10 @@ public class MainWindowController {
                 field12, field13, field14, field15, field16, field17, field18, field19, field20, field21Color, field22,
                 field23, field24, field25, field26, field27, field28, field29, field30, field31, field32, field33,
                 field34, field35, field36, field37, field38, field39, field40
+        ));
+
+        balls = new ArrayList<>(Arrays.asList(
+                player1Ball, player2Ball, player3Ball, player4Ball
         ));
         initializeGame();
     }
@@ -513,6 +520,7 @@ public class MainWindowController {
         switch (playerNumber) {
             case 1:
                 fundsBoxPlayer1Name.setText(playerName);
+                //player1Ball.setFill(new Color(Config.PlayerColor.PLAYER1.getColorValue()));
                 player1Ball.setOpacity(1.0);
                 separator0.setOpacity(1.0);
                 break;
@@ -685,6 +693,9 @@ public class MainWindowController {
                 // Listener for dice
                 logic.getCurrentDiceRollProperty().addListener((observableValue, oldValue, newValue) ->
                         rollDiceOutput.setText(newValue.toString()));
+
+                // Listener in case game was won
+                logic.getGameWasWonProperty().addListener((observableValue, oldValue, newValue) -> endGame());
 
                 gameWasStarted = true;
                 setBoardVisibility(true);
