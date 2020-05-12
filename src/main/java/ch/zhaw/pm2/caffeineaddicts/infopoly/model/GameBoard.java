@@ -140,7 +140,7 @@ public class GameBoard {
                         gameField = new StartGameField(fieldId, fieldType, fieldName);
                         break;
                     case FEE:
-                        gameField = new FeeGameField(fieldId, fieldType, fieldName, feeType, 30);
+                        gameField = new FeeGameField(fieldId, fieldType, fieldName, feeType);
                         break;
                     case REPETITION:
                         gameField = new RepetitionGameField(fieldId, fieldType, fieldName);

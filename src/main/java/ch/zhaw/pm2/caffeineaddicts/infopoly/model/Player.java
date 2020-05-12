@@ -182,7 +182,9 @@ public class Player {
      * @param amount positive or negative integer.
      */
     public void alterMoney(int amount) {
+        int oldState = money.getValue();
         money.set(money.getValue() + amount);
+        logger.info(String.format("Money altered. Player: %s Old: %d New: %d", name, oldState, money.get()));
     }
 
     /**

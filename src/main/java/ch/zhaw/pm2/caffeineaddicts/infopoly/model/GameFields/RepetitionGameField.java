@@ -22,7 +22,8 @@ public class RepetitionGameField extends GameField {
 
     @Override
     public void action(Player currentPlayer) {
-        new InformationalWindow("Repetition", "You are laughing at the students that are repeating!");
+        //todo timer
+        new InformationalWindow("Such a nerd!", "You are laughing at the students that are repeating!");
     }
 
     public int getNumberRoundsToWait() {
