@@ -456,7 +456,7 @@ public class MainWindowController {
                 // Delete Player name
                 tempText = tempText.replace(playerName, "");
 
-                // Trim leading and trailing whitepace
+                // Trim leading and trailing whitespace
                 tempText = tempText.trim();
 
                 // Set new text to field
@@ -499,7 +499,7 @@ public class MainWindowController {
                 color = Config.PlayerColor.PLAYER4;
                 break;
             default:
-                new InformationalWindow("Color","Illegal Color!");
+                new InformationalWindow("Color", "Illegal Color!");
                 break;
         }
         fieldColors.get(fieldNumber).setStyle("-fx-background-color: " + color.getColorValue());
@@ -534,7 +534,7 @@ public class MainWindowController {
                 seperator3.setOpacity(1.0);
                 break;
             default:
-                new InformationalWindow("","Player number out of range!");
+                new InformationalWindow("", "Player number out of range!");
         }
     }
 
@@ -561,7 +561,7 @@ public class MainWindowController {
                 fundsBoxPlayer4Credits.setText(String.valueOf(credits));
                 break;
             default:
-                new InformationalWindow("","Player number out of range!");
+                new InformationalWindow("", "Player number out of range!");
         }
     }
 
@@ -586,7 +586,7 @@ public class MainWindowController {
                 fundsBoxPlayer4Money.setText(String.valueOf(money));
                 break;
             default:
-                new InformationalWindow("","Player number out of range!");
+                new InformationalWindow("", "Player number out of range!");
         }
     }
 
