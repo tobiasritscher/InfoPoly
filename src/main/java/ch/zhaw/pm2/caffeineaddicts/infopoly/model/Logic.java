@@ -93,8 +93,9 @@ public class Logic {
      * If current player has no money move to the @{@link Config.FieldType#START} field.
      */
     private void verifyCurrentPlayerHasMoney() {
-        if (players.get(currentPlayer.getValue()).getMoney() <= 0) {
+        if (getCurrentPlayer().getMoney() <= 0) {
             new InformationalWindow("Broke!", "You have no money left!");
+            getCurrentPlayer().setPosition(gameBoard.getStartGameField().getFieldId());
             waitForScholarship();
         }
     }
@@ -106,10 +107,14 @@ public class Logic {
     }
 
     private void waitForScholarship() {
+        final int roundsToWait = gameBoard.getStartGameField().getScholarshipWaitTime();
+        final int scholarshipMoney = gameBoard.getStartGameField().getBaseScholarship();
         new InformationalWindow("Scholarship!", "You ran out of money so now you will apply for a scholarship.\nThat usually takes up to 3 Weeks");
-        getCurrentPlayer().setRoundsWaiting(3);
+        getCurrentPlayer().setRoundsWaiting(roundsToWait);
         if (getCurrentPlayer().getRoundsWaiting() == 0) {
-            getCurrentPlayer().setMoney(100);
+            getCurrentPlayer().setMoney(0);
+            getCurrentPlayer().alterMoney(scholarshipMoney);
+            new InformationalWindow("Poor guy!", String.format("You got some state help: %d", scholarshipMoney));
         }
     }
 

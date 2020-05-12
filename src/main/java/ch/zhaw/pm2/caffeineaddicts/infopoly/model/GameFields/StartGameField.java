@@ -14,6 +14,12 @@ public class StartGameField extends GameField {
     private final int baseScholarship = 10;
     private final int parentsHelp = 200;
 
+    public int getScholarshipWaitTime() {
+        return scholarshipWaiteTime;
+    }
+
+    private final int scholarshipWaiteTime = 3;
+
     public StartGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
         super(fieldId, fieldType, fieldName);
     }

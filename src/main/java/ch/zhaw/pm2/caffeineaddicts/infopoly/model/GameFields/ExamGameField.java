@@ -27,7 +27,7 @@ public class ExamGameField extends GameField {
 
     @Override
     public void action(Player currentPlayer) {
-        new InformationalWindow("Noooo","You are taking an exam, if you fail you have to repeat!");
+        new InformationalWindow("Noooo...","You are taking an exam, if you fail you have to repeat!");
 
         if (passed()) {
             new InformationalWindow("Impossible!","You have passed your exam! YAY");
