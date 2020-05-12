@@ -15,8 +15,8 @@ public class Logic {
     private final static Logger logger = Logger.getLogger(Logic.class.getCanonicalName());
     private static IntegerProperty currentPlayerId = new SimpleIntegerProperty(0);
     private final GameBoard gameBoard;
-    IntegerProperty currentDiceRoll = new SimpleIntegerProperty();
     private final ArrayList<Player> players = new ArrayList<>();
+    IntegerProperty currentDiceRoll = new SimpleIntegerProperty();
 
     public Logic() {
         gameBoard = new GameBoard();
@@ -30,6 +30,9 @@ public class Logic {
         players.add(player);
     }
 
+    public Player getPlayer(int playerId) {
+        return players.get(playerId);
+    }
 
     /**
      * changes the currentPlayerId to the next player
@@ -91,6 +94,11 @@ public class Logic {
         logger.info(String.format("Rolled number: %d; Next field id: %d", rolledNumber, fieldId));
         moveCurrentPlayerToField(fieldId);
         gameBoard.getField(fieldId).action(getCurrentPlayer());
+        //todo remove below
+        //gameBoard.getField(30).action(getCurrentPlayer());
+        if ((getCurrentPlayer().getPosition() == gameBoard.getExamGameFieldId()) && (getCurrentPlayer().getRoundsWaiting() > 0)) {
+            moveCurrentPlayerToField(gameBoard.getRepetitionGameFieldId());
+        }
         verifyCurrentPlayerHasMoney();
         verifyCurrentPlayerIsWinner();
         if (!moveAgain) {
@@ -99,8 +107,18 @@ public class Logic {
     }
 
     private void moveCurrentPlayerToField(int fieldId) {
-        getCurrentPlayer().setPosition(fieldId);
+            getCurrentPlayer().setPosition(fieldId);
     }
+    /*
+    private void moveCurrentPlayerToField(int fieldId) {
+        //todo remove test function
+        if (getCurrentPlayer().getPosition() == 0) {
+            getCurrentPlayer().setPosition(gameBoard.getExamGameFieldId());
+        } else {
+            getCurrentPlayer().setPosition(fieldId);
+        }
+
+    }*/
 
     /**
      * If current player has no money move to the @{@link Config.FieldType#START} field.
@@ -119,6 +137,10 @@ public class Logic {
             new InformationalWindow("Bye bye dear school!", "Congratulations! You just graduated from ZHAW!\nNow go and get a job in the real world!");
             //TODO: finish game
         }
+    }
+
+    private void moveToRepetitionGameField() {
+
     }
 
     private void waitForScholarship() {

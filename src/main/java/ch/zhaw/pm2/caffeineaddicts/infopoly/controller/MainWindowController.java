@@ -667,13 +667,22 @@ public class MainWindowController {
                             i + 1));
 
                     // Add listeners to money and credits.
-                    int playerNumber = i;
-                    logic.getPlayers().get(i).getMoneyProperty().addListener((observableValue, oldValue, newValue) ->
-                            setPlayerMoney(playerNumber + 1, (Integer) newValue));
-                    logic.getPlayers().get(i).getCreditsProperty().addListener((observableValue, oldValue, newValue) ->
-                            setPlayerCredits(playerNumber + 1, (Integer) newValue));
-                    logic.getPlayers().get(i).getPositionProperty().addListener((observableValue, oldValue, newValue) ->
-                            movePlayer(logic.getPlayers().get(playerNumber).getName(), (Integer) newValue));
+                    int playerId = i;
+                    Player player = logic.getPlayer(i);
+                    player.getMoneyProperty().addListener((observableValue, oldValue, newValue) ->
+                            setPlayerMoney(playerId + 1, (Integer) newValue));
+                    player.getCreditsProperty().addListener((observableValue, oldValue, newValue) ->
+                            setPlayerCredits(playerId + 1, (Integer) newValue));
+                    player.getPositionProperty().addListener((observableValue, oldPosition, newPosition) -> {
+                                final int repetitionGameFieldId = logic.getGameBoard().getRepetitionGameFieldId();
+                                final int examGameFieldId = logic.getGameBoard().getExamGameFieldId();
+                                if ((oldPosition.intValue() == examGameFieldId) && (newPosition.intValue() == repetitionGameFieldId)) {
+                                    movePlayer(player.getName(), fieldLabels.indexOf(repeatingPlayers));
+                                } else {
+                                    movePlayer(player.getName(), newPosition.intValue());
+                                }
+                            }
+                    );
 
                     movePlayer(entry.getPlayersList().get(i), Config.PLAYER_START_POSITION);
                 }
@@ -694,7 +703,7 @@ public class MainWindowController {
                         rollDiceOutput.setText(newValue.toString()));
 
                 // Listener in case game was won
-                logic.getGameWasWonProperty().addListener((observableValue, oldValue, newValue) -> endGame());
+                //logic.getGameWasWonProperty().addListener((observableValue, oldValue, newValue) -> endGame());
 
                 gameWasStarted = true;
                 setBoardVisibility(true);
@@ -742,7 +751,7 @@ public class MainWindowController {
     /**
      * Helper method for ending the game.
      */
-    private void endGame(){
+    private void endGame() {
         setBoardVisibility(false);
         gameWasStarted = false;
         newGameConfirmationNeeded = false;

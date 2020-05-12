@@ -20,7 +20,9 @@ public class GameBoard {
     private final static Logger logger = Logger.getLogger(GameBoard.class.getCanonicalName());
 
     final List<GameField> board = new ArrayList<>();
-    private int startGameFieldId = 0;
+    private int startGameFieldId;
+    private int repetitionGameFieldId;
+    private int examGameFieldId;
 
     public GameBoard() {
         InputStream logConfig = this.getClass().getClassLoader().getResourceAsStream("log.properties");
@@ -148,15 +150,18 @@ public class GameBoard {
                         break;
                     case START:
                         gameField = new StartGameField(fieldId, fieldType, fieldName);
+                        startGameFieldId = fieldId;
                         break;
                     case FEE:
                         gameField = new FeeGameField(fieldId, fieldType, fieldName, feeType);
                         break;
                     case REPETITION:
                         gameField = new RepetitionGameField(fieldId, fieldType, fieldName);
+                        repetitionGameFieldId = fieldId;
                         break;
                     case EXAM:
                         gameField = new ExamGameField(fieldId, fieldType, fieldName);
+                        examGameFieldId = fieldId;
                         break;
 
                     default:
@@ -184,4 +189,11 @@ public class GameBoard {
     }
 
 
+    public int getRepetitionGameFieldId() {
+        return repetitionGameFieldId;
+    }
+
+    public int getExamGameFieldId() {
+        return examGameFieldId;
+    }
 }

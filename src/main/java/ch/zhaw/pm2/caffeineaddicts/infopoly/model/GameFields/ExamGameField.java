@@ -11,16 +11,14 @@ import java.util.Random;
  * Representation of {@link Config.FieldType#EXAM}.
  */
 public class ExamGameField extends GameField {
+    final int repetitionTime = 3;
 
-    /**
-     *
-     */
     public ExamGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
         super(fieldId, fieldType, fieldName);
     }
 
     /**
-     * @return if exam was passed
+     * @return a boolean value: true, if passed; false, else;
      */
     public boolean passed() {
         return new Random().nextBoolean();
@@ -28,21 +26,15 @@ public class ExamGameField extends GameField {
 
     @Override
     public void action(Player currentPlayer) {
-        new InformationalWindow("Noooo...","You are taking an exam, if you fail you have to repeat!");
+        new InformationalWindow("Noooo...", "You are taking an exam, if you fail you have to repeat!");
 
         if (passed()) {
-            new InformationalWindow("Impossible!","You have passed your exam! YAY");
+            new InformationalWindow("Impossible!", "You have passed your exam! YAY");
             currentPlayer.alterCredits(Config.MANY_CREDITS);
         } else {
-            new InformationalWindow("As expected!","You have failed, you need to repeat this semester!");
-            repeating(currentPlayer);
+            new InformationalWindow("As expected!", "You have failed, you need to repeat this semester!");
+            currentPlayer.setRoundsWaiting(repetitionTime);
         }
     }
 
-    public void repeating(Player currentPlayer) {
-        final int REPETITION_FIELD_ID = 41;
-
-        currentPlayer.setPosition(REPETITION_FIELD_ID);
-        currentPlayer.setRoundsWaiting(3);
-    }
 }
