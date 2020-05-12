@@ -2,7 +2,6 @@ package ch.zhaw.pm2.caffeineaddicts.infopoly.controller;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.Region;
 
 import java.util.Optional;
 
@@ -20,6 +19,7 @@ import java.util.Optional;
  *
  * @author corrooli
  */
+@SuppressWarnings("ALL")
 public class QuestionWindow {
     /**
      * Spawns a new question window.

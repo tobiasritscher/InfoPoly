@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -34,6 +35,7 @@ public class MainWindowView extends Application {
         stage.setMinWidth(root.prefWidth(1200));
         stage.setMinHeight(root.prefHeight(800));
         stage.show();
+        stage.getIcons().add(new Image("InfoPolyIcon2.png"));
     }
 
     public void startUI() {
