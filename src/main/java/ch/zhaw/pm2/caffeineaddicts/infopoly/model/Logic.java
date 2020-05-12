@@ -125,7 +125,7 @@ public class Logic {
         getCurrentPlayer().alterMoney(money);
     }
 
-    private void repeating(Player currentPlayer) {
+    public void repeating(Player currentPlayer) {
         currentPlayer.setPosition(41);
         currentPlayer.setRoundsWaiting(3);
     }

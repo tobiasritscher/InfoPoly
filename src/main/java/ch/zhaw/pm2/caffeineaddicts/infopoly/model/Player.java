@@ -18,7 +18,7 @@ public class Player {
     /**
      * Numerical player number. Ranges between 1 to 4
      */
-    private int playerId;
+    private final int playerId;
     /**
      * Money of the player. Is SimpleIntegerProperty type to allow support for PropertyListener.
      */
@@ -36,11 +36,7 @@ public class Player {
     /**
      * Name of the player
      */
-    private String name;
-    /**
-     * Defines if the player has no money
-     */
-    private boolean isBroke = false;
+    private final String name;
     /**
      * Defines if the player has a job
      */
@@ -140,10 +136,6 @@ public class Player {
         return credits.getValue();
     }
 
-    public void setCredits(int credits) {
-        this.credits.set(credits);
-    }
-
     public String getName() {
         return name;
     }
@@ -173,16 +165,14 @@ public class Player {
     /**
      * Add or charge credits.
      *
-     * @param credits positive or negative integer.
+     * @param creditChange positive or negative integer.
      */
-    public void alterCredits(int credits) {
-        int oldState = this.credits.getValue();
-        this.credits.set(this.credits.get() + credits);
-        logger.info(String.format("Credits altered. Player: %s Old: %d New: %d", name, oldState, this.credits.getValue()));
-    }
+    public void alterCredits(int creditChange) {
+        int oldState = credits.getValue();
+        int newState = oldState + creditChange;
 
-    public boolean isBroke() {
-        return isBroke;
-    }
+        credits.set(Math.max(newState, 0));
 
+        logger.info(String.format("Credits altered. Player: %s Old: %d New: %d", name, oldState, newState));
+    }
 }
