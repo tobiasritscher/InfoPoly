@@ -33,8 +33,8 @@ public class GameBoard {
         loadGameBoard();
     }
 
-    public GameField getStartGameField() {
-        return board.get(startGameFieldId);
+    public StartGameField getStartGameField() {
+        return (StartGameField) board.get(startGameFieldId);
     }
 
     GameField getField(int fieldId) {
@@ -114,13 +114,23 @@ public class GameBoard {
 
                 numberAttributes--;
 
+                String attribute = "";
                 for (int a = 0; a < numberAttributes; a++) {
                     if (!sc.hasNext()) {
                         throw new RuntimeException("invalid file format: an attribute is expected");
                     }
-                    sc.nextLine().strip();
+                    attribute = sc.nextLine().strip();
                 }
                 FeeGameField.FeeType feeType = FeeGameField.FeeType.FIXED;
+                if (fieldType.equals(Config.FieldType.FEE)) {
+                    switch (attribute) {
+                        case "ran":
+                            feeType = FeeGameField.FeeType.RANDOM;
+                            break;
+                        default:
+                            feeType = FeeGameField.FeeType.FIXED;
+                    }
+                }
                 GameField gameField;
                 switch (fieldType) {
 
@@ -140,7 +150,7 @@ public class GameBoard {
                         gameField = new StartGameField(fieldId, fieldType, fieldName);
                         break;
                     case FEE:
-                        gameField = new FeeGameField(fieldId, fieldType, fieldName, feeType, 30);
+                        gameField = new FeeGameField(fieldId, fieldType, fieldName, feeType);
                         break;
                     case REPETITION:
                         gameField = new RepetitionGameField(fieldId, fieldType, fieldName);

@@ -1,37 +1,36 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields;
 
+import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
 
 import java.util.Random;
 
-public  class FeeGameField extends GameField {
-    private final int baseFee;
+public class FeeGameField extends GameField {
+    private final int baseFee = 30;
     private final FeeType feeType;
     private final Random random = new Random();
-    private final int RATE = 3;
+    private final int rate = 3;
 
-    public FeeGameField(int fieldId, Config.FieldType fieldType, String fieldName, FeeType feeType, int baseFee) {
+    public FeeGameField(int fieldId, Config.FieldType fieldType, String fieldName, FeeType feeType) {
         super(fieldId, fieldType, fieldName);
         this.feeType = feeType;
-        this.baseFee = baseFee;
     }
 
-    public FeeType getFeeType() {
-        return feeType;
-    }
 
-    public int getFee() {
+    private int calculateFee() {
         int value = baseFee;
         if (feeType.equals(FeeType.RANDOM)) {
-            value += random.nextInt(RATE) * baseFee;
+            value += random.nextInt(rate) * baseFee;
         }
         return value;
     }
 
     @Override
     public void action(Player currentPlayer) {
-        //TODO
+        int fee = calculateFee();
+        currentPlayer.alterMoney(-fee);
+        new InformationalWindow("Nothing is free of charge...", String.format("You have to pay %sCHF!", fee));
     }
 
     public enum FeeType {

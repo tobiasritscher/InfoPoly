@@ -11,9 +11,10 @@ discrete mathematics
 2
 module
 information theory & coding
-2
+3
 fee
 semester tuition
+fix
 2
 job
 BarStucks
@@ -56,9 +57,10 @@ system orientated programming
 2
 module
 web development
-2
+3
 fee
 zvv fees
+fix
 2
 startup
 startup
@@ -103,19 +105,20 @@ module
 cloud computing
 2
 module
-game development
+Game development
 2
 job
-cashbank
+CashBank
 2
 chance
 chance
 2
 module
-mobile applications
-2
+Mobile applications
+3
 fee
-party
+Party
+ran
 2
 module
-bachelor thesis
+Bachelor thesis

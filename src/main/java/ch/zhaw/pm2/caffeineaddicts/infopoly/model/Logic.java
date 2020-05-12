@@ -70,6 +70,7 @@ public class Logic {
         }
         logger.info(String.format("Rolled number: %d; Next field id: %d", rolledNumber, fieldId));
         moveCurrentPlayerToField(fieldId);
+        gameBoard.getField(fieldId).action(getCurrentPlayer());
         verifyCurrentPlayerHasMoney();
         verifyCurrentPlayerIsWinner();
         if (!moveAgain) {
@@ -84,17 +85,16 @@ public class Logic {
      * @param fieldId positive zero based integer number, field id where current player to be moved to.
      */
     public void moveCurrentPlayerToField(int fieldId) {
-        GameField gameField = gameBoard.getField(fieldId);
         getCurrentPlayer().setPosition(fieldId);
-        gameField.action(getCurrentPlayer());
     }
 
     /**
      * If current player has no money move to the @{@link Config.FieldType#START} field.
      */
     private void verifyCurrentPlayerHasMoney() {
-        if (players.get(currentPlayer.getValue()).getMoney() <= 0) {
+        if (getCurrentPlayer().getMoney() <= 0) {
             new InformationalWindow("Broke!", "You have no money left!");
+            getCurrentPlayer().setPosition(gameBoard.getStartGameField().getFieldId());
             waitForScholarship();
         }
     }
@@ -106,15 +106,19 @@ public class Logic {
     }
 
     private void waitForScholarship() {
+        final int roundsToWait = gameBoard.getStartGameField().getScholarshipWaitTime();
+        final int scholarshipMoney = gameBoard.getStartGameField().getBaseScholarship();
         new InformationalWindow("Scholarship!", "You ran out of money so now you will apply for a scholarship.\nThat usually takes up to 3 Weeks");
-        getCurrentPlayer().setRoundsWaiting(3);
+        getCurrentPlayer().setRoundsWaiting(roundsToWait);
         if (getCurrentPlayer().getRoundsWaiting() == 0) {
-            getCurrentPlayer().setMoney(100);
+            getCurrentPlayer().setMoney(0);
+            getCurrentPlayer().alterMoney(scholarshipMoney);
+            new InformationalWindow("Poor guy!", String.format("You got some state help: %d", scholarshipMoney));
         }
     }
 
     private void transferMoneyOnRunThroughStartField() {
-        int money = ((StartGameField) gameBoard.getStartGameField()).getBaseScholarship();
+        int money = ((StartGameField) gameBoard.getStartGameField()).getParentsHelp();
 
         new InformationalWindow("Parents help!", String.format("You got %d CHF from you parents!", money));
         getCurrentPlayer().alterMoney(money);

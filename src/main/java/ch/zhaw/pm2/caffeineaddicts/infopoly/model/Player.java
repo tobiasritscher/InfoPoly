@@ -165,7 +165,9 @@ public class Player {
      * @param amount positive or negative integer.
      */
     public void alterMoney(int amount) {
+        int oldState = money.getValue();
         money.set(money.getValue() + amount);
+        logger.info(String.format("Money altered. Player: %s Old: %d New: %d", name, oldState, money.get()));
     }
 
     /**
@@ -174,7 +176,9 @@ public class Player {
      * @param credits positive or negative integer.
      */
     public void alterCredits(int credits) {
+        int oldState = this.credits.getValue();
         this.credits.set(this.credits.get() + credits);
+        logger.info(String.format("Credits altered. Player: %s Old: %d New: %d", name, oldState, this.credits.getValue()));
     }
 
     public boolean isBroke() {
