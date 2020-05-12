@@ -1,7 +1,6 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
-import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.MainWindowController;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.GameField;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.StartGameField;
 import javafx.beans.property.IntegerProperty;
@@ -18,6 +17,12 @@ public class Logic {
     private static IntegerProperty currentPlayer = new SimpleIntegerProperty(0);
     private final GameBoard gameBoard;
     private ArrayList<Player> players = new ArrayList<>();
+    public IntegerProperty currentDiceRollProperty() {
+        return currentDiceRoll;
+    }
+
+    IntegerProperty currentDiceRoll = new SimpleIntegerProperty();
+
 
     public Logic() {
         gameBoard = new GameBoard();
@@ -141,12 +146,11 @@ public class Logic {
         int secondDice;
 
         //IntegerProperty for final dice roll. Needed for UI
-        IntegerProperty roll = new SimpleIntegerProperty();
 
         firstDice = random.nextInt(NUMBER_DICE_SIDES) + 1;
         secondDice = random.nextInt(NUMBER_DICE_SIDES) + 1;
         int rolledNumber = firstDice + secondDice;
-        roll.setValue(rolledNumber);
+        currentDiceRoll.setValue(rolledNumber);
 
         if (firstDice == secondDice) {
             new InformationalWindow("Wow! Rolled a double!", "You can move again.");
@@ -155,4 +159,7 @@ public class Logic {
         movePlayer(rolledNumber, again);
     }
 
+    public IntegerProperty getCurrentDiceRollProperty() {
+        return currentDiceRoll;
+    }
 }
