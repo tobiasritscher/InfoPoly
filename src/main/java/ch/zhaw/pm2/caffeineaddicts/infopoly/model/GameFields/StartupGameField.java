@@ -34,15 +34,15 @@ public class StartupGameField extends GameField {
                     QuestionWindow questionWindow = new QuestionWindow("Startup Manager", "Would you like to create your first startup?");
                     if (questionWindow.getAnswer()) {
                         setOwner(currentPlayer);
-                        currentPlayer.setMoney(currentPlayer.getMoney() - getMoneyNeeded());
+                        currentPlayer.alterMoney(-moneyNeeded);
                     } else {
                         new InformationalWindow("", "I guess not everyone is up to the challenge...");
                     }
                 } else {
-                    new InformationalWindow("", "You require: " + getMoneyNeeded() + " in order to start your first Startup");
+                    new InformationalWindow("No chance for poor...", "You require: " + getMoneyNeeded() + " in order to start your first Startup");
                 }
             } else {
-                new InformationalWindow("", "A successful startup requires the needed knowledge...(" + creditsNeeded + " Credits)");
+                new InformationalWindow("Not smart enough...", "A successful startup requires the needed knowledge...(" + creditsNeeded + " Credits)");
             }
         }
     }
