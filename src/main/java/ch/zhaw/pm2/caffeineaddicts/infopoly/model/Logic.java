@@ -38,6 +38,10 @@ public class Logic {
         return (currentFieldId + numberFieldToMove) % boardSize;
     }
 
+    static int calculateNextPlayerId(int numberPlayers, int currentPlayerId) {
+        return (currentPlayerId + 1) % numberPlayers;
+    }
+
     public ArrayList<Player> getPlayers() {
         return players;
     }
@@ -54,7 +58,7 @@ public class Logic {
      * changes the currentPlayerId to the next player
      */
     private void switchToNextPlayer() {
-        int nextPlayerId = (currentPlayerId.get() + 1) % players.size();
+        final int nextPlayerId = calculateNextPlayerId(players.size(), players.indexOf(getCurrentPlayer()));
         currentPlayerId.setValue(nextPlayerId);
 
         if (playerHasToWait()) {
@@ -86,9 +90,6 @@ public class Logic {
     }
 
     private Player getCurrentPlayer() {
-        if (players.isEmpty()) {
-            throw new RuntimeException("invalid operation: no players!");
-        }
         return players.get(currentPlayerId.getValue());
     }
 
@@ -122,7 +123,9 @@ public class Logic {
             //todo
             broke();
         }
-        verifyCurrentPlayerIsWinner();
+        if (getCurrentPlayer().getCredits() >= CREDITS_TO_WIN) {
+            winner();
+        }
         if (!moveAgain) {
             switchToNextPlayer();
         }
@@ -155,11 +158,9 @@ public class Logic {
         scholarship();
     }
 
-    private void verifyCurrentPlayerIsWinner() {
-        if (getCurrentPlayer().getCredits() >= CREDITS_TO_WIN) {
-            new InformationalWindow("Bye bye dear school!", String.format("Congratulations %S! You just graduated from ZHAW!%nNow go and get a job in the real world!", getCurrentPlayer().getName()));
-            //TODO: finish game
-        }
+    private void winner() {
+        new InformationalWindow("Bye bye dear school!", String.format("Congratulations %S! You just graduated from ZHAW!%nNow go and get a job in the real world!", getCurrentPlayer().getName()));
+        //TODO: finish game
     }
 
     private void payday() {
