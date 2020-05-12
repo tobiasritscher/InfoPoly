@@ -45,7 +45,7 @@ public class ModuleGameField extends GameField {
                 owner.alterMoney(Math.min(0, Math.min(currentPlayer.getMoney(), fieldMoneyCharge)));
                 currentPlayer.alterMoney(-fieldMoneyCharge);
             }
-            owner.setCredits(getCreditsGainFromVisitors());
+            owner.alterCredits(getCreditsGainFromVisitors());
         } else {
             if (currentPlayer.getMoney() >= getFieldPrice()) {
                 QuestionWindow questionWindow = new QuestionWindow("Purchase course?", String.format(" %s would you like to buy the course: %s", currentPlayer.getName().toUpperCase(), getFieldName().toUpperCase()));
