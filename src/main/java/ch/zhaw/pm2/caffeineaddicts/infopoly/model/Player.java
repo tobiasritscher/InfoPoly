@@ -11,40 +11,15 @@ import java.util.logging.Logger;
 
 public class Player {
     private static final Logger logger = Logger.getLogger(Player.class.getCanonicalName());
-    /**
-     * How many rounds a player must wait
-     */
     private int roundsWaiting;
-    /**
-     * Numerical player number. Ranges between 1 to 4
-     */
     private final int playerId;
-    /**
-     * Money of the player. Is SimpleIntegerProperty type to allow support for PropertyListener.
-     */
     private IntegerProperty money = new SimpleIntegerProperty();
-    /**
-     * Credits of the player. Is SimpleIntegerProperty type to allow support for PropertyListener.
-     */
     private IntegerProperty credits = new SimpleIntegerProperty();
-
-    /**
-     * Current position of the player on the field
-     */
     private IntegerProperty position = new SimpleIntegerProperty();
-
-    /**
-     * Name of the player
-     */
     private final String name;
-    /**
-     * Defines if the player has a job
-     */
     private boolean isWorking = false;
-    /**
-     * List of all the courses and jobs that the player has
-     */
     private List<GameField> ownerShips;
+    private boolean getsScholarship = false;
 
     public Player(String name, int money, int credits, int playerId) {
         this.name = name;
@@ -66,6 +41,14 @@ public class Player {
 
     public List<GameField> getOwnerShips() {
         return ownerShips;
+    }
+
+    public boolean isGetsScholarship() {
+        return getsScholarship;
+    }
+
+    public void setGetsScholarship(boolean getsScholarship) {
+        this.getsScholarship = getsScholarship;
     }
 
     /**

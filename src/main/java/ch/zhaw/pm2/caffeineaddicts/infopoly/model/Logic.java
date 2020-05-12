@@ -1,7 +1,6 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
-import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.StartGameField;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -35,13 +34,19 @@ public class Logic {
     /**
      * changes the currentPlayerId to the next player
      */
-    public void switchToNextPlayer() {
+    private void switchToNextPlayer() {
+        final int SCHOLARSHIP_MONEY = 100;
         int nextPlayerId = (currentPlayerId.get() + 1) % players.size();
         currentPlayerId.setValue(nextPlayerId);
 
         Player currentPlayer = getCurrentPlayer();
         int waitingRounds = currentPlayer.getRoundsWaiting();
-        if (waitingRounds > 0) {
+
+        if (waitingRounds == 0 && currentPlayer.isGetsScholarship()) {
+            currentPlayer.alterMoney(SCHOLARSHIP_MONEY);
+            currentPlayer.setGetsScholarship(false);
+            new InformationalWindow("Poor guy!", String.format("You got some state help: %d", SCHOLARSHIP_MONEY));
+        } else if (waitingRounds > 0) {
             new InformationalWindow("Small carrot!", currentPlayer.getName() + " has to sit " + waitingRounds + " more rounds out...You know why!");
             currentPlayer.setRoundsWaiting(waitingRounds - 1);
             switchToNextPlayer();
@@ -80,13 +85,7 @@ public class Logic {
         }
     }
 
-
-    /**
-     * Set current player position to the give field id.
-     *
-     * @param fieldId positive zero based integer number, field id where current player to be moved to.
-     */
-    public void moveCurrentPlayerToField(int fieldId) {
+    private void moveCurrentPlayerToField(int fieldId) {
         getCurrentPlayer().setPosition(fieldId);
     }
 
@@ -95,7 +94,7 @@ public class Logic {
      */
     private void verifyCurrentPlayerHasMoney() {
         Player currentPlayer = getCurrentPlayer();
-        if (currentPlayer.getMoney() <= 0) {
+        if (!currentPlayer.isGetsScholarship() && currentPlayer.getMoney() <= 0) {
             new InformationalWindow("Broke!", "You have no money left!");
             currentPlayer.setPosition(gameBoard.getStartGameField().getFieldId());
             waitForScholarship();
@@ -110,17 +109,11 @@ public class Logic {
     }
 
     private void waitForScholarship() {
-        StartGameField startGameField = gameBoard.getStartGameField();
-        int roundsToWait = startGameField.getScholarshipWaitTime();
-        int scholarshipMoney = startGameField.getBaseScholarship();
+        final int ROUNDS_TO_WAIT = 3;
 
         new InformationalWindow("Scholarship!", "You ran out of money so now you will apply for a scholarship.\nThat usually takes up to 3 Weeks");
-        getCurrentPlayer().setRoundsWaiting(roundsToWait);
-        if (getCurrentPlayer().getRoundsWaiting() == 0) {
-            getCurrentPlayer().setMoney(0);
-            getCurrentPlayer().alterMoney(scholarshipMoney);
-            new InformationalWindow("Poor guy!", String.format("You got some state help: %d", scholarshipMoney));
-        }
+        getCurrentPlayer().setRoundsWaiting(ROUNDS_TO_WAIT);
+        getCurrentPlayer().setGetsScholarship(true);
     }
 
     private void transferMoneyOnRunThroughStartField() {
