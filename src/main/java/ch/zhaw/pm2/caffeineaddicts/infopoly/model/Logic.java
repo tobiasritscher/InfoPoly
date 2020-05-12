@@ -47,8 +47,8 @@ public class Logic {
             currentPlayer.setGetsScholarship(false);
             new InformationalWindow("Poor guy!", String.format("You got some state help: %d", SCHOLARSHIP_MONEY));
         } else if (waitingRounds > 0) {
-            new InformationalWindow("Small carrot!", currentPlayer.getName() + " has to sit " + waitingRounds + " more rounds out...You know why!");
-            currentPlayer.setRoundsWaiting(waitingRounds - 1);
+            new InformationalWindow("Small carrot!", currentPlayer.getName() + " has to sit " + --waitingRounds + " more rounds out...You know why!");
+            currentPlayer.setRoundsWaiting(waitingRounds);
             switchToNextPlayer();
         }
     }
