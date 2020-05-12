@@ -16,16 +16,15 @@ public class Logic {
     private final static Logger logger = Logger.getLogger(Logic.class.getCanonicalName());
     private static IntegerProperty currentPlayer = new SimpleIntegerProperty(0);
     private final GameBoard gameBoard;
-    private ArrayList<Player> players = new ArrayList<>();
-    public IntegerProperty currentDiceRollProperty() {
-        return currentDiceRoll;
-    }
-
     IntegerProperty currentDiceRoll = new SimpleIntegerProperty();
-
+    private ArrayList<Player> players = new ArrayList<>();
 
     public Logic() {
         gameBoard = new GameBoard();
+    }
+
+    public IntegerProperty currentDiceRollProperty() {
+        return currentDiceRoll;
     }
 
     public ArrayList<Player> getPlayers() {
@@ -40,7 +39,7 @@ public class Logic {
     public void switchToNextPlayer(ArrayList<Player> player) {
         currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
         if (getCurrentPlayer().getIsWaiting()) {
-            new InformationalWindow("Small carrot!",getCurrentPlayer().getName() + " has to sit this round out...You know why!");
+            new InformationalWindow("Small carrot!", getCurrentPlayer().getName() + " has to sit this round out...You know why!");
             getCurrentPlayer().setRoundsWaiting(getCurrentPlayer().getRoundsWaiting() - 1);
             currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
 

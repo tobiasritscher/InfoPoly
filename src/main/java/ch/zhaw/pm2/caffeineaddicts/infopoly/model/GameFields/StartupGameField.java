@@ -11,7 +11,7 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
 public class StartupGameField extends GameField {
     private static final int moneyNeeded = 10;
     private static final int moneyPayout = 200;
-    private static final int NEEDED_AMOUNT_CREDITS = 200;
+    private static final int creditsNeeded = 200;
 
     public StartupGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
         super(fieldId, fieldType, fieldName);
@@ -29,7 +29,7 @@ public class StartupGameField extends GameField {
         } else if (hasOwner() && !getOwner().equals(currentPlayer)) {
             new InformationalWindow("Too late!", "Startup is already created with your Idea...had to be fast!");
         } else {
-            if (currentPlayer.getCredits() >= NEEDED_AMOUNT_CREDITS) {
+            if (currentPlayer.getCredits() >= creditsNeeded) {
                 if (currentPlayer.getMoney() >= getMoneyNeeded()) {
                     QuestionWindow questionWindow = new QuestionWindow("Startup Manager", "Would you like to create your first startup?");
                     if (questionWindow.getAnswer()) {
@@ -42,7 +42,7 @@ public class StartupGameField extends GameField {
                     new InformationalWindow("", "You require: " + getMoneyNeeded() + " in order to start your first Startup");
                 }
             } else {
-                new InformationalWindow("", "A successful startup requires the needed knowledge...(" + NEEDED_AMOUNT_CREDITS + " Credits)");
+                new InformationalWindow("", "A successful startup requires the needed knowledge...(" + creditsNeeded + " Credits)");
             }
         }
     }
