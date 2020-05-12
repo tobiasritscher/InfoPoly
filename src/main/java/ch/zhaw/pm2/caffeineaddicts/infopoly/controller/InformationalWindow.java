@@ -15,7 +15,6 @@ import java.util.Optional;
  * @author corrooli
  */
 public class InformationalWindow {
-    private Alert alert;
 
     /**
      * Constructor of the informational window. Spawns a new informational window.
@@ -23,7 +22,7 @@ public class InformationalWindow {
      * @param messageText The message for the player.
      */
     public InformationalWindow(String headerText, String messageText) {
-        alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setResizable(true);
         alert.getDialogPane().setMinWidth(Region.USE_PREF_SIZE);
         if (headerText.isEmpty()) {
