@@ -42,10 +42,6 @@ public class Player {
      */
     private boolean isBroke = false;
     /**
-     * Defines if the player is waiting due to being broke or failed exams
-     */
-    private boolean isWaiting = false;
-    /**
      * Defines if the player has a job
      */
     private boolean isWorking = false;
@@ -163,19 +159,6 @@ public class Player {
     public IntegerProperty getPositionProperty() {
         return position;
     }
-
-    public boolean getIsWaiting() {
-        return isWaiting;
-    }
-
-    public void isWaiting() {
-        isWaiting = true;
-    }
-
-    public void isNotWaiting() {
-        isWaiting = false;
-    }
-
     /**
      * Add or charge money.
      *

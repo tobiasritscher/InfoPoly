@@ -38,7 +38,7 @@ public class Logic {
 
     public void switchToNextPlayer(ArrayList<Player> player) {
         currentPlayer.setValue((1 + currentPlayer.get()) % player.size());
-        if (getCurrentPlayer().getIsWaiting()) {
+        if (getCurrentPlayer().getRoundsWaiting() > 0) {
             new InformationalWindow("Small carrot!", getCurrentPlayer().getName() + " has to sit this round out...You know why!");
             getCurrentPlayer().setRoundsWaiting(getCurrentPlayer().getRoundsWaiting() - 1);
             currentPlayer.setValue((1 + currentPlayer.get()) % player.size());

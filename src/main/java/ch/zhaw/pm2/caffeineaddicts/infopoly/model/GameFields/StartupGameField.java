@@ -11,7 +11,7 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
 public class StartupGameField extends GameField {
     private static final int moneyNeeded = 10;
     private static final int moneyPayout = 200;
-    private static final int creditsNeeded = 200;
+    private static final int creditsNeeded = 100;
 
     public StartupGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
         super(fieldId, fieldType, fieldName);
