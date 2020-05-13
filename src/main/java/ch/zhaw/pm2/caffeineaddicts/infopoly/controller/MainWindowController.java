@@ -110,7 +110,10 @@ public class MainWindowController {
     @FXML
     private BorderPane field40;
 
-    //Bottom of fields (player area). This is where player initials are used to indicate which players are on which field.
+    /*
+    * Bottom of fields (player area). This is where player initials are used to indicate which players are on which
+    * field.
+    */
     @FXML
     private Label field01Players;
     @FXML
@@ -388,7 +391,8 @@ public class MainWindowController {
      */
     private void initializeGame() {
         fieldLabels.forEach((fieldLabel) -> fieldLabel.setText(""));
-        fieldColors.forEach((fieldColor) -> fieldColor.setStyle("-fx-background-color: " + Config.PlayerColor.UNOCCUPIED.getColorValue()));
+        fieldColors.forEach((fieldColor) -> fieldColor.setStyle("-fx-background-color: " +
+                Config.PlayerColor.UNOCCUPIED.getColorValue()));
         setBoardVisibility(false);
         rollDiceOutput.setText("");
 
@@ -647,12 +651,15 @@ public class MainWindowController {
                     player.getPositionProperty().addListener((observableValue, oldPosition, newPosition) -> {
                                 final int repetitionGameFieldId = logic.getGameBoard().getRepetitionGameFieldId();
                                 final int examGameFieldId = logic.getGameBoard().getExamGameFieldId();
-                                if ((oldPosition.intValue() == examGameFieldId) && (newPosition.intValue() == repetitionGameFieldId)) {
+                                if ((oldPosition.intValue() == examGameFieldId) &&
+                                        (newPosition.intValue() == repetitionGameFieldId)) {
                                     movePlayer(player.getName(), fieldLabels.indexOf(repeatingPlayers));
                                 } else {
                                     movePlayer(player.getName(), newPosition.intValue());
                                 }
-                                new InformationalWindow("GPS", String.format("%S was move to field: %S", player.getName(), logic.getGameBoard().getField(newPosition.intValue()).getFieldName()));
+                                new InformationalWindow("GPS", String.format("%S moved to field: %S",
+                                        player.getName(),
+                                        logic.getGameBoard().getField(newPosition.intValue()).getFieldName()));
                             }
                     );
 

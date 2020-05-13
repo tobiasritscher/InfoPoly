@@ -4,13 +4,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LogicTest {
     GameBoard gameBoard;
@@ -68,47 +64,56 @@ public class LogicTest {
 
 
     @Test
-    void switchToNextPlayerTest(){
-        Logic mock = mock(Logic.class);
+    void switchToNextPlayerTest() {
         logic.addPlayer(player1);
         logic.addPlayer(player2);
         logic.addPlayer(player3);
         logic.addPlayer(player4);
 
-        logic.setCurrentPlayerId(1);
-        when(mock.calculateNextPlayerId(4,1)).thenReturn(2);
+        Logic.setCurrentPlayerId(1);
+        Assertions.assertEquals(Logic.calculateNextPlayerId(4, 1), 2);
         logic.switchToNextPlayer();
         int now = logic.getPlayerTurnProperty().getValue();
-        assertEquals(2,now);
+        assertEquals(2, now);
     }
 
     @Test
-    void playerHasToWaitTest(){
-
+    void playerHasToWaitTest() {
+        player1.setWaitingForScholarship(false);
+        Assertions.assertFalse(logic.playerHasToWait(player1));
     }
 
     @Test
-    void getScholarshipTest(){
+    void getScholarshipTest() {
+        player1.alterMoney(-100);
+        Assertions.assertEquals(player1.getMoney(), 0);
 
+        logic.getScholarship(player1);
+        Assertions.assertEquals(player1.getMoney(), 100);
+        Assertions.assertFalse(player1.isWaitingForScholarship());
     }
 
     @Test
-    void movePlayerTest(){
+    void movePlayerTest() {
+        gameBoard = new GameBoard();
+        player1.setPosition(gameBoard.getExamGameFieldId());
+        player1.setRoundsWaiting(2);
+        Assertions.assertTrue(logic.playerHasToWaitOnExam(player1));
 
-    }
+        player2.alterMoney(-200);
+        Assertions.assertTrue(logic.playerIsBroke(player2));
+        Assertions.assertFalse(logic.playerIsBroke(player1));
 
-    @Test
-    void parentsHelpTest(){
-
+        player3.alterCredits(180);
+        Assertions.assertTrue(logic.playerHasWon(player3));
+        Assertions.assertFalse(logic.playerHasWon(player2));
     }
 
     @Test
     public void DiceNumberTest() {
-
         for (int i = 0; i < 100; i++) {
             int diceRoll = logic.diceNumber();
             assertTrue(diceRoll >= 1 && diceRoll <= 6);
         }
     }
-
 }

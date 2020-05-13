@@ -117,7 +117,7 @@ public class Logic {
 
             currentPlayerId.setValue(nextPlayerId);
 
-            if (playerHasToWait()) {
+            if (playerHasToWait(getCurrentPlayer())) {
                 switchToNextPlayer();
             }
         }
@@ -128,8 +128,7 @@ public class Logic {
      *
      * @return if the player has to wait
      */
-    private boolean playerHasToWait() {
-        Player currentPlayer = getCurrentPlayer();
+    boolean playerHasToWait(Player currentPlayer) {
         boolean jumpPlayerTurn = false;
         int waitingRounds = currentPlayer.getRoundsWaiting();
 
@@ -139,6 +138,8 @@ public class Logic {
             currentPlayer.setRoundsWaiting(waitingRounds - 1);
             jumpPlayerTurn = true;
         } else if (currentPlayer.isWaitingForScholarship()) {
+            new InformationalWindow("Received scholarship!", String.format(
+                    "You got some money from the public: %d", SCHOLARSHIP_MONEY));
             getScholarship(currentPlayer);
         }
 
@@ -150,9 +151,7 @@ public class Logic {
      *
      * @param currentPlayer the player that needs the scholarship
      */
-    private void getScholarship(Player currentPlayer) {
-        new InformationalWindow("Received scholarship!", String.format(
-                "You got some money from the public: %d", SCHOLARSHIP_MONEY));
+    void getScholarship(Player currentPlayer) {
         currentPlayer.alterMoney(SCHOLARSHIP_MONEY);
         currentPlayer.setWaitingForScholarship(false);
     }
@@ -168,8 +167,7 @@ public class Logic {
      * @param rolledNumber the number between 1 and {@link Config#NUMBER_DICES} * {@link Config#NUMBER_DICE_SIDES}
      *                     inclusive.
      */
-    public void movePlayer(int rolledNumber, boolean moveAgain) {
-        Player currentPlayer = getCurrentPlayer();
+    public void movePlayer(Player currentPlayer, int rolledNumber, boolean moveAgain) {
         int currentPosition = currentPlayer.getPosition();
 
         int nextPosition = calculateNextFieldId(gameBoard.getBoardSize(), currentPosition, rolledNumber);
@@ -188,28 +186,44 @@ public class Logic {
         }
 
         logger.info(String.format("Rolled number: %d; Next field id: %d", rolledNumber, nextPosition));
-        moveCurrentPlayerToField(nextPosition);
+        moveCurrentPlayerToField(currentPlayer, nextPosition);
         gameBoard.getField(nextPosition).action(currentPlayer);
 
-        if ((currentPlayer.getPosition() == gameBoard.getExamGameFieldId()) && (currentPlayer.getRoundsWaiting() > 0)) {
-            repetition();
+        if (playerHasToWaitOnExam(currentPlayer)) {
+            repetition(currentPlayer);
         }
-        if (currentPlayer.getMoney() < 0 && !currentPlayer.isWaitingForScholarship()) {
+        if (playerIsBroke(currentPlayer)) {
             broke();
         }
-        if (currentPlayer.getCredits() >= CREDITS_TO_WIN) {
+        if (playerHasWon(currentPlayer)) {
             winner();
         }
-        if (!gameWasWon.get() && !moveAgain) {
+        if (nextPlayersTurn(moveAgain)) {
             switchToNextPlayer();
         }
+    }
+
+    boolean playerHasToWaitOnExam(Player currentPlayer) {
+        return (currentPlayer.getPosition() == gameBoard.getExamGameFieldId()) && (currentPlayer.getRoundsWaiting() > 0);
+    }
+
+    boolean playerIsBroke(Player currentPlayer) {
+        return currentPlayer.getMoney() < 0 && !currentPlayer.isWaitingForScholarship();
+    }
+
+    boolean playerHasWon(Player currentPlayer) {
+        return currentPlayer.getCredits() >= CREDITS_TO_WIN;
+    }
+
+    boolean nextPlayersTurn(boolean moveAgain) {
+        return !gameWasWon.get() && !moveAgain;
     }
 
     /**
      * Makes a player repeat after failing the exams
      */
-    private void repetition() {
-        moveCurrentPlayerToField(gameBoard.getRepetitionGameFieldId());
+    private void repetition(Player currentPlayer) {
+        moveCurrentPlayerToField(currentPlayer, gameBoard.getRepetitionGameFieldId());
     }
 
     /**
@@ -217,8 +231,8 @@ public class Logic {
      *
      * @param fieldId the new field
      */
-    private void moveCurrentPlayerToField(int fieldId) {
-        getCurrentPlayer().setPosition(fieldId);
+    private void moveCurrentPlayerToField(Player currentPlayer, int fieldId) {
+        currentPlayer.setPosition(fieldId);
     }
 
     /**
@@ -288,7 +302,7 @@ public class Logic {
                     getCurrentPlayer().getName()));
             again = true;
         }
-        movePlayer(rolledNumber, again);
+        movePlayer(getCurrentPlayer() ,rolledNumber, again);
     }
 
     int diceNumber() {
