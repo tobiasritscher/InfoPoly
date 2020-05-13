@@ -15,6 +15,9 @@ import java.util.logging.Logger;
 import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config.CREDITS_TO_WIN;
 import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config.NUMBER_DICE_SIDES;
 
+/**
+ * Handles the logic between the players and the board
+ */
 public class Logic {
     private final static Logger logger = Logger.getLogger(Logic.class.getCanonicalName());
     private static final IntegerProperty currentPlayerId = new SimpleIntegerProperty(0);
@@ -27,6 +30,13 @@ public class Logic {
         gameBoard = new GameBoard();
     }
 
+    /**
+     * checks if a player jumped over start to give him 100 CHF
+     * @param fieldId player's current position
+     * @param startPosition where the player begins
+     * @param endPosition the player's new position
+     * @return
+     */
     static boolean jumpedOverField(int fieldId, int startPosition, int endPosition) {
         boolean result;
 
@@ -39,10 +49,23 @@ public class Logic {
         return result;
     }
 
+    /**
+     * calculates the new position of the player
+     * @param boardSize all fields of the board
+     * @param currentFieldId the current position of the player
+     * @param numberFieldToMove the rolled number for the player to move
+     * @return the new field for the player
+     */
     static int calculateNextFieldId(int boardSize, int currentFieldId, int numberFieldToMove) {
         return (currentFieldId + numberFieldToMove) % boardSize;
     }
 
+    /**
+     * calculates the next player
+     * @param numberPlayers total number of players
+     * @param currentPlayerId the current player
+     * @return the next player
+     */
     static int calculateNextPlayerId(int numberPlayers, int currentPlayerId) {
         return (currentPlayerId + 1) % numberPlayers;
     }
@@ -75,6 +98,10 @@ public class Logic {
         }
     }
 
+    /**
+     * defines if a player has to wait a certain amount of turns
+     * @return if the player has to wait
+     */
     private boolean playerHasToWait() {
         Player currentPlayer = getCurrentPlayer();
         boolean jumpPlayerTurn = false;
@@ -91,6 +118,10 @@ public class Logic {
         return jumpPlayerTurn;
     }
 
+    /**
+     * Gives a player his scholarship money after waiting
+     * @param currentPlayer the player that needs the scholarship
+     */
     private void getScholarship(Player currentPlayer) {
         final int money = StartGameField.SCHOLARSHIP_MONEY;
         new InformationalWindow("Poor guy!", String.format("You got some money from the state: %d", money));
@@ -145,10 +176,17 @@ public class Logic {
         }
     }
 
+    /**
+     * Makes a player repeat after failing the exams
+     */
     private void repetition() {
         moveCurrentPlayerToField(gameBoard.getRepetitionGameFieldId());
     }
 
+    /**
+     * Moves a player to a new field
+     * @param fieldId the new field
+     */
     private void moveCurrentPlayerToField(int fieldId) {
         getCurrentPlayer().setPosition(fieldId);
     }
@@ -162,26 +200,37 @@ public class Logic {
         scholarship();
     }
 
+    /**
+     * Ends the game when someone has won
+     */
     private void winner() {
         new InformationalWindow("Bye bye dear school!", String.format("Congratulations %S! You just graduated from ZHAW!%nNow go and get a job in the real world!", getCurrentPlayer().getName()));
         gameWasWon.set(true);
     }
 
+    /**
+     * Pays the wage if a player lands on his job field
+     */
     private void payday() {
         int wage = JobGameField.BASE_WAGE;
         new InformationalWindow("Payday!", String.format("Here are your money for the last week: %d.-CHF.", wage));
         getCurrentPlayer().alterMoney(wage);
     }
 
+    /**
+     * Makes a player wait for scholarship after being broke
+     */
     private void scholarship() {
         Player currentPlayer = getCurrentPlayer();
         int round = StartGameField.SCHOLARSHIP_WAITING_TIME;
         new InformationalWindow("Scholarship!", String.format("%S, you ran out of money so now you will apply for a scholarship.%nThat usually takes up to %d Weeks", currentPlayer.getName(), round));
-        //todo mb random time to wait "up to" ...
         currentPlayer.setRoundsWaiting(round);
         currentPlayer.setWaitingForScholarship(true);
     }
 
+    /**
+     * Gives a player money if landing on START game field
+     */
     private void parentsHelp() {
         int moneyHelp = StartGameField.PARENTS_HELP;
         new InformationalWindow("Parents help!", String.format("%S, you got %d CHF from you parents!", getCurrentPlayer().getName(), moneyHelp));
@@ -201,6 +250,9 @@ public class Logic {
         return gameBoard;
     }
 
+    /**
+     * rolls dice and checks if you rolled a double which gives you an extra move
+     */
     public void rollDice() {
         Random random = new Random();
         boolean again = false;
