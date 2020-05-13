@@ -103,12 +103,11 @@ public class LogicTest {
     }
 
     @Test
-    public void DiceTest() {
+    public void DiceNumberTest() {
 
         for (int i = 0; i < 100; i++) {
-            logic.rollDice();
-            int diceRoll = logic.getCurrentDiceRollProperty().getValue();
-            assertTrue(diceRoll >= 2 && diceRoll <= 12);
+            int diceRoll = logic.diceNumber();
+            assertTrue(diceRoll >= 1 && diceRoll <= 6);
         }
     }
 
