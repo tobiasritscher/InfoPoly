@@ -26,7 +26,7 @@ Type in terminal:
 > ``gradlew run``
 
 #### Game rules
-Game rules may be found [here](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/wiki#game) under "Game".
+Game rules may be found in [Wiki](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/wiki#game) under "Game".
 
 ## Screenshot
 ![ScreenShot](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/blob/master/docs/Screenshot.png)
