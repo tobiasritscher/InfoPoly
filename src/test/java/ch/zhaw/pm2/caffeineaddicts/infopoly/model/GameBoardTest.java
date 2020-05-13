@@ -3,6 +3,7 @@ package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.*;
 import org.junit.jupiter.api.*;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,10 @@ class GameBoardTest {
         board.add(new RepetitionGameField(3, "repetition"));
         Config.setFieldLayoutPath("src/test/resources/test-field-layout-different-fields-txt");
         GameBoard gameBoard = new GameBoard();
+        Assertions.assertTrue(gameBoard.getBoard().get(0) instanceof FeeGameField);
+        Assertions.assertTrue(gameBoard.getBoard().get(1) instanceof ModuleGameField);
+        Assertions.assertTrue(gameBoard.getBoard().get(2) instanceof StartupGameField);
+        Assertions.assertTrue(gameBoard.getBoard().get(3) instanceof RepetitionGameField);
         assertEquals(board, gameBoard.board);
     }
 }
