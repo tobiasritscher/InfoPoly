@@ -19,7 +19,9 @@ public class StartGameField extends GameField {
 
     @Override
     public void action(Player currentPlayer) {
-        new InformationalWindow("Parents help!", String.format("You just visited you parents. They gave you %d.-CHF.", PARENTS_HELP_ON_VISIT));
+        new InformationalWindow("Financial support from parents",
+                String.format("You just visited your parents. They gave you %d.- CHF.",
+                        PARENTS_HELP_ON_VISIT));
         currentPlayer.alterMoney(PARENTS_HELP_ON_VISIT);
     }
 }

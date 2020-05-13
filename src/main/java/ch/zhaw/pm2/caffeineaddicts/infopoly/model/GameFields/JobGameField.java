@@ -35,16 +35,17 @@ public class JobGameField extends GameField {
                     quitWork(currentPlayer);
                 }
             } else {
-                new InformationalWindow("Shopping?", "Thank you for shopping with us!");
+                new InformationalWindow("You visited " + super.getFieldName(),
+                        "Thank you for shopping with us!");
                 currentPlayer.alterMoney(BASE_WAGE * -1);
                 getOwner().alterMoney(BASE_WAGE);
             }
         } else {
             if (currentPlayer.isWorking()) {
-                new InformationalWindow(String.format("Job Application %S (%d.-CHF)", getFieldName(), BASE_WAGE),
+                new InformationalWindow(String.format("Job application %S (%d.-CHF)", getFieldName(), BASE_WAGE),
                         String.format("You already have a job!%nCome back when you quit it!"));
             } else {
-                QuestionWindow questionWindow = new QuestionWindow(String.format("Job manager %s (%d.-CHF)", getFieldName(), BASE_WAGE),
+                QuestionWindow questionWindow = new QuestionWindow(String.format("Job application %s (%d.-CHF)", getFieldName(), BASE_WAGE),
                         "Would you like to start working here?");
                 if (questionWindow.getAnswer()) {
                     setOwner(currentPlayer);

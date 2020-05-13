@@ -55,22 +55,28 @@ public class ModuleGameField extends GameField {
 
         if (hasOwner()) {
             if (owner.equals(currentPlayer)) {
-                new InformationalWindow("Hey Boss!", "Have a sit and listen to the lectures!");
+                new InformationalWindow("Course taken", "Have a sit and listen to the lectures!");
             } else {
-                new InformationalWindow("This course is so good!", String.format("You decided to pay for it %d CHF. You get %d credits for listening to smart people.", MONEY_CHARGE_ON_VISIT, CREDITS_GAIN_ON_VISIT));
+                new InformationalWindow("Course taken", String.format(
+                        "You decided to pay %d.- CHF. You get %d credits for listening to smart people.",
+                        MONEY_CHARGE_ON_VISIT, CREDITS_GAIN_ON_VISIT));
                 currentPlayer.alterMoney(creditsGain * -1);
                 owner.alterCredits(creditsGain);
             }
         } else {
             if (currentPlayer.getMoney() >= fieldPrice) {
-                QuestionWindow questionWindow = new QuestionWindow(String.format("Purchase course? (%d CHF)", fieldPrice), String.format("%s would you like to buy the course: %s%nYou will get: %d credits", currentPlayer.getName().toUpperCase(), getFieldName().toUpperCase(), CREDITS_GAIN_ON_PURCHASE));
+                QuestionWindow questionWindow = new QuestionWindow(String.format("Purchase course? (%d CHF)",
+                        fieldPrice), String.format("%s, would you like to buy the course %s"+
+                                "?\nYou will get %d credits.",
+                        currentPlayer.getName().toUpperCase(), getFieldName().toUpperCase(), CREDITS_GAIN_ON_PURCHASE));
                 if (questionWindow.getAnswer()) {
                     currentPlayer.alterMoney(fieldPrice * -1);
                     setOwner(currentPlayer);
                     currentPlayer.alterCredits(CREDITS_GAIN_ON_PURCHASE);
                 }
             } else {
-                new InformationalWindow("Get a job!", "You are to poor to buy this field.");
+                new InformationalWindow("Not enough money!",
+                        "You have insufficient funds to buy this field.");
             }
         }
     }

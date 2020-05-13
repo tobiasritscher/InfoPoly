@@ -15,7 +15,8 @@ public class RepetitionGameField extends GameField {
 
     @Override
     public void action(Player currentPlayer) {
-        new InformationalWindow("Such a nerd!", "You are laughing at the students that are repeating!");
+        new InformationalWindow("Visited repeating students", "You hang out with your repeating " +
+                "student friends. You're glad you took studying seriously!");
     }
 
 }

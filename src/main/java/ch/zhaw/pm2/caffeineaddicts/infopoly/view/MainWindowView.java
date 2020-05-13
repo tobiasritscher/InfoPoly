@@ -38,6 +38,9 @@ public class MainWindowView extends Application {
         stage.getIcons().add(new Image("InfoPolyIcon2.png"));
     }
 
+    /**
+     * Starting the UI. Will be called externally.
+     */
     public void startUI() {
         Application.launch();
     }

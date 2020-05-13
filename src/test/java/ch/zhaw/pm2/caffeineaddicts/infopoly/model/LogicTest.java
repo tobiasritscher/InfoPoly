@@ -8,12 +8,14 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
 
 public class LogicTest {
     GameBoard gameBoard;
+    private Logic logic;
 
     private Player player1;
-    private Logic logic;
     private Player player2;
     private Player player3;
     private Player player4;
@@ -76,4 +78,23 @@ public class LogicTest {
         Assertions.assertEquals(0, Logic.calculateNextPlayerId(3, 2));
 
     }
+
+    /**
+     * Testing 100 Times if the dice roll is within bounds.
+     */
+    @Test
+    public void DiceTest(){
+        logic.addPlayer(player1);
+        logic.addPlayer(player2);
+        logic.addPlayer(player3);
+        logic.addPlayer(player4);
+
+        logic.rollDice();
+        int diceRoll = logic.getCurrentDiceRollProperty().get();
+
+        for (int i = 0; i < 100; i++){
+            assertTrue(diceRoll >= 1 && diceRoll <= 12);
+        }
+    }
+
 }

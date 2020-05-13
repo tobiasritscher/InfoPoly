@@ -71,16 +71,19 @@ public class ChanceGameField extends GameField {
                 "Your program code was stolen by hackers.\nYou lose CHF 100.- and your hard work.",
                 0, -100),
         EVENT8(
-                "Your new game app gained some traction, but you got sued because you used copyrighted assets.\nYou lose CHF 90.-",
+                "Your new game app gained some traction, but you got sued because you used copyrighted " +
+                        "assets.\nYou lose CHF 90.-",
                 0, -90),
         EVENT9(
-                "Even though you have exams tomorrow, you went to a party.\nYou lose 2 credits and spent CHF 40.-",
+                "Even though you have exams tomorrow, you went to a party.\n" +
+                        "You lose 2 credits and spent CHF 40.-",
                 -2, -40),
         EVENT10(
                 "You overslept an exam. You lose 2 credits.",
                 -2, 0),
         EVENT11(
-                "Since you study Information Technology, your relatives \nconfuse you with a PC repairman.\nYou earn CHF 50.- by fixing your grandmother's Internet Explorer.",
+                "Since you study Information Technology, your relatives confuse you with a PC repairman.\n" +
+                        "You earn CHF 50.- by fixing your grandmother's Internet Explorer.",
                 0, 50);
 
         private final String message;

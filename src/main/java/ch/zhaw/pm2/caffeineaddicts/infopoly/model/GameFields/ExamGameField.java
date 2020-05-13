@@ -31,13 +31,16 @@ public class ExamGameField extends GameField {
 
     @Override
     public void action(Player currentPlayer) {
-        new InformationalWindow("Noooo...", "You are taking an exam, if you fail you have to repeat!");
+        new InformationalWindow("Taking exam",
+                "You are taking an exam, if you fail you have to repeat!");
 
         if (passed()) {
-            new InformationalWindow("Impossible!", "You have passed your exam! YAY");
+            new InformationalWindow("You passed!", "You have passed your exam!");
             currentPlayer.alterCredits(CREDITS_GAIN_ON_SUCCESS);
         } else {
-            new InformationalWindow("As expected!", String.format("You have failed, you need to repeat this semester!%nIt will take you %d weeks!", REPETITION_TIME_ON_FAIL));
+            new InformationalWindow("You failed!", String.format(
+                    "You have failed, you need to repeat this semester!%nIt will take you %d weeks!",
+                    REPETITION_TIME_ON_FAIL));
             currentPlayer.setRoundsWaiting(REPETITION_TIME_ON_FAIL);
         }
     }
