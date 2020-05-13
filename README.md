@@ -7,11 +7,11 @@ The game has been developed and tested on IntelliJ, and works with gradle.
 
 * [**Nikita Smailov**](https://github.zhaw.ch/smailnik) - Head of Development aka Assistant Caffeine Addict
 
-* **Oliver Corrodi** - Director of UI aka Chief Caffeine and Nicotine Addict
+* [**Oliver Corrodi**](https://github.zhaw.ch/corrooli) - Director of UI aka Chief Caffeine and Nicotine Addict
 
-* **Erman Zankov** - First Executive Programmer specialized in Monopoly mechanics aka Longboi
+* [**Erman Zankov**](https://github.zhaw.ch/zankoerm) - First Executive Programmer specialized in Monopoly mechanics aka Longboi
 
-* **Tobias Ritscher** - Senior Software Engineer in the Controller Departement aka Diseased Penguin
+* [**Tobias Ritscher**](https://github.zhaw.ch/ritsctob) - Senior Software Engineer in the Controller Departement aka Diseased Penguin
 
 ## License 
 This project is licensed under the ZHAW License - see [ZHAW](http://www.zhaw.ch) for details.
