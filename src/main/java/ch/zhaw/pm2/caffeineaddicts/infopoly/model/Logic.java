@@ -1,6 +1,7 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
+import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.JobGameField;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.StartGameField;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
@@ -28,13 +29,13 @@ public class Logic {
 
     static boolean jumpedOverField(int fieldId, int startPosition, int endPosition) {
         boolean result;
-        if (startPosition < endPosition && (startPosition < fieldId && fieldId < endPosition)) {
-            result = true;
-        } else if (startPosition > endPosition && (startPosition < fieldId && fieldId > endPosition || startPosition > fieldId && fieldId < endPosition)) {
+
+        if ((startPosition < fieldId && fieldId < endPosition)) {
             result = true;
         } else {
-            result = false;
+            result = startPosition > endPosition && (startPosition < fieldId || startPosition > fieldId && fieldId < endPosition);
         }
+
         return result;
     }
 
@@ -81,12 +82,12 @@ public class Logic {
 
         if (waitingRounds > 0) {
             new InformationalWindow("Sit down!", String.format("%S has to sit out %d more rounds ...He knows why! Yes! Tell them!", currentPlayer.getName(), waitingRounds));
-            waitingRounds--;
-            currentPlayer.setRoundsWaiting(waitingRounds);
+            currentPlayer.setRoundsWaiting(waitingRounds - 1);
             jumpPlayerTurn = true;
         } else if (currentPlayer.isWaitingForScholarship()) {
             getScholarship(currentPlayer);
         }
+
         return jumpPlayerTurn;
     }
 
@@ -108,29 +109,35 @@ public class Logic {
      * @param rolledNumber the number between 1 and {@link Config#NUMBER_DICES} * {@link Config#NUMBER_DICE_SIDES} inclusive.
      */
     public void movePlayer(int rolledNumber, boolean moveAgain) {
-        final int nextPosition = calculateNextFieldId(gameBoard.getBoardSize(), getCurrentPlayer().getPosition(), rolledNumber);
-        final int startFieldId = gameBoard.getStartGameField().getFieldId();
-        if (jumpedOverField(startFieldId, getCurrentPlayer().getPosition(), nextPosition)) {
+        Player currentPlayer = getCurrentPlayer();
+        int currentPosition = currentPlayer.getPosition();
+
+        int nextPosition = calculateNextFieldId(gameBoard.getBoardSize(), currentPosition, rolledNumber);
+        int startFieldId = gameBoard.getStartGameField().getFieldId();
+
+        if (jumpedOverField(startFieldId, currentPosition, nextPosition)) {
             parentsHelp();
         }
-        if (getCurrentPlayer().isWorking()) {
-            final int currentPlayerJobFieldId = getCurrentPlayer().getJob().getFieldId();
-            if ((getCurrentPlayer().getPosition() < currentPlayerJobFieldId) && (currentPlayerJobFieldId < nextPosition)) {
+
+        if (currentPlayer.isWorking()) {
+            int currentPlayerJobFieldId = currentPlayer.getJob().getFieldId();
+
+            if ((currentPosition < currentPlayerJobFieldId) && (currentPlayerJobFieldId < nextPosition)) {
                 payday();
             }
         }
+
         logger.info(String.format("Rolled number: %d; Next field id: %d", rolledNumber, nextPosition));
         moveCurrentPlayerToField(nextPosition);
-        gameBoard.getField(nextPosition).action(getCurrentPlayer());
-        //todo remove below
-        //gameBoard.getField(30).action(getCurrentPlayer());
-        if ((getCurrentPlayer().getPosition() == gameBoard.getExamGameFieldId()) && (getCurrentPlayer().getRoundsWaiting() > 0)) {
+        gameBoard.getField(nextPosition).action(currentPlayer);
+
+        if ((currentPlayer.getPosition() == gameBoard.getExamGameFieldId()) && (currentPlayer.getRoundsWaiting() > 0)) {
             repetition();
         }
-        if (getCurrentPlayer().getMoney() < 0 && !getCurrentPlayer().isWaitingForScholarship()) {
+        if (currentPlayer.getMoney() < 0 && !currentPlayer.isWaitingForScholarship()) {
             broke();
         }
-        if (getCurrentPlayer().getCredits() >= CREDITS_TO_WIN) {
+        if (currentPlayer.getCredits() >= CREDITS_TO_WIN) {
             winner();
         }
         if (!gameWasWon.get() && !moveAgain) {
@@ -145,16 +152,6 @@ public class Logic {
     private void moveCurrentPlayerToField(int fieldId) {
         getCurrentPlayer().setPosition(fieldId);
     }
-    /*
-    private void moveCurrentPlayerToField(int fieldId) {
-        //todo remove test function
-        if (getCurrentPlayer().getPosition() == 0) {
-            getCurrentPlayer().setPosition(gameBoard.getExamGameFieldId());
-        } else {
-            getCurrentPlayer().setPosition(fieldId);
-        }
-
-    }*/
 
     /**
      * If current player has no money move to the @{@link Config.FieldType#START} field.
@@ -171,21 +168,22 @@ public class Logic {
     }
 
     private void payday() {
-        final int wage = getCurrentPlayer().getJob().BASE_WAGE;
+        int wage = JobGameField.BASE_WAGE;
         new InformationalWindow("Payday!", String.format("Here are your money for the last week: %d.-CHF.", wage));
         getCurrentPlayer().alterMoney(wage);
     }
 
     private void scholarship() {
-        final int round = gameBoard.getStartGameField().SCHOLARSHIP_WAITING_TIME;
-        new InformationalWindow("Scholarship!", String.format("%S, you ran out of money so now you will apply for a scholarship.%nThat usually takes up to %d Weeks", getCurrentPlayer().getName(), round));
+        Player currentPlayer = getCurrentPlayer();
+        int round = StartGameField.SCHOLARSHIP_WAITING_TIME;
+        new InformationalWindow("Scholarship!", String.format("%S, you ran out of money so now you will apply for a scholarship.%nThat usually takes up to %d Weeks", currentPlayer.getName(), round));
         //todo mb random time to wait "up to" ...
-        getCurrentPlayer().setRoundsWaiting(round);
-        getCurrentPlayer().setWaitingForScholarship(true);
+        currentPlayer.setRoundsWaiting(round);
+        currentPlayer.setWaitingForScholarship(true);
     }
 
     private void parentsHelp() {
-        final int moneyHelp = gameBoard.getStartGameField().PARENTS_HELP;
+        int moneyHelp = StartGameField.PARENTS_HELP;
         new InformationalWindow("Parents help!", String.format("%S, you got %d CHF from you parents!", getCurrentPlayer().getName(), moneyHelp));
         getCurrentPlayer().alterMoney(moneyHelp);
     }
@@ -215,7 +213,7 @@ public class Logic {
         currentDiceRoll.setValue(rolledNumber);
 
         if (firstDice == secondDice) {
-            new InformationalWindow(String.format("Wow! Has rolled a double!"), String.format("%S can move again.", getCurrentPlayer().getName()));
+            new InformationalWindow("Wow! Has rolled a double!", String.format("%S can move again.", getCurrentPlayer().getName()));
             again = true;
         }
         movePlayer(rolledNumber, again);
