@@ -7,6 +7,8 @@
 
 The game has been testet on Intellij and works with gradle.
 
+For more informations and the documentation of our work have a look into the [Wiki](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/wiki)
+
 ## Team
 
 * **Nikita Smailov** - Head of Development aka Assistant Caffeine Addict
