@@ -45,7 +45,7 @@ public abstract class GameField {
         ownerProperty.setValue(0);
     }
 
-    String getFieldName() {
+    public String getFieldName() {
         return fieldName;
     }
 
