@@ -26,6 +26,9 @@ class GameBoardTest {
         gameBoard = null;
     }
 
+    /**
+     * Checks if multiple game fields are correctly initialized from the file.
+     */
     @Test
     void loadGameBoardDifferentFields() {
         fields.add(new FeeGameField(0, "fee", FeeGameField.FeeType.RANDOM));
