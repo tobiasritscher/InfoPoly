@@ -2,7 +2,9 @@ package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.StartGameField;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
@@ -19,8 +21,14 @@ public class Logic {
     private final ArrayList<Player> players = new ArrayList<>();
     IntegerProperty currentDiceRoll = new SimpleIntegerProperty();
 
+    private final BooleanProperty gameWasWon = new SimpleBooleanProperty();
+
     public Logic() {
         gameBoard = new GameBoard();
+    }
+
+    public BooleanProperty getGameWasWonProperty() {
+        return gameWasWon;
     }
 
     static boolean jumpedOverField(int fieldId, int startPosition, int endPosition) {
@@ -161,7 +169,7 @@ public class Logic {
 
     private void winner() {
         new InformationalWindow("Bye bye dear school!", String.format("Congratulations %S! You just graduated from ZHAW!%nNow go and get a job in the real world!", getCurrentPlayer().getName()));
-        //TODO: finish game
+        gameWasWon.set(true);
     }
 
     private void payday() {

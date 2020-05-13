@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config.MEDIUM_CREDITS;
-
 /**
  * Main Window UI Controller. Contains all fields to address the main window, and all methods used to update fields.
  * <p>
@@ -26,15 +24,14 @@ import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config.MEDIUM_CREDITS;
  * starts/stops a game as well as spawns a dialog to enter player names / number.
  * <p>
  * This controller is deliberately kept (kinda) dumb, and it does not handle any business logic. This ensures a correct
- * MVP pattern. All information on the UI is updated via PropertyListeners (from JavaFx Beans)
+ * MVP pattern. All information on the UI is updated via PropertyListeners
  *
  * @author corrooli
  */
 public class MainWindowController {
 
-    /**
-     * All fields in the game. Can be formatted to our liking.
-     */
+
+    //All fields in the game. Can be formatted to our liking.
     @FXML
     private BorderPane field01; // START
     @FXML
@@ -113,10 +110,8 @@ public class MainWindowController {
     private BorderPane field39; // PARTY
     @FXML
     private BorderPane field40; // CLASS : Bachelor
-    /**
-     * Bottom of fields (player area). This is where player initials are used to indicate which players are on which
-     * field.
-     */
+
+    //Bottom of fields (player area). This is where player initials are used to indicate which players are on which field.
     @FXML
     private Label field01Players; // START
     @FXML
@@ -197,12 +192,12 @@ public class MainWindowController {
     private Label field39Players; // PARTY
     @FXML
     private Label field40Players; // CLASS : Bachelor Thesis
-    /**
-     * Content of 'Repeating Semester/Repeating:' text label. Indicates which player has to repeat currently.
-     */
+
+    //Content of 'Repeating Semester/Repeating:' text label. Indicates which player has to repeat currently.
     @FXML
     private Label repeatingPlayers;
-    /**
+
+    /*
      * Top / Middle title fields. The background colors of these fields will switch to the player
      * color using Listeners in case he/she decides to take a class/job/do a startup
      */
@@ -268,7 +263,8 @@ public class MainWindowController {
     private BorderPane field40Color; // CLASS : Bachelor Thesis
     @FXML
     private BorderPane dummyPane;    // Dummy Pane to make ArrayList easier to handle
-    /**
+
+    /*
      * Content of fundsBox. This box indicates labels indicating their info (player names, their color, their credits
      * and money.) as well as line separators.
      */
@@ -314,9 +310,8 @@ public class MainWindowController {
     private Line separator2;
     @FXML
     private Line separator3;
-    /**
-     * Content of Game controls (current player, rollDiceButton, rollDiceOutput)
-     */
+
+    //Content of Game controls (current player, rollDiceButton, rollDiceOutput)
     @FXML
     private Label currentPlayer;
     @FXML
@@ -327,32 +322,20 @@ public class MainWindowController {
     private Label rollDiceLabel;
     @FXML
     private Button rollDiceButton;
-    /**
-     * Game logic instance
-     */
+
     private Logic logic;
-    /**
+
+    /*
      * Boolean indicating if no game has started yet. This will eliminate the "Are you sure?" dialog when starting a
      * new game.
      */
     private Boolean newGameConfirmationNeeded = true;
-    /**
-     * Boolean indicating if no game has started yet. Will be needed to switch text of the Button.
-     */
+
+    //Boolean indicating if no game has started yet. Will be needed to switch text of the Button.
     private Boolean gameWasStarted = false;
-    /**
-     * ArrayList for all fields on the board.
-     */
+
     private ArrayList<BorderPane> fields;
-
-    /**
-     * ArrayList for all player position Labels (fieldXXPlayers) on the board.
-     */
     private ArrayList<Label> fieldLabels;
-
-    /**
-     * ArrayList for all changeable BorderPanes (fieldXXColor) on the board.
-     */
     private ArrayList<BorderPane> fieldColors;
 
     /**
@@ -452,36 +435,31 @@ public class MainWindowController {
     private void movePlayer(String playerName, int fieldId) {
         String tempText;
 
-        // Check if Player is in one of the fields. Loop through entire board (maybe could be made easier but i don't want to save the whole board state here
-        for (Label fieldLabel : fieldLabels) {
-
-            // If Player is on one field, proceed
+        //Check if Player is in one of the fields. Loop through entire board
+        for (Label fieldLabel : fieldLabels)
             if (fieldLabel.getText().contains(playerName)) {
 
-                // Extract text from field to temporary String
+                //Extract text from field to temporary String
                 tempText = fieldLabel.getText();
 
-                // Delete Player name
+                //Delete Player name
                 tempText = tempText.replace(playerName, "");
 
-                // Trim leading and trailing whitespace
+                //Trim leading and trailing whitespaces
                 tempText = tempText.trim();
 
-                // Set new text to field
+                //Set new text to field
                 fieldLabel.setText(tempText);
             }
-        }
 
-        // Extract text from field and concatenate it with whitespace and Player name
+        //Extract text from field and concatenate it with whitespace and Player name
         tempText = fieldLabels.get(fieldId).getText() + " " + playerName;
         tempText = tempText.trim();
-
-        // Set new text to field
         fieldLabels.get(fieldId).setText(tempText);
     }
 
     /**
-     * Take over field and color the BorderPane color to the player's colo
+     * Take over field and color the BorderPane color to the player's color
      *
      * @param playerNumber The Player's number. (See documentation)
      * @param fieldNumber  The number of the field that was taken over. (See documentation)
@@ -512,7 +490,7 @@ public class MainWindowController {
     }
 
     /**
-     * Set player names and makes the colored balls and separator lines visible.
+     * Display player names and makes the colored balls and separator lines visible.
      *
      * @param playerNumber Current player number (1-4).
      * @param playerName   Name of Player (uppercase initials).
@@ -545,13 +523,12 @@ public class MainWindowController {
     }
 
     /**
-     * Sets the player's credits on the GUI.
+     * Updates the player's credits on the GUI.
      *
      * @param playerNumber Current player number (1-4).
      * @param credits      New amount of credits currently obtained.
      */
     private void setPlayerCredits(int playerNumber, int credits) {
-
 
         switch (playerNumber) {
             case 1:
@@ -572,7 +549,7 @@ public class MainWindowController {
     }
 
     /**
-     * Sets the player's money on the GUI.
+     * Updates the player's money on the GUI.
      *
      * @param playerNumber Current player number (1-4).
      * @param money        New amount of money currently obtained.
@@ -606,7 +583,7 @@ public class MainWindowController {
     }
 
     /**
-     * Tells the model to roll the dice via button action.
+     * Tells the model to roll the dice via button action or starts the game when the game hasn't started yet.
      */
     public void rollDiceAction() {
         if (gameWasStarted) {
@@ -636,47 +613,54 @@ public class MainWindowController {
      * Helper method for adding players. Spawns a new PlayerEntryWindow and calls Logic to add new Player objects.
      */
     private void addPlayers() {
-        // Clean up board, empty out all the fields
+        //Clean up board, empty out all the fields
         initializeGame();
         setBoardVisibility(false);
 
         gameWasStarted = false;
         newGameConfirmationNeeded = false;
 
-        // Resetting logic and game board
+        //Resetting logic and game board
         logic = new Logic();
 
-        // Preparing player entry windows
+        //Preparing player entry windows
         PlayerEntryWindow entry;
 
-        // Spawn player entry windows
+        //Spawn player entry windows
         entry = new PlayerEntryWindow();
 
         try {
             if (entry.isEntrySuccess()) {
                 for (int i = 0; i < Objects.requireNonNull(entry).getPlayersList().size(); i++) {
-                    // Add players to UI
+                    //Add players to UI
                     setPlayerName(i + 1, entry.getPlayersList().get(i));
                     setPlayerMoney(i + 1, Config.START_MONEY);
                     setPlayerCredits(i + 1, Config.START_CREDITS);
 
-                    // Instantiating players, add them to Logic
+                    //Instantiating players, add them to Logic
                     logic.addPlayer(new Player(
                             entry.getPlayersList().get(i),
                             Config.START_MONEY,
                             Config.START_CREDITS,
                             i + 1));
 
-                    // Add listeners to money and credits.
+                    //Add listeners to money and credits.
                     int playerId = i;
                     Player player = logic.getPlayer(i);
                     player.getMoneyProperty().addListener((observableValue, oldMoney, newMoney) -> {
-                        new InformationalWindow("Email from bank.", String.format("%-11s%S%n%-9sAccount state%n%n%-14s%d.- CHF%n%-15s%d.- CHF%n%-16s%d.- CHF", "To:", player.getName(), "Subject:", "Money before:", oldMoney.intValue(), "Money now:", newMoney.intValue(), "Money gain:", newMoney.intValue() - oldMoney.intValue()));
+                        new InformationalWindow("Email from bank.", String.format(
+                                "%-11s%S%n%-9sAccount state%n%n%-14s%d.- CHF%n%-15s%d.- CHF%n%-16s%d.- CHF",
+                                "To:", player.getName(), "Subject:", "Money before:", oldMoney.intValue(),
+                                "Money now:", newMoney.intValue(),
+                                "Money gained:", newMoney.intValue() - oldMoney.intValue()));
                         setPlayerMoney(playerId + 1, newMoney.intValue());
                     });
                     player.getCreditsProperty().addListener((observableValue, oldCredits, newCredits) -> {
-                        //new InformationalWindow("Email from ZHAW.", String.format("You lost %dCHF.", , ));
-                        new InformationalWindow("Email from ZHAW.", String.format("%-11s%S%n%-9sCredits state%n%n%-16s%d  credits%n%-16s%d credits%n%-17s%d credits", "To:", player.getName(), "Subject:", "Credits before:", oldCredits.intValue(), "Credits now:", newCredits.intValue(), "Credits gain:", newCredits.intValue() - oldCredits.intValue()));
+                        new InformationalWindow("Email from ZHAW.", String.format(
+                                "%-11s%S%n%-9sCredits state%n%n%-16s%d  credits%n%-16s%d credits%n%-17s%d credits",
+                                "To:", player.getName(), "Subject:", "Credits before:", oldCredits.intValue(),
+                                "Credits now:", newCredits.intValue(),
+                                "Credits gained:", newCredits.intValue() - oldCredits.intValue()));
                         setPlayerCredits(playerId + 1, newCredits.intValue());
                     });
                     player.getPositionProperty().addListener((observableValue, oldPosition, newPosition) -> {
@@ -693,23 +677,23 @@ public class MainWindowController {
                     movePlayer(entry.getPlayersList().get(i), Config.PLAYER_START_POSITION);
                 }
 
-                // Add occupancy listeners to game fields
+                //Add occupancy listeners to game fields
                 GameBoard gameboard = logic.getGameBoard();
                 gameboard.getBoard().forEach((field) -> field.getOwnerProperty().addListener(
                         (observableValue, oldValue, newValue) ->
                                 takeOverField(newValue.intValue(), field.getFieldId()))
                 );
 
-                // Listener for current player
+                //Listener for current player
                 logic.getPlayerTurnProperty().addListener((observableValue, oldValue, newValue) ->
                         updateCurrentPlayer(logic.getPlayers().get(newValue.intValue()).getName()));
 
-                // Listener for dice
+                //Listener for dice
                 logic.getCurrentDiceRollProperty().addListener((observableValue, oldValue, newValue) ->
                         rollDiceOutput.setText(newValue.toString()));
 
                 // Listener in case game was won
-                //logic.getGameWasWonProperty().addListener((observableValue, oldValue, newValue) -> endGame());
+                logic.getGameWasWonProperty().addListener((observableValue, oldValue, newValue) -> endGame());
 
                 gameWasStarted = true;
                 setBoardVisibility(true);
@@ -755,11 +739,16 @@ public class MainWindowController {
     }
 
     /**
-     * Helper method for ending the game.
+     * Helper method for ending the game. Makes board invisible and resets Logic to prevent bugs when restarting the
+     * Game.
      */
     private void endGame() {
         setBoardVisibility(false);
+        initializeGame();
         gameWasStarted = false;
         newGameConfirmationNeeded = false;
+
+        /* Re-initialize Logic. Prevents bugs when restarting the game. */
+        logic = new Logic();
     }
 }

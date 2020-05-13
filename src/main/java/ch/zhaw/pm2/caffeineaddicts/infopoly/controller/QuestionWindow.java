@@ -24,7 +24,7 @@ public class QuestionWindow {
     /**
      * Spawns a new question window.
      */
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    private Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
     /**
      * Stores the result retrieved from the GUI.
