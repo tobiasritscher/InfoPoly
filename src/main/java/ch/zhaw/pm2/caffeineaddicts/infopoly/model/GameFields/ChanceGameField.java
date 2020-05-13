@@ -13,8 +13,8 @@ public class ChanceGameField extends GameField {
     private final Random random = new Random();
     private ChanceEvent event;
 
-    public ChanceGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
-        super(fieldId, fieldType, fieldName);
+    public ChanceGameField(int fieldId, String fieldName) {
+        super(fieldId, fieldName);
         generateEvent();
     }
 

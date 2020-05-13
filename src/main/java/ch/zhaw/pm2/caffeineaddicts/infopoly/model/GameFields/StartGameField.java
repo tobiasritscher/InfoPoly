@@ -13,8 +13,8 @@ public class StartGameField extends GameField {
     public static final int SCHOLARSHIP_WAITING_TIME = 3;
     public static final int PARENTS_HELP_ON_VISIT = 2 * PARENTS_HELP;
 
-    public StartGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
-        super(fieldId, fieldType, fieldName);
+    public StartGameField(int fieldId, String fieldName) {
+        super(fieldId, fieldName);
     }
 
     @Override

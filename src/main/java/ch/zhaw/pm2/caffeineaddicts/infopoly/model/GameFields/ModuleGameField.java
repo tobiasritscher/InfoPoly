@@ -22,8 +22,8 @@ public class ModuleGameField extends GameField {
     public static int CREDITS_GAIN_ON_VISIT_HIGH = 15;
     public static int CREDITS_GAIN_ON_VISIT_HIGHEST = 20;
 
-    public ModuleGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
-        super(fieldId, fieldType, fieldName);
+    public ModuleGameField(int fieldId, String fieldName) {
+        super(fieldId, fieldName);
     }
 
     /**

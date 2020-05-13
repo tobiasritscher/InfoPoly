@@ -125,30 +125,30 @@ public class GameBoard {
                 switch (fieldType) {
 
                     case MODULE:
-                        gameField = new ModuleGameField(fieldId, fieldType, fieldName);
+                        gameField = new ModuleGameField(fieldId, fieldName);
                         break;
                     case STARTUP:
-                        gameField = new StartupGameField(fieldId, fieldType, fieldName);
+                        gameField = new StartupGameField(fieldId, fieldName);
                         break;
                     case JOB:
-                        gameField = new JobGameField(fieldId, fieldType, fieldName);
+                        gameField = new JobGameField(fieldId, fieldName);
                         break;
                     case CHANCE:
-                        gameField = new ChanceGameField(fieldId, fieldType, fieldName);
+                        gameField = new ChanceGameField(fieldId, fieldName);
                         break;
                     case START:
-                        gameField = new StartGameField(fieldId, fieldType, fieldName);
+                        gameField = new StartGameField(fieldId, fieldName);
                         startGameFieldId = fieldId;
                         break;
                     case FEE:
-                        gameField = new FeeGameField(fieldId, fieldType, fieldName, feeType);
+                        gameField = new FeeGameField(fieldId, fieldName, feeType);
                         break;
                     case REPETITION:
-                        gameField = new RepetitionGameField(fieldId, fieldType, fieldName);
+                        gameField = new RepetitionGameField(fieldId, fieldName);
                         repetitionGameFieldId = fieldId;
                         break;
                     case EXAM:
-                        gameField = new ExamGameField(fieldId, fieldType, fieldName);
+                        gameField = new ExamGameField(fieldId, fieldName);
                         examGameFieldId = fieldId;
                         break;
 

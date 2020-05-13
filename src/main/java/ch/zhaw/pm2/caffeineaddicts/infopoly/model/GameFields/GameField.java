@@ -1,6 +1,5 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields;
 
-import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -9,23 +8,17 @@ import java.util.Objects;
 
 public abstract class GameField {
     private final int fieldId;
-    private final Config.FieldType fieldType;
     private final String fieldName;
     private final IntegerProperty ownerProperty = new SimpleIntegerProperty(-1);
     private Player owner = null;
 
-    public GameField(int fieldId, Config.FieldType fieldType, String fieldName) {
+    public GameField(int fieldId, String fieldName) {
         this.fieldId = fieldId;
-        this.fieldType = fieldType;
         this.fieldName = fieldName;
     }
 
     public IntegerProperty getOwnerProperty() {
         return ownerProperty;
-    }
-
-    public Config.FieldType getFieldType() {
-        return fieldType;
     }
 
     public Player getOwner() {
@@ -70,17 +63,16 @@ public abstract class GameField {
         if (o == null || getClass() != o.getClass()) return false;
         GameField gameField = (GameField) o;
         return fieldId == gameField.fieldId &&
-                fieldType == gameField.fieldType &&
                 fieldName.equals(gameField.fieldName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fieldId, fieldType, fieldName);
+        return Objects.hash(fieldId, fieldName);
     }
 
     @Override
     public String toString() {
-        return String.format("%d %s %s", fieldId, fieldName, fieldType.name());
+        return String.format("%d %s", fieldId, fieldName);
     }
 }

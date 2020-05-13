@@ -11,8 +11,8 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
 public class JobGameField extends GameField {
     public static final int BASE_WAGE = 10;
 
-    public JobGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
-        super(fieldId, fieldType, fieldName);
+    public JobGameField(int fieldId, String fieldName) {
+        super(fieldId, fieldName);
     }
 
     private void quitWork(Player player) {

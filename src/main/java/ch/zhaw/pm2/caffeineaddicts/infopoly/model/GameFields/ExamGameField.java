@@ -15,8 +15,8 @@ public class ExamGameField extends GameField {
     private final Random random = new Random();
     private final double probabilityToPass = 0.2;
 
-    public ExamGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
-        super(fieldId, fieldType, fieldName);
+    public ExamGameField(int fieldId, String fieldName) {
+        super(fieldId, fieldName);
     }
 
     /**

@@ -12,8 +12,8 @@ public class FeeGameField extends GameField {
     private final Random random = new Random();
     private final int rate = 3;
 
-    public FeeGameField(int fieldId, Config.FieldType fieldType, String fieldName, FeeType feeType) {
-        super(fieldId, fieldType, fieldName);
+    public FeeGameField(int fieldId, String fieldName, FeeType feeType) {
+        super(fieldId, fieldName);
         this.feeType = feeType;
     }
 

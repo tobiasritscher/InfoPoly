@@ -9,8 +9,8 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
  */
 public class RepetitionGameField extends GameField {
 
-    public RepetitionGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
-        super(fieldId, fieldType, fieldName);
+    public RepetitionGameField(int fieldId, String fieldName) {
+        super(fieldId, fieldName);
     }
 
     @Override

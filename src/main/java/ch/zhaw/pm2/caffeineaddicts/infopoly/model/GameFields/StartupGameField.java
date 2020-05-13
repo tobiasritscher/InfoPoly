@@ -13,8 +13,8 @@ public class StartupGameField extends GameField {
     public static final int MONEY_GAIN_EACH_ROUND_AFTER_PURCHASE = 200;
     public static final int MIN_CREDITS_TO_LAUNCH = 100;
 
-    public StartupGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
-        super(fieldId, fieldType, fieldName);
+    public StartupGameField(int fieldId, String fieldName) {
+        super(fieldId, fieldName);
     }
 
     @Override
