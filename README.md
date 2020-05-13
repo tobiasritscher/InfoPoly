@@ -20,7 +20,7 @@ This project is licensed under the ZHAW License - see [ZHAW](http://www.zhaw.ch)
 [Game Flow](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/wiki/Game-flow)
 
 ## Screenshot
-![ScreenShot](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/blob/master/Bildschirmfoto%202020-05-13%20um%2019.28.02.png)
+![ScreenShot](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/blob/master/Screenshot.png)
 
 ## Class Diagram
 [All Class Diagrams](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/tree/master/Klassendiagramm)
