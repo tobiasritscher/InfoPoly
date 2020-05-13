@@ -9,7 +9,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 /**
  * The class stores game fields of the game board.
@@ -56,16 +58,6 @@ public class GameBoard {
         }
     }
 
-    public Config.FieldType getFieldType(int fieldId) {
-        validateFieldId(fieldId);
-        return board.get(fieldId).getFieldType();
-    }
-
-    public String getFieldName(int fieldId) {
-        validateFieldId(fieldId);
-        return board.get(fieldId).getFieldName();
-    }
-
     public int getBoardSize() {
         if (board.isEmpty()) {
             throw new RuntimeException("invalid operation: game field must be initialized first");
@@ -74,7 +66,7 @@ public class GameBoard {
     }
 
     void loadGameBoard() {
-        File file = null;
+        File file;
         Scanner sc = null;
         String pathName = Config.getFieldLayoutPath();
         file = new File(pathName);
@@ -125,12 +117,8 @@ public class GameBoard {
                 }
                 FeeGameField.FeeType feeType = FeeGameField.FeeType.FIXED;
                 if (fieldType.equals(Config.FieldType.FEE)) {
-                    switch (attribute) {
-                        case "ran":
-                            feeType = FeeGameField.FeeType.RANDOM;
-                            break;
-                        default:
-                            feeType = FeeGameField.FeeType.FIXED;
+                    if ("ran".equals(attribute)) {
+                        feeType = FeeGameField.FeeType.RANDOM;
                     }
                 }
                 GameField gameField;
@@ -173,6 +161,7 @@ public class GameBoard {
         } catch (FileNotFoundException e) {
             System.out.println("file not found: " + e.getMessage());
         } finally {
+            assert sc != null;
             sc.close();
             logger.log(Level.FINE, "stopped reading");
         }
