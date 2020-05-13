@@ -1,0 +1,124 @@
+40
+2
+start
+start
+2
+module
+programming
+2
+module
+discrete mathematics
+2
+module
+information theory & coding
+3
+fee
+semester tuition
+fix
+2
+job
+BarStucks
+2
+module
+software project
+2
+chance
+chance
+2
+module
+electronics & digital technology
+2
+module
+analysis
+2
+repetition
+repeating semester
+2
+module
+databases
+2
+module
+communication competence
+2
+module
+linear algebra
+2
+module
+communication technologies
+2
+job
+mcburger
+2
+chance
+chance
+2
+module
+system orientated programming
+2
+module
+web development
+3
+fee
+zvv fees
+fix
+2
+startup
+startup
+2
+module
+algorithms & data structures
+2
+module
+stochastics & statistics
+2
+chance
+chance
+2
+module
+computer engineering
+2
+job
+analogtec
+2
+module
+it security
+2
+module
+higher mathematics
+2
+module
+physics engines
+2
+module
+business administration
+2
+exam
+exam
+2
+module
+project thesis
+2
+module
+machine learning
+2
+module
+cloud computing
+2
+module
+Game development
+2
+job
+CashBank
+2
+chance
+chance
+2
+module
+Mobile applications
+3
+fee
+Party
+ran
+2
+module
+Bachelor thesis
