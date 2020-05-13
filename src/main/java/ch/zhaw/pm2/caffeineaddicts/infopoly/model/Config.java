@@ -78,7 +78,7 @@ public class Config {
      * @author corrooli
      */
     public enum PlayerColor {
-        PLAYER1("#003f84"),    // RED
+        PLAYER1("#cbcba9"),    //
         PLAYER2("#861515"),    // BLUE
         PLAYER3("#008631"),    // GREEN
         PLAYER4("#930a7f"),    // PURPLE

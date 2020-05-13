@@ -19,16 +19,11 @@ public class Logic {
     private static IntegerProperty currentPlayerId = new SimpleIntegerProperty(0);
     private final GameBoard gameBoard;
     private final ArrayList<Player> players = new ArrayList<>();
-    IntegerProperty currentDiceRoll = new SimpleIntegerProperty();
-
     private final BooleanProperty gameWasWon = new SimpleBooleanProperty();
+    IntegerProperty currentDiceRoll = new SimpleIntegerProperty();
 
     public Logic() {
         gameBoard = new GameBoard();
-    }
-
-    public BooleanProperty getGameWasWonProperty() {
-        return gameWasWon;
     }
 
     static boolean jumpedOverField(int fieldId, int startPosition, int endPosition) {
@@ -49,6 +44,10 @@ public class Logic {
 
     static int calculateNextPlayerId(int numberPlayers, int currentPlayerId) {
         return (currentPlayerId + 1) % numberPlayers;
+    }
+
+    public BooleanProperty getGameWasWonProperty() {
+        return gameWasWon;
     }
 
     public ArrayList<Player> getPlayers() {
@@ -129,13 +128,12 @@ public class Logic {
             repetition();
         }
         if (getCurrentPlayer().getMoney() < 0 && !getCurrentPlayer().isWaitingForScholarship()) {
-            //todo
             broke();
         }
         if (getCurrentPlayer().getCredits() >= CREDITS_TO_WIN) {
             winner();
         }
-        if (!moveAgain) {
+        if (!gameWasWon.get() && !moveAgain) {
             switchToNextPlayer();
         }
     }

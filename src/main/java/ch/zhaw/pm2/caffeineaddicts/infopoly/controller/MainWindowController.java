@@ -693,7 +693,9 @@ public class MainWindowController {
                         rollDiceOutput.setText(newValue.toString()));
 
                 // Listener in case game was won
-                logic.getGameWasWonProperty().addListener((observableValue, oldValue, newValue) -> endGame());
+                logic.getGameWasWonProperty().addListener((observableValue, oldValue, newValue) -> {
+                    if (newValue == true) endGame();
+                });
 
                 gameWasStarted = true;
                 setBoardVisibility(true);
@@ -747,7 +749,7 @@ public class MainWindowController {
         initializeGame();
         gameWasStarted = false;
         newGameConfirmationNeeded = false;
-
+        logic = null;
         /* Re-initialize Logic. Prevents bugs when restarting the game. */
         logic = new Logic();
     }
