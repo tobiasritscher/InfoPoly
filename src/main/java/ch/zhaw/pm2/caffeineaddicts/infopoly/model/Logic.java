@@ -17,7 +17,7 @@ import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config.NUMBER_DICE_SIDE
 
 public class Logic {
     private final static Logger logger = Logger.getLogger(Logic.class.getCanonicalName());
-    private static IntegerProperty currentPlayerId = new SimpleIntegerProperty(0);
+    private static final IntegerProperty currentPlayerId = new SimpleIntegerProperty(0);
     private final GameBoard gameBoard;
     private final ArrayList<Player> players = new ArrayList<>();
     private final BooleanProperty gameWasWon = new SimpleBooleanProperty();

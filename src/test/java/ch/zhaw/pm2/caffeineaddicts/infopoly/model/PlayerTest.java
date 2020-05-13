@@ -13,7 +13,7 @@ public class PlayerTest {
     @BeforeEach
     void setUp() {
         player = new Player("EZ", 1000, 100, 1);
-        Burger = new JobGameField(22, Config.FieldType.JOB, "Burger");
+        Burger = new JobGameField(22, "Burger");
     }
 
     @Test
