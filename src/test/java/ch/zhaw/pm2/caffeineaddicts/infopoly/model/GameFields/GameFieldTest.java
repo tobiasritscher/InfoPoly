@@ -19,6 +19,7 @@ public class GameFieldTest {
 
     @AfterEach
     public void tearDown() {
+        gameField = null;
     }
 
     @Test
