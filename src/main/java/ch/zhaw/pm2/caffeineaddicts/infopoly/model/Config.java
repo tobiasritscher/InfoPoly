@@ -8,6 +8,7 @@ public class Config {
     public static final int START_CREDITS = 0;
     public static final int MEDIUM_CREDITS = 10;
     public static final int MANY_CREDITS = 30;
+    public static final int MEDIUM_CREDITS =10;
     public static final int NUMBER_DICE_SIDES = 6;
     public static final int PLAYER_START_POSITION = 0;
     public static final int CREDITS_TO_WIN = 180;
