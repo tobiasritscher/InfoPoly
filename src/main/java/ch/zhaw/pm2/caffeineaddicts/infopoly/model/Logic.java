@@ -130,8 +130,7 @@ public class Logic {
         logger.info(String.format("Rolled number: %d; Next field id: %d", rolledNumber, nextPosition));
         moveCurrentPlayerToField(nextPosition);
         gameBoard.getField(nextPosition).action(currentPlayer);
-        //todo remove below
-        //gameBoard.getField(30).action(getCurrentPlayer());
+
         if ((currentPlayer.getPosition() == gameBoard.getExamGameFieldId()) && (currentPlayer.getRoundsWaiting() > 0)) {
             repetition();
         }
@@ -153,16 +152,6 @@ public class Logic {
     private void moveCurrentPlayerToField(int fieldId) {
         getCurrentPlayer().setPosition(fieldId);
     }
-    /*
-    private void moveCurrentPlayerToField(int fieldId) {
-        //todo remove test function
-        if (getCurrentPlayer().getPosition() == 0) {
-            getCurrentPlayer().setPosition(gameBoard.getExamGameFieldId());
-        } else {
-            getCurrentPlayer().setPosition(fieldId);
-        }
-
-    }*/
 
     /**
      * If current player has no money move to the @{@link Config.FieldType#START} field.
