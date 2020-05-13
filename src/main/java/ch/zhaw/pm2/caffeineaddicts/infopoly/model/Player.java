@@ -125,14 +125,29 @@ public class Player {
         logger.info(String.format("Credits altered. Player: %s Old: %d New: %d", name, oldState, newState));
     }
 
+    /**
+     * An IntegerProperty to look for change in the money value
+     *
+     * @return the money IntegerProperty
+     */
     public IntegerProperty getMoneyProperty() {
         return money;
     }
 
+    /**
+     * An IntegerProperty to look for change in the credits value
+     *
+     * @return the credits IntegerProperty
+     */
     public IntegerProperty getCreditsProperty() {
         return credits;
     }
 
+    /**
+     * An IntegerProperty to look for change in the position value
+     *
+     * @return the position IntegerProperty
+     */
     public IntegerProperty getPositionProperty() {
         return position;
     }

@@ -4,8 +4,6 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-import java.util.Objects;
-
 public abstract class GameField {
     private final int fieldId;
     private final String fieldName;
@@ -21,7 +19,7 @@ public abstract class GameField {
         return ownerProperty;
     }
 
-    public Player getOwner() {
+    Player getOwner() {
         return owner;
     }
 
@@ -30,24 +28,24 @@ public abstract class GameField {
      *
      * @param owner The Player object which is subject to change.
      */
-    public void setOwner(Player owner) {
+    void setOwner(Player owner) {
         this.owner = owner;
         ownerProperty.setValue(owner.getPlayerId());
     }
 
-    public boolean hasOwner() {
+    boolean hasOwner() {
         return owner != null;
     }
 
     /**
      * Resets the field owner and changes the ownerProperty to zero.
      */
-    public void resetOwner() {
+    void resetOwner() {
         owner = null;
         ownerProperty.setValue(0);
     }
 
-    public String getFieldName() {
+    String getFieldName() {
         return fieldName;
     }
 
@@ -55,8 +53,20 @@ public abstract class GameField {
         return fieldId;
     }
 
+    /**
+     * The action each subclass has to implement
+     * this method will be called, when somebody enters the field
+     *
+     * @param currentPlayer != 0, the player who is standing on the field
+     */
     public abstract void action(Player currentPlayer);
 
+    /**
+     * compares the parameters of two fields to determine if they are equal
+     *
+     * @param o the object to compare
+     * @return true if the two objects are the same
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,11 +76,11 @@ public abstract class GameField {
                 fieldName.equals(gameField.fieldName);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(fieldId, fieldName);
-    }
-
+    /**
+     * transfers the data of the field in to a string.
+     *
+     * @return the fieldId + fieldName in a string
+     */
     @Override
     public String toString() {
         return String.format("%d %s", fieldId, fieldName);

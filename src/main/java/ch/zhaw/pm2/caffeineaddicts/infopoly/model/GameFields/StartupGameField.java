@@ -9,9 +9,9 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
  * Represents {@link Config.FieldType#STARTUP}.
  */
 public class StartupGameField extends GameField {
-    public static final int MONEY_TO_LAUNCH = 100;
-    public static final int MONEY_GAIN_EACH_ROUND_AFTER_PURCHASE = 200;
-    public static final int MIN_CREDITS_TO_LAUNCH = 100;
+    private static final int MONEY_TO_LAUNCH = 100;
+    private static final int MONEY_GAIN_EACH_ROUND_AFTER_PURCHASE = 200;
+    private static final int MIN_CREDITS_TO_LAUNCH = 100;
 
     public StartupGameField(int fieldId, String fieldName) {
         super(fieldId, fieldName);

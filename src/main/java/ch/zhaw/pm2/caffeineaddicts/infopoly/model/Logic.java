@@ -145,7 +145,7 @@ public class Logic {
      * @param currentPlayer the player that needs the scholarship
      */
     private void getScholarship(Player currentPlayer) {
-        final int money = StartGameField.SCHOLARSHIP_MONEY;
+        final int money = StartGameField.getScholarshipMoney();
         new InformationalWindow("Received scholarship!", String.format(
                 "You got some money from the public: %d", money));
         currentPlayer.alterMoney(money);
@@ -240,7 +240,7 @@ public class Logic {
      * Pays the wage if a player lands on his job field
      */
     private void payday() {
-        int wage = JobGameField.BASE_WAGE;
+        int wage = JobGameField.getBaseWage();
         new InformationalWindow("Payday", String.format("You earned this week: %d.-CHF.", wage));
         getCurrentPlayer().alterMoney(wage);
     }
@@ -250,7 +250,7 @@ public class Logic {
      */
     private void scholarship() {
         Player currentPlayer = getCurrentPlayer();
-        int round = StartGameField.SCHOLARSHIP_WAITING_TIME;
+        int round = StartGameField.getScholarshipWaitingTime();
         new InformationalWindow("Applied for Scholarship", String.format(
                 "%S, you ran out of money. You have to apply for a scholarship.%nThat usually takes up to %d Weeks",
                 currentPlayer.getName(), round));
@@ -262,7 +262,7 @@ public class Logic {
      * Gives a player money if landing on START game field
      */
     private void parentsHelp() {
-        int moneyHelp = StartGameField.PARENTS_HELP;
+        int moneyHelp = StartGameField.getParentsHelp();
         new InformationalWindow("Financial support from parents", String.format("%S, you got %d CHF from your parents!",
                 getCurrentPlayer().getName(), moneyHelp));
         getCurrentPlayer().alterMoney(moneyHelp);

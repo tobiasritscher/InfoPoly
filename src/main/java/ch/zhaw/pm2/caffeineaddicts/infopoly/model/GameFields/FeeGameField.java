@@ -6,7 +6,7 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
 import java.util.Random;
 
 public class FeeGameField extends GameField {
-    public final int BASE_FEE = 30;
+    private final int BASE_FEE = 30;
     private final FeeType feeType;
     private final Random random = new Random();
     private final int RATE = 3;
@@ -25,6 +25,12 @@ public class FeeGameField extends GameField {
         return value;
     }
 
+    /**
+     * the action is called when a player enters the FeeGameField
+     * the the currentPlayer will have to pay some money
+     *
+     * @param currentPlayer != null, the player who is standing on the field
+     */
     @Override
     public void action(Player currentPlayer) {
         int fee = calculateFee();

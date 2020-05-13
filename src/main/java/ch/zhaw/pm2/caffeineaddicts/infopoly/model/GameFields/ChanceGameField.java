@@ -32,20 +32,20 @@ public class ChanceGameField extends GameField {
         currentPlayer.alterCredits(getCreditsDeviation());
     }
 
-    public void generateEvent() {
+    private void generateEvent() {
         int eventId = random.nextInt(ChanceEvent.values().length - 1);
         event = ChanceEvent.values()[eventId];
     }
 
-    public String getMessage() {
+    private String getMessage() {
         return event.getMessage();
     }
 
-    public int getCreditsDeviation() {
+    private int getCreditsDeviation() {
         return event.creditsDeviation;
     }
 
-    public int getMoneyDeviation() {
+    private int getMoneyDeviation() {
         return event.moneyDeviation;
     }
 
@@ -103,7 +103,7 @@ public class ChanceGameField extends GameField {
             this.moneyDeviation = moneyDeviation;
         }
 
-        public String getMessage() {
+        String getMessage() {
             return message;
         }
     }

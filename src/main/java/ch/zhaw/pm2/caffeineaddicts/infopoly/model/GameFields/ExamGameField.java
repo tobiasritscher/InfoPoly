@@ -10,10 +10,10 @@ import java.util.Random;
  * Representation of {@link Config.FieldType#EXAM}.
  */
 public class ExamGameField extends GameField {
-    public static final int REPETITION_TIME_ON_FAIL = 3;
-    public static final int CREDITS_GAIN_ON_SUCCESS = 30;
+    private static final int REPETITION_TIME_ON_FAIL = 3;
+    private static final int CREDITS_GAIN_ON_SUCCESS = 30;
     private final Random random = new Random();
-    private final double probabilityToPass = 0.2;
+    private final double probabilityToPass = 0.3;
 
     public ExamGameField(int fieldId, String fieldName) {
         super(fieldId, fieldName);
@@ -25,10 +25,16 @@ public class ExamGameField extends GameField {
      *
      * @return a boolean value: true, if passed; false, else;
      */
-    public boolean passed() {
+    private boolean passed() {
         return 0 == random.nextInt((int) (1 / probabilityToPass));
     }
 
+    /**
+     * the action is called when a player enters the examGameField
+     * the the currentPlayer != null will have a chance for repeating or for getting credits
+     *
+     * @param currentPlayer != null, the player who is standing on the field
+     */
     @Override
     public void action(Player currentPlayer) {
         new InformationalWindow("Taking exam",
@@ -44,5 +50,4 @@ public class ExamGameField extends GameField {
             currentPlayer.setRoundsWaiting(REPETITION_TIME_ON_FAIL);
         }
     }
-
 }

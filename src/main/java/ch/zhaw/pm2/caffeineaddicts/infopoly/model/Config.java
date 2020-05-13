@@ -21,6 +21,9 @@ public class Config {
         Config.fieldLayoutPath = fieldLayoutPath;
     }
 
+    /**
+     * the enum with all possible fieldTypes and there name
+     */
     public enum FieldType {
         /**
          * Field which can be purchased for money. Owner gets credits if some other player land on it. The player will lose money.
