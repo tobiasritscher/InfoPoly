@@ -51,6 +51,10 @@ public class Logic {
         return result;
     }
 
+    public static void setCurrentPlayerId(int currentPlayerId) {
+        Logic.currentPlayerId.set(currentPlayerId);
+    }
+
     /**
      * calculates the new position of the player
      *

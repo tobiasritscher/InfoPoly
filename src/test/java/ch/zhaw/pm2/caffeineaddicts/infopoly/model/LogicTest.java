@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 public class LogicTest {
@@ -24,21 +23,21 @@ public class LogicTest {
     @BeforeEach
     void setUp() {
         player1 = new Player("EZ", 100, 0, 1);
-        player2 = new Player("EZ", 100, 0, 1);
-        player3 = new Player("EZ", 100, 0, 1);
-        player4 = new Player("EZ", 100, 0, 1);
+        player2 = new Player("EZ", 100, 0, 2);
+        player3 = new Player("EZ", 100, 0, 3);
+        player4 = new Player("EZ", 100, 0, 4);
         logic = new Logic();
         logic.addPlayer(player1);
         logic.addPlayer(player2);
         logic.addPlayer(player3);
         logic.addPlayer(player4);
-        ArrayList<Player> players = new ArrayList<>(logic.getPlayers());
     }
 
     @AfterEach
     public void tearDown() {
         gameBoard = null;
     }
+
 
     @Test
     void addPlayerTest() {
@@ -48,19 +47,10 @@ public class LogicTest {
 
 
     @Test
-    void nextPlayerTest() {
-
-    }
-
-    @Test
-    void getCurrentPlayerTest() {
-    }
-
-    @Test
     void calculateNextFieldId() {
         final int boardSize = 32;
-        Assertions.assertEquals(6 % boardSize, logic.calculateNextFieldId(boardSize, 0, 6));
-        Assertions.assertEquals((boardSize - 1 + 10) % boardSize, logic.calculateNextFieldId(boardSize, boardSize - 1, 10));
+        Assertions.assertEquals(6 % boardSize, Logic.calculateNextFieldId(boardSize, 0, 6));
+        Assertions.assertEquals((boardSize - 1 + 10) % boardSize, Logic.calculateNextFieldId(boardSize, boardSize - 1, 10));
 
     }
 
@@ -79,21 +69,27 @@ public class LogicTest {
 
     }
 
-    /**
-     * Testing 100 Times if the dice roll is within bounds.
-     */
     @Test
-    public void DiceTest(){
+    void movePlayerTest(){
         logic.addPlayer(player1);
         logic.addPlayer(player2);
         logic.addPlayer(player3);
         logic.addPlayer(player4);
+        Logic.setCurrentPlayerId(1);
+        logic.movePlayer(4,false);
+        assertEquals(5,logic.getPlayerTurnProperty().getValue());
+    }
 
-        logic.rollDice();
-        int diceRoll = logic.getCurrentDiceRollProperty().get();
+    /**
+     * Testing 100 Times if the dice roll is within bounds.
+     */
+    @Test
+    public void DiceTest() {
 
-        for (int i = 0; i < 100; i++){
-            assertTrue(diceRoll >= 1 && diceRoll <= 12);
+        for (int i = 0; i < 100; i++) {
+            logic.rollDice();
+            int diceRoll = logic.getCurrentDiceRollProperty().getValue();
+            assertTrue(diceRoll >= 2 && diceRoll <= 12);
         }
     }
 
