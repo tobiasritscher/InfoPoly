@@ -69,4 +69,11 @@ public class LogicTest {
         Assertions.assertFalse(Logic.jumpedOverField(0, 1, 2));
         Assertions.assertTrue(Logic.jumpedOverField(11, 10, 1));
     }
+
+    @Test
+    void calculateNextPlayerId() {
+        Assertions.assertEquals(2, Logic.calculateNextPlayerId(4, 1));
+        Assertions.assertEquals(0, Logic.calculateNextPlayerId(3, 2));
+
+    }
 }

@@ -1,12 +1,9 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
-import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.GameField;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.JobGameField;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 public class Player {
@@ -81,10 +78,6 @@ public class Player {
 
     public boolean isWorking() {
         return isWorking;
-    }
-
-    public void setWorking(boolean working) {
-        isWorking = working;
     }
 
     public int getPlayerId() {
