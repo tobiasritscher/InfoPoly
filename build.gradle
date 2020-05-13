@@ -1,14 +1,48 @@
+// the Java plugin is added by default in the main  configuration
 plugins {
     id 'java'
+    // Apply the application plugin to add support for building a CLI application.
+    id 'application'
+    // Apply the JavaFX plugin
+    id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
 group 'org.example'
 version '1.0-SNAPSHOT'
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 
+// by default use Java 11
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+mainClassName = 'ch.zhaw.pm2.caffeineaddicts.infopoly.view.InfoPoly'
+
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    // Use JUnit Jupiter API for testing.
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
+
+    // Use JUnit Jupiter Engine for testing.
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
+
+    // Mockito
+    testCompile "org.mockito:mockito-core:2.+"
+
+    // TestFX
+    //testCompile "org.testfx:testfx-core:4.0.16"
+    //testCompile "org.testfx:testfx-junit:4.0.16"
+
+}
+
+javafx {
+    version = '11.0.2'
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+test {
+    // Use junit platform for unit tests
+    useJUnitPlatform()
 }
