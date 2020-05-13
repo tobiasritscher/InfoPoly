@@ -11,33 +11,34 @@ import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config.MEDIUM_CREDITS;
  * Representation of {@link Config.FieldType#MODULE}
  */
 public class ModuleGameField extends GameField {
-    public static int MONEY_CHARGE_ON_VISIT = 10;
-    public static int CREDITS_GAIN_ON_PURCHASE = 10;
-    public static int FIELD_PRICE = 30;
-    public static int FIELD_MEDIUM_PRICE = 60;
-    public static int FIELD_HIGH_PRICE = 90;
-    public static int FIELD_HIGHEST_PRICE = 100;
-    public static int CREDITS_GAIN_ON_VISIT = 5;
-    public static int CREDITS_GAIN_ON_VISIT_MEDIUM = 10;
-    public static int CREDITS_GAIN_ON_VISIT_HIGH = 15;
-    public static int CREDITS_GAIN_ON_VISIT_HIGHEST = 20;
-    public int NEW_FIELD_PRICE = 0;
-    public int NEW_CREDITS_GAIN = 0;
+    public final static int MONEY_CHARGE_ON_VISIT = 10;
+    public final static int CREDITS_GAIN_ON_PURCHASE = 10;
+    public final static int FIELD_PRICE = 30;
+    public final static int FIELD_MEDIUM_PRICE = 60;
+    public final static int FIELD_HIGH_PRICE = 90;
+    public final static int FIELD_HIGHEST_PRICE = 100;
+    public final static int CREDITS_GAIN_ON_VISIT = 5;
+    public final static int CREDITS_GAIN_ON_VISIT_MEDIUM = 10;
+    public final static int CREDITS_GAIN_ON_VISIT_HIGH = 15;
+    public final static int CREDITS_GAIN_ON_VISIT_HIGHEST = 20;
+    public final int fieldPrice;
+    public final int creditsGain;
 
     public ModuleGameField(int fieldId, String fieldName) {
         super(fieldId, fieldName);
-        if(getFieldId() >= 32 && getFieldId() <= 40){
-            NEW_FIELD_PRICE = FIELD_HIGHEST_PRICE;
-            NEW_CREDITS_GAIN = CREDITS_GAIN_ON_VISIT_HIGHEST;
-        } else if (getFieldId() >= 22 && getFieldId() <= 30){
-            NEW_FIELD_PRICE = FIELD_HIGH_PRICE;
-            NEW_CREDITS_GAIN = CREDITS_GAIN_ON_VISIT_HIGH;
-        } else if(getFieldId() >= 12 && getFieldId() <= 19){
-            NEW_FIELD_PRICE = FIELD_MEDIUM_PRICE;
-            NEW_CREDITS_GAIN = CREDITS_GAIN_ON_VISIT_MEDIUM;
-        } else if (getFieldId() >= 2 && getFieldId() <= 10){
-            NEW_FIELD_PRICE = FIELD_PRICE;
-            NEW_CREDITS_GAIN = CREDITS_GAIN_ON_VISIT;
+
+        if(fieldId >= 32){
+            fieldPrice = FIELD_HIGHEST_PRICE;
+            creditsGain = CREDITS_GAIN_ON_VISIT_HIGHEST;
+        } else if (fieldId >= 22){
+            fieldPrice = FIELD_HIGH_PRICE;
+            creditsGain = CREDITS_GAIN_ON_VISIT_HIGH;
+        } else if(fieldId >= 12){
+            fieldPrice = FIELD_MEDIUM_PRICE;
+            creditsGain = CREDITS_GAIN_ON_VISIT_MEDIUM;
+        } else {
+            fieldPrice = FIELD_PRICE;
+            creditsGain = CREDITS_GAIN_ON_VISIT;
         }
     }
 
@@ -57,14 +58,14 @@ public class ModuleGameField extends GameField {
                 new InformationalWindow("Hey Boss!", "Have a sit and listen to the lectures!");
             } else {
                 new InformationalWindow("This course is so good!", String.format("You decided to pay for it %d CHF. You get %d credits for listening to smart people.", MONEY_CHARGE_ON_VISIT, CREDITS_GAIN_ON_VISIT));
-                currentPlayer.alterMoney(-NEW_CREDITS_GAIN);
-                owner.alterCredits(NEW_CREDITS_GAIN);
+                currentPlayer.alterMoney(creditsGain * -1);
+                owner.alterCredits(creditsGain);
             }
         } else {
-            if (currentPlayer.getMoney() >= NEW_FIELD_PRICE) {
-                QuestionWindow questionWindow = new QuestionWindow(String.format("Purchase course? (%d CHF)", NEW_FIELD_PRICE), String.format("%s would you like to buy the course: %s%nYou will get: %d credits", currentPlayer.getName().toUpperCase(), getFieldName().toUpperCase(), CREDITS_GAIN_ON_PURCHASE));
+            if (currentPlayer.getMoney() >= fieldPrice) {
+                QuestionWindow questionWindow = new QuestionWindow(String.format("Purchase course? (%d CHF)", fieldPrice), String.format("%s would you like to buy the course: %s%nYou will get: %d credits", currentPlayer.getName().toUpperCase(), getFieldName().toUpperCase(), CREDITS_GAIN_ON_PURCHASE));
                 if (questionWindow.getAnswer()) {
-                    currentPlayer.alterMoney(NEW_FIELD_PRICE * -1);
+                    currentPlayer.alterMoney(fieldPrice * -1);
                     setOwner(currentPlayer);
                     currentPlayer.alterCredits(CREDITS_GAIN_ON_PURCHASE);
                 }
