@@ -5,8 +5,6 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.QuestionWindow;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
 
-import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config.MEDIUM_CREDITS;
-
 /**
  * Representation of {@link Config.FieldType#MODULE}
  */
@@ -27,13 +25,13 @@ public class ModuleGameField extends GameField {
     public ModuleGameField(int fieldId, String fieldName) {
         super(fieldId, fieldName);
 
-        if(fieldId >= 32){
+        if (fieldId >= 32) {
             fieldPrice = FIELD_HIGHEST_PRICE;
             creditsGain = CREDITS_GAIN_ON_VISIT_HIGHEST;
-        } else if (fieldId >= 22){
+        } else if (fieldId >= 22) {
             fieldPrice = FIELD_HIGH_PRICE;
             creditsGain = CREDITS_GAIN_ON_VISIT_HIGH;
-        } else if(fieldId >= 12){
+        } else if (fieldId >= 12) {
             fieldPrice = FIELD_MEDIUM_PRICE;
             creditsGain = CREDITS_GAIN_ON_VISIT_MEDIUM;
         } else {
@@ -52,7 +50,6 @@ public class ModuleGameField extends GameField {
         Player owner = getOwner();
 
 
-
         if (hasOwner()) {
             if (owner.equals(currentPlayer)) {
                 new InformationalWindow("Course taken", "Have a sit and listen to the lectures!");
@@ -66,7 +63,7 @@ public class ModuleGameField extends GameField {
         } else {
             if (currentPlayer.getMoney() >= fieldPrice) {
                 QuestionWindow questionWindow = new QuestionWindow(String.format("Purchase course? (%d CHF)",
-                        fieldPrice), String.format("%s, would you like to buy the course %s"+
+                        fieldPrice), String.format("%s, would you like to buy the course %s" +
                                 "?\nYou will get %d credits.",
                         currentPlayer.getName().toUpperCase(), getFieldName().toUpperCase(), CREDITS_GAIN_ON_PURCHASE));
                 if (questionWindow.getAnswer()) {

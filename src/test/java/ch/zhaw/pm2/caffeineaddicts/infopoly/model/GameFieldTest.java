@@ -7,16 +7,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class GameFieldTest {
     GameField gameField;
+    Player player;
 
     @BeforeEach
     void setUp() {
-
+        player = new Player("EZ", 1000, 100, 1);
     }
 
     @AfterEach
@@ -26,7 +23,7 @@ public class GameFieldTest {
     @Test
     void chanceActionTest() {
         gameField = new ChanceGameField(1, "testChance");
-        gameField.action(new Player("testPlayer", 100, 100, 1));
+        gameField.action(player);
     }
 
 

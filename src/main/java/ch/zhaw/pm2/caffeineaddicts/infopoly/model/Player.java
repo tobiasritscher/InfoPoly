@@ -15,7 +15,7 @@ public class Player {
     private final String name;
     private int roundsWaiting;
     private IntegerProperty money = new SimpleIntegerProperty();
-    private final IntegerProperty credits = new SimpleIntegerProperty();
+    private IntegerProperty credits = new SimpleIntegerProperty();
     private IntegerProperty position = new SimpleIntegerProperty();
     private boolean isWorking = false;
     private JobGameField job = null;
@@ -60,21 +60,6 @@ public class Player {
         isWorking = true;
     }
 
-
-    /**
-     * Removes the job which the player had...Mainly if he decides for another job
-     */
-    /*
-    public void removeJob() {
-        for (GameField value : ownerShips) {
-            if (value.getFieldType().equals(Config.FieldType.JOB)) {
-                value.resetOwner();
-                ownerShips.remove(value);
-                return;
-            }
-        }
-    }*/
-
     /**
      * removes the player's job
      */
@@ -97,6 +82,7 @@ public class Player {
 
     /**
      * changes the players position on the field
+     *
      * @param position the new position
      */
     public void setPosition(int position) {
