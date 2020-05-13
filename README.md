@@ -13,7 +13,7 @@ The game has been developed and tested on IntelliJ, and works with gradle.
 
 * **Tobias Ritscher** - Senior Software Engineer in the Controller Departement aka Diseased Penguin
 
-## License
+## License 
 This project is licensed under the ZHAW License - see [ZHAW](http://www.zhaw.ch) for details.
 
 ## Manual
