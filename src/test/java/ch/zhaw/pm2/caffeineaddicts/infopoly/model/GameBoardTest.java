@@ -10,9 +10,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameBoardTest {
     List<GameField> board;
+
     @BeforeEach
     void setUp() {
-        board= new ArrayList<>();
+        board = new ArrayList<>();
     }
 
     @Test
@@ -24,13 +25,14 @@ class GameBoardTest {
         GameBoard gameBoard = new GameBoard();
         assertEquals(board, gameBoard.board);
     }
+
     @Test
     void loadGameBoardDifferentFields() {
         board.add(new FeeGameField(0, "fee", FeeGameField.FeeType.RANDOM));
         board.add(new ModuleGameField(1, "module"));
         board.add(new StartupGameField(2, "startup"));
         board.add(new RepetitionGameField(3, "repetition"));
-        Config.setFieldLayoutPath("src/test/resources/test-field-layout-diffrent-fileds-txt");
+        Config.setFieldLayoutPath("src/test/resources/test-field-layout-different-fields-txt");
         GameBoard gameBoard = new GameBoard();
         assertEquals(board, gameBoard.board);
     }
