@@ -19,12 +19,16 @@ public class JobGameField extends GameField {
         return BASE_WAGE;
     }
 
-    private void quitWork(Player player) {
+    private void askQuitWork(Player player) {
         QuestionWindow questionWindow = new QuestionWindow("Quit job", "Do you really want to quit this job?");
         if (questionWindow.getAnswer()) {
-            resetOwner();
-            player.removeJob();
+            quitWork(player);
         }
+    }
+
+    void quitWork(Player player) {
+        resetOwner();
+        player.removeJob();
     }
 
     /**
@@ -61,7 +65,7 @@ public class JobGameField extends GameField {
                 getFieldName(), BASE_WAGE), "Would you like to quite this job?");
 
         if (questionWindow.getAnswer()) {
-            quitWork(currentPlayer);
+            askQuitWork(currentPlayer);
         }
     }
 

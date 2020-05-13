@@ -8,21 +8,11 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
  * Represents {@link Config.FieldType#START}.
  */
 public class StartGameField extends GameField {
-    private static final int SCHOLARSHIP_MONEY = 100;
     private static final int PARENTS_HELP = 100;
-    private static final int SCHOLARSHIP_WAITING_TIME = 3;
     private static final int PARENTS_HELP_ON_VISIT = 2 * PARENTS_HELP;
 
     public StartGameField(int fieldId, String fieldName) {
         super(fieldId, fieldName);
-    }
-
-    public static int getScholarshipMoney() {
-        return SCHOLARSHIP_MONEY;
-    }
-
-    public static int getScholarshipWaitingTime() {
-        return SCHOLARSHIP_WAITING_TIME;
     }
 
     public static int getParentsHelp() {
@@ -38,8 +28,11 @@ public class StartGameField extends GameField {
     @Override
     public void action(Player currentPlayer) {
         new InformationalWindow("Financial support from parents",
-                String.format("You just visited your parents. They gave you %d.- CHF.",
-                        PARENTS_HELP_ON_VISIT));
+                String.format("You just visited your parents. They gave you %d.- CHF.", PARENTS_HELP_ON_VISIT));
+        getChildSupport(currentPlayer);
+    }
+
+    void getChildSupport(Player currentPlayer) {
         currentPlayer.alterMoney(PARENTS_HELP_ON_VISIT);
     }
 }

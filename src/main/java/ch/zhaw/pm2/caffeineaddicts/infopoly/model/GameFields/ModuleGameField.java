@@ -40,6 +40,14 @@ public class ModuleGameField extends GameField {
         }
     }
 
+    int getFieldPrice() {
+        return fieldPrice;
+    }
+
+    int getCreditsGain() {
+        return creditsGain;
+    }
+
     /**
      * the action is called when somebody gets on this field
      *

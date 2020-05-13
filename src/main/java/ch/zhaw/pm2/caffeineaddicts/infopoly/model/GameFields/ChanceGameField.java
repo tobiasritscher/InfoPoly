@@ -26,8 +26,17 @@ public class ChanceGameField extends GameField {
      */
     @Override
     public void action(Player currentPlayer) {
-        generateEvent();
+        makeChance(currentPlayer);
         new InformationalWindow("Chance", getMessage());
+    }
+
+    /**
+     * handels the logic of this class
+     *
+     * @param currentPlayer != 0, the player who got on this field
+     */
+    void makeChance(Player currentPlayer) {
+        generateEvent();
         currentPlayer.alterMoney(getMoneyDeviation());
         currentPlayer.alterCredits(getCreditsDeviation());
     }
@@ -45,7 +54,7 @@ public class ChanceGameField extends GameField {
         return event.creditsDeviation;
     }
 
-    private int getMoneyDeviation() {
+    int getMoneyDeviation() {
         return event.moneyDeviation;
     }
 
