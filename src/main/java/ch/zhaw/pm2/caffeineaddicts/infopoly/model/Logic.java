@@ -102,10 +102,14 @@ public class Logic {
         return players.get(playerId);
     }
 
+    public static void setCurrentPlayerId(int currentPlayerId) {
+        Logic.currentPlayerId.set(currentPlayerId);
+    }
+
     /**
      * changes the currentPlayerId to the next player
      */
-    private void switchToNextPlayer() {
+    void switchToNextPlayer() {
         if (!gameWasWon.get()) {
             final int nextPlayerId = calculateNextPlayerId(players.size(), players.indexOf(getCurrentPlayer()));
 
@@ -272,14 +276,11 @@ public class Logic {
      * rolls dice and checks if you rolled a double which gives you an extra move
      */
     public void rollDice() {
-        Random random = new Random();
         boolean again = false;
-        int firstDice;
-        int secondDice;
-
-        firstDice = random.nextInt(NUMBER_DICE_SIDES) + 1;
-        secondDice = random.nextInt(NUMBER_DICE_SIDES) + 1;
+        int firstDice = diceNumber();
+        int secondDice = diceNumber();
         int rolledNumber = firstDice + secondDice;
+
         currentDiceRoll.setValue(rolledNumber);
 
         if (firstDice == secondDice) {
@@ -290,5 +291,8 @@ public class Logic {
         movePlayer(rolledNumber, again);
     }
 
-
+    int diceNumber() {
+        Random random = new Random();
+        return random.nextInt(NUMBER_DICE_SIDES) + 1;
+    }
 }
