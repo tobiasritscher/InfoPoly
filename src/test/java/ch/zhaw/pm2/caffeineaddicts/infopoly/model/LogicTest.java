@@ -15,22 +15,11 @@ public class LogicTest {
     private Logic logic;
 
     private Player player1;
-    private Player player2;
-    private Player player3;
-    private Player player4;
-    private int number = 0;
 
     @BeforeEach
     void setUp() {
         player1 = new Player("EZ", 100, 0, 1);
-        player2 = new Player("EZ", 100, 0, 2);
-        player3 = new Player("EZ", 100, 0, 3);
-        player4 = new Player("EZ", 100, 0, 4);
         logic = new Logic();
-        logic.addPlayer(player1);
-        logic.addPlayer(player2);
-        logic.addPlayer(player3);
-        logic.addPlayer(player4);
     }
 
     @AfterEach
