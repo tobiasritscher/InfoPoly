@@ -152,7 +152,7 @@ public class Logic {
         currentPlayer.setWaitingForScholarship(false);
     }
 
-    private Player getCurrentPlayer() {
+    public Player getCurrentPlayer() {
         return players.get(currentPlayerId.getValue());
     }
 

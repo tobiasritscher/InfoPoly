@@ -589,6 +589,7 @@ public class MainWindowController {
     public void newGameAction() {
         if (newGameConfirmationNeeded) {
             addPlayers();
+            updateCurrentPlayer(logic.getCurrentPlayer().getName());
         } else {
             QuestionWindow newGameQuestion = new QuestionWindow(
                     "Are you sure?", "You really want to start a new game?"
@@ -646,12 +647,12 @@ public class MainWindowController {
                     player.getPositionProperty().addListener((observableValue, oldPosition, newPosition) -> {
                                 final int repetitionGameFieldId = logic.getGameBoard().getRepetitionGameFieldId();
                                 final int examGameFieldId = logic.getGameBoard().getExamGameFieldId();
-                                new InformationalWindow("GPS", String.format("%S was move to field: %S", player.getName(), logic.getGameBoard().getField(newPosition.intValue()).getFieldName()));
                                 if ((oldPosition.intValue() == examGameFieldId) && (newPosition.intValue() == repetitionGameFieldId)) {
                                     movePlayer(player.getName(), fieldLabels.indexOf(repeatingPlayers));
                                 } else {
                                     movePlayer(player.getName(), newPosition.intValue());
                                 }
+                                new InformationalWindow("GPS", String.format("%S was move to field: %S", player.getName(), logic.getGameBoard().getField(newPosition.intValue()).getFieldName()));
                             }
                     );
 
