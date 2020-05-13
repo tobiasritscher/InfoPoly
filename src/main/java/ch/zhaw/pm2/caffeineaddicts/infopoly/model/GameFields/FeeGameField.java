@@ -1,16 +1,15 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.controller.InformationalWindow;
-import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config;
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
 
 import java.util.Random;
 
 public class FeeGameField extends GameField {
-    public  final int baseFee = 30;
+    public final int BASE_FEE = 30;
     private final FeeType feeType;
     private final Random random = new Random();
-    private final int rate = 3;
+    private final int RATE = 3;
 
     public FeeGameField(int fieldId, String fieldName, FeeType feeType) {
         super(fieldId, fieldName);
@@ -19,9 +18,9 @@ public class FeeGameField extends GameField {
 
 
     private int calculateFee() {
-        int value = baseFee;
+        int value = BASE_FEE;
         if (feeType.equals(FeeType.RANDOM)) {
-            value += random.nextInt(rate) * baseFee;
+            value += random.nextInt(RATE) * BASE_FEE;
         }
         return value;
     }
