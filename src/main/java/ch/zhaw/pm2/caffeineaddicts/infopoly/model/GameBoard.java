@@ -65,6 +65,22 @@ public class GameBoard {
         return board.size();
     }
 
+    /**
+     * <ol>
+     *     <li>Loads information stored in the file.</li>
+     *     <li>Initializes game field.</li>
+     *     <li>Adds it to the game board.</li>
+     * </ol>
+     * <p>File format should look like that:</p>
+     * <ol>
+     *     <li>int: number fields</li>
+     *     <p>Field block entry:</p>
+     *     <li>int: number entries for the field block</li>
+     *     <li>string: {@link ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config.FieldType}</li>
+     *     <li>string: field name</li>
+     *     <li>other arguments</li>
+     * </ol>
+     */
     void loadGameBoard() {
         File file;
         Scanner sc = null;
