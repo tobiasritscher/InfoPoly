@@ -102,10 +102,14 @@ public class Logic {
         return players.get(playerId);
     }
 
+    public static void setCurrentPlayerId(int currentPlayerId) {
+        Logic.currentPlayerId.set(currentPlayerId);
+    }
+
     /**
      * changes the currentPlayerId to the next player
      */
-    private void switchToNextPlayer() {
+    void switchToNextPlayer() {
         if (!gameWasWon.get()) {
             final int nextPlayerId = calculateNextPlayerId(players.size(), players.indexOf(getCurrentPlayer()));
 

@@ -4,21 +4,29 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class LogicTest {
     GameBoard gameBoard;
     private Logic logic;
 
     private Player player1;
+    private Player player2;
+    private Player player3;
+    private Player player4;
 
     @BeforeEach
     void setUp() {
         player1 = new Player("EZ", 100, 0, 1);
+        player2 = new Player("EZ", 100, 0, 2);
+        player3 = new Player("EZ", 100, 0, 3);
+        player4 = new Player("EZ", 100, 0, 4);
         logic = new Logic();
     }
 
@@ -55,6 +63,42 @@ public class LogicTest {
     void calculateNextPlayerId() {
         Assertions.assertEquals(2, Logic.calculateNextPlayerId(4, 1));
         Assertions.assertEquals(0, Logic.calculateNextPlayerId(3, 2));
+
+    }
+
+
+    @Test
+    void switchToNextPlayerTest(){
+        Logic mock = mock(Logic.class);
+        logic.addPlayer(player1);
+        logic.addPlayer(player2);
+        logic.addPlayer(player3);
+        logic.addPlayer(player4);
+
+        logic.setCurrentPlayerId(1);
+        when(mock.calculateNextPlayerId(4,1)).thenReturn(2);
+        logic.switchToNextPlayer();
+        int now = logic.getPlayerTurnProperty().getValue();
+        assertEquals(2,now);
+    }
+
+    @Test
+    void playerHasToWaitTest(){
+
+    }
+
+    @Test
+    void getScholarshipTest(){
+
+    }
+
+    @Test
+    void movePlayerTest(){
+
+    }
+
+    @Test
+    void parentsHelpTest(){
 
     }
 
