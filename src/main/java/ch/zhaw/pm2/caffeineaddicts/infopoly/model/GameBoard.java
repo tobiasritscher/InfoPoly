@@ -98,65 +98,15 @@ public class GameBoard {
                 String fieldTypeString = sc.nextLine().strip();
                 Config.FieldType fieldType = Config.FieldType.valueOf(fieldTypeString.toUpperCase());
 
-                numberAttributes--;
-
-                //read field name
-                if (!sc.hasNext()) {
-                    throw new RuntimeException("invalid file format: field name is expected");
-                }
-                String fieldName = sc.nextLine().strip();
-
-                numberAttributes--;
-
-                String attribute = "";
-                for (int a = 0; a < numberAttributes; a++) {
+                String[] gameFieldArgs = new String[numberAttributes];
+                gameFieldArgs[0] = Integer.toString(fieldId);
+                for (int a = 1; a < numberAttributes; a++) {
                     if (!sc.hasNext()) {
                         throw new RuntimeException("invalid file format: an attribute is expected");
                     }
-                    attribute = sc.nextLine().strip();
+                    gameFieldArgs[a] = sc.nextLine().strip();
                 }
-                FeeGameField.FeeType feeType = FeeGameField.FeeType.FIXED;
-                if (fieldType.equals(Config.FieldType.FEE)) {
-                    if ("ran".equals(attribute)) {
-                        feeType = FeeGameField.FeeType.RANDOM;
-                    }
-                }
-                GameField gameField;
-                switch (fieldType) {
-
-                    case MODULE:
-                        gameField = new ModuleGameField(fieldId, fieldName);
-                        break;
-                    case STARTUP:
-                        gameField = new StartupGameField(fieldId, fieldName);
-                        break;
-                    case JOB:
-                        gameField = new JobGameField(fieldId, fieldName);
-                        break;
-                    case CHANCE:
-                        gameField = new ChanceGameField(fieldId, fieldName);
-                        break;
-                    case START:
-                        gameField = new StartGameField(fieldId, fieldName);
-                        startGameFieldId = fieldId;
-                        break;
-                    case FEE:
-                        gameField = new FeeGameField(fieldId, fieldName, feeType);
-                        break;
-                    case REPETITION:
-                        gameField = new RepetitionGameField(fieldId, fieldName);
-                        repetitionGameFieldId = fieldId;
-                        break;
-                    case EXAM:
-                        gameField = new ExamGameField(fieldId, fieldName);
-                        examGameFieldId = fieldId;
-                        break;
-
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + fieldType);
-                }
-                board.add(gameField);
-                logger.log(Level.FINE, "Field added: " + gameField.toString());
+                initializeGameField(fieldType, gameFieldArgs);
             }
         } catch (FileNotFoundException e) {
             System.out.println("file not found: " + e.getMessage());
@@ -165,7 +115,49 @@ public class GameBoard {
             sc.close();
             logger.log(Level.FINE, "stopped reading");
         }
+    }
 
+    private void initializeGameField(Config.FieldType fieldType, String[] gameFieldArgs) {
+        final int fieldId = Integer.parseInt(gameFieldArgs[0]);
+        final String fieldName = gameFieldArgs[1];
+        GameField gameField;
+        switch (fieldType) {
+            case MODULE:
+                gameField = new ModuleGameField(fieldId, fieldName);
+                break;
+            case STARTUP:
+                gameField = new StartupGameField(fieldId, fieldName);
+                break;
+            case JOB:
+                gameField = new JobGameField(fieldId, fieldName);
+                break;
+            case CHANCE:
+                gameField = new ChanceGameField(fieldId, fieldName);
+                break;
+            case START:
+                gameField = new StartGameField(fieldId, fieldName);
+                startGameFieldId = fieldId;
+                break;
+            case FEE:
+                FeeGameField.FeeType feeType = FeeGameField.FeeType.FIXED;
+                if ("ran".equals(gameFieldArgs[2])) {
+                    feeType = FeeGameField.FeeType.RANDOM;
+                }
+                gameField = new FeeGameField(fieldId, fieldName, feeType);
+                break;
+            case REPETITION:
+                gameField = new RepetitionGameField(fieldId, fieldName);
+                repetitionGameFieldId = fieldId;
+                break;
+            case EXAM:
+                gameField = new ExamGameField(fieldId, fieldName);
+                examGameFieldId = fieldId;
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + fieldType);
+        }
+        board.add(gameField);
+        logger.log(Level.FINE, "Field added: " + gameField.toString());
     }
 
     /**
