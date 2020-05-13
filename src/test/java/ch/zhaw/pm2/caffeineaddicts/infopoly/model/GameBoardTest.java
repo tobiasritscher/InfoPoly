@@ -1,6 +1,7 @@
 package ch.zhaw.pm2.caffeineaddicts.infopoly.model;
 
 import ch.zhaw.pm2.caffeineaddicts.infopoly.model.GameFields.*;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,35 +12,66 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GameBoardTest {
-    List<GameField> board;
+    private List<GameField> fields;
+    private GameBoard gameBoard;
 
     @BeforeEach
     void setUp() {
-        board = new ArrayList<>();
+        fields = new ArrayList<>();
+    }
+
+    @AfterEach
+    void tearDown() {
+        fields = null;
+        gameBoard = null;
     }
 
     @Test
     void loadGameBoard() {
-        board.add(new ModuleGameField(0, "module"));
-        board.add(new ModuleGameField(1, "module"));
-        board.add(new ModuleGameField(2, "module"));
-        Config.setFieldLayoutPath("src/test/resources/test-field-layout.txt");
-        GameBoard gameBoard = new GameBoard();
-        assertEquals(board, gameBoard.board);
+        fields.add(new ModuleGameField(0, "module"));
+        fields.add(new ModuleGameField(1, "module"));
+        fields.add(new ModuleGameField(2, "module"));
+        Config.setFieldLayoutPath("src/test/resources/test-gameboard-layout.txt");
+        gameBoard = new GameBoard();
+        assertEquals(fields, gameBoard.board);
     }
 
     @Test
     void loadGameBoardDifferentFields() {
-        board.add(new FeeGameField(0, "fee", FeeGameField.FeeType.RANDOM));
-        board.add(new ModuleGameField(1, "module"));
-        board.add(new StartupGameField(2, "startup"));
-        board.add(new RepetitionGameField(3, "repetition"));
-        Config.setFieldLayoutPath("src/test/resources/test-field-layout-different-fields-txt");
-        GameBoard gameBoard = new GameBoard();
+        fields.add(new FeeGameField(0, "fee", FeeGameField.FeeType.RANDOM));
+        fields.add(new ModuleGameField(1, "module"));
+        fields.add(new StartupGameField(2, "startup"));
+        fields.add(new RepetitionGameField(3, "repetition"));
+        Config.setFieldLayoutPath("src/test/resources/test-gameboard-different-fields.txt");
+        gameBoard = new GameBoard();
         Assertions.assertTrue(gameBoard.getBoard().get(0) instanceof FeeGameField);
         Assertions.assertTrue(gameBoard.getBoard().get(1) instanceof ModuleGameField);
         Assertions.assertTrue(gameBoard.getBoard().get(2) instanceof StartupGameField);
         Assertions.assertTrue(gameBoard.getBoard().get(3) instanceof RepetitionGameField);
-        assertEquals(board, gameBoard.board);
+        assertEquals(fields, gameBoard.board);
+    }
+
+    @Test
+    void loadGameBoardModuleGameField() {
+        final String moduleName = "test module";
+        final int fieldId = 0;
+        fields.add(new ModuleGameField(fieldId, moduleName));
+        Config.setFieldLayoutPath("src/test/resources/test-gameboard-module.txt");
+        gameBoard = new GameBoard();
+        Assertions.assertTrue(gameBoard.getBoard().get(fieldId) instanceof ModuleGameField);
+        Assertions.assertEquals(fieldId, gameBoard.getBoard().get(fieldId).getFieldId());
+        Assertions.assertEquals(fields.get(fieldId).getFieldName(), moduleName);
+    }
+
+    @Test
+    void loadGameBoardChanceGameField() {
+        final String moduleName = "test chance";
+        final int fieldId = 0;
+        fields.add(new ChanceGameField(fieldId, moduleName));
+        Config.setFieldLayoutPath("src/test/resources/test-gameboard-chance.txt");
+        gameBoard = new GameBoard();
+        Assertions.assertTrue(gameBoard.getBoard().get(fieldId) instanceof ChanceGameField);
+        Assertions.assertEquals(fieldId, gameBoard.getBoard().get(fieldId).getFieldId());
+        Assertions.assertEquals(fields.get(fieldId).getFieldName(), moduleName);
     }
 }
