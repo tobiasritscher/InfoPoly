@@ -1,4 +1,4 @@
-![Screenshot](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/blob/master/InfoPolyLogo.png)
+![Screenshot](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/blob/master/docs/InfoPolyLogo.png)
 
 ## Getting Started
 The game has been developed and tested on IntelliJ, and works with gradle.
@@ -20,7 +20,7 @@ This project is licensed under the ZHAW License - see [ZHAW](http://www.zhaw.ch)
 [Game Flow](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/wiki/Game-flow)
 
 ## Screenshot
-![ScreenShot](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/blob/master/Screenshot.png)
+![ScreenShot](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/blob/master/docs/Screenshot.png)
 
 ## Class Diagram
 [All Class Diagrams](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/tree/master/Klassendiagramm)
