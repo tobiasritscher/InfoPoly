@@ -7,7 +7,7 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
 import java.util.Random;
 
 public class FeeGameField extends GameField {
-    private final int baseFee = 30;
+    public  final int baseFee = 30;
     private final FeeType feeType;
     private final Random random = new Random();
     private final int rate = 3;

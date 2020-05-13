@@ -12,7 +12,7 @@ public class Player {
     private final String name;
     private int roundsWaiting;
     private IntegerProperty money = new SimpleIntegerProperty();
-    private IntegerProperty credits = new SimpleIntegerProperty();
+    private final IntegerProperty credits = new SimpleIntegerProperty();
     private IntegerProperty position = new SimpleIntegerProperty();
     private boolean isWorking = false;
     private JobGameField job = null;

@@ -26,7 +26,7 @@ public class ExamGameField extends GameField {
      * @return a boolean value: true, if passed; false, else;
      */
     public boolean passed() {
-        return (0 == random.nextInt((int) (1 / probabilityToPass))) ? true : false;
+        return 0 == random.nextInt((int) (1 / probabilityToPass));
     }
 
     @Override

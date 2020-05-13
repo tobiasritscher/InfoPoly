@@ -30,7 +30,7 @@ public class JobGameField extends GameField {
             if (currentPlayer.equals(getOwner())) {
                 new InformationalWindow("Payday!", "You made an extra shift: +" + BASE_WAGE + "CHF");
                 currentPlayer.alterMoney(BASE_WAGE);
-                QuestionWindow questionWindow = new QuestionWindow(String.format("Job manager %s (%d.-CHF)", getFieldName(), BASE_WAGE), String.format("Would you like to quite this job?"));
+                QuestionWindow questionWindow = new QuestionWindow(String.format("Job manager %s (%d.-CHF)", getFieldName(), BASE_WAGE), "Would you like to quite this job?");
                 if (questionWindow.getAnswer()) {
                     quitWork(currentPlayer);
                 }

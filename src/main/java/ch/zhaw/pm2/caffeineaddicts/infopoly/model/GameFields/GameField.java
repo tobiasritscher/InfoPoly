@@ -11,8 +11,8 @@ public abstract class GameField {
     private final int fieldId;
     private final Config.FieldType fieldType;
     private final String fieldName;
+    private final IntegerProperty ownerProperty = new SimpleIntegerProperty(-1);
     private Player owner = null;
-    private IntegerProperty ownerProperty = new SimpleIntegerProperty(-1);
 
     public GameField(int fieldId, Config.FieldType fieldType, String fieldName) {
         this.fieldId = fieldId;
