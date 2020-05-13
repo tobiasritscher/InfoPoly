@@ -9,18 +9,18 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
  * Representation of {@link Config.FieldType#MODULE}
  */
 public class ModuleGameField extends GameField {
-    public final static int MONEY_CHARGE_ON_VISIT = 10;
-    public final static int CREDITS_GAIN_ON_PURCHASE = 10;
-    public final static int FIELD_PRICE = 30;
-    public final static int FIELD_MEDIUM_PRICE = 60;
-    public final static int FIELD_HIGH_PRICE = 90;
-    public final static int FIELD_HIGHEST_PRICE = 100;
-    public final static int CREDITS_GAIN_ON_VISIT = 5;
-    public final static int CREDITS_GAIN_ON_VISIT_MEDIUM = 10;
-    public final static int CREDITS_GAIN_ON_VISIT_HIGH = 15;
-    public final static int CREDITS_GAIN_ON_VISIT_HIGHEST = 20;
-    public final int fieldPrice;
-    public final int creditsGain;
+    private final static int MONEY_CHARGE_ON_VISIT = 10;
+    private final static int CREDITS_GAIN_ON_PURCHASE = 10;
+    private final static int FIELD_PRICE = 30;
+    private final static int FIELD_MEDIUM_PRICE = 60;
+    private final static int FIELD_HIGH_PRICE = 90;
+    private final static int FIELD_HIGHEST_PRICE = 100;
+    private final static int CREDITS_GAIN_ON_VISIT = 5;
+    private final static int CREDITS_GAIN_ON_VISIT_MEDIUM = 10;
+    private final static int CREDITS_GAIN_ON_VISIT_HIGH = 15;
+    private final static int CREDITS_GAIN_ON_VISIT_HIGHEST = 20;
+    private final int fieldPrice;
+    private final int creditsGain;
 
     public ModuleGameField(int fieldId, String fieldName) {
         super(fieldId, fieldName);
@@ -48,7 +48,6 @@ public class ModuleGameField extends GameField {
     @Override
     public void action(Player currentPlayer) {
         Player owner = getOwner();
-
 
         if (hasOwner()) {
             if (owner.equals(currentPlayer)) {
