@@ -5,7 +5,7 @@ The game has been developed and tested on IntelliJ, and works with gradle.
 
 ## Team
 
-* **Nikita Smailov** - Head of Development aka Assistant Caffeine Addict
+* [**Nikita Smailov**](https://github.zhaw.ch/smailnik) - Head of Development aka Assistant Caffeine Addict
 
 * **Oliver Corrodi** - Director of UI aka Chief Caffeine and Nicotine Addict
 
