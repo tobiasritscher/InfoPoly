@@ -21,9 +21,24 @@ public class ModuleGameField extends GameField {
     public static int CREDITS_GAIN_ON_VISIT_MEDIUM = 10;
     public static int CREDITS_GAIN_ON_VISIT_HIGH = 15;
     public static int CREDITS_GAIN_ON_VISIT_HIGHEST = 20;
+    public int NEW_FIELD_PRICE = 0;
+    public int NEW_CREDITS_GAIN = 0;
 
     public ModuleGameField(int fieldId, String fieldName) {
         super(fieldId, fieldName);
+        if(getFieldId() >= 32 && getFieldId() <= 40){
+            NEW_FIELD_PRICE = FIELD_HIGHEST_PRICE;
+            NEW_CREDITS_GAIN = CREDITS_GAIN_ON_VISIT_HIGHEST;
+        } else if (getFieldId() >= 22 && getFieldId() <= 30){
+            NEW_FIELD_PRICE = FIELD_HIGH_PRICE;
+            NEW_CREDITS_GAIN = CREDITS_GAIN_ON_VISIT_HIGH;
+        } else if(getFieldId() >= 12 && getFieldId() <= 19){
+            NEW_FIELD_PRICE = FIELD_MEDIUM_PRICE;
+            NEW_CREDITS_GAIN = CREDITS_GAIN_ON_VISIT_MEDIUM;
+        } else if (getFieldId() >= 2 && getFieldId() <= 10){
+            NEW_FIELD_PRICE = FIELD_PRICE;
+            NEW_CREDITS_GAIN = CREDITS_GAIN_ON_VISIT;
+        }
     }
 
     /**
@@ -34,21 +49,9 @@ public class ModuleGameField extends GameField {
     @Override
     public void action(Player currentPlayer) {
         Player owner = getOwner();
-        int NEW_FIELD_PRICE = 0;
-        int NEW_CREDITS_GAIN = 0;
-        if(getFieldId() == 2 || getFieldId() == 3 || getFieldId() == 4 || getFieldId() == 7 || getFieldId() == 9 || getFieldId() == 10){
-            NEW_FIELD_PRICE = FIELD_PRICE;
-            NEW_CREDITS_GAIN = CREDITS_GAIN_ON_VISIT;
-        } else if (getFieldId() == 12 || getFieldId() == 13 || getFieldId() == 14 || getFieldId() == 15 || getFieldId() == 18 || getFieldId() == 19){
-            NEW_FIELD_PRICE = FIELD_MEDIUM_PRICE;
-            NEW_CREDITS_GAIN = CREDITS_GAIN_ON_VISIT_MEDIUM;
-        } else if(getFieldId() == 22 || getFieldId() == 23 || getFieldId() == 25 || getFieldId() == 26 || getFieldId() == 27 || getFieldId() == 28 || getFieldId() == 29 || getFieldId() == 30){
-            NEW_FIELD_PRICE = FIELD_HIGH_PRICE;
-            NEW_CREDITS_GAIN = CREDITS_GAIN_ON_VISIT_HIGH;
-        } else if (getFieldId() == 32 || getFieldId() == 33 || getFieldId() == 34 || getFieldId() == 35 || getFieldId() == 38 || getFieldId() == 40){
-            NEW_FIELD_PRICE = FIELD_HIGHEST_PRICE;
-            NEW_CREDITS_GAIN = CREDITS_GAIN_ON_VISIT_HIGHEST;
-        }
+
+
+
         if (hasOwner()) {
             if (owner.equals(currentPlayer)) {
                 new InformationalWindow("Hey Boss!", "Have a sit and listen to the lectures!");
