@@ -27,6 +27,7 @@ This project is licensed under the ZHAW License - see [ZHAW](http://www.zhaw.ch)
 
 ## Screenshot
 
+![ScreenShot](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/blob/master/Bildschirmfoto%202020-05-13%20um%2019.28.02.png)
 
 ## Class Diagram
 
