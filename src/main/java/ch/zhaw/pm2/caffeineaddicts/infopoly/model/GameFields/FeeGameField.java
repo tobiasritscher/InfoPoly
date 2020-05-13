@@ -28,7 +28,7 @@ public class FeeGameField extends GameField {
     @Override
     public void action(Player currentPlayer) {
         int fee = calculateFee();
-        new InformationalWindow("Nothing is free of charge...", String.format("You have to pay %d.-CHF!", fee));
+        new InformationalWindow("New fee", String.format("You have to pay %d.-CHF!", fee));
         currentPlayer.alterMoney(-fee);
     }
 

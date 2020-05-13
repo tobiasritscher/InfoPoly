@@ -6,6 +6,9 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.logging.Logger;
 
+/**
+ * Creates each individual player
+ */
 public class Player {
     private static final Logger logger = Logger.getLogger(Player.class.getCanonicalName());
     private final int playerId;
@@ -71,6 +74,10 @@ public class Player {
             }
         }
     }*/
+
+    /**
+     * removes the player's job
+     */
     public void removeJob() {
         isWorking = false;
         job = null;
@@ -88,6 +95,10 @@ public class Player {
         return position.get();
     }
 
+    /**
+     * changes the players position on the field
+     * @param position the new position
+     */
     public void setPosition(int position) {
         logger.info(String.format("Player %s position changed from %d to %d", name.toUpperCase(), this.position.get(), position));
         this.position.set(position);
