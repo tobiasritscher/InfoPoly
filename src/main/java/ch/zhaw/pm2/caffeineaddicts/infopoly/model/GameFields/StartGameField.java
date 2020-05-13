@@ -9,7 +9,7 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
  */
 public class StartGameField extends GameField {
     public static final int SCHOLARSHIP_MONEY = 100;
-    public static final int PARENTS_HELP = 200;
+    public static final int PARENTS_HELP = 100;
     public static final int SCHOLARSHIP_WAITING_TIME = 3;
     public static final int PARENTS_HELP_ON_VISIT = 2 * PARENTS_HELP;
 

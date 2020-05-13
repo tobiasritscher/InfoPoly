@@ -13,7 +13,7 @@ import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config.MEDIUM_CREDITS;
 public class ModuleGameField extends GameField {
     public static int MONEY_CHARGE_ON_VISIT = 10;
     public static int CREDITS_GAIN_ON_PURCHASE = 10;
-    public static int FIELD_PRICE = 100;
+    public static int FIELD_PRICE = 30;
     public static int CREDITS_GAIN_ON_VISIT = 5;
 
     public ModuleGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
