@@ -30,7 +30,6 @@ import java.util.Objects;
  */
 public class MainWindowController {
 
-
     //All fields in the game. Can be formatted to our liking.
     @FXML
     private BorderPane field01; // START
@@ -619,6 +618,7 @@ public class MainWindowController {
 
         gameWasStarted = false;
         newGameConfirmationNeeded = false;
+        System.gc();
 
         //Resetting logic and game board
         logic = new Logic();
@@ -694,7 +694,7 @@ public class MainWindowController {
 
                 // Listener in case game was won
                 logic.getGameWasWonProperty().addListener((observableValue, oldValue, newValue) -> {
-                    if (newValue == true) endGame();
+                    if (newValue) endGame();
                 });
 
                 gameWasStarted = true;
@@ -750,7 +750,7 @@ public class MainWindowController {
         gameWasStarted = false;
         newGameConfirmationNeeded = false;
         logic = null;
-        /* Re-initialize Logic. Prevents bugs when restarting the game. */
+        // Re-initialize Logic. Prevents bugs when restarting the game.
         logic = new Logic();
     }
 }

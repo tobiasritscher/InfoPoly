@@ -5,8 +5,8 @@ import javafx.scene.paint.Color;
 public class Config {
     public static final int NUMBER_DICES = 2;
     public static final int START_MONEY = 100;
-    public static final int START_CREDITS = 0;
-    public static final int MEDIUM_CREDITS =10;
+    public static final int START_CREDITS = 179;
+    public static final int MEDIUM_CREDITS = 10;
     public static final int MANY_CREDITS = 30;
     public static final int NUMBER_DICE_SIDES = 6;
     public static final int PLAYER_START_POSITION = 0;
@@ -78,7 +78,7 @@ public class Config {
      * @author corrooli
      */
     public enum PlayerColor {
-        PLAYER1("#cbcba9"),    //
+        PLAYER1("#3D86BA"),    //
         PLAYER2("#861515"),    // BLUE
         PLAYER3("#008631"),    // GREEN
         PLAYER4("#930a7f"),    // PURPLE
@@ -87,7 +87,7 @@ public class Config {
         /**
          * Hexadecimal color value to be used by FXML.
          */
-        private String colorValue;
+        private final String colorValue;
 
         PlayerColor(String colorValue) {
             this.colorValue = colorValue;
