@@ -22,10 +22,7 @@ The game has been testet on Intellij and works with gradle.
 This project is licensed under the ZHAW License - see [ZHAW](http://www.zhaw.ch) for details
 
 ## Manual
-### First Steps ##
-
-
-### Main Game ##
+[Game Flow](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/wiki/Game-flow)
 
 
 ## Screenshot
