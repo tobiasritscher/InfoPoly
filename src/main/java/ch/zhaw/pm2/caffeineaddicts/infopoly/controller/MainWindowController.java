@@ -646,6 +646,7 @@ public class MainWindowController {
                     player.getPositionProperty().addListener((observableValue, oldPosition, newPosition) -> {
                                 final int repetitionGameFieldId = logic.getGameBoard().getRepetitionGameFieldId();
                                 final int examGameFieldId = logic.getGameBoard().getExamGameFieldId();
+                                new InformationalWindow("GPS", String.format("%S was move to field: %S", player.getName(), logic.getGameBoard().getField(newPosition.intValue()).getFieldName()));
                                 if ((oldPosition.intValue() == examGameFieldId) && (newPosition.intValue() == repetitionGameFieldId)) {
                                     movePlayer(player.getName(), fieldLabels.indexOf(repeatingPlayers));
                                 } else {

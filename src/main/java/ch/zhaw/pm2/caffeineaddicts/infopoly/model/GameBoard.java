@@ -41,7 +41,7 @@ public class GameBoard {
         return (StartGameField) board.get(startGameFieldId);
     }
 
-    GameField getField(int fieldId) {
+    public GameField getField(int fieldId) {
         validateFieldId(fieldId);
         return board.get(fieldId);
     }
