@@ -70,20 +70,6 @@ public class LogicTest {
     }
 
     @Test
-    void movePlayerTest(){
-        logic.addPlayer(player1);
-        logic.addPlayer(player2);
-        logic.addPlayer(player3);
-        logic.addPlayer(player4);
-        Logic.setCurrentPlayerId(1);
-        logic.movePlayer(4,false);
-        assertEquals(5,logic.getPlayerTurnProperty().getValue());
-    }
-
-    /**
-     * Testing 100 Times if the dice roll is within bounds.
-     */
-    @Test
     public void DiceTest() {
 
         for (int i = 0; i < 100; i++) {
