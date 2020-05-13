@@ -32,165 +32,165 @@ public class MainWindowController {
 
     //All fields in the game. Can be formatted to our liking.
     @FXML
-    private BorderPane field01; // START
+    private BorderPane field01;
     @FXML
-    private BorderPane field02; // CLASS : Programming
+    private BorderPane field02;
     @FXML
-    private BorderPane field03; // CLASS : Discrete Mathematics
+    private BorderPane field03;
     @FXML
-    private BorderPane field04; // CLASS : Information Theory & Coding
+    private BorderPane field04;
     @FXML
-    private BorderPane field05; // SEMESTER TUITION
+    private BorderPane field05;
     @FXML
-    private BorderPane field06; // JOB   : BarStucks
+    private BorderPane field06;
     @FXML
-    private BorderPane field07; // CLASS : Software Project
+    private BorderPane field07;
     @FXML
-    private BorderPane field08; // CHANCE
+    private BorderPane field08;
     @FXML
-    private BorderPane field09; // CLASS : Electronics & digital technology
+    private BorderPane field09;
     @FXML
-    private BorderPane field10; // CLASS : Analysis
+    private BorderPane field10;
     @FXML
-    private BorderPane field11; // REPEATING SEMESTER
+    private BorderPane field11;
     @FXML
-    private BorderPane field12; // CLASS : Databases
+    private BorderPane field12;
     @FXML
-    private BorderPane field13; // CLASS : Communication Competence
+    private BorderPane field13;
     @FXML
-    private BorderPane field14; // CLASS : Linear Algebra
+    private BorderPane field14;
     @FXML
-    private BorderPane field15; // CLASS : Communication Technologies
+    private BorderPane field15;
     @FXML
-    private BorderPane field16; // JOB   : McBurger
+    private BorderPane field16;
     @FXML
-    private BorderPane field17; // CHANCE
+    private BorderPane field17;
     @FXML
-    private BorderPane field18; // CLASS : System Orientated Programming
+    private BorderPane field18;
     @FXML
-    private BorderPane field19; // CLASS : Web Development
+    private BorderPane field19;
     @FXML
-    private BorderPane field20; // ZVV FEES
+    private BorderPane field20;
     @FXML
-    private BorderPane field22; // CLASS : Algorithms & Data Structures
+    private BorderPane field22;
     @FXML
-    private BorderPane field23; // CLASS : Stochastics & Statistics
+    private BorderPane field23;
     @FXML
-    private BorderPane field24; // CHANCE
+    private BorderPane field24;
     @FXML
-    private BorderPane field25; // CLASS : Computer Engineering
+    private BorderPane field25;
     @FXML
-    private BorderPane field26; // JOB   : AnalogTec
+    private BorderPane field26;
     @FXML
-    private BorderPane field27; // CLASS : IT Security
+    private BorderPane field27;
     @FXML
-    private BorderPane field28; // CLASS : Higher Mathematics
+    private BorderPane field28;
     @FXML
-    private BorderPane field29; // CLASS : Physics Engines
+    private BorderPane field29;
     @FXML
-    private BorderPane field30; // CLASS : Business Administration
+    private BorderPane field30;
     @FXML
-    private BorderPane field31; // EXAM FAILED
+    private BorderPane field31;
     @FXML
-    private BorderPane field32; // CLASS : Project Thesis
+    private BorderPane field32;
     @FXML
-    private BorderPane field33; // CLASS : Machine Learning
+    private BorderPane field33;
     @FXML
-    private BorderPane field34; // CLASS : Cloud Computing
+    private BorderPane field34;
     @FXML
-    private BorderPane field35; // CLASS : Game Development
+    private BorderPane field35;
     @FXML
-    private BorderPane field36; // JOB   : CashBank
+    private BorderPane field36;
     @FXML
-    private BorderPane field37; // CHANCE
+    private BorderPane field37;
     @FXML
-    private BorderPane field38; // CLASS : Mobile Applications
+    private BorderPane field38;
     @FXML
-    private BorderPane field39; // PARTY
+    private BorderPane field39;
     @FXML
-    private BorderPane field40; // CLASS : Bachelor
+    private BorderPane field40;
 
     //Bottom of fields (player area). This is where player initials are used to indicate which players are on which field.
     @FXML
-    private Label field01Players; // START
+    private Label field01Players;
     @FXML
-    private Label field02Players; // CLASS : Programming
+    private Label field02Players;
     @FXML
-    private Label field03Players; // CLASS : Discrete Mathematics
+    private Label field03Players;
     @FXML
-    private Label field04Players; // CLASS : Information Theory & Coding
+    private Label field04Players;
     @FXML
-    private Label field05Players; // SEMESTER TUITION
+    private Label field05Players;
     @FXML
-    private Label field06Players; // JOB   : BarStucks
+    private Label field06Players;
     @FXML
-    private Label field07Players; // CLASS : Software Project
+    private Label field07Players;
     @FXML
-    private Label field08Players; // CHANCE
+    private Label field08Players;
     @FXML
-    private Label field09Players; // CLASS : Electronics & digital technology
+    private Label field09Players;
     @FXML
-    private Label field10Players; // CLASS : Analysis
+    private Label field10Players;
     @FXML
-    private Label field11Players; // REPEATING SEMESTER
+    private Label field11Players;
     @FXML
-    private Label field12Players; // CLASS : Databases
+    private Label field12Players;
     @FXML
-    private Label field13Players; // CLASS : Communication Competence
+    private Label field13Players;
     @FXML
-    private Label field14Players; // CLASS : Linear Algebra
+    private Label field14Players;
     @FXML
-    private Label field15Players; // CLASS : Communication Technologies
+    private Label field15Players;
     @FXML
-    private Label field16Players; // JOB   : McBurger
+    private Label field16Players;
     @FXML
-    private Label field17Players; // CHANCE
+    private Label field17Players;
     @FXML
-    private Label field18Players; // CLASS : System Orientated Programming
+    private Label field18Players;
     @FXML
-    private Label field19Players; // CLASS : Web Development
+    private Label field19Players;
     @FXML
-    private Label field20Players; // ZVV FEES
+    private Label field20Players;
     @FXML
-    private Label field21Players; // STARTUP
+    private Label field21Players;
     @FXML
-    private Label field22Players; // CLASS : Algorithms & Data Structures
+    private Label field22Players;
     @FXML
-    private Label field23Players; // CLASS : Stochastics & Statistics
+    private Label field23Players;
     @FXML
-    private Label field24Players; // CHANCE
+    private Label field24Players;
     @FXML
-    private Label field25Players; // CLASS : Computer Engineering
+    private Label field25Players;
     @FXML
-    private Label field26Players; // JOB   : AnalogTec
+    private Label field26Players;
     @FXML
-    private Label field27Players; // CLASS : IT Security
+    private Label field27Players;
     @FXML
-    private Label field28Players; // CLASS : Higher Mathematics
+    private Label field28Players;
     @FXML
-    private Label field29Players; // CLASS : Physics Engines
+    private Label field29Players;
     @FXML
-    private Label field30Players; // CLASS : Business Administration
+    private Label field30Players;
     @FXML
-    private Label field31Players; // EXAM FAILED
+    private Label field31Players;
     @FXML
-    private Label field32Players; // CLASS : Project Thesis
+    private Label field32Players;
     @FXML
-    private Label field33Players; // CLASS : Machine Learning
+    private Label field33Players;
     @FXML
-    private Label field34Players; // CLASS : Cloud Computing
+    private Label field34Players;
     @FXML
-    private Label field35Players; // CLASS : Game Development
+    private Label field35Players;
     @FXML
-    private Label field36Players; // JOB   : CashBank
+    private Label field36Players;
     @FXML
-    private Label field37Players; // CHANCE
+    private Label field37Players;
     @FXML
-    private Label field38Players; // CLASS : Mobile Applications
+    private Label field38Players;
     @FXML
-    private Label field39Players; // PARTY
+    private Label field39Players;
     @FXML
-    private Label field40Players; // CLASS : Bachelor Thesis
+    private Label field40Players;
 
     //Content of 'Repeating Semester/Repeating:' text label. Indicates which player has to repeat currently.
     @FXML
@@ -201,67 +201,67 @@ public class MainWindowController {
      * color using Listeners in case he/she decides to take a class/job/do a startup
      */
     @FXML
-    private BorderPane field02Color; // CLASS : Programming
+    private BorderPane field02Color;
     @FXML
-    private BorderPane field03Color; // CLASS : Discrete Mathematics
+    private BorderPane field03Color;
     @FXML
-    private BorderPane field04Color; // CLASS : Information Theory & Coding
+    private BorderPane field04Color;
     @FXML
-    private BorderPane field06Color; // JOB   : BarStucks
+    private BorderPane field06Color;
     @FXML
-    private BorderPane field07Color; // CLASS : Software Project
+    private BorderPane field07Color;
     @FXML
-    private BorderPane field09Color; // CLASS : Electronics & digital technology
+    private BorderPane field09Color;
     @FXML
-    private BorderPane field10Color; // CLASS : Analysis
+    private BorderPane field10Color;
     @FXML
-    private BorderPane field12Color; // CLASS : Databases
+    private BorderPane field12Color;
     @FXML
-    private BorderPane field13Color; // CLASS : Communication Competence
+    private BorderPane field13Color;
     @FXML
-    private BorderPane field14Color; // CLASS : Linear Algebra
+    private BorderPane field14Color;
     @FXML
-    private BorderPane field15Color; // CLASS : Communication Technologies
+    private BorderPane field15Color;
     @FXML
-    private BorderPane field16Color; // JOB   : McBurger
+    private BorderPane field16Color;
     @FXML
-    private BorderPane field18Color; // CLASS : System Orientated Programming
+    private BorderPane field18Color;
     @FXML
-    private BorderPane field19Color; // CLASS : Web Development
+    private BorderPane field19Color;
     @FXML
-    private BorderPane field21Color; // STARTUP
+    private BorderPane field21Color;
     @FXML
-    private BorderPane field22Color; // CLASS : Algorithms & Data Structures
+    private BorderPane field22Color;
     @FXML
-    private BorderPane field23Color; // CLASS : Stochastics & Statistics
+    private BorderPane field23Color;
     @FXML
-    private BorderPane field25Color; // CLASS : Computer Engineering
+    private BorderPane field25Color;
     @FXML
-    private BorderPane field26Color; // JOB   : AnalogTec
+    private BorderPane field26Color;
     @FXML
-    private BorderPane field27Color; // CLASS : IT Security
+    private BorderPane field27Color;
     @FXML
-    private BorderPane field28Color; // CLASS : Higher Mathematics
+    private BorderPane field28Color;
     @FXML
-    private BorderPane field29Color; // CLASS : Physics Engines
+    private BorderPane field29Color;
     @FXML
-    private BorderPane field30Color; // CLASS : Business Administration
+    private BorderPane field30Color;
     @FXML
-    private BorderPane field32Color; // CLASS : Project Thesis
+    private BorderPane field32Color;
     @FXML
-    private BorderPane field33Color; // CLASS : Machine Learning
+    private BorderPane field33Color;
     @FXML
-    private BorderPane field34Color; // CLASS : Cloud Computing
+    private BorderPane field34Color;
     @FXML
-    private BorderPane field35Color; // CLASS : Game Development
+    private BorderPane field35Color;
     @FXML
-    private BorderPane field36Color; // JOB   : CashBank
+    private BorderPane field36Color;
     @FXML
-    private BorderPane field38Color; // CLASS : Mobile Applications
+    private BorderPane field38Color;
     @FXML
-    private BorderPane field40Color; // CLASS : Bachelor Thesis
+    private BorderPane field40Color;
     @FXML
-    private BorderPane dummyPane;    // Dummy Pane to make ArrayList easier to handle
+    private BorderPane dummyPane;
 
     /*
      * Content of fundsBox. This box indicates labels indicating their info (player names, their color, their credits
@@ -390,7 +390,6 @@ public class MainWindowController {
         fieldLabels.forEach((fieldLabel) -> fieldLabel.setText(""));
         fieldColors.forEach((fieldColor) -> fieldColor.setStyle("-fx-background-color: " + Config.PlayerColor.UNOCCUPIED.getColorValue()));
         setBoardVisibility(false);
-
         rollDiceOutput.setText("");
 
         setPlayerName(1, "");
@@ -438,16 +437,8 @@ public class MainWindowController {
         for (Label fieldLabel : fieldLabels)
             if (fieldLabel.getText().contains(playerName)) {
 
-                //Extract text from field to temporary String
-                tempText = fieldLabel.getText();
-
-                //Delete Player name
-                tempText = tempText.replace(playerName, "");
-
-                //Trim leading and trailing whitespaces
-                tempText = tempText.trim();
-
-                //Set new text to field
+                //Extract text from field to temporary String, delete player name, clean up String and update label
+                tempText = fieldLabel.getText().replace(playerName, "").trim();
                 fieldLabel.setText(tempText);
             }
 
@@ -613,21 +604,10 @@ public class MainWindowController {
      */
     private void addPlayers() {
         //Clean up board, empty out all the fields
-        initializeGame();
-        setBoardVisibility(false);
-
-        gameWasStarted = false;
-        newGameConfirmationNeeded = false;
-        System.gc();
-
-        //Resetting logic and game board
-        logic = new Logic();
+        endGame();
 
         //Preparing player entry windows
-        PlayerEntryWindow entry;
-
-        //Spawn player entry windows
-        entry = new PlayerEntryWindow();
+        PlayerEntryWindow entry = new PlayerEntryWindow();
 
         try {
             if (entry.isEntrySuccess()) {
@@ -648,7 +628,7 @@ public class MainWindowController {
                     int playerId = i;
                     Player player = logic.getPlayer(i);
                     player.getMoneyProperty().addListener((observableValue, oldMoney, newMoney) -> {
-                        new InformationalWindow("Email from bank.", String.format(
+                        new InformationalWindow("Email from bank", String.format(
                                 "%-11s%S%n%-9sAccount state%n%n%-14s%d.- CHF%n%-15s%d.- CHF%n%-16s%d.- CHF",
                                 "To:", player.getName(), "Subject:", "Money before:", oldMoney.intValue(),
                                 "Money now:", newMoney.intValue(),
@@ -656,7 +636,7 @@ public class MainWindowController {
                         setPlayerMoney(playerId + 1, newMoney.intValue());
                     });
                     player.getCreditsProperty().addListener((observableValue, oldCredits, newCredits) -> {
-                        new InformationalWindow("Email from ZHAW.", String.format(
+                        new InformationalWindow("Email from ZHAW", String.format(
                                 "%-11s%S%n%-9sCredits state%n%n%-16s%d  credits%n%-16s%d credits%n%-17s%d credits",
                                 "To:", player.getName(), "Subject:", "Credits before:", oldCredits.intValue(),
                                 "Credits now:", newCredits.intValue(),
@@ -749,8 +729,6 @@ public class MainWindowController {
         initializeGame();
         gameWasStarted = false;
         newGameConfirmationNeeded = false;
-        logic = null;
-        // Re-initialize Logic. Prevents bugs when restarting the game.
-        logic = new Logic();
+        logic = new Logic(); // Re-initialize Logic. Prevents bugs when restarting the game.
     }
 }

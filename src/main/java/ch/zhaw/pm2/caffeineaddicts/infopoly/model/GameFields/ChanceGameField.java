@@ -27,7 +27,7 @@ public class ChanceGameField extends GameField {
     @Override
     public void action(Player currentPlayer) {
         generateEvent();
-        new InformationalWindow("Wuuups...Something has happened!!!", getMessage());
+        new InformationalWindow("Chance", getMessage());
         currentPlayer.alterMoney(getMoneyDeviation());
         currentPlayer.alterCredits(getCreditsDeviation());
     }
