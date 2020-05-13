@@ -35,8 +35,6 @@ This project is licensed under the ZHAW License - see [ZHAW](http://www.zhaw.ch)
 
 ![ClassDiagram](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/blob/master/Klassendiagramm/ClassDiagramInfopoly_withoutDependency_withoutFields.png)
 
-## Test Documentation
-
 
 ## Conventions
 * [Branch modelling](https://github.zhaw.ch/pm2-it19azh-ehri-fame-muon/gruppe2-CaffeineAddicts-projekt2/wiki/Git-Branch-Model)
