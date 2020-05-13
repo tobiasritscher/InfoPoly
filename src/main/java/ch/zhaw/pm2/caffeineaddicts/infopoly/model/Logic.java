@@ -19,6 +19,8 @@ import static ch.zhaw.pm2.caffeineaddicts.infopoly.model.Config.NUMBER_DICE_SIDE
  * Handles the logic between the players and the board
  */
 public class Logic {
+    private static final int SCHOLARSHIP_WAITING_TIME = 3;
+    private static final int SCHOLARSHIP_MONEY = 100;
     private final static Logger logger = Logger.getLogger(Logic.class.getCanonicalName());
     private static final IntegerProperty currentPlayerId = new SimpleIntegerProperty(0);
     private final GameBoard gameBoard;
@@ -149,10 +151,9 @@ public class Logic {
      * @param currentPlayer the player that needs the scholarship
      */
     private void getScholarship(Player currentPlayer) {
-        final int money = StartGameField.getScholarshipMoney();
         new InformationalWindow("Received scholarship!", String.format(
-                "You got some money from the public: %d", money));
-        currentPlayer.alterMoney(money);
+                "You got some money from the public: %d", SCHOLARSHIP_MONEY));
+        currentPlayer.alterMoney(SCHOLARSHIP_MONEY);
         currentPlayer.setWaitingForScholarship(false);
     }
 
@@ -254,11 +255,10 @@ public class Logic {
      */
     private void scholarship() {
         Player currentPlayer = getCurrentPlayer();
-        int round = StartGameField.getScholarshipWaitingTime();
         new InformationalWindow("Applied for Scholarship", String.format(
                 "%S, you ran out of money. You have to apply for a scholarship.%nThat usually takes up to %d Weeks",
-                currentPlayer.getName(), round));
-        currentPlayer.setRoundsWaiting(round);
+                currentPlayer.getName(), SCHOLARSHIP_WAITING_TIME));
+        currentPlayer.setRoundsWaiting(SCHOLARSHIP_WAITING_TIME);
         currentPlayer.setWaitingForScholarship(true);
     }
 
