@@ -10,12 +10,14 @@ public class FeeGameField extends GameField {
     private final FeeType feeType;
     private final Random random = new Random();
     private final int RATE = 3;
-
     public FeeGameField(int fieldId, String fieldName, FeeType feeType) {
         super(fieldId, fieldName);
         this.feeType = feeType;
     }
 
+    public FeeType getFeeType() {
+        return feeType;
+    }
 
     private int calculateFee() {
         int value = BASE_FEE;

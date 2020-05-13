@@ -72,6 +72,29 @@ class GameBoardTest {
         gameBoard = new GameBoard();
         Assertions.assertTrue(gameBoard.getBoard().get(fieldId) instanceof ChanceGameField);
         Assertions.assertEquals(fieldId, gameBoard.getBoard().get(fieldId).getFieldId());
-        Assertions.assertEquals(fields.get(fieldId).getFieldName(), moduleName);
+        Assertions.assertEquals(moduleName, gameBoard.getBoard().get(fieldId).getFieldName());
+    }
+
+    @Test
+    void loadGameBoardFeeGameField() {
+        final String moduleName = "test fee";
+        final int fieldIdOne = 0;
+        final int fieldIdTwo = 1;
+        fields.add(new FeeGameField(fieldIdOne, moduleName, FeeGameField.FeeType.RANDOM));
+        fields.add(new FeeGameField(fieldIdOne, moduleName, FeeGameField.FeeType.FIXED));
+
+        Config.setFieldLayoutPath("src/test/resources/test-gameboard-fee.txt");
+        gameBoard = new GameBoard();
+
+        Assertions.assertTrue(gameBoard.getBoard().get(fieldIdOne) instanceof FeeGameField);
+        Assertions.assertEquals(fieldIdOne, gameBoard.getBoard().get(fieldIdOne).getFieldId());
+        Assertions.assertEquals(moduleName, gameBoard.getBoard().get(fieldIdOne).getFieldName());
+        Assertions.assertEquals(FeeGameField.FeeType.RANDOM, ((FeeGameField) gameBoard.getBoard().get(fieldIdOne)).getFeeType());
+
+        Assertions.assertTrue(gameBoard.getBoard().get(fieldIdTwo) instanceof FeeGameField);
+        Assertions.assertEquals(fieldIdTwo, gameBoard.getBoard().get(fieldIdTwo).getFieldId());
+        Assertions.assertEquals(moduleName, gameBoard.getBoard().get(fieldIdTwo).getFieldName());
+        Assertions.assertEquals(FeeGameField.FeeType.FIXED, ((FeeGameField) gameBoard.getBoard().get(fieldIdTwo)).getFeeType());
+
     }
 }
