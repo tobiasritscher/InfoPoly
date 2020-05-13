@@ -9,9 +9,9 @@ import ch.zhaw.pm2.caffeineaddicts.infopoly.model.Player;
  * Represents {@link Config.FieldType#STARTUP}.
  */
 public class StartupGameField extends GameField {
-    private static final int moneyNeeded = 100;
-    private static final int moneyPayout = 200;
-    private static final int creditsNeeded = 100;
+    public static final int MONEY_TO_LAUNCH = 100;
+    public static final int MONEY_GAIN_EACH_ROUND_AFTER_PURCHASE = 200;
+    public static final int MIN_CREDITS_TO_LAUNCH = 100;
 
     public StartupGameField(int fieldId, Config.FieldType fieldType, String fieldName) {
         super(fieldId, fieldType, fieldName);
@@ -21,26 +21,26 @@ public class StartupGameField extends GameField {
     public void action(Player currentPlayer) {
         if (hasOwner()) {
             if (getOwner().equals(currentPlayer)) {
-                new InformationalWindow("Bravo!", String.format("Your startup made quite the turnover this week! You got %dCHF", moneyPayout));
-                currentPlayer.alterMoney(moneyPayout);
+                new InformationalWindow("Bravo!", String.format("Your startup made quite the turnover this week! You got %d.-CHF", MONEY_GAIN_EACH_ROUND_AFTER_PURCHASE));
+                currentPlayer.alterMoney(MONEY_GAIN_EACH_ROUND_AFTER_PURCHASE);
             } else {
                 new InformationalWindow("Too late!", "Startup is already created with your Idea...had to be fast!");
             }
         } else {
-            if (currentPlayer.getCredits() >= creditsNeeded) {
-                if (currentPlayer.getMoney() >= moneyNeeded) {
+            if (currentPlayer.getCredits() >= MIN_CREDITS_TO_LAUNCH) {
+                if (currentPlayer.getMoney() >= MONEY_TO_LAUNCH) {
                     QuestionWindow questionWindow = new QuestionWindow("Startup Manager", "Would you like to create your first startup?");
                     if (questionWindow.getAnswer()) {
                         setOwner(currentPlayer);
-                        currentPlayer.alterMoney(moneyNeeded * -1);
+                        currentPlayer.alterMoney(MONEY_TO_LAUNCH * -1);
                     } else {
                         new InformationalWindow("", "I guess not everyone is up to the challenge...");
                     }
                 } else {
-                    new InformationalWindow("No chance for poor...", "You require: " + moneyNeeded + " in order to start your first Startup");
+                    new InformationalWindow("No chance for poor...", String.format("You require: %d in order to start your first startup", MONEY_TO_LAUNCH));
                 }
             } else {
-                new InformationalWindow("Not smart enough...", "A successful startup requires the needed knowledge...(" + creditsNeeded + " Credits)");
+                new InformationalWindow("Not smart enough...", String.format("A successful startup requires the needed knowledge...(%d credits)", MIN_CREDITS_TO_LAUNCH));
             }
         }
     }
