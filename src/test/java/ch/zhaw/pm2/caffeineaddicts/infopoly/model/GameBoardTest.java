@@ -13,13 +13,12 @@ class GameBoardTest {
 
     @Test
     void loadGameBoard() {
-        GameBoard gameBoard = new GameBoard();
         final List<GameField> testBoard = new ArrayList<>();
-        Config.setFieldLayoutPath("src\\test\\resources\\test-field-layout.txt");
         testBoard.add(new ModuleGameField(0, "module"));
         testBoard.add(new ModuleGameField(1, "module"));
         testBoard.add(new ModuleGameField(2, "module"));
-        gameBoard.loadGameBoard();
+        Config.setFieldLayoutPath("src/test/resources/test-field-layout.txt");
+        GameBoard gameBoard = new GameBoard();
         assertEquals(testBoard, gameBoard.board);
     }
 
