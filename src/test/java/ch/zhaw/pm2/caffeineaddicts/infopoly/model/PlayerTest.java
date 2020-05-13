@@ -16,6 +16,29 @@ public class PlayerTest {
         Burger = new JobGameField(22, "Burger");
     }
 
+
+    @Test
+    void addJobTest() {
+        assertNull(player.getJob());
+        player.addJob(Burger);
+        assertEquals(Burger, player.getJob());
+    }
+
+    @Test
+    void removeJobTest() {
+        player.addJob(Burger);
+        player.removeJob();
+        assertFalse(player.isWorking());
+        assertNull(player.getJob());
+    }
+
+    @Test
+    void setPositionTest() {
+        player.setPosition(10);
+        assertEquals(10, player.getPosition());
+    }
+
+
     @Test
     void alterMoneyTest() {
         player.alterMoney(100);
@@ -30,49 +53,5 @@ public class PlayerTest {
         assertEquals(110, player.getCredits());
         player.alterCredits(-10);
         assertEquals(100, player.getCredits());
-    }
-
-    @Test
-    void removeWorkTest() {
-        /*
-        assert (player.getJob().isEmpty());
-        player.addOwnerShip(Burger);
-        assertNotNull(player.getJob());
-        player.removeJob();
-        assert (player.getJob().isEmpty());*/
-    }
-
-    @Test
-    void moveTest() {
-        player.setPosition(2);
-        assertEquals(2, player.getPositionProperty().getValue());
-    }
-
-    @Test
-    void addOwnershipTest() {
-        /*
-        assert (player.getJob().isEmpty());
-        player.addOwnerShip(Burger);
-        assertEquals(Burger, player.getJob().get(0));*/
-    }
-
-
-    @Test
-    void setRoundsWaitingTest() {
-        assertEquals(0, player.getRoundsWaiting());
-        player.setRoundsWaiting(3);
-        assertEquals(3, player.getRoundsWaiting());
-        player.setRoundsWaiting(-1);
-        assertEquals(2, player.getRoundsWaiting());
-    }
-
-    @Test
-    void addWorkTest() {
-        /*
-        assertFalse(player.isWorking());
-        player.addJob(Burger);
-        assertEquals(Burger, player.getJob().get(0));
-
-         */
     }
 }
